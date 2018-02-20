@@ -8,12 +8,16 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public final static  double SCREEN_WIDTH = 640.0;
+    public final static  double SCREEN_HEIGHT = 480.0;
+    public final static String GAME_NAME = "Tiyareed";
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setResizable(false);
-        primaryStage.setTitle("Tiyareed");
-        primaryStage.setScene(new Scene(root, 640, 480));
+        primaryStage.setTitle(GAME_NAME);
+        primaryStage.setScene(new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT));
         primaryStage.show(); 
     }
 

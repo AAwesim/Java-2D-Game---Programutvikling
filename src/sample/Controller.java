@@ -1,7 +1,23 @@
 package sample;
 
+import com.sun.istack.internal.NotNull;
+import javafx.fxml.FXML;
+import javafx.scene.*;
+import javafx.scene.paint.*;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
 public class Controller {
 
+    @FXML
+    public Canvas canvas;
+    public GraphicsContext gc;
 
+    public void render(){
+        gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.BLUE);
+        gc.fillRect(50,50,50,50);
+    }
 
 }
