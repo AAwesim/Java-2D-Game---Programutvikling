@@ -7,7 +7,7 @@
 fx:controller="sample.Controller">
 
    <children>
-      <Canvas id="canvas" height="480.0" width="640.0" onMouseClicked="#render"/>
+      <Canvas id="canvas" height="480.0" width="640.0"/>
    </children>
 
 </Pane>
