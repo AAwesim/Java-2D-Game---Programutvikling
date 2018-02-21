@@ -8,18 +8,19 @@ import javafx.scene.paint.Color;
 
 public class Controller {
 
+private Thread thread;
 
 
-    /*
-    @FXML
-    public Canvas canvas;
+        /*
+        @FXML
+        public Canvas canvas;
 
-    public GraphicsContext gc;
+        public GraphicsContext gc;
 
-    public void render(){
-        gc = canvas.getGraphicsContext2D();
-        gc.setFill(Color.BLUE);
-        gc.fillRect(50,50,50,50);
-    }*/
+        public void render(){
+            gc = canvas.getGraphicsContext2D();
+            gc.setFill(Color.BLUE);
+            gc.fillRect(50,50,50,50);
+        }*/
 
 }

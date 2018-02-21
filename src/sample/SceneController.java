@@ -12,14 +12,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SceneController {
+public class SceneController implements Runnable{
     @FXML public Button startButton;
     @FXML public Button hjelpButton;
     @FXML public Button exitButton;
 
+    private Thread thread;
     String gameScreen = "gameScene.fxml";
     String hjelpScreen = "hjelpScene.fxml";
     String screenCompare = "";
+    private boolean running;
 
     public void setStartScene(ActionEvent e) throws IOException {
         String source1 = e.getSource().toString();
@@ -42,6 +44,8 @@ public class SceneController {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.setScene(startScene);
         stage.show();
+        threadStart();
+
     }
 
     public static String getId(String a){
@@ -75,6 +79,40 @@ public class SceneController {
     public void exitScreen(){
         System.exit(0);
     }
+
+    public void threadStart(){
+        if(thread == null) {
+            thread = new Thread(this);
+            thread.start();
+        }
+
+        if(thread != null){
+        }
+    }
+
+    @Override
+    public void run() {
+        System.out.println("thread er laget");
+        running = true;
+
+        // GAME LOOP
+        while(running){
+
+            update();
+            render();
+
+        }
+    }
+
+    private void update(){
+
+    }
+
+    private void render(){
+        
+    }
+
+
 
 
     /*
