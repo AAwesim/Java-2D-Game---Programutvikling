@@ -5,15 +5,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerTest">
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SceneController">
    <children>
       <ImageView fitHeight="480.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../ressurser/background.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="startButton" layoutX="270.0" layoutY="111.0" mnemonicParsing="false" onAction="#setStartScene" prefWidth="100" text="Start" />
-      <Button fx:id="helpButton" layoutX="270.0" layoutY="150.0" mnemonicParsing="false" prefWidth="100" text="Hjelp" />
-      <Button fx:id="exitButton" layoutX="270.0" layoutY="190.0" mnemonicParsing="false" prefWidth="100" text="Avslutt" />
+      <Button fx:id="startButton" layoutX="270.0" layoutY="110.0" mnemonicParsing="false" onAction="#setStartScene" prefWidth="100" text="Start" />
+      <Button fx:id="hjelpButton" layoutX="270.0" layoutY="150.0" mnemonicParsing="false" onAction="#setStartScene"  prefWidth="100" text="Hjelp" />
+      <Button fx:id="exitButton" layoutX="270.0" layoutY="190.0" mnemonicParsing="false" onMouseClicked="#exitScreen" prefWidth="100" text="Avslutt" />
    </children>
 </AnchorPane>
