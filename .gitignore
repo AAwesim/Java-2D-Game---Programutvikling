@@ -98,6 +98,7 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
+.db
 
 # OS
 .DS_Store
