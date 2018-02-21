@@ -35,6 +35,11 @@ public class SceneController implements Runnable{
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         stage.setScene(startScene);
         stage.show();
+
+        stage.setOnCloseRequest(event -> {
+            exitScreen();
+        });
+
         threadStart();
 
     }
@@ -77,7 +82,7 @@ public class SceneController implements Runnable{
             thread.start();
         }
 
-        else if(thread != null){
+        else{
             return;
         }
     }
@@ -138,15 +143,4 @@ public class SceneController implements Runnable{
 
     }
 
-
-
-
-    /*
-    public void setHelpScene(ActionEvent e) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
-        Scene startScene = new Scene(root);
-        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        stage.setScene(startScene);
-        stage.show();
-    }*/
     }
