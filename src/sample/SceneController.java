@@ -6,8 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +18,7 @@ public class SceneController implements Runnable{
     @FXML public Button startButton;
     @FXML public Button hjelpButton;
     @FXML public Button exitButton;
+    @FXML public Canvas canvas;
 
     private Thread thread;
     String gameScreen = "gameScene.fxml";
@@ -44,6 +47,7 @@ public class SceneController implements Runnable{
 
     }
 
+    //DIAGNOSE VERKTØY, SJEKKER ID TIL ELEMENT//
     public String getId(String a, int word){
         char[] result = new char[word];
         char[] chars = a.toCharArray();
@@ -92,12 +96,13 @@ public class SceneController implements Runnable{
         System.out.println("thread er laget");
         running = true;
 
+        initialize();
+
         //Variabler for å måle tid før og etter update() og render() har kjørt
         long startTid;
         long prosessTid;
         long venteTid;
         long totalTid = 0;
-
 
         int frameCount = 0;
         int maksFrameCount = FPS;
@@ -105,11 +110,11 @@ public class SceneController implements Runnable{
         //tiden i millisekunder som man må for å få riktig FPS
         long prefTid = 1000/FPS;
 
-
         // GAME LOOP
         while(running){
 
             startTid = System.nanoTime();
+
 
             update();
             render();
@@ -133,6 +138,12 @@ public class SceneController implements Runnable{
             }
 
         }
+    }
+
+    private void initialize(){
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.RED);
+        gc.fillRect(50,50,50,50);
     }
 
     private void update(){

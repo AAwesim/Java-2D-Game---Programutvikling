@@ -11,7 +11,7 @@ public class Controller {
 private Thread thread;
 
 
-        /*
+
         @FXML
         public Canvas canvas;
 
@@ -21,6 +21,6 @@ private Thread thread;
             gc = canvas.getGraphicsContext2D();
             gc.setFill(Color.BLUE);
             gc.fillRect(50,50,50,50);
-        }*/
+        }
 
 }
