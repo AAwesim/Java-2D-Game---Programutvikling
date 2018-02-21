@@ -22,22 +22,13 @@ public class SceneController implements Runnable{
     String hjelpScreen = "hjelpScene.fxml";
     String screenCompare = "";
     private boolean running;
+    private int FPS = 60;
+    private double averageFPS;
 
     public void setStartScene(ActionEvent e) throws IOException {
         String source1 = e.getSource().toString();
-        String source2 = getId(source1);
+        String source2 = getId(source1,11);
         System.out.println(source2);
-
-        if(source2 == "startButton"){
-            screenCompare = "gameScene.fxml";
-            System.out.println("123");
-            System.out.println(screenCompare);
-        }
-
-        else if (source2 == "hjelpButton"){
-            screenCompare = "hjelpScene.fxml";
-            System.out.println("123");
-        }
 
         Parent root = FXMLLoader.load(getClass().getResource(gameScreen));
         Scene startScene = new Scene(root);
@@ -48,8 +39,8 @@ public class SceneController implements Runnable{
 
     }
 
-    public static String getId(String a){
-        char[] result = new char[11];
+    public String getId(String a, int word){
+        char[] result = new char[word];
         char[] chars = a.toCharArray();
         int counter = 0;
         int x = 0;
@@ -86,7 +77,8 @@ public class SceneController implements Runnable{
             thread.start();
         }
 
-        if(thread != null){
+        else if(thread != null){
+            return;
         }
     }
 
@@ -95,21 +87,55 @@ public class SceneController implements Runnable{
         System.out.println("thread er laget");
         running = true;
 
+        //Variabler for å måle tid før og etter update() og render() har kjørt
+        long startTid;
+        long prosessTid;
+        long venteTid;
+        long totalTid = 0;
+
+
+        int frameCount = 0;
+        int maksFrameCount = FPS;
+
+        //tiden i millisekunder som man må for å få riktig FPS
+        long prefTid = 1000/FPS;
+
+
         // GAME LOOP
         while(running){
 
+            startTid = System.nanoTime();
+
             update();
             render();
+
+            prosessTid = (System.nanoTime()-startTid)/(1000000); //Tiden det tok å kjøre update og render
+            venteTid = prefTid - prosessTid; //hvor mye du er nødt til å vente for å få ca. 60 fps
+
+            try{
+                Thread.sleep(venteTid);
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+
+            totalTid += System.nanoTime() - startTid;
+            frameCount++;
+            if(frameCount == maksFrameCount){
+                averageFPS = 1000.0 /  ((totalTid/frameCount)/1000000.0);
+                frameCount = 0;
+                totalTid = 0;
+            }
 
         }
     }
 
     private void update(){
-
+        System.out.println("FPS: " + (int)averageFPS);
     }
 
     private void render(){
-        
+
     }
 
 
