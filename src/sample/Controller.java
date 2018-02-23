@@ -28,6 +28,7 @@ public class Controller {
     double ballX = 0;
     double ballY = SCREEN_HEIGHT/2;
     double xSpeed = 4;
+    double ySpeed = 2;
 
     String gameScreen = "gameScene.fxml";
     String hjelpScreen = "hjelpScene.fxml";
@@ -60,6 +61,18 @@ public class Controller {
 
                 // UPDATE
                 ballX += xSpeed;
+                ballY += ySpeed;
+
+                if (ballY + ballRadius >= SCREEN_HEIGHT)
+                {
+                    ballY = SCREEN_HEIGHT - ballRadius;
+                    ySpeed *= -1;
+                }
+                else if (ballY - ballRadius < 0)
+                {
+                    ballY = 0 + ballRadius;
+                    ySpeed *= -1;
+                }
 
                 if (ballX + ballRadius >= SCREEN_WIDTH)
                 {
@@ -74,6 +87,7 @@ public class Controller {
 
                 // RENDER
                 ball.setCenterX(ballX);
+                ball.setCenterY(ballY);
 
             }
         };
