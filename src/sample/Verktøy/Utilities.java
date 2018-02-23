@@ -36,6 +36,5 @@ public class Utilities {
         return builder.toString();
     }
 
-    public static String check
 
 }
