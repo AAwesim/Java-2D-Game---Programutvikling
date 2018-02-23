@@ -11,6 +11,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import sample.Verktøy.Utilities;
+import sample.Verktøy.Utilities.*;
 
 import java.io.IOException;
 
@@ -32,7 +34,7 @@ public class Controller implements Runnable{
 
     public void setStartScene(ActionEvent e) throws IOException {
         String source1 = e.getSource().toString();
-        String source2 = getId(source1,11);
+        String source2 = Utilities.getId(source1);
         System.out.println(source2);
 
         Parent root = FXMLLoader.load(getClass().getResource(gameScreen));
@@ -52,34 +54,6 @@ public class Controller implements Runnable{
 
     }
 
-    //DIAGNOSE VERKTØY, SJEKKER ID TIL ELEMENT//
-    public String getId(String a, int word){
-        char[] result = new char[word];
-        char[] chars = a.toCharArray();
-        int counter = 0;
-        int x = 0;
-
-        for(int i = 0 ; i < 21 ; i++){
-
-            if(chars[i] == ','){
-                x = 0;
-                break;
-            }
-
-            if(x == 1){
-                result[counter] = chars[i];
-                counter++;
-            }
-
-            if(chars[i] == '='){
-                x = 1;
-            }
-
-
-        }
-        String b = new String(result);
-        return b;
-    }
 
     public void exitScreen(){
         System.exit(0);
