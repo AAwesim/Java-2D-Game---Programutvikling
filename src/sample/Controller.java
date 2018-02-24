@@ -2,15 +2,15 @@ package sample;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -21,22 +21,31 @@ import static sample.Main.SCREEN_HEIGHT;
 import static sample.Main.SCREEN_WIDTH;
 
 
-public class Controller {
+public class Controller implements EventHandler<KeyEvent> {
 
     //Ballinfo
-    double ballRadius = 40;
-    double ballX = 0;
-    double ballY = SCREEN_HEIGHT/2;
-    double xSpeed = 4;
-    double ySpeed = 2;
+    private double ballRadius = 50;
+    private double ballX = 0;
+    private double ballY = SCREEN_HEIGHT / 2;
+    private double xSpeed = 4;
+    private double ySpeed = 2;
 
-    String gameScreen = "gameScene.fxml";
-    String hjelpScreen = "hjelpScene.fxml";
+    /*String gameScreen = "gameScene.fxml";
+    String hjelpScreen = "hjelpScene.fxml";*/
 
     public void setStartScene(ActionEvent e) throws IOException {
-        AnchorPane root = FXMLLoader.load(getClass().getResource(gameScreen));
+        AnchorPane root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene startScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        //Keyboard input - Det som skjer er at en usynlig box blir en del av root. Den
+        Box keyboardInputNode = new Box();
+        keyboardInputNode.setFocusTraversable(true);
+        keyboardInputNode.requestFocus();
+
+        keyboardInputNode.setOnKeyReleased(this::handle);
+
+        root.getChildren().add(keyboardInputNode);
 
         //Lager et element
         Circle ball = new Circle();
@@ -46,9 +55,7 @@ public class Controller {
         ball.setFill(Color.BLUE);
         root.getChildren().add(ball);
 
-        stage.setOnCloseRequest(event -> {
-            exitScreen();
-        });
+        stage.setOnCloseRequest(event -> exitScreen());
         stage.setResizable(false);
         stage.setTitle(GAME_NAME);
         stage.setScene(startScene);
@@ -57,46 +64,61 @@ public class Controller {
         AnimationTimer animator = new AnimationTimer() {
 
             @Override
-            public void handle(long arg0) {
+            public void handle(long now) {
 
                 // UPDATE
-                ballX += xSpeed;
-                ballY += ySpeed;
-
-                if (ballY + ballRadius >= SCREEN_HEIGHT)
-                {
-                    ballY = SCREEN_HEIGHT - ballRadius;
-                    ySpeed *= -1;
-                }
-                else if (ballY - ballRadius < 0)
-                {
-                    ballY = 0 + ballRadius;
-                    ySpeed *= -1;
-                }
-
-                if (ballX + ballRadius >= SCREEN_WIDTH)
-                {
-                    ballX = SCREEN_WIDTH - ballRadius;
-                    xSpeed *= -1;
-                }
-                else if (ballX - ballRadius < 0)
-                {
-                    ballX = 0 + ballRadius;
-                    xSpeed *= -1;
-                }
+                update();
 
                 // RENDER
                 ball.setCenterX(ballX);
                 ball.setCenterY(ballY);
 
+
             }
         };
 
         animator.start();
+
+    }
+
+    @Override
+    public void handle(KeyEvent e) {
+        if (e.getCode() == KeyCode.SPACE) {
+            xSpeed *= -1; //skifter retning
+            System.out.println("Keypressed" + e.getCode()); //Debugging
+        }
     }
 
     public void exitScreen() {
         System.exit(0);
     }
 
+    public void update() {
+        ballX += xSpeed;
+        ballY += ySpeed;
+
+        checkBorder(ballY, SCREEN_HEIGHT);
+        checkBorder(ballX, SCREEN_WIDTH);
+
+    }
+
+    public void checkBorder(double ballCord,double screen){
+        if (screen == SCREEN_HEIGHT) {
+            if (ballCord + ballRadius >= SCREEN_HEIGHT) {
+                ballY = SCREEN_HEIGHT - ballRadius;
+                ySpeed *= -1;
+            } else if (ballCord - ballRadius < 0) {
+                ballY = 0 + ballRadius;
+                ySpeed *= -1;
+            }
+        } else if (screen == SCREEN_WIDTH) {
+            if (ballCord + ballRadius >= SCREEN_WIDTH) {
+                ballX = SCREEN_WIDTH - ballRadius;
+                xSpeed *= -1;
+            } else if (ballCord - ballRadius < 0) {
+                ballX = 0 + ballRadius;
+                xSpeed *= -1;
+            }
+        }
+    }
 }
