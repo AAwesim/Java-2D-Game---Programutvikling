@@ -1,6 +1,8 @@
 package sample;
 
+
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -8,12 +10,15 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 
 import static sample.Main.GAME_NAME;
@@ -48,11 +53,12 @@ public class Controller implements EventHandler<KeyEvent> {
         root.getChildren().add(keyboardInputNode);
 
         //Lager et element
+
         Circle ball = new Circle();
         ball.setCenterX(ballX);
         ball.setCenterY(ballY);
         ball.setRadius(ballRadius);
-        ball.setFill(Color.BLUE);
+        ball.setFill(Color.GREEN);
         root.getChildren().add(ball);
 
         stage.setOnCloseRequest(event -> exitScreen());
@@ -76,6 +82,13 @@ public class Controller implements EventHandler<KeyEvent> {
 
             }
         };
+        ball.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ball.setFill(Color.color(Math.random(),Math.random(),Math.random()));//velger tre random tall.
+
+            }
+        });
 
         animator.start();
 
