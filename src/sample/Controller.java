@@ -11,8 +11,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
@@ -29,8 +29,8 @@ public class Controller implements EventHandler<KeyEvent> {
     private double ballRadius = 50;
     private double ballX = 0;
     private double ballY = SCREEN_HEIGHT / 2;
-    private double xSpeed = 4;
-    private double ySpeed = 2;
+    private double xSpeed = 5;
+    private double ySpeed = 5;
 
     /*String gameScreen = "gameScene.fxml";
     String hjelpScreen = "hjelpScene.fxml";*/
@@ -41,11 +41,12 @@ public class Controller implements EventHandler<KeyEvent> {
         Scene startScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
 
         //Keyboard input - Det som skjer er at en usynlig box blir en del av root. Den
-        Box keyboardInputNode = new Box();
+        StackPane keyboardInputNode = new StackPane();
         keyboardInputNode.setFocusTraversable(true);
         keyboardInputNode.requestFocus();
 
         keyboardInputNode.setOnKeyReleased(this::handle);
+
 
         root.getChildren().add(keyboardInputNode);
 
@@ -80,8 +81,8 @@ public class Controller implements EventHandler<KeyEvent> {
             }
         };
 
-        ball.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->{
-            ball.setFill(Color.color(Math.random(),Math.random(),Math.random()));
+        ball.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+            ball.setFill(Color.color(Math.random(), Math.random(), Math.random()));
         });
 
         animator.start();
@@ -109,7 +110,7 @@ public class Controller implements EventHandler<KeyEvent> {
 
     }
 
-    public void checkBorder(double ballCord,double screen){
+    public void checkBorder(double ballCord, double screen) {
         if (screen == SCREEN_HEIGHT) {
             if (ballCord + ballRadius >= SCREEN_HEIGHT) {
                 ballY = SCREEN_HEIGHT - ballRadius;
