@@ -2,7 +2,6 @@ package sample;
 
 
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -12,13 +11,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Box;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 
 import static sample.Main.GAME_NAME;
@@ -82,12 +79,9 @@ public class Controller implements EventHandler<KeyEvent> {
 
             }
         };
-        ball.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                ball.setFill(Color.color(Math.random(),Math.random(),Math.random()));//velger tre random tall.
 
-            }
+        ball.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent ->{
+            ball.setFill(Color.color(Math.random(),Math.random(),Math.random()));
         });
 
         animator.start();
@@ -134,4 +128,5 @@ public class Controller implements EventHandler<KeyEvent> {
             }
         }
     }
+
 }
