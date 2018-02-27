@@ -59,7 +59,9 @@ public class Controller implements EventHandler<KeyEvent> {
         Canvas canvas= new Canvas(SCREEN_WIDTH,SCREEN_HEIGHT);
         GraphicsContext gc=canvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
-        gc.fillRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+        
+        gc.fillRect(60,60,60,60);
+        gc.fillText("AnAAAAAAAAAeAAAAAAAAAAAg",60,60);
         root.getChildren().add(canvas);
 
         Circle ball = new Circle();
@@ -68,6 +70,8 @@ public class Controller implements EventHandler<KeyEvent> {
         ball.setRadius(ballRadius);
         ball.setFill(Color.GREEN);
         root.getChildren().add(ball);
+
+        ball.setAccessibleText("er");
 
         stage.setOnCloseRequest(event -> exitScreen());
         stage.setResizable(false);
