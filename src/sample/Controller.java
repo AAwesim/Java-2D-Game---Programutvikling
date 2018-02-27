@@ -4,9 +4,12 @@ package sample;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -24,6 +27,8 @@ import static sample.Main.SCREEN_WIDTH;
 
 
 public class Controller implements EventHandler<KeyEvent> {
+
+     @FXML Canvas canvas;
 
     //Ballinfo
     private double ballRadius = 50;
@@ -65,6 +70,8 @@ public class Controller implements EventHandler<KeyEvent> {
         stage.setScene(startScene);
         stage.show();
 
+        GraphicsContext gc = new canvas.getGraphicsContext2D();
+
         AnimationTimer animator = new AnimationTimer() {
 
             @Override
@@ -76,7 +83,6 @@ public class Controller implements EventHandler<KeyEvent> {
                 // RENDER
                 ball.setCenterX(ballX);
                 ball.setCenterY(ballY);
-
 
             }
         };
