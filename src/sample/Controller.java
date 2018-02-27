@@ -90,7 +90,7 @@ public class Controller implements EventHandler<KeyEvent> {
             }
         };
 
-        root.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+        ball.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
             ball.setFill(Color.color(Math.random(), Math.random(), Math.random()));
 
         });
