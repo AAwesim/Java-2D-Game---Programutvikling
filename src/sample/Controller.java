@@ -28,7 +28,9 @@ import static sample.Main.SCREEN_WIDTH;
 
 public class Controller implements EventHandler<KeyEvent> {
 
-     @FXML Canvas canvas;
+    @FXML public Canvas canvas ;
+     public GraphicsContext gc ;
+
 
     //Ballinfo
     private double ballRadius = 50;
@@ -70,7 +72,12 @@ public class Controller implements EventHandler<KeyEvent> {
         stage.setScene(startScene);
         stage.show();
 
-        GraphicsContext gc = new canvas.getGraphicsContext2D();
+
+        //gc.setFill(Color.RED);
+        final Canvas canvas = new Canvas(480,640);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.setFill(Color.RED);
+
 
         AnimationTimer animator = new AnimationTimer() {
 
