@@ -18,7 +18,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.setTitle(GAME_NAME);
         primaryStage.setScene(new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT));
-        primaryStage.show(); 
+        primaryStage.show();
     }
 
 
