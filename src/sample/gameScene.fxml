@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.Pane?>
 
 <?import javafx.scene.layout.AnchorPane?>
 <AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
 
    <children>
-      <Canvas fx:id="canvas" id="canvas" height="480.0" width="640.0" />
+      <Canvas id="canvas" height="480.0" width="640.0" />
    </children>
 
 </AnchorPane>
