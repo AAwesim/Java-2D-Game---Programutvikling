@@ -56,6 +56,12 @@ public class Controller implements EventHandler<KeyEvent> {
 
         //Lager et element
 
+        Canvas canvas= new Canvas(SCREEN_WIDTH,SCREEN_HEIGHT);
+        GraphicsContext gc=canvas.getGraphicsContext2D();
+        gc.setFill(Color.BLACK);
+        gc.fillRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+        root.getChildren().add(canvas);
+
         Circle ball = new Circle();
         ball.setCenterX(ballX);
         ball.setCenterY(ballY);
@@ -68,14 +74,6 @@ public class Controller implements EventHandler<KeyEvent> {
         stage.setTitle(GAME_NAME);
         stage.setScene(startScene);
         stage.show();
-
-
-        Canvas canvas= new Canvas(SCREEN_WIDTH,SCREEN_HEIGHT);
-        GraphicsContext gc=canvas.getGraphicsContext2D();
-        gc.setFill(Color.RED);
-        gc.fillRect(5,5,20,20);
-        root.getChildren().add(canvas);
-
 
         AnimationTimer animator = new AnimationTimer() {
 
