@@ -70,7 +70,7 @@ public class Controller implements EventHandler<KeyEvent> {
         stage.setScene(startScene);
         stage.show();
 
-        GraphicsContext gc = new canvas.getGraphicsContext2D();
+        GraphicsContext gc = new Canvas().getGraphicsContext2D();
 
         AnimationTimer animator = new AnimationTimer() {
 
@@ -89,6 +89,7 @@ public class Controller implements EventHandler<KeyEvent> {
 
         ball.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
             ball.setFill(Color.color(Math.random(), Math.random(), Math.random()));
+            
         });
 
         animator.start();
@@ -100,6 +101,7 @@ public class Controller implements EventHandler<KeyEvent> {
         if (e.getCode() == KeyCode.SPACE) {
             xSpeed *= -1; //skifter retning
             System.out.println("Keypressed" + e.getCode()); //Debugging
+
         }
     }
 
