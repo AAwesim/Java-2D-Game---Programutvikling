@@ -52,7 +52,6 @@ public class Controller implements EventHandler<KeyEvent> {
 
         keyboardInputNode.setOnKeyReleased(this::handle);
 
-
         root.getChildren().add(keyboardInputNode);
 
         //Lager et element
@@ -93,7 +92,7 @@ public class Controller implements EventHandler<KeyEvent> {
             }
         };
 
-        ball.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+        root.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
             ball.setFill(Color.color(Math.random(), Math.random(), Math.random()));
 
         });
