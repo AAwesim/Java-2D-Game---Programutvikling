@@ -13,7 +13,6 @@
             <Image url="@../../ressurser/background.jpg" />
          </image>
       </ImageView>-->
-
       <Button fx:id="startButton" layoutX="270.0" layoutY="110.0" onAction="#setStartScene" prefWidth="100" text="Start" />
       <Button fx:id="hjelpButton" layoutX="270.0" layoutY="150.0" onAction="#setStartScene"  prefWidth="100" text="Hjelp" />
       <Button fx:id="exitButton" layoutX="270.0" layoutY="190.0" onMouseClicked="#exitScreen" prefWidth="100" text="Avslutt" />
