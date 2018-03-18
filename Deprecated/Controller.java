@@ -1,4 +1,4 @@
-package sample;
+package Deprecated;
 
 
 import javafx.animation.AnimationTimer;
@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -20,14 +21,16 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static sample.Main.GAME_NAME;
 import static sample.Main.SCREEN_HEIGHT;
 import static sample.Main.SCREEN_WIDTH;
 
 
-public class Controller implements EventHandler<KeyEvent> {
-    //@FXML Canvas canvas;
+public class Controller implements Initializable, EventHandler<KeyEvent> {
+
 
 
     //Ballinfo
@@ -44,6 +47,7 @@ public class Controller implements EventHandler<KeyEvent> {
         AnchorPane root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Scene startScene = new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT);
+<<<<<<< HEAD:src/sample/Controller.java
 
         //Keyboard input - Det som skjer er at en usynlig box blir en del av root. Den
         StackPane keyboardInputNode = new StackPane();
@@ -73,35 +77,16 @@ public class Controller implements EventHandler<KeyEvent> {
 
         ball.setAccessibleText("er");
 
+=======
+>>>>>>> Asim:Deprecated/Controller.java
         stage.setOnCloseRequest(event -> exitScreen());
         stage.setResizable(false);
         stage.setTitle(GAME_NAME);
         stage.setScene(startScene);
         stage.show();
 
-        AnimationTimer animator = new AnimationTimer() {
-
-            @Override
-            public void handle(long now) {
-
-                // UPDATE
-                update();
-
-                // RENDER
-                ball.setCenterX(ballX);
-                ball.setCenterY(ballY);
-
-            }
-        };
-
-        ball.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
-            ball.setFill(Color.color(Math.random(), Math.random(), Math.random()));
-
-        });
-
-        animator.start();
-
     }
+
 
     @Override
     public void handle(KeyEvent e) {
@@ -145,4 +130,53 @@ public class Controller implements EventHandler<KeyEvent> {
         }
     }
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        //Keyboard input - Det som skjer er at en usynlig box blir en del av root. Den
+        StackPane keyboardInputNode = new StackPane();
+        keyboardInputNode.setFocusTraversable(true);
+        keyboardInputNode.requestFocus();
+
+        keyboardInputNode.setOnKeyReleased(this);
+
+        //root.getChildren().add(keyboardInputNode);
+
+        //Lager et element
+
+        /*gc.setFill(Color.RED);
+        gc.fillRect(50,50,50,50);*/
+
+
+        Circle ball = new Circle();
+        ball.setCenterX(ballX);
+        ball.setCenterY(ballY);
+        ball.setRadius(ballRadius);
+        ball.setFill(Color.GREEN);
+        //root.getChildren().add(ball);
+
+
+        AnimationTimer animator = new AnimationTimer() {
+
+            @Override
+            public void handle(long now) {
+
+                // UPDATE
+                /*update();*/
+
+                // RENDER
+                /*ball.setCenterX(ballX);
+                ball.setCenterY(ballY);*/
+
+            }
+        };
+
+        /*ball.addEventFilter(MouseEvent.MOUSE_PRESSED, mouseEvent -> {
+            ball.setFill(Color.color(Math.random(), Math.random(), Math.random()));
+
+        });*/
+
+        animator.start();
+
+    }
 }
