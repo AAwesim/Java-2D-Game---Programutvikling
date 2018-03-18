@@ -1,4 +1,4 @@
-package sample;
+package Deprecated;
 
 
 import javafx.animation.AnimationTimer;
