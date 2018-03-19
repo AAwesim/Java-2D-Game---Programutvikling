@@ -30,7 +30,6 @@ public class Player implements Entity {
 
     //bruker Image objektet img som inneholder bildefilen til å tegne det til skjermen basert på objektet sine cords.
     public void render(GraphicsContext gc) {
-        gc.clearRect(0, 0, 640, 480);
         gc.drawImage(this.img, this.posX, this.posY);
     }
 

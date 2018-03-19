@@ -1,5 +1,6 @@
 package sample.Verktøy;
 
+
 import java.util.ArrayList;
 
 public class Utilities {
@@ -35,6 +36,5 @@ public class Utilities {
 
         return builder.toString();
     }
-
 
 }

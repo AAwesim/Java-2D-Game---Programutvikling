@@ -43,9 +43,9 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
             @Override
             public void handle(long now) {
+                gc.clearRect(0,0,640,480);
                 mainPlayer.render(gc);
             }
-
         };
 
         timer.start();
