@@ -43,6 +43,7 @@ public class Player implements Entity {
     }
 
     public void setPosX(int posX) {
+
         this.posX += posX;
     }
 
