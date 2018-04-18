@@ -1,32 +1,18 @@
 package sample.Entity;
 
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import java.io.InputStream;
+
 
 public class Player extends Rectangle implements Entity {
     private int posX;
     private int posY;
-    private Image avatar = null;
-    private InputStream is = null;
     public static final String testPic = "file:ressurser\\\\mate.png";
     Image img=new Image(testPic);
     final private ImagePattern imgPattern = new ImagePattern(img);
 
-
-    //createAvatar leser en bildefil og lagerer den i img som et Image objekt.
-    /*@Override
-    public void createAvatar() {
-        try {
-            is = new BufferedInputStream(new FileInputStream("ressurser\\\\mate.png"));
-            avatar = new Image(is);
-        } catch (FileNotFoundException fnfx) {
-            Logger.getLogger(gameController.class.getName()).log(Level.SEVERE, null, fnfx);
-        }
-    }*/
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void init(Pane p){
@@ -46,7 +32,7 @@ public class Player extends Rectangle implements Entity {
 
     //Getters og setters
     public Image getImg() {
-        return avatar;
+        return null;
     }
 
     public int getPosX() {

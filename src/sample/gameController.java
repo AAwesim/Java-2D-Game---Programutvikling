@@ -8,16 +8,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sample.Entity.EntityCreator;
-import sample.Entity.Player;
-
+import sample.Entity.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,9 +26,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        gamePane.setFocusTraversable(true);
-        gamePane.requestFocus();
-        gamePane.setOnKeyPressed(this::handle);
+        keyHandlerInit(gamePane);
         mainPlayer.init(gamePane);
 
         AnimationTimer timer = new AnimationTimer() {
@@ -46,6 +39,12 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
         timer.start();
 
+    }
+
+    public void keyHandlerInit(Pane p){
+        p.setFocusTraversable(true);
+        p.requestFocus();
+        p.setOnKeyPressed(this::handle);
     }
 
     @Override
