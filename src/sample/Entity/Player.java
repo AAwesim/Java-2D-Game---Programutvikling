@@ -17,11 +17,12 @@ public class Player implements Entity {
     private Image img = null;
     private InputStream is = null;
 
+
     //createAvatar leser en bildefil og lagerer den i img som et Image objekt.
     @Override
     public void createAvatar() {
         try {
-            is = new BufferedInputStream(new FileInputStream("ressurser\\\\mate.png"));
+            is = new BufferedInputStream(new FileInputStream("ressurser\\\\testplayer.gif"));
             img = new Image(is);
         } catch (FileNotFoundException fnfx) {
             Logger.getLogger(gameController.class.getName()).log(Level.SEVERE, null, fnfx);
