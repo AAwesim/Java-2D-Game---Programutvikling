@@ -12,8 +12,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import sample.Entity.EntityCreater;
+import sample.Entity.EntityCreator;
 import sample.Entity.Player;
 
 import java.io.IOException;
@@ -21,31 +23,25 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class gameController implements Initializable, EventHandler<KeyEvent> {
-    //Instansierer FXML Variabelen til Canvas i gameController
-    @FXML Canvas can1;
+    @FXML Pane gamePane;
 
     //Oppretter Entity factory, deretter oppretter et player objekt
-    private EntityCreater ec = new EntityCreater();
+    private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Setter opp canvas, GraphicsContext, keyInput
-        GraphicsContext gc = can1.getGraphicsContext2D();
-        can1.setFocusTraversable(true);
-        can1.requestFocus();
-        can1.setOnKeyPressed(this::handle);
-
-        // Ber EntityCreater om å lage et player objekt
-        mainPlayer.createAvatar();
+        gamePane.setFocusTraversable(true);
+        gamePane.requestFocus();
+        gamePane.setOnKeyPressed(this::handle);
+        mainPlayer.init(gamePane);
 
         AnimationTimer timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
-                mainPlayer.render(gc);
+                mainPlayer.render();
             }
-
         };
 
         timer.start();
@@ -60,7 +56,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
         else if(keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT){
             mainPlayer.setPosX(5);
-            System.out.println(keyEvent.toString());
         }
 
         else if(keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT){

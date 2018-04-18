@@ -1,6 +1,6 @@
 package sample.Entity;
 
-public class EntityCreater {
+public class EntityCreator {
 
     public Entity getEntity(String type){
         if(type == null){

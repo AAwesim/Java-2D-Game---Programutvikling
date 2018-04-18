@@ -1,42 +1,52 @@
 package sample.Entity;
 
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
-import sample.gameController;
-
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class Player implements Entity {
+public class Player extends Rectangle implements Entity {
     private int posX;
     private int posY;
-    private Image img = null;
+    private Image avatar = null;
     private InputStream is = null;
+    public static final String testPic = "file:ressurser\\\\mate.png";
+    Image img=new Image(testPic);
+    final private ImagePattern imgPattern = new ImagePattern(img);
+
 
     //createAvatar leser en bildefil og lagerer den i img som et Image objekt.
-    @Override
+    /*@Override
     public void createAvatar() {
         try {
             is = new BufferedInputStream(new FileInputStream("ressurser\\\\mate.png"));
-            img = new Image(is);
+            avatar = new Image(is);
         } catch (FileNotFoundException fnfx) {
             Logger.getLogger(gameController.class.getName()).log(Level.SEVERE, null, fnfx);
         }
+    }*/
+
+    //Setter opp entiteten Player sine vilkårlige verdier.
+    public void init(Pane p){
+        this.setHeight(32);
+        this.setWidth(32);
+        this.setFill(imgPattern);
+        this.setX(0);
+        this.setY(0);
+        p.getChildren().add(this);
     }
 
-    //bruker Image objektet img som inneholder bildefilen til å tegne det til skjermen basert på objektet sine cords.
-    public void render(GraphicsContext gc) {
-        gc.clearRect(0, 0, 640, 480);
-        gc.drawImage(this.img, this.posX, this.posY);
+    public void render(){
+        setX(posX);
+        setY(posY);
+        this.setFill(imgPattern);
     }
 
     //Getters og setters
     public Image getImg() {
-        return img;
+        return avatar;
     }
 
     public int getPosX() {

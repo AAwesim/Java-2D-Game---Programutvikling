@@ -123,7 +123,6 @@ public class Controller implements Initializable, EventHandler<KeyEvent> {
         ball.setFill(Color.GREEN);
         //root.getChildren().add(ball);
 
-
         AnimationTimer animator = new AnimationTimer() {
 
             @Override
