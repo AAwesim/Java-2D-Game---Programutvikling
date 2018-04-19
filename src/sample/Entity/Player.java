@@ -9,10 +9,18 @@ import javafx.scene.shape.Rectangle;
 public class Player extends Rectangle implements Entity {
     private int posX;
     private int posY;
-    public static final String testPic = "file:ressurser\\\\mate.png";
-    Image img=new Image(testPic);
-    final private ImagePattern imgPattern = new ImagePattern(img);
 
+    private int xSpeed = 3;
+    private int ySpeed = 2;
+
+    private int direction = 5;
+    private int left = 0;
+    private int right = 1;
+
+
+    private static final String testPic = "file:ressurser\\\\mate.png";
+    Image img = new Image(testPic);
+    final private ImagePattern imgPattern = new ImagePattern(img);
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void init(Pane p){
@@ -24,15 +32,45 @@ public class Player extends Rectangle implements Entity {
         p.getChildren().add(this);
     }
 
+    public void update(){
+        if(this.posY < (int)(480.0 - 32.0)){
+            this.setPosY(ySpeed);
+            this.setySpeed(1);
+            System.out.println(posY);
+        }
+        else {
+            setPosY(0);
+            ySpeed = 2;
+        }
+
+        if(direction == left){
+            this.setPosX(-xSpeed);
+        }
+        else if(direction == right) {
+            this.setPosX(xSpeed);
+        }
+
+        else return;
+
+    }
+
     public void render(){
         setX(posX);
         setY(posY);
         this.setFill(imgPattern);
     }
 
+    public void checkBorderCollision(double playerX, double playerY){
+        return;
+    }
+
     //Getters og setters
     public Image getImg() {
         return null;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
     }
 
     public int getPosX() {
@@ -49,5 +87,9 @@ public class Player extends Rectangle implements Entity {
 
     public void setPosY(int posY) {
         this.posY += posY;
+    }
+
+    public void setySpeed(int ySpeed) {
+        this.ySpeed += ySpeed;
     }
 }

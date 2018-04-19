@@ -28,12 +28,14 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public void initialize(URL location, ResourceBundle resources) {
         keyHandlerInit(gamePane);
         mainPlayer.init(gamePane);
-
         AnimationTimer timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
+
+                mainPlayer.update();
                 mainPlayer.render();
+
             }
         };
 
@@ -45,6 +47,14 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         p.setFocusTraversable(true);
         p.requestFocus();
         p.setOnKeyPressed(this::handle);
+        p.setOnKeyReleased(e -> {
+            if(e.getCode() == KeyCode.A){
+                mainPlayer.setDirection(5);
+            }
+            else if(e.getCode() == KeyCode.D){
+                mainPlayer.setDirection(5);
+            }
+        });
     }
 
     @Override
@@ -53,12 +63,12 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             System.out.println(keyEvent.toString());
         }
 
-        else if(keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT){
-            mainPlayer.setPosX(5);
+        else if(keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT){
+            mainPlayer.setDirection(0);
         }
 
-        else if(keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT){
-            mainPlayer.setPosX(-5);
+        else if(keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT){
+            mainPlayer.setDirection(1);
         }
 
         else if(keyEvent.getCode() == KeyCode.S || keyEvent.getCode() == KeyCode.DOWN){
