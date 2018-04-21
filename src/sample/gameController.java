@@ -33,6 +33,9 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         mainPlayer.init(gamePane);
         mc.initMap(gamePane);
 
+        //denne tester bare om den skriver heisann for hvert element i arraylisten
+        //mc.checker();
+
         AnimationTimer timer = new AnimationTimer() {
 
             @Override
@@ -40,7 +43,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
-                mc.checkCollision(mainPlayer);
+                //mc.checkCollision(mainPlayer);
+                mc.checker(mainPlayer);
 
             }
         };

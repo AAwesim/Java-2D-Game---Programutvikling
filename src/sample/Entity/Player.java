@@ -35,7 +35,7 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
     }
 
     public void updatePlayerState(){
-        gravity();
+       // gravity();
         playerMovement();
 
     }

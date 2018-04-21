@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import sample.Entity.Player;
 
 import java.util.ArrayList;
 
@@ -70,7 +71,7 @@ public class mapCreator{
     }
 
     //Iterer gjennom en ArrayList og hvis mapParts i map intersecter med rectangle så blir det true
-    public void checkCollision(Rectangle r){
+   /* public void checkCollision(Rectangle r){
         System.out.println(r.getBoundsInLocal()); // Diagnostikk: sjekker bounds
         for(int i = 0; i < map.size(); i++){
             if(map.get(i).intersects(r.getBoundsInLocal())){
@@ -78,6 +79,15 @@ public class mapCreator{
             }else return;
 
         }
-    }
+    }*/
+   public void checker(Player p){
+       for(Rectangle test: map){
+           if(p.intersects(test.getBoundsInParent())){
+               System.out.println("lets goooo");
+               return;
+
+           }
+       }
+   }
 
 }
