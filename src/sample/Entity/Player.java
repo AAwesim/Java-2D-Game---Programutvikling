@@ -9,8 +9,8 @@ import javafx.scene.shape.Rectangle;
 
 
 public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> {
-    private int posX;
-    private int posY;
+    private int posX = 640/2-16;
+    private int posY = 480/2-16;
 
     private int xSpeed = 3;
     private int ySpeed = 2;
@@ -29,23 +29,26 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
         this.setHeight(32);
         this.setWidth(32);
         this.setFill(imgPattern);
-        this.setX(0);
-        this.setY(0);
+        this.setX(posX);
+        this.setY(posY);
         p.getChildren().add(this);
     }
 
     public void updatePlayerState(){
-        if(this.posY < (int)(480.0 - 32.0)){
-            this.setPosY(ySpeed);
-            this.setySpeed(1);
-            System.out.println(posY);
+        gravity();
+        playerMovement();
+
+    }
+
+    public void gravity(){
+        if(posY+33>480){
+            this.setySpeed(ySpeed * -1);
         }
         else {
-            setPosY(0);
-            ySpeed = 2;
+            ySpeed += 1;
         }
-
-        playerMovement();
+        setPosY(ySpeed);
+        System.out.println(ySpeed);
 
     }
 
@@ -92,7 +95,7 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
     }
 
     public void setySpeed(int ySpeed) {
-        this.ySpeed += ySpeed;
+        this.ySpeed = ySpeed;
     }
 
     @Override
