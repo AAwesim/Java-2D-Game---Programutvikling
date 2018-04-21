@@ -13,6 +13,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import sample.Entity.*;
+import sample.Map.mapCreator;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,11 +25,15 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     //Oppretter Entity factory, deretter oppretter et player objekt
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
+    private mapCreator mc=new mapCreator();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         keyHandlerInit(gamePane);
         mainPlayer.init(gamePane);
+        mc.initMap(gamePane);
+
+
         AnimationTimer timer = new AnimationTimer() {
 
             @Override
