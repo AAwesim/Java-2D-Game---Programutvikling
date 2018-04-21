@@ -14,7 +14,7 @@ public class mapCreator{
     public  int levelWidth;
     public ArrayList<Rectangle> map=new ArrayList<>();
     public  String testPic = "file:ressurser\\\\testpic.jpeg";
-    Image img=new Image(testPic);
+    Image img = new Image(testPic);
     public static final String[] LEVEL1MAP = new String[] {
             "000000000000000000000000000000",
             "000000000000000000000000000000",
@@ -48,9 +48,8 @@ public class mapCreator{
                     case '0':
                         break;
                     case '1':
-                        Rectangle mapParts= mapMaker(j*24,i*24,24,24, pe, Color.RED);
+                        Rectangle mapParts = mapMaker(j*24,i*24,24,24, pe, Color.RED);
                         map.add(mapParts);
-
                         break;
                 }
             }
@@ -59,15 +58,26 @@ public class mapCreator{
     }
     public Rectangle mapMaker(int x, int y, int w, int h, Pane pe, Color color) {
 
-        Rectangle rect= new Rectangle();
+        Rectangle rect = new Rectangle();
         rect.setTranslateX(x);
         rect.setTranslateY(y);
         rect.setWidth(w);
         rect.setHeight(h);
         rect.setFill(color);
-
         pe.getChildren().add(rect);
         return rect;
 
     }
+
+    //Iterer gjennom en ArrayList og hvis mapParts i map intersecter med rectangle så blir det true
+    public void checkCollision(Rectangle r){
+        System.out.println(r.getBoundsInLocal()); // Diagnostikk: sjekker bounds
+        for(int i = 0; i < map.size(); i++){
+            if(map.get(i).intersects(r.getBoundsInLocal())){
+                System.out.println("hei");
+            }else return;
+
+        }
+    }
+
 }

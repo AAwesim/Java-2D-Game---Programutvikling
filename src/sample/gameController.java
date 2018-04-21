@@ -25,14 +25,13 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     //Oppretter Entity factory, deretter oppretter et player objekt
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
-    private mapCreator mc=new mapCreator();
+    private mapCreator mc = new mapCreator();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         keyHandlerInit(gamePane);
         mainPlayer.init(gamePane);
         mc.initMap(gamePane);
-
 
         AnimationTimer timer = new AnimationTimer() {
 
@@ -41,6 +40,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
+                mc.checkCollision(mainPlayer);
 
             }
         };

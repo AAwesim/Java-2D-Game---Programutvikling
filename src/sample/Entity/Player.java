@@ -48,7 +48,7 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
             ySpeed += 1;
         }
         setPosY(ySpeed);
-        System.out.println(ySpeed);
+        //System.out.println(ySpeed);
 
     }
 
@@ -66,10 +66,6 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
             this.setPosX(xSpeed);
         }
         else return;
-    }
-
-    public void checkBorderCollision(double playerX, double playerY){
-        return;
     }
 
     //Getters og setters
