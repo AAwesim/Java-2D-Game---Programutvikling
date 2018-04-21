@@ -39,8 +39,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             @Override
             public void handle(long now) {
 
-                mainPlayer.update();
-                mainPlayer.render();
+                mainPlayer.updatePlayerState();
+                mainPlayer.renderPlayer();
 
             }
         };

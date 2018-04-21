@@ -1,12 +1,14 @@
 package sample.Entity;
 
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 
-public class Player extends Rectangle implements Entity {
+public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> {
     private int posX;
     private int posY;
 
@@ -32,7 +34,7 @@ public class Player extends Rectangle implements Entity {
         p.getChildren().add(this);
     }
 
-    public void update(){
+    public void updatePlayerState(){
         if(this.posY < (int)(480.0 - 32.0)){
             this.setPosY(ySpeed);
             this.setySpeed(1);
@@ -43,21 +45,24 @@ public class Player extends Rectangle implements Entity {
             ySpeed = 2;
         }
 
+        playerMovement();
+
+    }
+
+    public void renderPlayer(){
+        setX(posX);
+        setY(posY);
+        this.setFill(imgPattern);
+    }
+
+    public void playerMovement() {
         if(direction == left){
             this.setPosX(-xSpeed);
         }
         else if(direction == right) {
             this.setPosX(xSpeed);
         }
-
         else return;
-
-    }
-
-    public void render(){
-        setX(posX);
-        setY(posY);
-        this.setFill(imgPattern);
     }
 
     public void checkBorderCollision(double playerX, double playerY){
@@ -65,9 +70,6 @@ public class Player extends Rectangle implements Entity {
     }
 
     //Getters og setters
-    public Image getImg() {
-        return null;
-    }
 
     public void setDirection(int direction) {
         this.direction = direction;
@@ -91,5 +93,10 @@ public class Player extends Rectangle implements Entity {
 
     public void setySpeed(int ySpeed) {
         this.ySpeed += ySpeed;
+    }
+
+    @Override
+    public void handle(KeyEvent event) {
+
     }
 }
