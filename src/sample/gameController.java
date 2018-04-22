@@ -88,6 +88,11 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             mainPlayer.setPosY(-5);
         }
 
+        else if(keyEvent.getCode() == KeyCode.F1){
+            mainPlayer.setPosX(320-mainPlayer.getPosX());
+            mainPlayer.setPosY(240-mainPlayer.getPosY());
+        }
+
         else if(keyEvent.getCode() == KeyCode.ESCAPE){
             Stage stage = (Stage) ((Node)keyEvent.getSource()).getScene().getWindow();
             Parent root = null;
