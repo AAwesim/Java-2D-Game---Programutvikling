@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
@@ -12,30 +13,31 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
     private int posX = 640/2-16;
     private int posY = 480/2-16;
 
-    private int xSpeed = 3;
-    private int ySpeed = 2;
+    private int xSpeed = 8;
+    private int ySpeed = 1;
 
     private int direction = 5;
     private int left = 0;
     private int right = 1;
 
 
-    private static final String testPic = "file:ressurser\\\\mate.png";
+/*    private static final String testPic = "file:ressurser\\\\mate.png";
     Image img = new Image(testPic);
-    final private ImagePattern imgPattern = new ImagePattern(img);
+    final private ImagePattern imgPattern = new ImagePattern(img);*/
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void init(Pane p){
         this.setHeight(32);
         this.setWidth(32);
-        this.setFill(imgPattern);
+        /*this.setFill(imgPattern);*/
+        this.setFill(Color.BLUE);
         this.setX(posX);
         this.setY(posY);
         p.getChildren().add(this);
     }
 
     public void updatePlayerState(){
-       /* gravity();*/
+        gravity();
         playerMovement();
 
     }
@@ -53,7 +55,6 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
     public void renderPlayer(){
         setX(posX);
         setY(posY);
-        this.setFill(imgPattern);
     }
 
     public void playerMovement() {

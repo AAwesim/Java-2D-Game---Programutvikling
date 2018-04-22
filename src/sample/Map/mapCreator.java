@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class mapCreator{
 
+    private int scalar = 24;
     public  int levelWidth;
     public ArrayList<Rectangle> map=new ArrayList<>();
     public  String testPic = "file:ressurser\\\\testpic.jpeg";
@@ -40,8 +41,7 @@ public class mapCreator{
     };
 
     public void initMap(Pane pe){
-        levelWidth = LEVEL1MAP[0].length() * 24;
-
+        levelWidth = LEVEL1MAP[0].length() * scalar;
         for (int i = 0; i < LEVEL1MAP.length; i++) {
             String line = LEVEL1MAP[i];
             for (int j = 0; j < line.length(); j++) {
@@ -49,7 +49,7 @@ public class mapCreator{
                     case '0':
                         break;
                     case '1':
-                        Rectangle mapParts = mapMaker(j*24,i*24,24,24, pe, Color.RED);
+                        Rectangle mapParts = mapMaker(j*scalar,i*scalar,scalar,scalar, pe);
                         map.add(mapParts);
                         break;
                 }
@@ -57,34 +57,18 @@ public class mapCreator{
         }
 
     }
-    public Rectangle mapMaker(int x, int y, int w, int h, Pane pe, Color color) {
-
-        Rectangle rect = new Rectangle();
-        rect.setTranslateX(x);
-        rect.setTranslateY(y);
-        rect.setWidth(w);
-        rect.setHeight(h);
-        rect.setFill(color);
+    public Rectangle mapMaker(int x, int y, int w, int h, Pane pe) {
+        Rectangle rect = new Rectangle(x,y,w,h);
         pe.getChildren().add(rect);
         return rect;
 
     }
 
-    //Iterer gjennom en ArrayList og hvis mapParts i map intersecter med rectangle så blir det true
-   /* public void checkCollision(Rectangle r){
-        System.out.println(r.getBoundsInLocal()); // Diagnostikk: sjekker bounds
-        for(int i = 0; i < map.size(); i++){
-            if(map.get(i).intersects(r.getBoundsInLocal())){
-                System.out.println("hei");
-            }else return;
-
-        }
-   public void checker(Player p){
-       for(Rectangle test: map){
-           if(p.intersects(test.getBoundsInParent())){
+   public void playerMapCollisionChecker(Player p){
+       for(Rectangle mapPart:map){
+           if(p.intersects(mapPart.getBoundsInParent())){
                System.out.println("lets goooo");
                return;
-
            }
        }
    }
