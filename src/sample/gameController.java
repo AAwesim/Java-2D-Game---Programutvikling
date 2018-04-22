@@ -91,6 +91,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         else if(keyEvent.getCode() == KeyCode.F1){
             mainPlayer.setPosX(320-mainPlayer.getPosX());
             mainPlayer.setPosY(240-mainPlayer.getPosY());
+            mainPlayer.setySpeed(0);
         }
 
         else if(keyEvent.getCode() == KeyCode.ESCAPE){
