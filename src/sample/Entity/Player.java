@@ -35,21 +35,19 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
     }
 
     public void updatePlayerState(){
-       // gravity();
+       /* gravity();*/
         playerMovement();
 
     }
 
     public void gravity(){
-        if(posY+33>480){
+        if(posY+32>480){
             this.setySpeed(ySpeed * -1);
         }
         else {
             ySpeed += 1;
         }
         setPosY(ySpeed);
-        //System.out.println(ySpeed);
-
     }
 
     public void renderPlayer(){

@@ -43,8 +43,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
-                //mc.checkCollision(mainPlayer);
-                mc.checker(mainPlayer);
+                mc.playerMapCollisionChecker(mainPlayer);
 
             }
         };

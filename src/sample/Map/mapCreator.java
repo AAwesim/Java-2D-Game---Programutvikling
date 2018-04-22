@@ -79,7 +79,6 @@ public class mapCreator{
             }else return;
 
         }
-    }*/
    public void checker(Player p){
        for(Rectangle test: map){
            if(p.intersects(test.getBoundsInParent())){
