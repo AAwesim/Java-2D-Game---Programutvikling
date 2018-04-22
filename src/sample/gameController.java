@@ -8,9 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
@@ -27,11 +28,17 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
     private mapCreator mc = new mapCreator();
 
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         keyHandlerInit(gamePane);
         mainPlayer.init(gamePane);
         mc.initMap(gamePane);
+
+        BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",640,480,
+                false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+
+        gamePane.setBackground(new Background(BI));
 
         //denne tester bare om den skriver heisann for hvert element i arraylisten
         //mc.checker();
@@ -69,7 +76,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.SPACE){
-            System.out.println(keyEvent.toString());
+           System.out.println(keyEvent.toString());
         }
 
         else if(keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT){

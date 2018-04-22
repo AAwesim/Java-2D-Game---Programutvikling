@@ -39,8 +39,8 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
     public void updatePlayerState(){
         gravity();
         playerMovement();
-        System.out.println(this.posX);
-        System.out.println(this.posY);
+       // System.out.println(this.posX);
+       // System.out.println(this.posY);
 
     }
 

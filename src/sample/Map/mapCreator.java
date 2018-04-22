@@ -17,6 +17,7 @@ public class mapCreator{
     public ArrayList<Rectangle> map=new ArrayList<>();
     public  String testPic = "file:ressurser\\\\testpic.jpeg";
     Image img = new Image(testPic);
+
     public static final String[] LEVEL1MAP = new String[] {
             "000000000000000000000000000000",
             "000000000000000000000000000000",
