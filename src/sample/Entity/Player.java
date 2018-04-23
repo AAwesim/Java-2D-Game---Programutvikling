@@ -27,8 +27,8 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void init(Pane p){
-        this.setHeight(32);
-        this.setWidth(32);
+        this.setHeight(25);
+        this.setWidth(25);
         /*this.setFill(imgPattern);*/
         this.setFill(Color.BLUE);
         this.setX(posX);
