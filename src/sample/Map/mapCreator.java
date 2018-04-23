@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class mapCreator{
 
-    private int scalar = 24;
+    private int scalar = 25;
     public  int levelWidth;
     public ArrayList<Rectangle> map=new ArrayList<>();
     public  String testPic = "file:ressurser\\\\testpic.jpeg";

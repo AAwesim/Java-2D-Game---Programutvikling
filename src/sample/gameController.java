@@ -35,8 +35,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         mainPlayer.init(gamePane);
         mc.initMap(gamePane);
 
-        BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",640,480,
-                false,true), BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",800,500,
+                false,true),BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
         gamePane.setBackground(new Background(BI));
 
