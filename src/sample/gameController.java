@@ -92,7 +92,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
 
         else if(keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.UP){
-            mainPlayer.setPosY(-5);
+            mainPlayer.setPosY(-20);
         }
 
         else if(keyEvent.getCode() == KeyCode.F1){
