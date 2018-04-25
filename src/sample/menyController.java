@@ -31,21 +31,13 @@ public class menyController implements Initializable{
         stage.setResizable(false);
         stage.show();
 
-        if(stage.getWidth()<1920) {
-            stage.setX(1920/2 - (stage.getWidth()/2));
-        } else {
-            stage.setX(0);
-        }
+        /*if(stage.getWidth()<1920) { stage.setX(1920/2 - (stage.getWidth()/2)); }
+         else {  stage.setX(0);  }
 
-        if(stage.getHeight()<1080) {
-            stage.setY(1080/2 - (stage.getHeight()/2));
-        } else {
-            stage.setY(0);
-        }
+        if(stage.getHeight()<1080) { stage.setY(1080/2 - (stage.getHeight()/2)); }
+        else { stage.setY(0); }*/
 
-        System.out.println(stage.getWidth());
-        System.out.println(stage.getX());
-        System.out.println(stage.getY());
+
 
     }
 
