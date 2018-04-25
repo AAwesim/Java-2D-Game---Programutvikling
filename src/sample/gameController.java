@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
+import sun.plugin.javascript.navig.Anchor;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,11 +23,16 @@ import java.util.ResourceBundle;
 
 public class gameController implements Initializable, EventHandler<KeyEvent> {
     @FXML Pane gamePane;
+    @FXML AnchorPane anchor;
+    @FXML Pane gpWrap;
 
     //Oppretter Entity factory, deretter oppretter et player objekt
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
     private mapCreator mc = new mapCreator();
+    BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",1800,
+            500,true,true),BackgroundRepeat.REPEAT,
+            BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
 
     @Override
@@ -35,8 +41,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         mainPlayer.init(gamePane);
         mc.initMap(gamePane);
 
-        BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",800,500,
-                false,true),BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
         gamePane.setBackground(new Background(BI));
 
@@ -47,6 +51,10 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
             @Override
             public void handle(long now) {
+
+                if(mainPlayer.getPosX()>400) {
+                    gamePane.setLayoutX(-mainPlayer.getPosX()+400);
+                }
 
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
