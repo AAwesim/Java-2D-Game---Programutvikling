@@ -37,7 +37,7 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
     }
 
     public void updatePlayerState(){
-        gravity();
+        //gravity();
         playerMovement();
        // System.out.println(this.posX);
        // System.out.println(this.posY);
@@ -57,11 +57,14 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
     public void playerMovement() {
         if(direction == left){
             this.setPosX(-xSpeed);
+            this.setxSpeed(8);
         }
         else if(direction == right) {
             this.setPosX(xSpeed);
+            this.setxSpeed(8);
         }
         else return;
+
     }
 
     //Getters og setters
@@ -88,6 +91,10 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
 
     public void setySpeed(double ySpeed) {
         this.ySpeed = ySpeed;
+    }
+
+    public void setxSpeed(double xSpeed) {
+        this.xSpeed = xSpeed;
     }
 
     @Override

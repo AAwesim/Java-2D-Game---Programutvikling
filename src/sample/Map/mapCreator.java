@@ -83,8 +83,11 @@ public class mapCreator{
 
    public void playerMapCollisionChecker(Player p){
        for(Rectangle mapPart:map){
-           if(p.intersects(mapPart.getBoundsInParent())){
+           if(p.intersects(mapPart.getBoundsInLocal())){
                p.setySpeed(0);
+               p.setxSpeed(0);
+               p.setDirection(5);
+               System.out.println("h");
                return;
            }
        }
