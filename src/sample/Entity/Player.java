@@ -10,7 +10,7 @@ import javafx.scene.shape.Rectangle;
 
 
 public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> {
-    private double posX = 640/2-16;
+    private double posX = 640/2-160;
     private double posY = 480/2-16;
 
     private double xSpeed = 8;
@@ -21,16 +21,16 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
     private int right = 1;
 
 
-/*    private static final String testPic = "file:ressurser\\\\mate.png";
+    private static final String testPic = "file:ressurser\\\\char.png";
     Image img = new Image(testPic);
-    final private ImagePattern imgPattern = new ImagePattern(img);*/
+    final private ImagePattern imgPattern = new ImagePattern(img);
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void init(Pane p){
-        this.setHeight(25);
-        this.setWidth(25);
-        /*this.setFill(imgPattern);*/
-        this.setFill(Color.BLUE);
+        this.setHeight(50);
+        this.setWidth(35);
+        this.setFill(imgPattern);
+        //this.setFill(Color.BLUE);
         this.setX(posX);
         this.setY(posY);
         p.getChildren().add(this);

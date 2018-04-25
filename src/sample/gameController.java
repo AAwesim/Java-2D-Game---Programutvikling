@@ -22,18 +22,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class gameController implements Initializable, EventHandler<KeyEvent> {
+
     @FXML Pane gamePane;
-    @FXML AnchorPane anchor;
     @FXML Pane gpWrap;
 
     //Oppretter Entity factory, deretter oppretter et player objekt
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
     private mapCreator mc = new mapCreator();
-    BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",1800,
-            500,true,true),BackgroundRepeat.REPEAT,
-            BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
+    BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",805,525,false,true),BackgroundRepeat.REPEAT,
+            BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -41,8 +40,10 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         mainPlayer.init(gamePane);
         mc.initMap(gamePane);
 
-
         gamePane.setBackground(new Background(BI));
+
+        System.out.println("stage: " + gpWrap.getWidth());
+        System.out.println("scene: " + gamePane.getWidth());
 
         //denne tester bare om den skriver heisann for hvert element i arraylisten
         //mc.checker();
@@ -52,10 +53,13 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             @Override
             public void handle(long now) {
 
-                if(mainPlayer.getPosX()>400) {
-                    gamePane.setLayoutX(-mainPlayer.getPosX()+400);
+                if(mainPlayer.getPosX()>300) {
+                    gamePane.setLayoutX(-mainPlayer.getPosX()+300);
+                } else {
+                    gamePane.setLayoutX(0);
                 }
 
+               // System.out.println(mainPlayer.getPosX());
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
                 mc.playerMapCollisionChecker(mainPlayer);
