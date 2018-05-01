@@ -105,7 +105,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
 
         else if(keyEvent.getCode() == KeyCode.ESCAPE){
-            timer.stop();
             Stage stage = (Stage) ((Node)keyEvent.getSource()).getScene().getWindow();
 
             StateManager.setState(StateManager.GameState.MAINMENU);
