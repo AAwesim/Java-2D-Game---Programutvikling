@@ -7,8 +7,8 @@ import javafx.scene.shape.Rectangle;
 
 
 public class Player extends Rectangle implements Entity {
-    private double posX = 640/2-160;
-    private double posY = 480/2-16;
+    private double posX = 640 / 2 - 160;
+    private double posY = 480 / 2 - 16;
 
     private double xSpeed = 8;
     private double ySpeed = 0.7;
@@ -23,7 +23,7 @@ public class Player extends Rectangle implements Entity {
     final private ImagePattern imgPattern = new ImagePattern(img);
 
     //Setter opp entiteten Player sine vilkårlige verdier.
-    public void init(Pane p){
+    public void init(Pane p) {
         this.setHeight(50);
         this.setWidth(35);
         this.setFill(imgPattern);
@@ -33,41 +33,32 @@ public class Player extends Rectangle implements Entity {
         p.getChildren().add(this);
     }
 
-    public void updatePlayerState(){
+    public void updatePlayerState() {
         //gravity();
         playerMovement();
-       // System.out.println(this.posX);
-       // System.out.println(this.posY);
-
+        // System.out.println(this.posX);
+        // System.out.println(this.posY);
     }
 
-    public void gravity(){
+    public void gravity() {
         setPosY(ySpeed);
         ySpeed += 0.7;
     }
 
-    public void renderPlayer(){
+    public void renderPlayer() {
         setX(posX);
         setY(posY);
     }
 
-<<<<<<< HEAD
-    //bruker Image objektet img som inneholder bildefilen til å tegne det til skjermen basert på objektet sine cords.
-    public void render(GraphicsContext gc) {
-        gc.drawImage(this.img, this.posX, this.posY);
-=======
     public void playerMovement() {
-        if(direction == left){
+        if (direction == left) {
             this.setPosX(-xSpeed);
             this.setxSpeed(8);
-        }
-        else if(direction == right) {
+        } else if (direction == right) {
             this.setPosX(xSpeed);
             this.setxSpeed(8);
-        }
-        else return;
+        } else return;
 
->>>>>>> Asim
     }
 
     //Getters og setters
@@ -80,12 +71,7 @@ public class Player extends Rectangle implements Entity {
         return posX;
     }
 
-<<<<<<< HEAD
-    public void setPosX(int posX) {
-
-=======
     public void setPosX(double posX) {
->>>>>>> Asim
         this.posX += posX;
     }
 
