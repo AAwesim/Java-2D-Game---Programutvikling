@@ -5,7 +5,7 @@
 <!--  <Canvas fx:id="can1" id="canvas" height="480.0" width="640.0" />-->
 
 
-<Pane fx:id="gpWrap" prefHeight="525.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gameController">
+<Pane fx:id="gpWrap" prefHeight="525.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.gameController">
 
    <Pane fx:id="gamePane" prefHeight="525.0" prefWidth="2415.0" />
 

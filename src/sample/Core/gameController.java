@@ -1,13 +1,10 @@
-package sample;
+package sample.Core;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -15,9 +12,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
-import sun.plugin.javascript.navig.Anchor;
-
-import java.io.IOException;
+import sample.helper.StateManager;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -26,10 +21,10 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     @FXML Pane gamePane;
     @FXML Pane gpWrap;
 
-    //Oppretter Entity factory, deretter oppretter et player objekt
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
     private mapCreator mc = new mapCreator();
+    private AnimationTimer timer;
 
     BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",805,525,false,true),BackgroundRepeat.REPEAT,
             BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -45,10 +40,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         System.out.println("stage: " + gpWrap.getWidth());
         System.out.println("scene: " + gamePane.getWidth());
 
-        //denne tester bare om den skriver heisann for hvert element i arraylisten
-        //mc.checker();
-
-        AnimationTimer timer = new AnimationTimer() {
+        timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
@@ -63,7 +55,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
                 mc.playerMapCollisionChecker(mainPlayer);
-
             }
         };
 
@@ -114,15 +105,12 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
 
         else if(keyEvent.getCode() == KeyCode.ESCAPE){
+            timer.stop();
             Stage stage = (Stage) ((Node)keyEvent.getSource()).getScene().getWindow();
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("meny.fxml"));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
+
+            StateManager.setState(StateManager.GameState.MAINMENU);
+            stage.setScene(StateManager.update());
+
             stage.setResizable(false);
             stage.show();
         }

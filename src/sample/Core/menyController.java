@@ -1,4 +1,4 @@
-package sample;
+package sample.Core;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -12,6 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.helper.StateManager;
 
 public class menyController implements Initializable{
 
@@ -22,12 +23,10 @@ public class menyController implements Initializable{
     }
 
     @FXML
-    private void setGameScene(ActionEvent e) throws IOException{
+    private void setGameScene(ActionEvent e){
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("gameScene.fxml"));
-        Scene scene = new Scene(root);
-
-        stage.setScene(scene);
+        StateManager.setState(StateManager.GameState.GAME);
+        stage.setScene(StateManager.update());
         stage.setResizable(false);
         stage.show();
 
@@ -42,11 +41,12 @@ public class menyController implements Initializable{
     }
 
     @FXML
-    private void setHjelpScene(ActionEvent e) throws IOException {
+    private void setHjelpScene(ActionEvent e) {
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("hjelpScene.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+
+        StateManager.setState(StateManager.GameState.HELP);
+        stage.setScene(StateManager.update());
+
         stage.setResizable(false);
         stage.show();
     }

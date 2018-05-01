@@ -1,15 +1,12 @@
 package sample.Entity;
 
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 
-public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> {
+public class Player extends Rectangle implements Entity {
     private double posX = 640/2-160;
     private double posY = 480/2-16;
 
@@ -97,8 +94,4 @@ public class Player extends Rectangle implements Entity, EventHandler<KeyEvent> 
         this.xSpeed = xSpeed;
     }
 
-    @Override
-    public void handle(KeyEvent event) {
-
-    }
 }
