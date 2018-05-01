@@ -45,9 +45,9 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             @Override
             public void handle(long now) {
 
-                if(mainPlayer.getPosX()>300) {
+                if(mainPlayer.getPosX()>300 && mainPlayer.getPosX()<gamePane.getWidth()-505) {
                     gamePane.setLayoutX(-mainPlayer.getPosX()+300);
-                } else {
+                } else if (mainPlayer.getPosX()<300) {
                     gamePane.setLayoutX(0);
                 }
 
