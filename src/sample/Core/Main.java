@@ -1,23 +1,23 @@
-package sample;
+package sample.Core;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.helper.*;
 
 public class Main extends Application {
 
     public final static  double SCREEN_WIDTH = 640.0;
     public final static  double SCREEN_HEIGHT = 480.0;
     public final static String GAME_NAME = "Tiyareed";
+    StateManager stateManager = new StateManager();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("meny.fxml"));
         primaryStage.setResizable(false);
         primaryStage.setTitle(GAME_NAME);
-        primaryStage.setScene(new Scene(root, SCREEN_WIDTH, SCREEN_HEIGHT));
+
+        primaryStage.setScene(StateManager.update());
+
         primaryStage.show();
     }
 

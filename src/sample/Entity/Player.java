@@ -1,57 +1,108 @@
 package sample.Entity;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import sample.gameController;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class Player implements Entity {
-    private int posX;
-    private int posY;
-    private Image img = null;
-    private InputStream is = null;
+public class Player extends Rectangle implements Entity {
+    private double posX = 640/2-160;
+    private double posY = 480/2-16;
 
-    //createAvatar leser en bildefil og lagerer den i img som et Image objekt.
-    @Override
-    public void createAvatar() {
-        try {
-            is = new BufferedInputStream(new FileInputStream("ressurser\\\\mate.png"));
-            img = new Image(is);
-        } catch (FileNotFoundException fnfx) {
-            Logger.getLogger(gameController.class.getName()).log(Level.SEVERE, null, fnfx);
-        }
+    private double xSpeed = 8;
+    private double ySpeed = 0.7;
+
+    private int direction = 5;
+    private int left = 0;
+    private int right = 1;
+
+
+    private static final String testPic = "file:ressurser\\\\char.png";
+    Image img = new Image(testPic);
+    final private ImagePattern imgPattern = new ImagePattern(img);
+
+    //Setter opp entiteten Player sine vilkårlige verdier.
+    public void init(Pane p){
+        this.setHeight(50);
+        this.setWidth(35);
+        this.setFill(imgPattern);
+        //this.setFill(Color.BLUE);
+        this.setX(posX);
+        this.setY(posY);
+        p.getChildren().add(this);
     }
 
+    public void updatePlayerState(){
+        //gravity();
+        playerMovement();
+       // System.out.println(this.posX);
+       // System.out.println(this.posY);
+
+    }
+
+    public void gravity(){
+        setPosY(ySpeed);
+        ySpeed += 0.7;
+    }
+
+    public void renderPlayer(){
+        setX(posX);
+        setY(posY);
+    }
+
+<<<<<<< HEAD
     //bruker Image objektet img som inneholder bildefilen til å tegne det til skjermen basert på objektet sine cords.
     public void render(GraphicsContext gc) {
         gc.drawImage(this.img, this.posX, this.posY);
+=======
+    public void playerMovement() {
+        if(direction == left){
+            this.setPosX(-xSpeed);
+            this.setxSpeed(8);
+        }
+        else if(direction == right) {
+            this.setPosX(xSpeed);
+            this.setxSpeed(8);
+        }
+        else return;
+
+>>>>>>> Asim
     }
 
     //Getters og setters
-    public Image getImg() {
-        return img;
+
+    public void setDirection(int direction) {
+        this.direction = direction;
     }
 
-    public int getPosX() {
+    public double getPosX() {
         return posX;
     }
 
+<<<<<<< HEAD
     public void setPosX(int posX) {
 
+=======
+    public void setPosX(double posX) {
+>>>>>>> Asim
         this.posX += posX;
     }
 
-    public int getPosY() {
+    public double getPosY() {
         return posY;
     }
 
-    public void setPosY(int posY) {
+    public void setPosY(double posY) {
         this.posY += posY;
     }
+
+    public void setySpeed(double ySpeed) {
+        this.ySpeed = ySpeed;
+    }
+
+    public void setxSpeed(double xSpeed) {
+        this.xSpeed = xSpeed;
+    }
+
 }
