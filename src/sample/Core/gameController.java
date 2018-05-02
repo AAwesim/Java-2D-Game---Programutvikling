@@ -11,6 +11,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
@@ -60,8 +61,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                     gamePane.setLayoutX(0);
                 }
 
-               // System.out.println(mainPlayer.getPosX());
-                if(playerMapCollisionChecker(mainPlayer)){
+                System.out.println(mainPlayer.getPosX());
+                if(playerMapCollisionChecker(mainPlayer)) {
                     mainPlayer.gravity();
                 }
                 System.out.println(playerMapCollisionChecker(mainPlayer));
@@ -75,16 +76,19 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     }
 
+
+    /*private int left = 0;
+    private int right = 1;*/
     public void keyHandlerInit(Pane p){
         p.setFocusTraversable(true);
         p.requestFocus();
         p.setOnKeyPressed(this::handle);
         p.setOnKeyReleased(e -> {
             if(e.getCode() == KeyCode.A){
-                mainPlayer.setDirection(5);
+                mainPlayer.setDirection(3);
             }
             else if(e.getCode() == KeyCode.D){
-                mainPlayer.setDirection(5);
+                mainPlayer.setDirection(3);
             }
         });
     }
@@ -97,6 +101,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
         else if(keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT){
             mainPlayer.setDirection(0);
+            mainPlayer.Translate(1.00,-1.0);
+
         }
 
         else if(keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT){
@@ -153,6 +159,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
 
     }
+
     public Rectangle mapMaker1(int x, int y, int w, int h, Pane pe) {
         Rectangle rect = new Rectangle(x,y,w,h);
         pe.getChildren().add(rect);
@@ -164,6 +171,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             if(p.intersects(mapPart.getBoundsInLocal())){
                 p.setySpeed(0);
                 p.setxSpeed(0);
+                p.setPosY(-1);
+
                 p.setDirection(5);
                 System.out.println("h");
                 return false;
