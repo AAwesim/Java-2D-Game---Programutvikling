@@ -65,54 +65,59 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public void keyHandlerInit(Pane p){
         p.setFocusTraversable(true);
         p.requestFocus();
-        p.setOnKeyPressed(this::handle);
-        p.setOnKeyReleased(e -> {
-            if(e.getCode() == KeyCode.A){
-                mainPlayer.setDirection(5);
+        p.setOnKeyPressed(e -> {
+            switch (e.getCode()) {
+                case SPACE:
+                    System.out.println(e.toString());
+                    break;
+                case A:
+                case LEFT:
+                    mainPlayer.setDirection(0);
+                    break;
+                case D:
+                case RIGHT:
+                    mainPlayer.setDirection(1);
+                    break;
+                case S:
+                case DOWN:
+                    mainPlayer.setPosY(5);
+                    break;
+                case W:
+                case UP:
+                    mainPlayer.setPosY(-20);
+                    break;
+                case F1:
+                    mainPlayer.setPosX(320 - mainPlayer.getPosX());
+                    mainPlayer.setPosY(240 - mainPlayer.getPosY());
+                    mainPlayer.setySpeed(0);
+                    break;
+                case ESCAPE:
+                    Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+
+                    StateManager.setState(StateManager.GameState.MAINMENU);
+                    stage.setScene(StateManager.update());
+
+                    stage.setResizable(false);
+                    stage.show();
+                    break;
             }
-            else if(e.getCode() == KeyCode.D){
-                mainPlayer.setDirection(5);
+        });
+
+        p.setOnKeyReleased(e -> {
+            switch(e.getCode()){
+                case A:
+                    mainPlayer.setDirection(5);
+                    break;
+                case D:
+                    mainPlayer.setDirection(5);
+                    break;
             }
         });
     }
 
     @Override
     public void handle(KeyEvent keyEvent) {
-        if(keyEvent.getCode() == KeyCode.SPACE){
-           System.out.println(keyEvent.toString());
-        }
 
-        else if(keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT){
-            mainPlayer.setDirection(0);
-        }
-
-        else if(keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT){
-            mainPlayer.setDirection(1);
-        }
-
-        else if(keyEvent.getCode() == KeyCode.S || keyEvent.getCode() == KeyCode.DOWN){
-            mainPlayer.setPosY(5);
-        }
-
-        else if(keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.UP){
-            mainPlayer.setPosY(-20);
-        }
-
-        else if(keyEvent.getCode() == KeyCode.F1){
-            mainPlayer.setPosX(320-mainPlayer.getPosX());
-            mainPlayer.setPosY(240-mainPlayer.getPosY());
-            mainPlayer.setySpeed(0);
-        }
-
-        else if(keyEvent.getCode() == KeyCode.ESCAPE){
-            Stage stage = (Stage) ((Node)keyEvent.getSource()).getScene().getWindow();
-
-            StateManager.setState(StateManager.GameState.MAINMENU);
-            stage.setScene(StateManager.update());
-
-            stage.setResizable(false);
-            stage.show();
-        }
     }
 
 }
