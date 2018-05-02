@@ -9,12 +9,17 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
 import sample.helper.StateManager;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static javafx.scene.paint.Color.color;
 
 public class gameController implements Initializable, EventHandler<KeyEvent> {
 
@@ -26,6 +31,10 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     private mapCreator mc = new mapCreator();
     private AnimationTimer timer;
 
+    private int scalar = 35;
+    public  int levelWidth;
+    public ArrayList<Rectangle> map=new ArrayList<>();
+
     BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",805,525,false,true),BackgroundRepeat.REPEAT,
             BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
@@ -33,7 +42,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public void initialize(URL location, ResourceBundle resources) {
         keyHandlerInit(gamePane);
         mainPlayer.init(gamePane);
-        mc.initMap(gamePane);
+        initMap(gamePane);
 
         gamePane.setBackground(new Background(BI));
 
@@ -52,9 +61,13 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 }
 
                // System.out.println(mainPlayer.getPosX());
+                if(playerMapCollisionChecker(mainPlayer)){
+                    mainPlayer.gravity();
+                }
+                System.out.println(playerMapCollisionChecker(mainPlayer));
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
-                mc.playerMapCollisionChecker(mainPlayer);
+                playerMapCollisionChecker(mainPlayer);
             }
         };
 
@@ -115,4 +128,48 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
     }
 
+
+    public void initMap(Pane pe){
+        levelWidth = mapCreator.LEVEL1MAP[0].length() * scalar;
+        for (int i = 0; i < mapCreator.LEVEL1MAP.length; i++) {
+            String line = mapCreator.LEVEL1MAP[i];
+            for (int j = 0; j < line.length(); j++) {
+                switch (line.charAt(j)) {
+                    case '0':
+                        break;
+                    case '1':
+                        Rectangle mapPart1 = mapMaker1(j*scalar,i*scalar,scalar,scalar, pe);
+                        mapPart1.setFill(Color.rgb(44,190,49));
+                        map.add(mapPart1);
+                        break;
+                    case '2':
+                        mapPart1 = mapMaker1(j*scalar,i*scalar,scalar,scalar, pe);
+                        mapPart1.setFill(color(0.0,0.20,0.50));
+                        map.add(mapPart1);
+                        break;
+
+                }
+            }
+        }
+
+    }
+    public Rectangle mapMaker1(int x, int y, int w, int h, Pane pe) {
+        Rectangle rect = new Rectangle(x,y,w,h);
+        pe.getChildren().add(rect);
+        return rect;
+    }
+
+    public boolean playerMapCollisionChecker(Player p){
+        for(Rectangle mapPart:map){
+            if(p.intersects(mapPart.getBoundsInLocal())){
+                p.setySpeed(0);
+                p.setxSpeed(0);
+                p.setDirection(5);
+                System.out.println("h");
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
