@@ -34,7 +34,7 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void updatePlayerState() {
-        //gravity();
+        gravity();
         playerMovement();
         // System.out.println(this.posX);
         // System.out.println(this.posY);

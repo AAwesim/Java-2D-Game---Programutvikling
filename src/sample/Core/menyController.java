@@ -16,7 +16,6 @@ import sample.helper.StateManager;
 
 public class menyController implements Initializable{
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -25,6 +24,7 @@ public class menyController implements Initializable{
     @FXML
     private void setGameScene(ActionEvent e){
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        Main.getStateManager().initGame();
         StateManager.setState(StateManager.GameState.GAME);
         stage.setScene(StateManager.update());
         stage.setResizable(false);
