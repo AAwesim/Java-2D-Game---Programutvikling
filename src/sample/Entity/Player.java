@@ -11,11 +11,11 @@ public class Player extends Rectangle implements Entity {
     private double posY = 480 / 2 - 16;
 
     private double xSpeed = 3;
-    private double ySpeed = 3;
+    public double ySpeed = 3;
 
-    private int direction = 5;
-    private int left = 0;
-    private int right = 1;
+    private int direction = 3;
+    protected int left = 0;
+    protected int right = 1;
 
 
     private static final String testPic = "file:ressurser\\\\char.png";
@@ -29,22 +29,26 @@ public class Player extends Rectangle implements Entity {
         this.setFill(imgPattern);
         //this.setFill(Color.BLUE);
         this.setX(posX) ;
-        System.out.println(posX);
+       // System.out.println(posX);
         this.setY(posY);
-        System.out.println(posY);
+        //System.out.println(posY);
         p.getChildren().add(this);
+
     }
 
     public void updatePlayerState() {
         //gravity();
+        {System.out.println(ySpeed);}
+       // {System.out.println(xSpeed);}
         playerMovement();
         // System.out.println(this.posX);
         // System.out.println(this.posY);
     }
 
     public void gravity() {
-        setPosY(ySpeed);
-        ySpeed = ySpeed+0.1;
+        setPosY(getPosY()+ySpeed);
+        ySpeed = ySpeed+0.2;
+
     }
 
     public void renderPlayer() {
@@ -58,7 +62,7 @@ public class Player extends Rectangle implements Entity {
             this.setxSpeed(4);
         } else if (direction == right) {
             this.setPosX(getPosX()+xSpeed);
-            this.setxSpeed(4);
+            setxSpeed(4);
         } else return;
 
     }
@@ -69,12 +73,16 @@ public class Player extends Rectangle implements Entity {
         this.direction = direction;
     }
 
-    public double getPosX() {
-        return posX;
+    public void getDirection(int direction) {
+        this.direction = direction;
     }
 
     public void setPosX(double posX) {
         this.posX = posX;
+    }
+
+    public double getPosX() {
+        return posX;
     }
 
     public double getPosY() {
@@ -89,8 +97,16 @@ public class Player extends Rectangle implements Entity {
         this.ySpeed = ySpeed;
     }
 
+    public double getySpeed() {
+        return ySpeed;
+    }
+
     public void setxSpeed(double xSpeed) {
         this.xSpeed = xSpeed;
+    }
+
+    public double getxSpeed() {
+        return xSpeed;
     }
 
 }

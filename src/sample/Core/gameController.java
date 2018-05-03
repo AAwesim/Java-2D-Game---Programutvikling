@@ -32,8 +32,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     private AnimationTimer timer;
 
     private int scalar = 35;
-    public  int levelWidth;
-    public ArrayList<Rectangle> map=new ArrayList<>();
+    private int levelWidth;
+    private ArrayList<Rectangle> map=new ArrayList<>();
 
     BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",805,525,false,true),BackgroundRepeat.REPEAT,
             BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -51,21 +51,19 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             @Override
             public void handle(long now) {
 
-                if(mainPlayer.getPosX()>300 && mainPlayer.getPosX()<gamePane.getWidth()-505) {
-                    gamePane.setLayoutX(-mainPlayer.getPosX()+300);
-                } else if (mainPlayer.getPosX()<300) {
-                    gamePane.setLayoutX(0);
-                }
 
-               /* System.out.println(mainPlayer.getPosX());
+                //System.out.println(mainPlayer.getPosX());
                 if(playerMapCollisionChecker(mainPlayer)) {
                     mainPlayer.gravity();
-                }*/
-                mainPlayer.gravity();
+                }
+                //mainPlayer.gravity();
                // System.out.println(playerMapCollisionChecker(mainPlayer));
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
                 playerMapCollisionChecker(mainPlayer);
+                view();
+                playerMapCollisionChecker2(mainPlayer);
+               // System.out.println(mainPlayer.getPosY());
             }
         };
 
@@ -82,10 +80,10 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         p.setOnKeyPressed(this::handle);
         p.setOnKeyReleased(e -> {
             if(e.getCode() == KeyCode.A){
-                mainPlayer.setDirection(3);
+                mainPlayer.setDirection(5);
             }
             else if(e.getCode() == KeyCode.D){
-                mainPlayer.setDirection(3);
+                mainPlayer.setDirection(5);
             }
         });
     }
@@ -110,13 +108,14 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
 
         else if(keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.UP){
-            mainPlayer.setPosY(-20);
+            mainPlayer.setPosY(mainPlayer.getPosY()-4);
+            mainPlayer.setySpeed(-7);
         }
 
         else if(keyEvent.getCode() == KeyCode.F1){
-            mainPlayer.setPosX(320);
-            mainPlayer.setPosY(300);
-           // mainPlayer.setySpeed(0);
+            mainPlayer.setPosX(320.0);
+            mainPlayer.setPosY(100.0);
+            mainPlayer.setySpeed(0);
         }
 
         else if(keyEvent.getCode() == KeyCode.ESCAPE){
@@ -162,19 +161,57 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         return rect;
     }
 
+    //Vet ikke lenger, men tror det eneste formålet til metoden er for å sjekke om gravity()
+    //skal kjøres, derfor er Width og Height en pixel større enn metoden under.
     public boolean playerMapCollisionChecker(Player p){
         for(Rectangle mapPart:map){
-            if(mapPart.intersects(p.getX(),p.getY(),p.getWidth()+1,p.getHeight()+1)){
-                p.setySpeed(0);
+            if(mapPart.intersects(p.getX(),mainPlayer.getY(),mainPlayer.getWidth()+1,mainPlayer.getHeight()+1)){
+                //mainPlayer.setySpeed(0);
                 //p.setxSpeed(0);
-
 
                 //p.setDirection(5);
                 //System.out.println("h");
                 return false;
-            }
+            } //else { mainPlayer.gravity();
+            //}
         }
-
         return true;
     }
+
+    public void playerMapCollisionChecker2(Player p){
+        for(Rectangle mapPart:map){
+            if(mapPart.intersects(p.getX(),p.getY(),p.getWidth(),p.getHeight())){
+               /* if (mainPlayer.getySpeed()>0){ mainPlayer.setPosY(p.getPosY()-1);}
+                if (mainPlayer.getySpeed()>0) { mainPlayer.setySpeed(-1);}
+                if ()*/
+
+               /* if (p.getySpeed()<0.5){mainPlayer.setySpeed(0);}
+                else {mainPlayer.setySpeed(mainPlayer.getySpeed()/4);}*/
+                p.setPosY(mainPlayer.getPosY()-1);
+                p.setySpeed(0);
+                p.setxSpeed(0);
+                p.setDirection(5);
+                //System.out.println("h");
+
+
+               // else if(mainPlayer.getySpeed()>0)
+
+                return;
+            } //else { mainPlayer.gravity();
+            //}
+        }
+
+    }
+
+        //endrer visningfeltet
+    public void view() {
+        if (mainPlayer.getPosX() > 300 && mainPlayer.getPosX() < gamePane.getWidth() - 505) {
+            gamePane.setLayoutX(-mainPlayer.getPosX() + 300);
+        } else if (mainPlayer.getPosX() < 300) {
+            gamePane.setLayoutX(0);
+        }
+    }
+
+
+
 }
