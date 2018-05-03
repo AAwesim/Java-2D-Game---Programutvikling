@@ -13,10 +13,12 @@ import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
 import sample.helper.StateManager;
+
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class gameController implements Initializable, EventHandler<KeyEvent> {
+public class gameController implements Initializable, EventHandler<KeyEvent>, Serializable {
 
     @FXML Pane gamePane;
     @FXML Pane gpWrap;
@@ -91,6 +93,24 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                     mainPlayer.setPosY(240 - mainPlayer.getPosY());
                     mainPlayer.setySpeed(0);
                     break;
+                case F2:
+                    try {
+                        playerSave(mainPlayer);
+                        System.out.println(mainPlayer.toString());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    break;
+
+                case F3:
+                    try{
+                        loadSave();
+                        mainPlayer.renderPlayer();
+                        System.out.println(mainPlayer.toString());
+                    }catch (Exception e2){
+                        System.out.println(e);
+                    }
+                    break;
                 case ESCAPE:
                     Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
 
@@ -118,6 +138,26 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     @Override
     public void handle(KeyEvent keyEvent) {
 
+    }
+
+    public void playerSave(Player p) throws IOException {
+        FileOutputStream fo = new FileOutputStream("playersave.save");
+        ObjectOutputStream out = new ObjectOutputStream(fo);
+        out.writeObject(p);
+        out.close();
+        fo.close();
+        System.out.println("Save Complete");
+    }
+
+    public void loadSave() throws Exception{
+        gamePane.getChildren().remove(mainPlayer);
+        FileInputStream fi = new FileInputStream("playersave.save");
+        ObjectInputStream in = new ObjectInputStream(fi);
+        mainPlayer = (Player) in.readObject();
+        in.close();
+        fi.close();
+        mainPlayer.init(gamePane);
+        System.out.println("Load Complete");
     }
 
 }

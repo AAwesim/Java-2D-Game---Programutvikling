@@ -42,17 +42,21 @@ public class StateManager {
         switch(gameState){
             case MAINMENU:
                 if(State.get("MENU") != null)
+                    System.out.println("MAINMENU");
                     return State.get("MENU");
 
             case GAME:
                 if(State.get("GAME") != null)
+                    System.out.println("GAME");
                     return State.get("GAME");
 
             case HELP:
                 if(State.get("HELP") != null)
+                    System.out.println("HELP");
                     return State.get("HELP");
             case PAUSE:
                 if(State.get("PAUSE") != null){
+                    System.out.println("PAUSE");
                     return State.get("PAUSE");
                 }
         }

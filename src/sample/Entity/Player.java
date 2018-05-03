@@ -2,39 +2,44 @@ package sample.Entity;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+import java.io.*;
 
-public class Player extends Rectangle implements Entity {
+
+public class Player extends Rectangle implements Entity, Serializable {
     private double posX = 640 / 2 - 160;
     private double posY = 480 / 2 - 16;
 
     private double xSpeed = 8;
     private double ySpeed = 0.7;
 
+    private double height = 50;
+    private double width = 35;
+
     private int direction = 5;
     private int left = 0;
     private int right = 1;
 
-
-    private static final String testPic = "file:ressurser\\\\char.png";
-    Image img = new Image(testPic);
-    final private ImagePattern imgPattern = new ImagePattern(img);
+    private static transient final String testPic = "file:ressurser\\\\char.png";
+    transient Image img = new Image(testPic);
+    transient final private ImagePattern imgPattern = new ImagePattern(img);
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void init(Pane p) {
-        this.setHeight(50);
-        this.setWidth(35);
-        this.setFill(imgPattern);
-        //this.setFill(Color.BLUE);
+        this.setHeight(height);
+        this.setWidth(width);
+        /*this.setFill(imgPattern);*/
+        this.setFill(Color.BLUE);
         this.setX(posX);
         this.setY(posY);
         p.getChildren().add(this);
     }
 
     public void updatePlayerState() {
-        gravity();
+        //gravity();
         playerMovement();
         // System.out.println(this.posX);
         // System.out.println(this.posY);
