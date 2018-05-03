@@ -10,7 +10,7 @@ public class Player extends Rectangle implements Entity {
     private double posX = 640 / 2 - 160;
     private double posY = 480 / 2 - 16;
 
-    private double xSpeed = 8;
+    private double xSpeed = 3;
     private double ySpeed = 3;
 
     private int direction = 5;
@@ -28,8 +28,10 @@ public class Player extends Rectangle implements Entity {
         this.setWidth(35);
         this.setFill(imgPattern);
         //this.setFill(Color.BLUE);
-        this.setX(posX);
+        this.setX(posX) ;
+        System.out.println(posX);
         this.setY(posY);
+        System.out.println(posY);
         p.getChildren().add(this);
     }
 
@@ -52,11 +54,11 @@ public class Player extends Rectangle implements Entity {
 
     public void playerMovement() {
         if (direction == left) {
-            this.setPosX(-xSpeed);
-            this.setxSpeed(8);
+            this.setPosX(getPosX()-xSpeed);
+            this.setxSpeed(4);
         } else if (direction == right) {
-            this.setPosX(xSpeed);
-            this.setxSpeed(8);
+            this.setPosX(getPosX()+xSpeed);
+            this.setxSpeed(4);
         } else return;
 
     }
@@ -72,7 +74,7 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void setPosX(double posX) {
-        this.posX += posX;
+        this.posX = posX;
     }
 
     public double getPosY() {
@@ -80,7 +82,7 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void setPosY(double posY) {
-        this.posY += posY;
+        this.posY = posY;
     }
 
     public void setySpeed(double ySpeed) {

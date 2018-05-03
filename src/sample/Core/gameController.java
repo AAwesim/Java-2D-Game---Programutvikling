@@ -29,7 +29,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
-    private mapCreator mc = new mapCreator();
     private AnimationTimer timer;
 
     private int scalar = 35;
@@ -47,9 +46,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
         gamePane.setBackground(new Background(BI));
 
-        System.out.println("stage: " + gpWrap.getWidth());
-        System.out.println("scene: " + gamePane.getWidth());
-
         timer = new AnimationTimer() {
 
             @Override
@@ -66,7 +62,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                     mainPlayer.gravity();
                 }*/
                 mainPlayer.gravity();
-                System.out.println(playerMapCollisionChecker(mainPlayer));
+               // System.out.println(playerMapCollisionChecker(mainPlayer));
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
                 playerMapCollisionChecker(mainPlayer);
@@ -103,7 +99,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         else if(keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT){
             mainPlayer.setDirection(0);
 
-
         }
 
         else if(keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT){
@@ -119,9 +114,9 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
 
         else if(keyEvent.getCode() == KeyCode.F1){
-            mainPlayer.setPosX(320-mainPlayer.getPosX());
-            mainPlayer.setPosY(50);
-            mainPlayer.setySpeed(0);
+            mainPlayer.setPosX(320);
+            mainPlayer.setPosY(300);
+           // mainPlayer.setySpeed(0);
         }
 
         else if(keyEvent.getCode() == KeyCode.ESCAPE){
@@ -170,12 +165,12 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public boolean playerMapCollisionChecker(Player p){
         for(Rectangle mapPart:map){
             if(mapPart.intersects(p.getX(),p.getY(),p.getWidth()+1,p.getHeight()+1)){
-                //p.setySpeed(0);
+                p.setySpeed(0);
                 //p.setxSpeed(0);
 
 
                 //p.setDirection(5);
-                System.out.println("h");
+                //System.out.println("h");
                 return false;
             }
         }
