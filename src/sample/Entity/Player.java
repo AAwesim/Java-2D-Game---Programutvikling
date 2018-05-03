@@ -11,7 +11,7 @@ public class Player extends Rectangle implements Entity {
     private double posY = 480 / 2 - 16;
 
     private double xSpeed = 8;
-    private double ySpeed = 0.7;
+    private double ySpeed = 3;
 
     private int direction = 5;
     private int left = 0;
@@ -42,7 +42,7 @@ public class Player extends Rectangle implements Entity {
 
     public void gravity() {
         setPosY(ySpeed);
-        ySpeed += 0.7;
+        ySpeed = ySpeed+0.1;
     }
 
     public void renderPlayer() {

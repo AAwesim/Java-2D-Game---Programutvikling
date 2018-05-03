@@ -61,10 +61,11 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                     gamePane.setLayoutX(0);
                 }
 
-                System.out.println(mainPlayer.getPosX());
+               /* System.out.println(mainPlayer.getPosX());
                 if(playerMapCollisionChecker(mainPlayer)) {
                     mainPlayer.gravity();
-                }
+                }*/
+                mainPlayer.gravity();
                 System.out.println(playerMapCollisionChecker(mainPlayer));
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
@@ -101,7 +102,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
         else if(keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT){
             mainPlayer.setDirection(0);
-            mainPlayer.Translate(1.00,-1.0);
+
 
         }
 
@@ -119,7 +120,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
         else if(keyEvent.getCode() == KeyCode.F1){
             mainPlayer.setPosX(320-mainPlayer.getPosX());
-            mainPlayer.setPosY(240-mainPlayer.getPosY());
+            mainPlayer.setPosY(50);
             mainPlayer.setySpeed(0);
         }
 
@@ -168,12 +169,12 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     public boolean playerMapCollisionChecker(Player p){
         for(Rectangle mapPart:map){
-            if(p.intersects(mapPart.getBoundsInLocal())){
-                p.setySpeed(0);
-                p.setxSpeed(0);
-                p.setPosY(-1);
+            if(mapPart.intersects(p.getX(),p.getY(),p.getWidth()+1,p.getHeight()+1)){
+                //p.setySpeed(0);
+                //p.setxSpeed(0);
 
-                p.setDirection(5);
+
+                //p.setDirection(5);
                 System.out.println("h");
                 return false;
             }
