@@ -34,6 +34,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     private int scalar = 35;
     private int levelWidth;
     private ArrayList<Rectangle> map=new ArrayList<>();
+    public int i = 0;
 
     BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",805,525,false,true),BackgroundRepeat.REPEAT,
             BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -52,7 +53,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             public void handle(long now) {
 
 
-                //System.out.println(mainPlayer.getPosX());
+                System.out.println(mainPlayer.getPosX());
                 if(playerMapCollisionChecker(mainPlayer)) {
                     mainPlayer.gravity();
                 }
@@ -63,6 +64,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 playerMapCollisionChecker(mainPlayer);
                 view();
                 playerMapCollisionChecker2(mainPlayer);
+                System.out.println(mainPlayer.getySpeed());
                // System.out.println(mainPlayer.getPosY());
             }
         };
@@ -104,7 +106,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
 
         else if(keyEvent.getCode() == KeyCode.S || keyEvent.getCode() == KeyCode.DOWN){
-            mainPlayer.setPosY(5);
+            mainPlayer.setPosY(mainPlayer.getPosY()+5);
         }
 
         else if(keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.UP){
@@ -113,8 +115,9 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
 
         else if(keyEvent.getCode() == KeyCode.F1){
-            mainPlayer.setPosX(320.0);
-            mainPlayer.setPosY(100.0);
+            mainPlayer.setPosX(
+                    0.0);
+            mainPlayer.setPosY(0.0);
             mainPlayer.setySpeed(0);
         }
 
@@ -148,7 +151,11 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                         mapPart1.setFill(color(0.0,0.20,0.50));
                         map.add(mapPart1);
                         break;
-
+                    case '3':
+                        mapPart1 = mapMaker1(j*scalar,i*scalar,scalar,scalar, pe);
+                        mapPart1.setFill(Color.rgb(97, 63, 16));
+                        map.add(mapPart1);
+                        break;
                 }
             }
         }
@@ -169,8 +176,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 //mainPlayer.setySpeed(0);
                 //p.setxSpeed(0);
 
-                //p.setDirection(5);
-                //System.out.println("h");
+
                 return false;
             } //else { mainPlayer.gravity();
             //}
@@ -187,12 +193,27 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
                /* if (p.getySpeed()<0.5){mainPlayer.setySpeed(0);}
                 else {mainPlayer.setySpeed(mainPlayer.getySpeed()/4);}*/
-                p.setPosY(mainPlayer.getPosY()-1);
-                p.setySpeed(0);
-                p.setxSpeed(0);
+                //p.setPosY(mainPlayer.getPosY()-1);
+                //left=0
+                if(mainPlayer.getDirection()==0) {mainPlayer.setPosX(mainPlayer.getPosX()+5);}
+                if(mainPlayer.getDirection()==1) {mainPlayer.setPosX(mainPlayer.getPosX()-5);}
+
+                if((mainPlayer.getPosY()+mainPlayer.getHeight())<(mapPart.getY()+mapPart.getHeight()/2) &&( mainPlayer.getDirection()!=0 || mainPlayer.getDirection()!=1) ) {
+                    mainPlayer.setySpeed(0);
+                    mainPlayer.setPosY(mainPlayer.getPosY()-1);
+                }
+
+                if((mainPlayer.getPosY())>(mapPart.getY()+mapPart.getHeight()/2) && (mainPlayer.getDirection()!=0 || mainPlayer.getDirection()!=1) ) {
+                    mainPlayer.setySpeed(0);
+                    mainPlayer.setPosY(mainPlayer.getPosY()+1);
+                }
+             //   p.setySpeed(0);
+               // p.setxSpeed(0);
                 p.setDirection(5);
                 //System.out.println("h");
 
+                 //   System.out.println("mappartgetX: " +(mapPart.getX()+mapPart.getWidth()));
+                  //  System.out.println("playergetx: " +mainPlayer.getX());
 
                // else if(mainPlayer.getySpeed()>0)
 
@@ -211,7 +232,5 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             gamePane.setLayoutX(0);
         }
     }
-
-
 
 }

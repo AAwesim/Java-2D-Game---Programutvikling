@@ -2,6 +2,7 @@ package sample.Entity;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
@@ -26,8 +27,8 @@ public class Player extends Rectangle implements Entity {
     public void init(Pane p) {
         this.setHeight(50);
         this.setWidth(35);
-        this.setFill(imgPattern);
-        //this.setFill(Color.BLUE);
+        //this.setFill(imgPattern);
+        this.setFill(Color.BLUE);
         this.setX(posX) ;
        // System.out.println(posX);
         this.setY(posY);
@@ -38,7 +39,8 @@ public class Player extends Rectangle implements Entity {
 
     public void updatePlayerState() {
         //gravity();
-        {System.out.println(ySpeed);}
+        setPosY(getPosY()+ySpeed);
+      //  {System.out.println(ySpeed);}
        // {System.out.println(xSpeed);}
         playerMovement();
         // System.out.println(this.posX);
@@ -46,9 +48,7 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void gravity() {
-        setPosY(getPosY()+ySpeed);
         ySpeed = ySpeed+0.2;
-
     }
 
     public void renderPlayer() {
@@ -73,8 +73,8 @@ public class Player extends Rectangle implements Entity {
         this.direction = direction;
     }
 
-    public void getDirection(int direction) {
-        this.direction = direction;
+    public int getDirection() {
+        return direction;
     }
 
     public void setPosX(double posX) {
