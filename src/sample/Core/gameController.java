@@ -6,19 +6,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
-import sample.helper.StateManager;
+import sample.Tools.StateManager;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class gameController implements Initializable, EventHandler<KeyEvent>, Serializable {
+public class gameController implements Initializable, Serializable {
 
     @FXML Pane gamePane;
     @FXML Pane gpWrap;
@@ -67,6 +66,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent>, Se
     public void keyHandlerInit(Pane p){
         p.setFocusTraversable(true);
         p.requestFocus();
+
         p.setOnKeyPressed(e -> {
             switch (e.getCode()) {
                 case SPACE:
@@ -135,13 +135,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent>, Se
         });
     }
 
-    @Override
-    public void handle(KeyEvent keyEvent) {
-
-    }
-
     public void playerSave(Player p) throws IOException {
-        FileOutputStream fo = new FileOutputStream("playersave.save");
+        FileOutputStream fo = new FileOutputStream("playersave.ser");
         ObjectOutputStream out = new ObjectOutputStream(fo);
         out.writeObject(p);
         out.close();
@@ -151,7 +146,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent>, Se
 
     public void loadSave() throws Exception{
         gamePane.getChildren().remove(mainPlayer);
-        FileInputStream fi = new FileInputStream("playersave.save");
+        FileInputStream fi = new FileInputStream("playersave.ser");
         ObjectInputStream in = new ObjectInputStream(fi);
         mainPlayer = (Player) in.readObject();
         in.close();

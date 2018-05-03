@@ -22,7 +22,7 @@ public class mapCreator{
     public  String testPic = "file:ressurser\\\\testpic.jpeg";
     Image img = new Image(testPic);
 
-    public static final String[] LEVEL1MAP = new String[] {
+    public final String[] LEVEL1MAP = new String[] {
             "000000000000000000000000000000000000001110000000000000000000000000000",
             "000000000000000000000000000000000000001110000000000000000000000000000",
             "000000000000000000000000000000000000001110000000000000000000000000000",

@@ -2,7 +2,7 @@ package sample.Core;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import sample.helper.*;
+import sample.Tools.StateManager;
 
 public class Main extends Application {
 

@@ -1,12 +1,10 @@
-package sample.helper;
+package sample.Tools;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StateManager {
@@ -14,18 +12,20 @@ public class StateManager {
     public enum GameState {
         MAINMENU,
         GAME,
+        LEVEL,
         HELP,
         PAUSE
     }
 
-    public static GameState gameState = GameState.MAINMENU;
+    private static GameState gameState = GameState.MAINMENU;
     static Map<String, Scene> State = new HashMap<>();
-    public Parent menuRoot, gameRoot, helpRoot, pauseRoot;
+    private Parent menuRoot, gameRoot, levelRoot, helpRoot, pauseRoot;
 
     public StateManager(){
 
         try {
             this.menuRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/meny.fxml"));
+            this.levelRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/levelScene.fxml"));
             this.helpRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/hjelpScene.fxml"));
             this.pauseRoot= FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/pauseScene.fxml"));
         } catch (IOException e) {
@@ -33,9 +33,10 @@ public class StateManager {
             System.exit(1);
         }
 
-        State.put("MENU",new Scene(menuRoot));
-        State.put("HELP",new Scene(helpRoot));
-        State.put("PAUSE",new Scene(pauseRoot));
+        State.put("MENU", new Scene(menuRoot));
+        State.put("LEVEL", new Scene(levelRoot));
+        State.put("HELP", new Scene(helpRoot));
+        State.put("PAUSE", new Scene(pauseRoot));
     }
 
     public static Scene update(){
@@ -49,6 +50,11 @@ public class StateManager {
                 if(State.get("GAME") != null)
                     System.out.println("GAME");
                     return State.get("GAME");
+            case LEVEL:
+                if(State.get("LEVEL") != null){
+                    System.out.println("LEVEL");
+                    return State.get("LEVEL");
+                }
 
             case HELP:
                 if(State.get("HELP") != null)
