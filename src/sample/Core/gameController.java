@@ -150,11 +150,11 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public void playerMapCollisionChecker2(Player p){
         for(Rectangle mapPart:mc.getMap()){
             if(mapPart.intersects(mainPlayer.getX(),mainPlayer.getY(),mainPlayer.getWidth(),mainPlayer.getHeight())){
-                if(mainPlayer.getDirection()==0) {
+                if(mainPlayer.getDirection()==0 && 0.4<mainPlayer.getySpeed() && mainPlayer.getySpeed()<0.4) {
                     mainPlayer.setPosX(mapPart.getX()+mapPart.getWidth()+1);
                     mainPlayer.setxSpeed(0);
                     return;
-                } else if(mainPlayer.getDirection()==1) {
+                } else if(mainPlayer.getDirection()==1 && 0.4<mainPlayer.getySpeed() && mainPlayer.getySpeed()<0.4 ) {
                     mainPlayer.setPosX(mapPart.getX()-mainPlayer.getWidth()-1);
                     mainPlayer.setxSpeed(0);
                     return;
