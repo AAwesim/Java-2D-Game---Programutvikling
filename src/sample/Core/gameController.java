@@ -191,11 +191,11 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                /* if (mainPlayer.getySpeed()>0){ mainPlayer.setPosY(p.getPosY()-1);}
                 if (mainPlayer.getySpeed()>0) { mainPlayer.setySpeed(-1);}
                */
-                if(mainPlayer.getDirection()==0) {
-                    mainPlayer.setPosX(mainPlayer.getPosX()+1);
+                if(mainPlayer.getDirection()==0 && mainPlayer.ySpeed==0) {
+                    mainPlayer.setPosX(mapPart.getX()+mapPart.getWidth()+1);
                     mainPlayer.setxSpeed(0);
-                } else if(mainPlayer.getDirection()==1) {
-                    mainPlayer.setPosX(mainPlayer.getPosX()-1);
+                } else if(mainPlayer.getDirection()==1 && mainPlayer.ySpeed==0) {
+                    mainPlayer.setPosX(mapPart.getX()-mainPlayer.getWidth()-1);
                     mainPlayer.setxSpeed(0);
                 }
                /* if (p.getySpeed()<0.5){mainPlayer.setySpeed(0);}
