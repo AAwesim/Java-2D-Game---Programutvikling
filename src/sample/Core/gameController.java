@@ -53,7 +53,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             public void handle(long now) {
 
 
-                System.out.println(mainPlayer.getPosX());
+               // System.out.println(mainPlayer.getPosX());
                 if(playerMapCollisionChecker(mainPlayer)) {
                     mainPlayer.gravity();
                 }
@@ -64,7 +64,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 playerMapCollisionChecker(mainPlayer);
                 view();
                 playerMapCollisionChecker2(mainPlayer);
-                System.out.println(mainPlayer.getySpeed());
+              //  System.out.println(mainPlayer.getySpeed());
                // System.out.println(mainPlayer.getPosY());
             }
         };
@@ -89,7 +89,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             }
         });
     }
-
+    int A =0;
     @Override
     public void handle(KeyEvent keyEvent) {
         if(keyEvent.getCode() == KeyCode.SPACE){
@@ -110,8 +110,9 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
 
         else if(keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.UP){
+            if(!playerMapCollisionChecker(mainPlayer)){
             mainPlayer.setPosY(mainPlayer.getPosY()-4);
-            mainPlayer.setySpeed(-7);
+            mainPlayer.setySpeed(-7);}
         }
 
         else if(keyEvent.getCode() == KeyCode.F1){
@@ -174,7 +175,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         for(Rectangle mapPart:map){
             if(mapPart.intersects(p.getX(),mainPlayer.getY(),mainPlayer.getWidth()+1,mainPlayer.getHeight()+1)){
                 //mainPlayer.setySpeed(0);
-                //p.setxSpeed(0);
+
 
 
                 return false;
@@ -186,40 +187,42 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     public void playerMapCollisionChecker2(Player p){
         for(Rectangle mapPart:map){
-            if(mapPart.intersects(p.getX(),p.getY(),p.getWidth(),p.getHeight())){
+            if(mapPart.intersects(mainPlayer.getX(),mainPlayer.getY(),mainPlayer.getWidth(),mainPlayer.getHeight())){
                /* if (mainPlayer.getySpeed()>0){ mainPlayer.setPosY(p.getPosY()-1);}
                 if (mainPlayer.getySpeed()>0) { mainPlayer.setySpeed(-1);}
-                if ()*/
-
+               */
+                if(mainPlayer.getDirection()==0) {
+                    mainPlayer.setPosX(mainPlayer.getPosX()+1);
+                    mainPlayer.setxSpeed(0);
+                } else if(mainPlayer.getDirection()==1) {
+                    mainPlayer.setPosX(mainPlayer.getPosX()-1);
+                    mainPlayer.setxSpeed(0);
+                }
                /* if (p.getySpeed()<0.5){mainPlayer.setySpeed(0);}
                 else {mainPlayer.setySpeed(mainPlayer.getySpeed()/4);}*/
                 //p.setPosY(mainPlayer.getPosY()-1);
-                //left=0
-                if(mainPlayer.getDirection()==0) {mainPlayer.setPosX(mainPlayer.getPosX()+5);}
-                if(mainPlayer.getDirection()==1) {mainPlayer.setPosX(mainPlayer.getPosX()-5);}
 
+                // formålet er å sjekke om mainPlayer kolliderer med mapPart ovenfra eller nedenifra
+                // condition uttrykket: sjekker om player sin posisjon er mindre(lenger opp på sjermen)enn summen av mapPart sin posisjon+høyde/2 og i
+                // tillegg om direction er 0 eller 1 (om a eller d holdes inne)
                 if((mainPlayer.getPosY()+mainPlayer.getHeight())<(mapPart.getY()+mapPart.getHeight()/2) &&( mainPlayer.getDirection()!=0 || mainPlayer.getDirection()!=1) ) {
                     mainPlayer.setySpeed(0);
-                    mainPlayer.setPosY(mainPlayer.getPosY()-1);
+                    mainPlayer.setPosY(mapPart.getY()-mainPlayer.getHeight()-1);
                 }
 
+                //samme som over bare motsatt.om player pos er lenger ned en senter på mappart.
                 if((mainPlayer.getPosY())>(mapPart.getY()+mapPart.getHeight()/2) && (mainPlayer.getDirection()!=0 || mainPlayer.getDirection()!=1) ) {
                     mainPlayer.setySpeed(0);
-                    mainPlayer.setPosY(mainPlayer.getPosY()+1);
+                    mainPlayer.setPosY(mapPart.getY()+mapPart.getHeight()+1);
                 }
-             //   p.setySpeed(0);
-               // p.setxSpeed(0);
-                p.setDirection(5);
+                mainPlayer.setDirection(5);
                 //System.out.println("h");
-
                  //   System.out.println("mappartgetX: " +(mapPart.getX()+mapPart.getWidth()));
                   //  System.out.println("playergetx: " +mainPlayer.getX());
-
                // else if(mainPlayer.getySpeed()>0)
-
                 return;
-            } //else { mainPlayer.gravity();
-            //}
+            }
+
         }
 
     }

@@ -48,7 +48,7 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void gravity() {
-        ySpeed = ySpeed+0.2;
+        ySpeed = ySpeed+0.3;
     }
 
     public void renderPlayer() {
