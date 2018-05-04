@@ -27,32 +27,16 @@ public class gameController implements Initializable, Serializable {
     private mapCreator mc = new mapCreator();
     private AnimationTimer timer;
 
-    BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",805,525,false,true),BackgroundRepeat.REPEAT,
-            BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        keyHandlerInit(gamePane);
-        mainPlayer.init(gamePane);
-        mc.initMap(gamePane);
-
-        gamePane.setBackground(new Background(BI));
-
-        System.out.println("stage: " + gpWrap.getWidth());
-        System.out.println("scene: " + gamePane.getWidth());
+        init(gamePane);
 
         timer = new AnimationTimer() {
-
             @Override
             public void handle(long now) {
+                /*FIKS DET JAKOB*/
+                jakobSugerPåÅSkriveGodKode();
 
-                if(mainPlayer.getPosX()>300 && mainPlayer.getPosX()<gamePane.getWidth()-505) {
-                    gamePane.setLayoutX(-mainPlayer.getPosX()+300);
-                } else if (mainPlayer.getPosX()<300) {
-                    gamePane.setLayoutX(0);
-                }
-
-               // System.out.println(mainPlayer.getPosX());
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
                 mc.playerMapCollisionChecker(mainPlayer);
@@ -60,7 +44,18 @@ public class gameController implements Initializable, Serializable {
         };
 
         timer.start();
+    }
 
+    public void init(Pane p){
+        BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",805,525,false,true),BackgroundRepeat.REPEAT,
+                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        keyHandlerInit(p);
+        mainPlayer.init(p);
+        mc.initMap(p);
+        p.setBackground(new Background(BI));
+
+        System.out.println("stage: " + gpWrap.getWidth());
+        System.out.println("scene: " + p.getWidth());
     }
 
     public void keyHandlerInit(Pane p){
@@ -153,6 +148,15 @@ public class gameController implements Initializable, Serializable {
         fi.close();
         mainPlayer.init(gamePane);
         System.out.println("Load Complete");
+    }
+
+    /*FIKS DET JAKOB*/
+    public void jakobSugerPåÅSkriveGodKode(){
+        if(mainPlayer.getPosX()>300 && mainPlayer.getPosX()<gamePane.getWidth()-505) {
+            gamePane.setLayoutX(-mainPlayer.getPosX()+300);
+        } else if (mainPlayer.getPosX()<300) {
+            gamePane.setLayoutX(0);
+        }
     }
 
 }

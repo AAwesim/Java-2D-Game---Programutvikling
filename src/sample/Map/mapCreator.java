@@ -51,7 +51,7 @@ public class mapCreator{
                         break;
                     case '1':
                         Rectangle mapPart1 = mapMaker1(j*scalar,i*scalar,scalar,scalar, pe);
-                        mapPart1.setFill(Color.rgb(44,190,49));
+                        mapPart1.setFill(Color.rgb(randomColor(),randomColor(),randomColor()));
                         map.add(mapPart1);
                         break;
                     case '2':
@@ -59,7 +59,6 @@ public class mapCreator{
                         mapPart1.setFill(color(0.0,0.20,0.50));
                         map.add(mapPart1);
                         break;
-
                 }
             }
         }
@@ -81,6 +80,10 @@ public class mapCreator{
                return;
            }
        }
+   }
+
+   public int randomColor(){
+       return (int) Math.floor(Math.random() * 256);
    }
 
 }
