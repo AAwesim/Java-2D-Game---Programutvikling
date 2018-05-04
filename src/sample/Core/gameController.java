@@ -35,7 +35,7 @@ public class gameController implements Initializable, Serializable {
             @Override
             public void handle(long now) {
                 /*FIKS DET JAKOB*/
-                jakobSugerPåÅSkriveGodKode();
+                HvordanEllersSkalDuFikseKamera();
 
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
@@ -151,7 +151,7 @@ public class gameController implements Initializable, Serializable {
     }
 
     /*FIKS DET JAKOB*/
-    public void jakobSugerPåÅSkriveGodKode(){
+    public void HvordanEllersSkalDuFikseKamera(){
         if(mainPlayer.getPosX()>300 && mainPlayer.getPosX()<gamePane.getWidth()-505) {
             gamePane.setLayoutX(-mainPlayer.getPosX()+300);
         } else if (mainPlayer.getPosX()<300) {
