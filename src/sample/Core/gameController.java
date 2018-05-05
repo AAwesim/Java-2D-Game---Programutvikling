@@ -149,8 +149,7 @@ public class gameController implements Initializable, Serializable {
         mainPlayer.init(gamePane);
         System.out.println("Load Complete");
     }
-
-    /*FIKS DET JAKOB*/
+    
     public void camera(Player p, Pane pane){
         if(p.getPosX()>300 && p.getPosX()<pane.getWidth()-505) {
             pane.setLayoutX(-p.getPosX()+300);
