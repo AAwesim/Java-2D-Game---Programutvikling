@@ -59,25 +59,14 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void MoveLeft() {
-        setxSpeed(-3);
+        setxSpeed(-1);
         setPosX(getPosX()+xSpeed);
     }
 
     public void MoveRight() {
-        setxSpeed(3);
+        setxSpeed(1);
         setPosX(getPosX()+xSpeed);
     }
-
-      /*  public void playermovement() {
-        if (direction == left) {
-            this.setPosX(getPosX()-xSpeed);
-          //  this.setxSpeed(;
-        } else if (direction == right) {
-            this.setPosX(getPosX()+xSpeed);
-         //   setxSpeed(1);
-        } else return;
-
-    }*/
 
     //Getters og setters
 

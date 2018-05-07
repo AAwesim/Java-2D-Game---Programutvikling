@@ -67,7 +67,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
               //  playerMapCollisionChecker(mainPlayer);
-                view();
+                view(mainPlayer, gamePane);
                 playerMapCollisionChecker2(mainPlayer);
 
               //  System.out.println(mainPlayer.getySpeed());
@@ -165,7 +165,13 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         return true;
     }
 
+    
+
+    //TODO
     public void playerMapCollisionChecker2(Player p){
+        //kan forbedres ved å adde en for loop her, metoden må da ta inn en parameter som tilsvarer
+        //xspeed. Antall iterasjoner i for løkken avhenger av denne parameteren med mer
+        //dette kan gjøre at vi kan skjekke collision for hver piksel
         for(Rectangle mapPart:mc.getMap()){
             if(mapPart.intersects(mainPlayer.getX(),mainPlayer.getY(),mainPlayer.getWidth(),mainPlayer.getHeight())){
                     //ovenifra
@@ -209,10 +215,9 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     }
 
         //endrer visningfeltet
-    public void view() {
-        if (mainPlayer.getPosX() > 300 && mainPlayer.getPosX() < gamePane.getWidth() - 505) {
-            gamePane.setLayoutX(-mainPlayer.getPosX() + 300);
-
+    public void view(Player p, Pane pa) {
+        if (p.getPosX() > 300 && p.getPosX() < pa.getWidth() - 505) {
+            pa.setLayoutX(-p.getPosX() + 300);
         }
     }
 
