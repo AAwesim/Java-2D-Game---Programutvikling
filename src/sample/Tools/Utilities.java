@@ -1,4 +1,4 @@
-package sample.Verktøy;
+package sample.Tools;
 
 
 import java.util.ArrayList;

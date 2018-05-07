@@ -2,20 +2,21 @@ package sample.Entity;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 
 public class Player extends Rectangle implements Entity {
-    private double posX = 640 / 2 - 160;
-    private double posY = 480 / 2 - 16;
+    private double posX = 50;
+    private double posY = 424;
 
-    private double xSpeed = 8;
-    private double ySpeed = 0.7;
+    private double xSpeed = 4;
+    public double ySpeed = 0;
 
-    private int direction = 5;
-    private int left = 0;
-    private int right = 1;
+    private int direction = 3;
+    protected int left = -1;
+    protected int right = 1;
 
 
     private static final String testPic = "file:ressurser\\\\char.png";
@@ -24,25 +25,32 @@ public class Player extends Rectangle implements Entity {
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void init(Pane p) {
-        this.setHeight(50);
-        this.setWidth(35);
-        this.setFill(imgPattern);
-        //this.setFill(Color.BLUE);
-        this.setX(posX);
+        this.setHeight(30);
+        this.setWidth(20);
+        //this.setFill(imgPattern);
+        this.setFill(Color.BLUE);
+        this.setX(posX) ;
+       // System.out.println(posX);
         this.setY(posY);
+        //System.out.println(posY);
         p.getChildren().add(this);
+
     }
 
     public void updatePlayerState() {
         //gravity();
+        setPosY(getPosY()+ySpeed);
+      //  {System.out.println(ySpeed);}
+       // {System.out.println(xSpeed);}
         playerMovement();
         // System.out.println(this.posX);
         // System.out.println(this.posY);
     }
 
     public void gravity() {
-        setPosY(ySpeed);
-        ySpeed += 0.7;
+        if (ySpeed<9){
+            ySpeed = ySpeed+0.3;
+        }
     }
 
     public void renderPlayer() {
@@ -52,11 +60,11 @@ public class Player extends Rectangle implements Entity {
 
     public void playerMovement() {
         if (direction == left) {
-            this.setPosX(-xSpeed);
-            this.setxSpeed(8);
+            this.setPosX(getPosX()-xSpeed);
+            this.setxSpeed(1);
         } else if (direction == right) {
-            this.setPosX(xSpeed);
-            this.setxSpeed(8);
+            this.setPosX(getPosX()+xSpeed);
+            setxSpeed(1);
         } else return;
 
     }
@@ -67,12 +75,16 @@ public class Player extends Rectangle implements Entity {
         this.direction = direction;
     }
 
-    public double getPosX() {
-        return posX;
+    public int getDirection() {
+        return direction;
     }
 
     public void setPosX(double posX) {
-        this.posX += posX;
+        this.posX = posX;
+    }
+
+    public double getPosX() {
+        return posX;
     }
 
     public double getPosY() {
@@ -80,15 +92,23 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void setPosY(double posY) {
-        this.posY += posY;
+        this.posY = posY;
     }
 
     public void setySpeed(double ySpeed) {
         this.ySpeed = ySpeed;
     }
 
+    public double getySpeed() {
+        return ySpeed;
+    }
+
     public void setxSpeed(double xSpeed) {
         this.xSpeed = xSpeed;
+    }
+
+    public double getxSpeed() {
+        return xSpeed;
     }
 
 }
