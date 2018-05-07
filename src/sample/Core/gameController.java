@@ -18,11 +18,12 @@ import sample.Map.mapCreator;
 import sample.helper.StateManager;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import static javafx.scene.paint.Color.color;
 
-public class gameController implements Initializable, EventHandler<KeyEvent> {
+public class gameController implements Initializable {
 
     @FXML Pane gamePane;
     @FXML Pane gpWrap;
@@ -31,7 +32,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
     private AnimationTimer timer;
     private mapCreator mc = new mapCreator();
-
+    private HashMap<KeyCode, Boolean> keys = new HashMap<>();
     public int i = 0;
 
     BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",805,525,false,true),BackgroundRepeat.REPEAT,
@@ -51,17 +52,20 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             public void handle(long now) {
 
 
-               // System.out.println(mainPlayer.getPosX());
+               /* System.out.println(mainPlayer.getPosX());
                 if(playerMapCollisionChecker(mainPlayer)) {
                     mainPlayer.gravity();
-                }
+                }*/
+               keys();
                 //mainPlayer.gravity();
                // System.out.println(playerMapCollisionChecker(mainPlayer));
+               // mainPlayer.updatePlayerState();
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
-                playerMapCollisionChecker(mainPlayer);
+
+                //playerMapCollisionChecker(mainPlayer);
                 view();
-                playerMapCollisionChecker2(mainPlayer);
+               // playerMapCollisionChecker2(mainPlayer);
               //  System.out.println(mainPlayer.getySpeed());
                // System.out.println(mainPlayer.getPosY());
             }
@@ -77,50 +81,42 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public void keyHandlerInit(Pane p){
         p.setFocusTraversable(true);
         p.requestFocus();
-        p.setOnKeyPressed(this::handle);
-        p.setOnKeyReleased(e -> {
-            if(e.getCode() == KeyCode.A){
-                mainPlayer.setDirection(5);
-            }
-            else if(e.getCode() == KeyCode.D){
-                mainPlayer.setDirection(5);
-            }
+        p.setOnKeyPressed(event -> keys.put(event.getCode(), true));
+        p.setOnKeyReleased(event -> {
+            keys.put(event.getCode(), false);
         });
+    ;}
+
+    private boolean isPressed(KeyCode key) {
+        return keys.getOrDefault(key, false);
     }
 
-    @Override
-    public void handle(KeyEvent keyEvent) {
-        if(keyEvent.getCode() == KeyCode.SPACE){
-           System.out.println(keyEvent.toString());
+
+    public void keys() {
+
+       if (isPressed(KeyCode.A)){
+            Direction(-1);
         }
 
-        else if(keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT){
-            mainPlayer.setDirection(0);
-
+        else if (isPressed(KeyCode.D)){
+            Direction(1);
         }
 
-        else if(keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT){
-            mainPlayer.setDirection(1);
+        else if (isPressed(KeyCode.W)) {
+            //if(!playerMapCollisionChecker(mainPlayer)){
+            mainPlayer.setPosY(mainPlayer.getPosY() - 4);
+            //mainPlayer.setySpeed(-7);
+       // }
         }
 
-        else if(keyEvent.getCode() == KeyCode.S || keyEvent.getCode() == KeyCode.DOWN){
-            mainPlayer.setPosY(mainPlayer.getPosY()+5);
-        }
-
-        else if(keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.UP){
-            if(!playerMapCollisionChecker(mainPlayer)){
-            mainPlayer.setPosY(mainPlayer.getPosY()-4);
-            mainPlayer.setySpeed(-7);}
-        }
-
-        else if(keyEvent.getCode() == KeyCode.F1){
+        else if(isPressed(KeyCode.F1)){
             mainPlayer.setPosX(
                     0.0);
             mainPlayer.setPosY(0.0);
             mainPlayer.setySpeed(0);
         }
 
-        else if(keyEvent.getCode() == KeyCode.ESCAPE){
+        /*else if(keyEvent.getCode() == KeyCode.ESCAPE){
             Stage stage = (Stage) ((Node)keyEvent.getSource()).getScene().getWindow();
 
             StateManager.setState(StateManager.GameState.MAINMENU);
@@ -128,26 +124,46 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
             stage.setResizable(false);
             stage.show();
-        }
+        }*/
     }
 
-    //Vet ikke lenger, men tror det eneste formålet til metoden er for å sjekke om gravity()
-    //skal kjøres, derfor er Width og Height en pixel større enn metoden under.
-    public boolean playerMapCollisionChecker(Player p){
-        for(Rectangle mapPart:mc.getMap()){
-            if(mapPart.intersects(mainPlayer.getX(),mainPlayer.getY(),mainPlayer.getWidth()+1,mainPlayer.getHeight()+1)){
-                //mainPlayer.setySpeed(0);
+    public void Direction(int dir) {
+        for (int a = 0; a<4;a++){
+            mainPlayer.setX(mainPlayer.getPosX());
+            mainPlayer.setY(mainPlayer.getPosY());
 
+             for(Rectangle mapPart:mc.getMap()){
+                 if(mapPart.intersects(mainPlayer.getPosX(),mainPlayer.getPosY(),mainPlayer.getWidth(),mainPlayer.getHeight())
+                         );{
+                    if(dir== -1) {
+                        if (mainPlayer.getX() == (mapPart.getX() + mapPart.getWidth())) {
 
+                         return;
+                        }
+                    }
+                    if(dir == 1) {
+                        if ((mainPlayer.getPosX() + mainPlayer.getWidth()) == (mapPart.getX())) {
+                            System.out.println(mainPlayer.getX() + mainPlayer.getWidth());
+                            System.out.println(mapPart.getX());
+                            System.out.println(mapPart.getBoundsInLocal());
+                            System.out.println(mainPlayer.getBoundsInLocal());
+                            return;
+                        }
 
-                return false;
-            } //else { mainPlayer.gravity();
+                        }
+                    }
+                 }mainPlayer.setDirection(dir);
+
+             }
+
+        }
+          //mainPlayer.setySpeed(0);
+     //else { mainPlayer.gravity();
             //}
-        }
-        return true;
-    }
 
-    public void playerMapCollisionChecker2(Player p){
+
+
+ /*   public void playerMapCollisionChecker2(Player p){
         for(Rectangle mapPart:mc.getMap()){
             if(mapPart.intersects(mainPlayer.getX(),mainPlayer.getY(),mainPlayer.getWidth(),mainPlayer.getHeight())){
                 if(mainPlayer.getDirection()==0 && 0.4<mainPlayer.getySpeed() && mainPlayer.getySpeed()<0.4) {
@@ -185,7 +201,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             }
 
         }
-    }
+    }*/
 
         //endrer visningfeltet
     public void view() {

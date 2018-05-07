@@ -8,14 +8,14 @@ import javafx.scene.shape.Rectangle;
 
 
 public class Player extends Rectangle implements Entity {
-    private double posX = 640 / 2 - 160;
-    private double posY = 480 / 2 - 16;
+    private double posX = 50;
+    private double posY = 424;
 
-    private double xSpeed = 3;
-    public double ySpeed = 3;
+    private double xSpeed = 4;
+    public double ySpeed = 0;
 
     private int direction = 3;
-    protected int left = 0;
+    protected int left = -1;
     protected int right = 1;
 
 
@@ -25,8 +25,8 @@ public class Player extends Rectangle implements Entity {
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void init(Pane p) {
-        this.setHeight(50);
-        this.setWidth(35);
+        this.setHeight(30);
+        this.setWidth(20);
         //this.setFill(imgPattern);
         this.setFill(Color.BLUE);
         this.setX(posX) ;
@@ -48,7 +48,9 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void gravity() {
-        ySpeed = ySpeed+0.3;
+        if (ySpeed<9){
+            ySpeed = ySpeed+0.3;
+        }
     }
 
     public void renderPlayer() {
@@ -59,10 +61,10 @@ public class Player extends Rectangle implements Entity {
     public void playerMovement() {
         if (direction == left) {
             this.setPosX(getPosX()-xSpeed);
-            this.setxSpeed(4);
+            this.setxSpeed(1);
         } else if (direction == right) {
             this.setPosX(getPosX()+xSpeed);
-            setxSpeed(4);
+            setxSpeed(1);
         } else return;
 
     }
