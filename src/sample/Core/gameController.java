@@ -172,7 +172,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             if (mapPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {
 
                 // Collision Ovenifra
-                if ((p.getPosY() + p.getHeight()) < (mapPart.getY() + mapPart.getHeight() / 2) && p.getySpeed() > 0) {
+                if ((p.getPosY() + p.getHeight()) < (mapPart.getY() + 7.1) && p.getySpeed() > 0) {
                     p.setySpeed(0);
                     p.setPosY(mapPart.getY() - p.getHeight() - 1);
                     return;

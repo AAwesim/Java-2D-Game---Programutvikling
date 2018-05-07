@@ -49,7 +49,7 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void gravity() {
-        if (ySpeed<9)
+        if (ySpeed<7)
         ySpeed = ySpeed+0.3;
     }
 
@@ -59,12 +59,12 @@ public class Player extends Rectangle implements Entity {
     }
 
     public void MoveLeft() {
-        setxSpeed(-1);
+        setxSpeed(-4);
         setPosX(getPosX()+xSpeed);
     }
 
     public void MoveRight() {
-        setxSpeed(1);
+        setxSpeed(4);
         setPosX(getPosX()+xSpeed);
     }
 
