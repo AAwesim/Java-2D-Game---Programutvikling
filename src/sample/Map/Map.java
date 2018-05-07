@@ -4,7 +4,13 @@ import java.io.Serializable;
 
 public class Map implements Serializable{
 
-    private String check;
-    private String[] mapArray;
+    private static String[] mapArray;
 
+    public static String[] getMapArray() {
+        return mapArray;
+    }
+
+    public static void setMapArray(String[] mapArray) {
+        Map.mapArray = mapArray;
+    }
 }

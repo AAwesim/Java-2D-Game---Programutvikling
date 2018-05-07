@@ -21,8 +21,8 @@ public class menyController implements Initializable{
     private void setGameScene(ActionEvent e){
         Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
 
-        Main.getStateManager().initGame();
-        StateManager.setState(StateManager.GameState.GAME);
+        /*Main.getStateManager().initGame();*/
+        StateManager.setState(StateManager.GameState.LEVEL);
         stage.setScene(StateManager.update());
 
         stage.setResizable(false);

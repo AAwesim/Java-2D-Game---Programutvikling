@@ -1,20 +1,20 @@
 package sample.Core;
 
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sample.Entity.*;
+import sample.Map.Map;
 import sample.Map.mapCreator;
 import sample.Tools.StateManager;
 
 import java.io.*;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class gameController implements Initializable, Serializable {
@@ -30,24 +30,24 @@ public class gameController implements Initializable, Serializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         init(gamePane);
+        System.out.println(Arrays.toString(Map.getMapArray()));
 
         timer = new AnimationTimer() {
+
             @Override
             public void handle(long now) {
-                /*FIKS DET JAKOB*/
-                camera(mainPlayer, gamePane);
-
-                mainPlayer.updatePlayerState();
-                mainPlayer.renderPlayer();
-                mc.playerMapCollisionChecker(mainPlayer);
+                    camera(mainPlayer, gamePane);
+                    mainPlayer.updatePlayerState();
+                    mainPlayer.renderPlayer();
+                    mc.playerMapCollisionChecker(mainPlayer);
             }
         };
 
         timer.start();
     }
 
-    public void init(Pane p){
-        BackgroundImage BI= new BackgroundImage(new Image("file:ressurser\\\\Hills.png",805,525,false,true),BackgroundRepeat.REPEAT,
+    public void init(Pane p) {
+        BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         keyHandlerInit(p);
         mainPlayer.init(p);
@@ -58,7 +58,7 @@ public class gameController implements Initializable, Serializable {
         System.out.println("scene: " + p.getWidth());
     }
 
-    public void keyHandlerInit(Pane p){
+    public void keyHandlerInit(Pane p) {
         p.setFocusTraversable(true);
         p.requestFocus();
 
@@ -98,11 +98,11 @@ public class gameController implements Initializable, Serializable {
                     break;
 
                 case F3:
-                    try{
+                    try {
                         loadSave();
                         mainPlayer.renderPlayer();
                         System.out.println(mainPlayer.toString());
-                    }catch (Exception e2){
+                    } catch (Exception e2) {
                         System.out.println(e);
                     }
                     break;
@@ -119,7 +119,7 @@ public class gameController implements Initializable, Serializable {
         });
 
         p.setOnKeyReleased(e -> {
-            switch(e.getCode()){
+            switch (e.getCode()) {
                 case A:
                     mainPlayer.setDirection(5);
                     break;
@@ -139,7 +139,7 @@ public class gameController implements Initializable, Serializable {
         System.out.println("Save Complete");
     }
 
-    public void loadSave() throws Exception{
+    public void loadSave() throws Exception {
         gamePane.getChildren().remove(mainPlayer);
         FileInputStream fi = new FileInputStream("playersave.ser");
         ObjectInputStream in = new ObjectInputStream(fi);
@@ -149,13 +149,12 @@ public class gameController implements Initializable, Serializable {
         mainPlayer.init(gamePane);
         System.out.println("Load Complete");
     }
-    
-    public void camera(Player p, Pane pane){
-        if(p.getPosX()>300 && p.getPosX()<pane.getWidth()-505) {
-            pane.setLayoutX(-p.getPosX()+300);
-        } else if (p.getPosX()<300) {
+
+    public void camera(Player p, Pane pane) {
+        if (p.getPosX() > 300 && p.getPosX() < pane.getWidth() - 505) {
+            pane.setLayoutX(-p.getPosX() + 300);
+        } else if (p.getPosX() < 300) {
             pane.setLayoutX(0);
         }
     }
-
 }

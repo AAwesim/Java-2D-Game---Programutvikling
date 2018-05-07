@@ -1,50 +1,23 @@
 package sample.Map;
 
-import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import sample.Entity.Player;
-
 import java.util.ArrayList;
-
-import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.color;
 
-
 public class mapCreator{
-
     private int scalar = 35;
     public  int levelWidth;
     public ArrayList<Rectangle> map=new ArrayList<>();
-    public  String testPic = "file:ressurser\\\\testpic.jpeg";
-    Image img = new Image(testPic);
 
-    public final String[] LEVEL1MAP = new String[] {
-            "000000000000000000000000000000000000001110000000000000000000000000000",
-            "000000000000000000000000000000000000001110000000000000000000000000000",
-            "000000000000000000000000000000000000001110000000000000000000000000000",
-            "000000000000000000000000000000000000001110000000000000000000000000000",
-            "000000000000000000000000000000000000001110000000000000000000000000000",
-            "000000000000000000000000000000000000001110000000000000000000000000000",
-            "000000000000000000000000000000000000001110000000000000000000000000000",
-            "000000000000000000000000000000000000001110000000000000000000000000000",
-            "000000000000000000000000000000000000001110000000000000000000000000000",
-            "000000000000000111000000000000000000011110000000000000000000000000111",
-            "000111000000001000100000001100011100001110000000000000010000001111100",
-            "000000000000000000000011111100011100000000000000000001110011000000000",
-            "000000000000110000011111111100011100000000000001101101110000000000000",
-            "111111100111110000011111111100011100000000001101101101110000000000000",
-            "111111100111112222211111111122211101101101100001101101111111111111111"
-            //bredde: 69 høyde:15
-    };
+    public static final String[] LEVELARRAY = Map.getMapArray();
 
     public void initMap(Pane pe){
-        levelWidth = LEVEL1MAP[0].length() * scalar;
-        for (int i = 0; i < LEVEL1MAP.length; i++) {
-            String line = LEVEL1MAP[i];
+        levelWidth = LEVELARRAY[0].length() * scalar;
+        for (int i = 0; i < LEVELARRAY.length; i++) {
+            String line = LEVELARRAY[i];
             for (int j = 0; j < line.length(); j++) {
                 switch (line.charAt(j)) {
                     case '0':
