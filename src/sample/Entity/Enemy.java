@@ -1,3 +1,5 @@
+
+
 package sample.Entity;
 
 public class Enemy implements Entity {

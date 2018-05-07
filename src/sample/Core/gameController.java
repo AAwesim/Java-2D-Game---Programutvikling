@@ -35,10 +35,12 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     private AnimationTimer timer;
     private mapCreator mc = new mapCreator();
 
-    private boolean left;
-    private boolean right;
+    private boolean left = false;
+    private boolean right = false;
 
     public int i = 0;
+    public int d = 0;
+
 
     BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT,
             BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -55,7 +57,9 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
             @Override
             public void handle(long now) {
-
+                i++;
+                //if (i%60==0){
+                System.out.println("runtime: "+ i/60);
                 // System.out.println(mainPlayer.getPosX());
                 if (playerMapCollisionChecker(mainPlayer)) {
                     mainPlayer.gravity();
@@ -64,7 +68,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                     mainPlayer.setPosX(300);
                     mainPlayer.setPosY(300);
                 }
-
                 if (left) {
                     mainPlayer.MoveLeft();
                 }
@@ -102,6 +105,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             } else if (e.getCode() == KeyCode.D) {
                 //  mainPlayer.setDirection(5);
                 this.right = false;
+                System.out.println("BAAAAAAAAAAls");
             }
         });
     }
@@ -111,18 +115,18 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         if (keyEvent.getCode() == KeyCode.SPACE) {
             System.out.println(keyEvent.toString());
         } else if (keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT) {
-            // mainPlayer.setDirection(0);
-            //mainPlayer.MoveLeft();
-            this.left = true;
+             this.left = true;
+
         } else if (keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT) {
-            //  mainPlayer.MoveRight();
-            this.right = true;
+             this.right = true;
+
         } else if (keyEvent.getCode() == KeyCode.S || keyEvent.getCode() == KeyCode.DOWN) {
             mainPlayer.setySpeed(2);
+
         } else if (keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.UP) {
             if (!playerMapCollisionChecker(mainPlayer)) {
                 // mainPlayer.setPosY(mainPlayer.getPosY()-4);
-                mainPlayer.setySpeed(-7);
+                mainPlayer.setySpeed(-7.5);
             }
         } else if (keyEvent.getCode() == KeyCode.F1) {
             mainPlayer.setPosX(350);
@@ -155,8 +159,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
 
                 return false;
-            } //else { p.gravity();
-            //}
+            }
         }
         return true;
     }
@@ -168,7 +171,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         //xspeed. Antall iterasjoner i for løkken avhenger av denne parameteren med mer
         //dette kan gjøre at vi kan skjekke collision for hver piksel
         for (Rectangle mapPart : mc.getMap()) {
-            if (mapPart.intersects(p.getX(), p.getY(), p.getWidth(), p.getHeight())) {
+            if (mapPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {
 
                 //ovenifra
                 if ((p.getPosY() + p.getHeight()) < (mapPart.getY() + mapPart.getHeight() / 2) && p.getySpeed() > 0) {
@@ -189,22 +192,21 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 //dersom player sin bevegelseretning: høyre
                 if ((p.getPosX() + p.getWidth()) < (mapPart.getX() + mapPart.getWidth() / 2)) {
                     p.setxSpeed(0);
+                    this.right=false;
                     p.setPosX(mapPart.getX() - p.getWidth() - 1);
-
                 }
 
                 //dersom player sin bevegelseretning: venstre
                 if ((p.getPosX()) > (mapPart.getX() + mapPart.getWidth() / 2)) {
                     p.setxSpeed(0);
+                    this.left=false;
                     p.setPosX(mapPart.getX() + mapPart.getWidth() + 1);
-
                 }
                 //   p.setySpeed(0);
 
                 //   System.out.println("mappartgetX: " +(mapPart.getX()+mapPart.getWidth()));
                 //  System.out.println("playergetx: " +p.getX());
                 // else if(p.getySpeed()>0)
-
             }
         }
     }
