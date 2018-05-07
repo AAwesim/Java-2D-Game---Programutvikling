@@ -58,8 +58,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             @Override
             public void handle(long now) {
                 i++;
-                //if (i%60==0){
-                System.out.println("runtime: "+ i/60);
+                if (i%60==0){
+                System.out.println("runtime: "+ i/60);}
                 // System.out.println(mainPlayer.getPosX());
                 if (playerMapCollisionChecker(mainPlayer)) {
                     mainPlayer.gravity();
@@ -157,56 +157,47 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 //p.setySpeed(0);
                 //System.out.println("PLAYER Y: "+p.getySpeed());
 
-
                 return false;
             }
         }
         return true;
     }
 
-
+    //kan forbedres ved å adde en for loop her, metoden må da ta inn en parameter som tilsvarer
+    //xspeed. Antall iterasjoner i for løkken avhenger av denne parameteren med mer
+    //dette kan gjøre at vi kan skjekke collision for hver piksel
     //TODO
     public void playerMapCollisionChecker2(Player p) {
-        //kan forbedres ved å adde en for loop her, metoden må da ta inn en parameter som tilsvarer
-        //xspeed. Antall iterasjoner i for løkken avhenger av denne parameteren med mer
-        //dette kan gjøre at vi kan skjekke collision for hver piksel
         for (Rectangle mapPart : mc.getMap()) {
             if (mapPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {
 
-                //ovenifra
+                // Collision Ovenifra
                 if ((p.getPosY() + p.getHeight()) < (mapPart.getY() + mapPart.getHeight() / 2) && p.getySpeed() > 0) {
                     p.setySpeed(0);
                     p.setPosY(mapPart.getY() - p.getHeight() - 1);
                     return;
-
                 }
 
-                //  Nedenifra
+                // Collision Nedenifra
                 if ((p.getPosY()) > (mapPart.getY() + mapPart.getHeight() / 2) && p.getySpeed() < 0) {
                     p.setySpeed(0);
                     p.setPosY(mapPart.getY() + mapPart.getHeight() + 1);
                     return;
-
                 }
 
-                //dersom player sin bevegelseretning: høyre
+                // Bevegelseretning høyre
                 if ((p.getPosX() + p.getWidth()) < (mapPart.getX() + mapPart.getWidth() / 2)) {
                     p.setxSpeed(0);
                     this.right=false;
                     p.setPosX(mapPart.getX() - p.getWidth() - 1);
                 }
 
-                //dersom player sin bevegelseretning: venstre
+                // Bevegelseretning venstre
                 if ((p.getPosX()) > (mapPart.getX() + mapPart.getWidth() / 2)) {
                     p.setxSpeed(0);
                     this.left=false;
                     p.setPosX(mapPart.getX() + mapPart.getWidth() + 1);
                 }
-                //   p.setySpeed(0);
-
-                //   System.out.println("mappartgetX: " +(mapPart.getX()+mapPart.getWidth()));
-                //  System.out.println("playergetx: " +p.getX());
-                // else if(p.getySpeed()>0)
             }
         }
     }
