@@ -81,4 +81,26 @@ public class mapCreator{
     public ArrayList<Rectangle> getMap() {
         return map;
     }
+
+    //tar inn parameter som svarer til map 1,2 3 etc.. og returnerer lengden til mappet i piksler
+    //tenkte å ha denne i en mer generel map klasse som inneholder string arrayene til de ulike levelene
+    // har for nå bare adda det her
+    public int getmapLength(int i) {
+        int length=0;
+        switch (i){
+            case 1:
+                length= scalar*LEVEL1MAP[0].length();
+                break;
+            case 2:
+                length= scalar*LEVEL2MAP[0].length();
+                break;
+            case 3:
+                length= scalar*LEVEL3MAP[0].length();
+                break;
+            case 4:
+                length= scalar*LEVEL4MAP[0].length();
+                break;
+        }
+        return length;
+    }
 }
