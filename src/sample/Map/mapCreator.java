@@ -47,13 +47,15 @@ public class mapCreator{
 
         for (int i = 0; i < mapCreator.LEVEL1MAP.length; i++) {
             String line = mapCreator.LEVEL1MAP[i];
+            
             for (int j = 0; j < line.length(); j++) {
                 switch (line.charAt(j)) {
                     case '0':
                         break;
                     case '1':
                         Rectangle mapPart1 = mapMaker1(j*scalar,i*scalar,scalar,scalar, pe);
-                        mapPart1.setFill(Color.rgb(44,190,49));
+                        mapPart1.setFill(Color.DARKGREEN);
+                        // mapPart1.setFill();
                         map.add(mapPart1);
                         break;
                     case '2':
