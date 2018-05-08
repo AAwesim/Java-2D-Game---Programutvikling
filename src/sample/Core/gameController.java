@@ -42,6 +42,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public int d = 0;
 
 
+
+
     BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT,
             BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
@@ -62,8 +64,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 if (i%60==0)
                     System.out.println("runtime: "+ i/60);
 
-
-
                 if (!gravitycheck(mainPlayer)) {
                     mainPlayer.gravity();
                 }
@@ -75,6 +75,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 if (right) {
                     mainPlayer.MoveRight();
                 }
+                
                 toolowidk(mainPlayer,gamePane);
                 
                 mainPlayer.updatePlayerState();
