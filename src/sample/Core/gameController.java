@@ -116,11 +116,9 @@ public class gameController implements Initializable {
             mainPlayer.setySpeed(0);
         }
 
-<<<<<<< HEAD
-        else if(keyEvent.getCode() == KeyCode.ESCAPE){
-=======
+
         /*else if(keyEvent.getCode() == KeyCode.ESCAPE){
->>>>>>> jakobtemp
+
             Stage stage = (Stage) ((Node)keyEvent.getSource()).getScene().getWindow();
 
             StateManager.setState(StateManager.GameState.MAINMENU);
