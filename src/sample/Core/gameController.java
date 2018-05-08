@@ -61,6 +61,10 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 if (i%60==0){
                 System.out.println("runtime: "+ i/60);}
                 // System.out.println(mainPlayer.getPosX());
+
+
+                toolowidk(mainPlayer,gamePane);
+
                 if (playerMapCollisionChecker(mainPlayer)) {
                     mainPlayer.gravity();
                 }
@@ -211,5 +215,11 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
     }
 
-
+    //checker om mainplayer har falt ned i høøøøl
+    public void toolowidk(Player p, Pane pa) {
+        if (p.getPosY() > pa.getHeight() - 65) {
+            p.setPosX(300);
+            p.setPosY(300);
+        }
+    }
 }
