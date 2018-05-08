@@ -58,8 +58,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             @Override
             public void handle(long now) {
                 i++;
-                if (i%60==0){
-                System.out.println("runtime: "+ i/60);}
+                if (i%60==0)
+                    System.out.println("runtime: "+ i/60);
                 // System.out.println(mainPlayer.getPosX());
 
 
