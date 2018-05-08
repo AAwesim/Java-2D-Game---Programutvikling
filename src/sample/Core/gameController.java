@@ -49,6 +49,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public void initialize(URL location, ResourceBundle resources) {
         keyHandlerInit(gamePane);
         mainPlayer.init(gamePane);
+        setGamePaneWidth();
         mc.initMap(gamePane);
 
         gamePane.setBackground(new Background(BI));
@@ -204,6 +205,14 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 }
             }
         }
+    }
+
+    //må kalles hver gang vi endrer map, dersom map størrelsene skal være forskjellige.
+    //Setter gamePane witdh lik maplengden
+    public void setGamePaneWidth() {
+           gamePane.setPrefWidth(mc.getmapLength(1));
+           System.out.println(mc.getmapLength(1));
+           System.out.println(gamePane.getWidth());
     }
 
     //endrer visningfeltet
