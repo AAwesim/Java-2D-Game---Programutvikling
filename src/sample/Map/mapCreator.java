@@ -9,14 +9,15 @@ import javafx.scene.shape.Rectangle;
 import sample.Entity.Player;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 
+import static javafx.scene.paint.Color.DARKGREEN;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.color;
 
 
 public class mapCreator{
 
-    
     private static String[] LEVEL2MAP;
     private static String[] LEVEL3MAP;
     private static String[] LEVEL4MAP;
