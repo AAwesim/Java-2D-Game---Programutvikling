@@ -31,16 +31,16 @@ public class gameController implements Initializable, Serializable {
     public void initialize(URL location, ResourceBundle resources) {
         init(gamePane);
         System.out.println(Arrays.toString(Map.getMapArray()));
-        //setGamePaneWidth();
+        setGamePaneWidth();
 
         timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
-                    camera(mainPlayer, gamePane);
-                    mainPlayer.updatePlayerState();
-                    mainPlayer.renderPlayer();
-                    mc.playerMapCollisionChecker(mainPlayer);
+                camera(mainPlayer, gamePane);
+                mainPlayer.updatePlayerState();
+                mainPlayer.renderPlayer();
+                mc.playerMapCollisionChecker(mainPlayer);
             }
         };
 
@@ -55,7 +55,7 @@ public class gameController implements Initializable, Serializable {
         mc.initMap(p);
         p.setBackground(new Background(BI));
 
-        System.out.println("stage: " + gpWrap.getWidth());
+      //  System.out.println("stage: " + gpWrap.getWidth());
         System.out.println("scene: " + p.getWidth());
     }
 
@@ -159,16 +159,11 @@ public class gameController implements Initializable, Serializable {
         }
     }
 
-
-}
-/*
     //må kalles hver gang vi endrer map, dersom map størrelsene skal være forskjellige.
     //Setter gamePane witdh lik maplengden
     public void setGamePaneWidth() {
-        gamePane.setPrefWidth(mc.getmapLength(getter for aktivt map som returnerer int)); // 
-
-
-        System.out.println(mc.getmapLength(1));
+        gamePane.setPrefWidth(mc.getmapLength());
+        System.out.println(mc.getmapLength());
         System.out.println(gamePane.getWidth());
     }
-    */
+}

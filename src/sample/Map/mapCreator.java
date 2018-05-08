@@ -60,14 +60,15 @@ public class mapCreator{
        return (int) Math.floor(Math.random() * 256);
    }
 
-
-}
-/*
     //tar inn parameter som svarer til map 1,2 3 etc.. og returnerer lengden til mappet i piksler
     //tenkte å ha denne i en mer generel map klasse som inneholder string arrayene til de ulike levelene
     // har for nå bare adda det her
-    public int getmapLength(int i) {
-        int length=0;
+    public int getmapLength() {
+        return scalar*LEVELARRAY[0].length();
+    }
+}
+
+        /*
         switch (i){
             case 1:
                 length= scalar*LEVEL1MAP[0].length();
