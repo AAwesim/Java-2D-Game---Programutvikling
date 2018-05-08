@@ -15,7 +15,7 @@ import static javafx.scene.paint.Color.color;
 
 
 public class mapCreator{
-
+    Image img=new Image("file:ressurser\\\\\\\\shop.png");
     private int scalar = 35;
     public ArrayList<Rectangle> map=new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class mapCreator{
             "000000000000000010000000000000000000001110000000000000000000000000111",
             "000000000000001111100000001101011100001110000000000000010000001111100",
             "000000000000000000000011113300033300000000000000000001110011000000000",
-            "001001000001110000011133333300033300000000000001101103330000000000000",
+            "000000000001110000011133333300033300000000000001101103330000000000000",
             "111111100113330000033333333300033300000000001113303303330000000000000",
             "333333300333332222233333333322233311001111000033303303331111111111111"
             //bredde: 69 høyde:15
@@ -71,6 +71,13 @@ public class mapCreator{
         Rectangle rect = new Rectangle(x,y,w,h);
         pe.getChildren().add(rect);
         return rect;
+    }
+
+    public Rectangle shop(Pane pe){
+     Rectangle shop=new Rectangle(0, 355,150, 100);
+     shop.setFill(new ImagePattern(img, 0, 0, 1, 1, true));
+     pe.getChildren().add(shop);
+     return shop;
     }
 
     public ArrayList<Rectangle> getMap() {

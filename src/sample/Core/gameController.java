@@ -48,6 +48,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         keyHandlerInit(gamePane);
+        mc.shop(gamePane);
         mainPlayer.init(gamePane);
         mc.initMap(gamePane);
 
@@ -57,6 +58,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
             @Override
             public void handle(long now) {
+
                 i++;
                 if (i%60==0){
                 System.out.println("runtime: "+ i/60);}
@@ -81,6 +83,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 //  playerMapCollisionChecker(mainPlayer);
                 view(mainPlayer, gamePane);
                 playerMapCollisionChecker2(mainPlayer);
+
 
                 //  System.out.println(mainPlayer.getySpeed());
                 // System.out.println(mainPlayer.getPosY());
