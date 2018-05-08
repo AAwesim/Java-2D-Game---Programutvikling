@@ -16,6 +16,11 @@ import static javafx.scene.paint.Color.color;
 
 public class mapCreator{
 
+    
+    private static String[] LEVEL2MAP;
+    private static String[] LEVEL3MAP;
+    private static String[] LEVEL4MAP;
+
     private int scalar = 35;
     public ArrayList<Rectangle> map=new ArrayList<>();
 
