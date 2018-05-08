@@ -61,34 +61,28 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 i++;
                 if (i%60==0)
                     System.out.println("runtime: "+ i/60);
-                // System.out.println(mainPlayer.getPosX());
 
 
-                toolowidk(mainPlayer,gamePane);
 
-                if (playerMapCollisionChecker(mainPlayer)) {
+                if (!gravitycheck(mainPlayer)) {
                     mainPlayer.gravity();
                 }
-                if (mainPlayer.getPosY() > gamePane.getHeight() - 65) {
-                    mainPlayer.setPosX(300);
-                    mainPlayer.setPosY(300);
-                }
+
                 if (left) {
                     mainPlayer.MoveLeft();
                 }
+
                 if (right) {
                     mainPlayer.MoveRight();
                 }
-                //mainPlayer.gravity();
-                // System.out.println(playerMapCollisionChecker(mainPlayer));
+                toolowidk(mainPlayer,gamePane);
+                
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
-                //  playerMapCollisionChecker(mainPlayer);
+
                 view(mainPlayer, gamePane);
                 playerMapCollisionChecker2(mainPlayer);
 
-                //  System.out.println(mainPlayer.getySpeed());
-                // System.out.println(mainPlayer.getPosY());
             }
         };
 
@@ -129,7 +123,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             mainPlayer.setySpeed(2);
 
         } else if (keyEvent.getCode() == KeyCode.W || keyEvent.getCode() == KeyCode.UP) {
-            if (!playerMapCollisionChecker(mainPlayer)) {
+            if (gravitycheck(mainPlayer)) {
                 // mainPlayer.setPosY(mainPlayer.getPosY()-4);
                 mainPlayer.setySpeed(-7.5);
             }
@@ -150,7 +144,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     //Vet ikke lenger, men tror det eneste formålet til metoden er for å sjekke om gravity()
     //skal kjøres, derfor er Width og Height en pixel større enn metoden under.
-    public boolean playerMapCollisionChecker(Player p) {
+    public boolean gravitycheck(Player p) {
         for (Rectangle mapPart : mc.getMap()) {
             if (mapPart.intersects(p.getX(), p.getY(), p.getWidth() + 0.5, p.getHeight() + 1)) {
                 /*System.out.println(mapPart.intersects(p.getX(),p.getY(),p.getWidth()+0.5,p.getHeight()+1));
@@ -162,10 +156,10 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 //p.setySpeed(0);
                 //System.out.println("PLAYER Y: "+p.getySpeed());
 
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     //kan forbedres ved å adde en for loop her, metoden må da ta inn en parameter som tilsvarer
