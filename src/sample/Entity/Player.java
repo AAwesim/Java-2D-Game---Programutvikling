@@ -27,8 +27,8 @@ public class Player extends Rectangle implements Entity {
     public void init(Pane p) {
         this.setHeight(32);
         this.setWidth(32);
-        //this.setFill(imgPattern);
-        this.setFill(Color.BLUE);
+        this.setFill(imgPattern);
+       // this.setFill(Color.BLUE);
         this.setX(posX) ;
        // System.out.println(posX);
         this.setY(posY);

@@ -49,37 +49,29 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         keyHandlerInit(gamePane);
         mainPlayer.init(gamePane);
-        setGamePaneWidth();
-        mc.initMap(gamePane);
 
+        mc.initMap(gamePane);
+        setGamePaneWidth();
         gamePane.setBackground(new Background(BI));
 
         timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
+
                 i++;
                 if (i%60==0)
                     System.out.println("runtime: "+ i/60);
+                // System.out.println(mainPlayer.getPosX());
 
-                if (!gravitycheck(mainPlayer)) {
-                    mainPlayer.gravity();
-                }
+                if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
+                if (left) {PlayerCollisionX(4, mainPlayer);}
+                if (right) {PlayerCollisionX(4, mainPlayer);}
 
-                if (left) {
-                    PlayerCollisionX(4, mainPlayer);
-                }
-
-                if (right) {
-                    PlayerCollisionX(4, mainPlayer);
-                }
-
-               // System.out.println(mainPlayer.getPosX());
-
-                
-                toolowidk(mainPlayer,gamePane);
+                PitCheck(mainPlayer,gamePane);
                 
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
@@ -249,7 +241,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     }
 
     //checker om mainplayer har falt ned i høøøøl
-    public void toolowidk(Player p, Pane pa) {
+    public void PitCheck(Player p, Pane pa) {
         if (p.getPosY() > pa.getHeight() - 65) {
             p.setPosX(300);
             p.setPosY(300);
