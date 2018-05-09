@@ -32,7 +32,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
-    private Enemy enemy = (Enemy) ec.getEntity("ENEMY");
+   // private Enemy enemy = (Enemy) ec.getEntity("ENEMY");
     private AnimationTimer timer;
     private mapCreator mc = new mapCreator();
 
@@ -53,7 +53,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
         keyHandlerInit(gamePane);
         mainPlayer.initPlayer(gamePane);
-        enemy.initEnemy(gamePane);
+        //mc.enemy.(gamePane);
+        //enemy.initEnemy(gamePane);
 
         mc.initMap(gamePane);
         setGamePaneWidth();

@@ -8,8 +8,8 @@ import javafx.scene.shape.Rectangle;
 
 public class Enemy extends Rectangle implements Entity {
 
-    private double EposX = 105;
-    private double EposY = 400;
+    private double EposX;
+    private double EposY;
 
     private double xSpeed = 4;
     public double ySpeed = 4;

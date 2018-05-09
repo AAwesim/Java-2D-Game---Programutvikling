@@ -6,6 +6,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import sample.Entity.Enemy;
+import sample.Entity.EntityCreator;
 import sample.Entity.Player;
 
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class mapCreator{
     private int scalar = 35;
     private int widthscalar = 70;
 
+    private EntityCreator ec = new EntityCreator();
+
     private static final String Dit = "file:ressurser\\\\Dirt.png";
     Image D = new Image(Dit);
     final private ImagePattern Dirt = new ImagePattern(D);
@@ -32,11 +36,6 @@ public class mapCreator{
     private static final String testPic = "file:ressurser\\\\Grass.png";
     Image img = new Image(testPic);
     final private ImagePattern Grass = new ImagePattern(img);
-
-
-
-
-
 
     public ArrayList<Rectangle> map=new ArrayList<>();
 
@@ -52,8 +51,8 @@ public class mapCreator{
             "00000000000000003000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
             "00000000000000003000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
             "00000000000000111110000000110001110000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000000000001111330003330000000000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000111000001113333330003330000000000000110000011110011111111001111111111111110111111111110000000",
+            "00000000000400000000001111330003330000000000000000000000000000000000000000000000000000000000000000000000",
+            "0404004000111000001113333330003330000000000000110000011110011111111001111111111111110111111111110000000",
             "11111110011333000003333333330003330000000000111330333033300000000000033033300000000000003330000000000000",
             "33333330033333222223333333332223331100111100003330333033311111111111133033311111111111103331111111111111"
             //bredde: 69 høyde:15
@@ -65,7 +64,6 @@ public class mapCreator{
 
         for (int i = 0; i < mapCreator.LEVEL1MAP.length; i++) {
             String line = mapCreator.LEVEL1MAP[i];
-            
             for (int j = 0; j < line.length(); j++) {
                 switch (line.charAt(j)) {
                     case '0':
@@ -85,8 +83,15 @@ public class mapCreator{
                         mapPart1 = mapMaker1(j*widthscalar,i*scalar,widthscalar,scalar, pe);
                         //mapPart1.setFill(Color.rgb(97, 63, 16));
                         mapPart1.setFill(Dirt);
-                        map.add(mapPart1);
+                       // map.add(mapPart1);
                         break;
+                    case '4':
+                        Enemy enemy = (Enemy) ec.getEntity("ENEMY");
+                        enemy.setPosX(j*widthscalar);
+                        enemy.setPosY(i*scalar);
+                        enemy.initEnemy(pe);
+
+
                 }
             }
         }
