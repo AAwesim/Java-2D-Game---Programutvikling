@@ -8,49 +8,45 @@ import javafx.scene.shape.Rectangle;
 
 
 public class Player extends Rectangle implements Entity {
-    private double posX = 50;
-    private double posY = 424;
+
+    private double posX = 300;
+    private double posY = 300;
+
 
     private double xSpeed = 4;
-    public double ySpeed = 0;
-
-    private int direction = 3;
-    protected int left = -1;
-    protected int right = 1;
-
+    public double ySpeed = 4;
 
     private static final String testPic = "file:ressurser\\\\char.png";
     Image img = new Image(testPic);
     final private ImagePattern imgPattern = new ImagePattern(img);
 
     //Setter opp entiteten Player sine vilkårlige verdier.
-    public void init(Pane p) {
-        this.setHeight(30);
-        this.setWidth(20);
-        //this.setFill(imgPattern);
-        this.setFill(Color.BLUE);
+    public void initPlayer(Pane p) {
+        this.setHeight(32);
+        this.setWidth(32);
+        this.setFill(imgPattern);
+       // this.setFill(Color.BLUE);
         this.setX(posX) ;
        // System.out.println(posX);
         this.setY(posY);
         //System.out.println(posY);
         p.getChildren().add(this);
-
     }
 
     public void updatePlayerState() {
         //gravity();
         setPosY(getPosY()+ySpeed);
+      //  setPosX(getPosX()+xSpeed);
+
       //  {System.out.println(ySpeed);}
        // {System.out.println(xSpeed);}
-        playerMovement();
         // System.out.println(this.posX);
         // System.out.println(this.posY);
     }
 
     public void gravity() {
-        if (ySpeed<9){
-            ySpeed = ySpeed+0.3;
-        }
+        if (ySpeed<7)
+        ySpeed = ySpeed+0.3;
     }
 
     public void renderPlayer() {
@@ -58,26 +54,20 @@ public class Player extends Rectangle implements Entity {
         setY(posY);
     }
 
-    public void playerMovement() {
-        if (direction == left) {
-            this.setPosX(getPosX()-xSpeed);
-            this.setxSpeed(1);
-        } else if (direction == right) {
-            this.setPosX(getPosX()+xSpeed);
-            setxSpeed(1);
-        } else return;
 
+    public void MoveLeft(int x) {
+        System.out.println("MLeft");
+        setxSpeed(-x);
+        setPosX(getPosX()+xSpeed);
+    }
+
+    public void MoveRight(int x) {
+        System.out.println("MRight");
+        setxSpeed(x);
+        setPosX(getPosX()+xSpeed);
     }
 
     //Getters og setters
-
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
-
-    public int getDirection() {
-        return direction;
-    }
 
     public void setPosX(double posX) {
         this.posX = posX;
