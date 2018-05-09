@@ -14,17 +14,12 @@ public class Player extends Rectangle implements Entity {
     private double xSpeed = 4;
     public double ySpeed = 4;
 
-
-    protected int left = 0;
-    protected int right = 1;
-
-
     private static final String testPic = "file:ressurser\\\\char.png";
     Image img = new Image(testPic);
     final private ImagePattern imgPattern = new ImagePattern(img);
 
     //Setter opp entiteten Player sine vilkårlige verdier.
-    public void init(Pane p) {
+    public void initPlayer(Pane p) {
         this.setHeight(32);
         this.setWidth(32);
         this.setFill(imgPattern);
