@@ -44,9 +44,6 @@ public class gameController implements Initializable {
     public int i = 0;
     public int d = 0;
 
-
-
-
     BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT,
             BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
 
@@ -81,7 +78,6 @@ public class gameController implements Initializable {
 
                 //playerMapCollisionChecker(mainPlayer);
 
-
                 if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
                 if (left) {PlayerCollisionX(4, mainPlayer);}
                 if (right) {PlayerCollisionX(4, mainPlayer);}
@@ -90,6 +86,7 @@ public class gameController implements Initializable {
                 
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
+                view(mainPlayer,gamePane);
 
                 playerMapCollisionChecker2(mainPlayer);
 
@@ -100,8 +97,6 @@ public class gameController implements Initializable {
 
     }
 
-    /*private int left = 0;
-    private int right = 1;*/
     public void keyHandlerInit(Pane p) {
         p.setFocusTraversable(true);
         p.requestFocus();
@@ -117,7 +112,7 @@ public class gameController implements Initializable {
             }
         });
     }
-    
+
     public void handle(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.SPACE) {
             System.out.println(keyEvent.toString());
