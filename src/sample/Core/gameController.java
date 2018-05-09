@@ -69,12 +69,15 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 }
 
                 if (left) {
-                    mainPlayer.MoveLeft();
+                    PlayerCollisionX(4, mainPlayer);
                 }
 
                 if (right) {
-                    mainPlayer.MoveRight();
+                    PlayerCollisionX(4, mainPlayer);
                 }
+
+               // System.out.println(mainPlayer.getPosX());
+
                 
                 toolowidk(mainPlayer,gamePane);
                 
@@ -115,10 +118,13 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         if (keyEvent.getCode() == KeyCode.SPACE) {
             System.out.println(keyEvent.toString());
         } else if (keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT) {
-             this.left = true;
+            this.right = false ;
+            this.left = true;
 
         } else if (keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT) {
+             this.left = false;
              this.right = true;
+
 
         } else if (keyEvent.getCode() == KeyCode.S || keyEvent.getCode() == KeyCode.DOWN) {
             mainPlayer.setySpeed(2);
@@ -170,37 +176,60 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public void playerMapCollisionChecker2(Player p) {
         for (Rectangle mapPart : mc.getMap()) {
             if (mapPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {
-
                 // Collision Ovenifra
                 if ((p.getPosY() + p.getHeight()) < (mapPart.getY() + 7.1) && p.getySpeed() > 0) {
                     p.setySpeed(0);
                     p.setPosY(mapPart.getY() - p.getHeight() - 1);
                     return;
                 }
-
                 // Collision Nedenifra
                 if ((p.getPosY()) > (mapPart.getY() + mapPart.getHeight() / 2) && p.getySpeed() < 0) {
                     p.setySpeed(0);
                     p.setPosY(mapPart.getY() + mapPart.getHeight() + 1);
                     return;
                 }
-
-                // Bevegelseretning høyre
-                if ((p.getPosX() + p.getWidth()) < (mapPart.getX() + mapPart.getWidth() / 2)) {
-                    p.setxSpeed(0);
-                    this.right=false;
-                    p.setPosX(mapPart.getX() - p.getWidth() - 1);
-                }
-
-                // Bevegelseretning venstre
-                if ((p.getPosX()) > (mapPart.getX() + mapPart.getWidth() / 2)) {
-                    p.setxSpeed(0);
-                    this.left=false;
-                    p.setPosX(mapPart.getX() + mapPart.getWidth() + 1);
-                }
             }
         }
     }
+
+    public void PlayerCollisionX(int x, Player p) {
+        int speed = 4;
+        for (int i = 1; i <= x; i++) {
+            for (Rectangle mapPart : mc.getMap()) {
+                if (mapPart.intersects(p.getPosX()+speed, p.getPosY(), p.getWidth(), p.getHeight())) {
+                    // Bevegelseretning høyre
+                    if (right) {
+                        speed--;
+                        //p.setxSpeed(0);
+                        //this.right = false;
+                        System.out.println("høyre movement løkke");
+                        p.setPosX(mapPart.getX() - p.getWidth()-1);
+                        System.out.println("sjekk");
+                    }
+                }
+                if (mapPart.intersects(p.getPosX()-speed, p.getPosY(), p.getWidth(), p.getHeight())) {
+                    // Bevegelseretning venstre
+                    if (left) {
+                        speed--;
+                        //p.setxSpeed(0);
+                        //this.left = false;
+                        p.setPosX(mapPart.getX() + mapPart.getWidth()+1);
+                    }
+                }
+            }
+
+        } System.out.println(p.getPosX());
+
+        System.out.println(speed);
+        if (right) {
+            p.MoveRight(speed);
+        } else if (left) {
+            p.MoveLeft(speed);
+        }
+
+    }
+
+
 
     //må kalles hver gang vi endrer map, dersom map størrelsene skal være forskjellige.
     //Setter gamePane witdh lik maplengden

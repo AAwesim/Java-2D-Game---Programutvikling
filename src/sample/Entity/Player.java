@@ -11,8 +11,8 @@ public class Player extends Rectangle implements Entity {
     private double posX = 300;
     private double posY = 300;
 
-    private double xSpeed = 3;
-    public double ySpeed = 3;
+    private double xSpeed = 4;
+    public double ySpeed = 4;
 
 
     protected int left = 0;
@@ -58,13 +58,15 @@ public class Player extends Rectangle implements Entity {
         setY(posY);
     }
 
-    public void MoveLeft() {
-        setxSpeed(-4);
+    public void MoveLeft(int x) {
+        System.out.println("MLeft");
+        setxSpeed(-x);
         setPosX(getPosX()+xSpeed);
     }
 
-    public void MoveRight() {
-        setxSpeed(4);
+    public void MoveRight(int x) {
+        System.out.println("MRight");
+        setxSpeed(x);
         setPosX(getPosX()+xSpeed);
     }
 

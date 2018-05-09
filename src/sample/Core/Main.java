@@ -16,7 +16,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.setTitle(GAME_NAME);
 
-        primaryStage.setScene(StateManager.update());
+        primaryStage.setScene(stateManager.update());
 
         primaryStage.show();
     }
