@@ -75,12 +75,17 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 if (right) {PlayerCollisionX(4, mainPlayer);}
 
                 PitCheck(mainPlayer,gamePane);
-                
+
+                PlayerEnemyColl(mainPlayer);
+
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
 
+
                 view(mainPlayer, gamePane);
                 playerMapCollisionChecker2(mainPlayer);
+
+
 
             }
         };
@@ -88,7 +93,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         timer.start();
 
     }
-
 
     /*private int left = 0;
     private int right = 1;*/
@@ -248,6 +252,15 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         if (p.getPosY() > pa.getHeight() - 65) {
             p.setPosX(300);
             p.setPosY(300);
+        }
+    }
+
+    public void PlayerEnemyColl(Player p) {
+        for (Enemy enemy : mc.getEMap()) {
+        if (p.intersects(enemy.getBoundsInLocal())) {
+            p.setPosX(110);
+            p.setPosY(390);
+            }
         }
     }
 }
