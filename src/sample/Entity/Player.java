@@ -12,7 +12,6 @@ public class Player extends Rectangle implements Entity {
     private double posX = 300;
     private double posY = 300;
 
-
     private double xSpeed = 4;
     public double ySpeed = 4;
 

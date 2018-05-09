@@ -37,7 +37,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     private AnimationTimer timer;
     private mapCreator mc = new mapCreator();
 
-
     private boolean left = false;
     private boolean right = false;
 
@@ -61,22 +60,6 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
             @Override
             public void handle(long now) {
-
-                i++;
-                if (i%60==0)
-                    System.out.println("runtime: "+ i/60);
-                // System.out.println(mainPlayer.getPosX());
-
-               /* System.out.println(mainPlayer.getPosX());
-                if(playerMapCollisionChecker(mainPlayer)) {
-                    mainPlayer.gravity();
-                }*/
-
-                //mainPlayer.gravity();
-               // System.out.println(playerMapCollisionChecker(mainPlayer));
-               // mainPlayer.updatePlayerState();
-
-                //playerMapCollisionChecker(mainPlayer);
 
                 if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
                 if (left) {PlayerCollisionX(4, mainPlayer);}
@@ -149,26 +132,11 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
     }
 
-
-
-
-
-
-
     //Vet ikke lenger, men tror det eneste formålet til metoden er for å sjekke om gravity()
     //skal kjøres, derfor er Width og Height en pixel større enn metoden under.
     public boolean gravitycheck(Player p) {
         for (Rectangle mapPart : mc.getMap()) {
             if (mapPart.intersects(p.getX(), p.getY(), p.getWidth() + 0.5, p.getHeight() + 1)) {
-                /*System.out.println(mapPart.intersects(p.getX(),p.getY(),p.getWidth()+0.5,p.getHeight()+1));
-                System.out.println("MAPPART X: "+mapPart.getX());
-                System.out.println("PLAYER X: "+p.getX());
-
-                System.out.println("MAPPART Y: "+mapPart.getY());
-                System.out.println("PLAYER Y: "+p.getY());*/
-                //p.setySpeed(0);
-                //System.out.println("PLAYER Y: "+p.getySpeed());
-
                 return true;
             }
         }
