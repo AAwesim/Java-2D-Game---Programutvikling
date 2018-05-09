@@ -2,10 +2,13 @@ package sample.Core;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import sample.Entity.*;
@@ -15,10 +18,11 @@ import sample.Tools.StateManager;
 
 import java.io.*;
 import java.net.URL;
+import java.security.Key;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-public class gameController implements Initializable, Serializable {
+public class gameController implements Initializable, Serializable, EventHandler<KeyEvent> {
 
     @FXML Pane gamePane;
     @FXML Pane gpWrap;
@@ -27,9 +31,11 @@ public class gameController implements Initializable, Serializable {
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
     private mapCreator mc = new mapCreator();
     private AnimationTimer timer;
+    private static boolean running = true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        running = true;
         init(gamePane);
         System.out.println(Arrays.toString(Map.getMapArray()));
         setGamePaneWidth();
@@ -38,10 +44,12 @@ public class gameController implements Initializable, Serializable {
 
             @Override
             public void handle(long now) {
-                camera(mainPlayer, gamePane);
-                mainPlayer.updatePlayerState();
-                mainPlayer.renderPlayer();
-                mc.playerMapCollisionChecker(mainPlayer);
+                if(running) {
+                    camera(mainPlayer, gamePane);
+                    mainPlayer.updatePlayerState();
+                    mainPlayer.renderPlayer();
+                    mc.playerMapCollisionChecker(mainPlayer);
+                }else return;
             }
         };
 
@@ -49,8 +57,7 @@ public class gameController implements Initializable, Serializable {
     }
 
     public void init(Pane p) {
-        BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT,
-                BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         keyHandlerInit(p);
         mainPlayer.init(p);
         mc.initMap(p);
@@ -64,56 +71,7 @@ public class gameController implements Initializable, Serializable {
         p.setFocusTraversable(true);
         p.requestFocus();
 
-        p.setOnKeyPressed(e -> {
-            switch (e.getCode()) {
-                case SPACE:
-                    System.out.println(e.toString());
-                    break;
-                case A:
-                case LEFT:
-                    mainPlayer.setDirection(0);
-                    break;
-                case D:
-                case RIGHT:
-                    mainPlayer.setDirection(1);
-                    break;
-                case S:
-                case DOWN:
-                    mainPlayer.setPosY(5);
-                    break;
-                case W:
-                case UP:
-                    mainPlayer.setPosY(-20);
-                    break;
-                case F1:
-                    mainPlayer.setPosX(320 - mainPlayer.getPosX());
-                    mainPlayer.setPosY(240 - mainPlayer.getPosY());
-                    mainPlayer.setySpeed(0);
-                    break;
-                case F2:
-                    try {
-                        playerSave(mainPlayer);
-                        System.out.println(mainPlayer.toString());
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                    break;
-
-                case F3:
-                    try {
-                        loadSave();
-                        mainPlayer.renderPlayer();
-                        System.out.println(mainPlayer.toString());
-                    } catch (Exception e2) {
-                        System.out.println(e);
-                    }
-                    break;
-                case ESCAPE:
-                    StateManager.changeScene(e, StateManager.GameState.PAUSE);
-                    timer.stop();
-                    break;
-            }
-        });
+        p.setOnKeyPressed(this);
 
         p.setOnKeyReleased(e -> {
             switch (e.getCode()) {
@@ -161,5 +119,77 @@ public class gameController implements Initializable, Serializable {
         gamePane.setPrefWidth(mc.getmapLength());
         System.out.println(mc.getmapLength());
         System.out.println(gamePane.getWidth());
+    }
+
+    public static void setRunning(boolean running) {
+        gameController.running = running;
+    }
+
+    @Override
+    public void handle(KeyEvent e) {
+        switch (e.getCode()) {
+            case SPACE:
+                System.out.println(e.toString());
+                break;
+            case A:
+            case LEFT:
+                mainPlayer.setDirection(0);
+                break;
+            case D:
+            case RIGHT:
+                mainPlayer.setDirection(1);
+                break;
+            case S:
+            case DOWN:
+                mainPlayer.setPosY(5);
+                break;
+            case W:
+            case UP:
+                mainPlayer.setPosY(-20);
+                break;
+            case F1:
+                mainPlayer.setPosX(320 - mainPlayer.getPosX());
+                mainPlayer.setPosY(240 - mainPlayer.getPosY());
+                mainPlayer.setySpeed(0);
+                break;
+            case F2:
+                try {
+                    playerSave(mainPlayer);
+                    System.out.println(mainPlayer.toString());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+
+            case F3:
+                try {
+                    loadSave();
+                    mainPlayer.renderPlayer();
+                    System.out.println(mainPlayer.toString());
+                } catch (Exception e2) {
+                    System.out.println(e);
+                }
+                break;
+
+            case F5:
+                    Terminate();
+                break;
+
+            case ESCAPE:
+                StateManager.changeScene(e, StateManager.GameState.PAUSE);
+                running = false;
+                break;
+        }
+    }
+
+    public void Terminate(){
+        if(gamePane != null && mainPlayer != null && timer != null){
+            gamePane.getChildren().clear();
+            timer.stop();
+            mainPlayer = null;
+            gamePane.removeEventHandler(KeyEvent.ANY,this);
+            gamePane.setOnKeyPressed(null);
+            gamePane.setOnKeyReleased(null);
+        } else System.exit(2);
     }
 }

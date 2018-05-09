@@ -42,6 +42,7 @@ public class StateManager {
         State.put("LEVEL", new Scene(levelRoot));
         State.put("HELP", new Scene(helpRoot));
         State.put("PAUSE", new Scene(pauseRoot));
+
     }
 
     public static Scene update(){
