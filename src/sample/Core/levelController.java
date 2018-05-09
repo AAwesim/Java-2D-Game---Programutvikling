@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import sample.Map.Map;
 import sample.Tools.StateManager;
+
+import javax.swing.plaf.nimbus.State;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -42,15 +44,22 @@ public class levelController implements Initializable{
     public void getMap(ActionEvent event) throws IOException, ClassNotFoundException {
         switch(((Button) event.getSource()).getText()){
             case "1":
+
                 if(new File("1.map").exists()) {
                     loadMap("1");
-                    initLevelState(event);
+
+                    Main.getStateManager().initGame();
+                    StateManager.changeScene(event, StateManager.GameState.GAME);
                 } else generateMap();
                 break;
+
             case "2":
                 loadMap("2");
-                initLevelState(event);
+
+                Main.getStateManager().initGame();
+                StateManager.changeScene(event, StateManager.GameState.GAME);
             break;
+
         }
     }
 
@@ -68,16 +77,5 @@ public class levelController implements Initializable{
         ObjectInputStream in = new ObjectInputStream(new FileInputStream((s+".map")));
         Map.setMapArray((String[]) in.readObject());
         in.close();
-    }
-
-    public void initLevelState(ActionEvent event){
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        Main.getStateManager().initGame();
-        StateManager.setState(StateManager.GameState.GAME);
-        stage.setScene(StateManager.update());
-
-        stage.setResizable(false);
-        stage.show();
     }
 }

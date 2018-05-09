@@ -7,8 +7,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import sample.Tools.StateManager;
+
+import javax.swing.plaf.nimbus.State;
 
 public class menyController implements Initializable{
 
@@ -18,26 +21,16 @@ public class menyController implements Initializable{
     }
 
     @FXML
-    private void setGameScene(ActionEvent e){
-        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+    private void changeScene(ActionEvent e){
+        switch(((Button)e.getSource()).getText()) {
+            case "Start":
+            StateManager.changeScene(e, StateManager.GameState.LEVEL);
+            break;
 
-        /*Main.getStateManager().initGame();*/
-        StateManager.setState(StateManager.GameState.LEVEL);
-        stage.setScene(StateManager.update());
-
-        stage.setResizable(false);
-        stage.show();
-    }
-
-    @FXML
-    private void setHjelpScene(ActionEvent e) {
-        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-
-        StateManager.setState(StateManager.GameState.HELP);
-        stage.setScene(StateManager.update());
-
-        stage.setResizable(false);
-        stage.show();
+            case "Hjelp":
+            StateManager.changeScene(e, StateManager.GameState.HELP);
+            break;
+        }
     }
 
     public void exit(ActionEvent e) {

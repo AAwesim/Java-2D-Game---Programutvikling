@@ -1,6 +1,7 @@
 package sample.Core;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -108,13 +109,8 @@ public class gameController implements Initializable, Serializable {
                     }
                     break;
                 case ESCAPE:
-                    Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-
-                    StateManager.setState(StateManager.GameState.MAINMENU);
-                    stage.setScene(StateManager.update());
-
-                    stage.setResizable(false);
-                    stage.show();
+                    StateManager.changeScene(e, StateManager.GameState.PAUSE);
+                    timer.stop();
                     break;
             }
         });

@@ -1,8 +1,13 @@
 package sample.Tools;
 
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.event.ActionEvent;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -81,6 +86,16 @@ public class StateManager {
             System.exit(1);
         }
         State.put("GAME",new Scene(gameRoot));
+    }
+
+    public static void changeScene(Event e, GameState gameStateEnum){
+        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+
+        StateManager.setState(gameStateEnum);
+        stage.setScene(StateManager.update());
+
+        stage.setResizable(false);
+        stage.show();
     }
 
 }
