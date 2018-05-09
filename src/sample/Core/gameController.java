@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import static javafx.scene.paint.Color.MAGENTA;
 import static javafx.scene.paint.Color.color;
 
-public class gameController implements Initializable {
+public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     @FXML
     Pane gamePane;
@@ -96,7 +96,7 @@ public class gameController implements Initializable {
         timer.start();
 
     }
-
+    
     public void keyHandlerInit(Pane p) {
         p.setFocusTraversable(true);
         p.requestFocus();
@@ -113,6 +113,7 @@ public class gameController implements Initializable {
         });
     }
 
+    @Override
     public void handle(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.SPACE) {
             System.out.println(keyEvent.toString());
