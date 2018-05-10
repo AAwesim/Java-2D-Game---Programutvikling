@@ -109,6 +109,7 @@ release.properties
 pom.xml.releaseBackup
 pom.xml.tag
 *.xml
+
 *.ser
 .idea/misc.xml
 *.xml

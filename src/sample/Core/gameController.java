@@ -67,7 +67,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc.initMap(gamePane);
         setGamePaneWidth();
         gamePane.setBackground(new Background(BI));
-=======
+
     private static boolean running = true;
 
     @Override
@@ -76,14 +76,14 @@ public class gameController implements Initializable, Serializable, EventHandler
         init(gamePane);
         /*setGamePaneWidth();*/
         System.out.println(Arrays.toString(Map.getMapArray()));
->>>>>>> Asim
+
 
         timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
 
-<<<<<<< HEAD
+
                 if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
                 if (left) {PlayerCollisionX(4, mainPlayer);}
                 if (right) {PlayerCollisionX(4, mainPlayer);}
@@ -98,16 +98,12 @@ public class gameController implements Initializable, Serializable, EventHandler
                 mainPlayer.renderPlayer();
                 view(mainPlayer,gamePane);
 
-<<<<<<< HEAD
-=======
 
-                view(mainPlayer, gamePane);
->>>>>>> JakobMain
                 playerMapCollisionChecker2(mainPlayer);
 
 
 
-=======
+
                 if (running) {
                     camera(mainPlayer, gamePane);
                     mainPlayer.updatePlayerState();
@@ -115,7 +111,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                     mc.playerMapCollisionChecker(mainPlayer);
                 } else return;
 
->>>>>>> Asim
+
             }
         };
 
@@ -132,16 +128,11 @@ public class gameController implements Initializable, Serializable, EventHandler
       //  System.out.println("stage: " + gpWrap.getWidth());
         System.out.println("scene: " + p.getWidth());
     }
-<<<<<<< HEAD
-    
-=======
 
-<<<<<<< HEAD
+
     /*private int left = 0;
     private int right = 1;*/
->>>>>>> JakobMain
-=======
->>>>>>> Asim
+
     public void keyHandlerInit(Pane p) {
         p.setFocusTraversable(true);
         p.requestFocus();
@@ -149,7 +140,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         p.setOnKeyPressed(this);
 
         p.setOnKeyReleased(e -> {
-<<<<<<< HEAD
+
             if (e.getCode() == KeyCode.A) {
                 //   mainPlayer.setDirection(5);
                 this.left = false;
@@ -157,7 +148,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                 //  mainPlayer.setDirection(5);
                 this.right = false;
                 System.out.println("BAAAAAAAAAAls");
-=======
+
             switch (e.getCode()) {
                 case A:
                     mainPlayer.setDirection(5);
@@ -165,12 +156,12 @@ public class gameController implements Initializable, Serializable, EventHandler
                 case D:
                     mainPlayer.setDirection(5);
                     break;
->>>>>>> Asim
+
             }
         });
     }
 
-<<<<<<< HEAD
+
     @Override
     public void handle(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.SPACE) {
