@@ -76,11 +76,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 mainPlayer.renderPlayer();
                 view(mainPlayer,gamePane);
 
-<<<<<<< HEAD
-=======
 
-                view(mainPlayer, gamePane);
->>>>>>> JakobMain
                 playerMapCollisionChecker2(mainPlayer);
 
 
@@ -91,13 +87,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         timer.start();
 
     }
-<<<<<<< HEAD
-    
-=======
 
-    /*private int left = 0;
-    private int right = 1;*/
->>>>>>> JakobMain
     public void keyHandlerInit(Pane p) {
         p.setFocusTraversable(true);
         p.requestFocus();
