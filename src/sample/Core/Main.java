@@ -2,14 +2,14 @@ package sample.Core;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import sample.helper.*;
+import sample.Tools.StateManager;
 
 public class Main extends Application {
 
     public final static  double SCREEN_WIDTH = 640.0;
     public final static  double SCREEN_HEIGHT = 480.0;
     public final static String GAME_NAME = "Tiyareed";
-    StateManager stateManager = new StateManager();
+    private static StateManager stateManager = new StateManager();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -24,4 +24,9 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
+    public static StateManager getStateManager(){
+        return stateManager;
+    }
 }
+

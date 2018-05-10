@@ -4,19 +4,23 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+<<<<<<< HEAD
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
+=======
+>>>>>>> Asim
 import sample.Entity.*;
+import sample.Map.Map;
 import sample.Map.mapCreator;
-import sample.helper.StateManager;
+import sample.Tools.StateManager;
+import java.io.*;
 import java.net.URL;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -25,6 +29,12 @@ import static javafx.scene.paint.Color.MAGENTA;
 import static javafx.scene.paint.Color.color;
 
 public class gameController implements Initializable, EventHandler<KeyEvent> {
+=======
+import java.util.Arrays;
+import java.util.ResourceBundle;
+
+public class gameController implements Initializable, Serializable, EventHandler<KeyEvent> {
+>>>>>>> Asim
 
     @FXML
     Pane gamePane;
@@ -35,6 +45,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
    // private Enemy enemy = (Enemy) ec.getEntity("ENEMY");
     private AnimationTimer timer;
+<<<<<<< HEAD
     private mapCreator mc = new mapCreator();
 
     private boolean left = false;
@@ -56,12 +67,23 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         mc.initMap(gamePane);
         setGamePaneWidth();
         gamePane.setBackground(new Background(BI));
+=======
+    private static boolean running = true;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        running = true;
+        init(gamePane);
+        /*setGamePaneWidth();*/
+        System.out.println(Arrays.toString(Map.getMapArray()));
+>>>>>>> Asim
 
         timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
 
+<<<<<<< HEAD
                 if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
                 if (left) {PlayerCollisionX(4, mainPlayer);}
                 if (right) {PlayerCollisionX(4, mainPlayer);}
@@ -85,24 +107,49 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
 
 
+=======
+                if (running) {
+                    camera(mainPlayer, gamePane);
+                    mainPlayer.updatePlayerState();
+                    mainPlayer.renderPlayer();
+                    mc.playerMapCollisionChecker(mainPlayer);
+                } else return;
+
+>>>>>>> Asim
             }
         };
 
         timer.start();
+    }
 
+    public void init(Pane p) {
+        BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        keyHandlerInit(p);
+        mainPlayer.init(p);
+        mc.initMap(p);
+        p.setBackground(new Background(BI));
+
+      //  System.out.println("stage: " + gpWrap.getWidth());
+        System.out.println("scene: " + p.getWidth());
     }
 <<<<<<< HEAD
     
 =======
 
+<<<<<<< HEAD
     /*private int left = 0;
     private int right = 1;*/
 >>>>>>> JakobMain
+=======
+>>>>>>> Asim
     public void keyHandlerInit(Pane p) {
         p.setFocusTraversable(true);
         p.requestFocus();
-        p.setOnKeyPressed(this::handle);
+
+        p.setOnKeyPressed(this);
+
         p.setOnKeyReleased(e -> {
+<<<<<<< HEAD
             if (e.getCode() == KeyCode.A) {
                 //   mainPlayer.setDirection(5);
                 this.left = false;
@@ -110,10 +157,20 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 //  mainPlayer.setDirection(5);
                 this.right = false;
                 System.out.println("BAAAAAAAAAAls");
+=======
+            switch (e.getCode()) {
+                case A:
+                    mainPlayer.setDirection(5);
+                    break;
+                case D:
+                    mainPlayer.setDirection(5);
+                    break;
+>>>>>>> Asim
             }
         });
     }
 
+<<<<<<< HEAD
     @Override
     public void handle(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.SPACE) {
@@ -217,8 +274,106 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             p.MoveRight(speed);
         } else if (left) {
             p.MoveLeft(speed);
-        }
+=======
+    public void playerSave(Player p) throws IOException {
+        FileOutputStream fo = new FileOutputStream("playersave.ser");
+        ObjectOutputStream out = new ObjectOutputStream(fo);
+        out.writeObject(p);
+        out.close();
+        fo.close();
+        System.out.println("Save Complete");
+    }
 
+    public void loadSave() throws Exception {
+        gamePane.getChildren().remove(mainPlayer);
+        FileInputStream fi = new FileInputStream("playersave.ser");
+        ObjectInputStream in = new ObjectInputStream(fi);
+        mainPlayer = (Player) in.readObject();
+        in.close();
+        fi.close();
+        mainPlayer.init(gamePane);
+        System.out.println("Load Complete");
+    }
+
+    public void camera(Player p, Pane pane) {
+        if (p.getPosX() > 300 && p.getPosX() < pane.getWidth() - 505) {
+            pane.setLayoutX(-p.getPosX() + 300);
+        } else if (p.getPosX() < 300) {
+            pane.setLayoutX(0);
+        }
+    }
+
+    //må kalles hver gang vi endrer map, dersom map størrelsene skal være forskjellige.
+    //Setter gamePane witdh lik maplengden
+    public void setGamePaneWidth() {
+        gamePane.setPrefWidth(mc.getmapLength());
+        /*System.out.println(mc.getmapLength());*/
+        System.out.println(gamePane.getWidth());
+    }
+
+    public static void setRunning(boolean running) {
+        gameController.running = running;
+    }
+
+    @Override
+    public void handle(KeyEvent e) {
+        switch (e.getCode()) {
+            case SPACE:
+                System.out.println(e.toString());
+                break;
+            case A:
+            case LEFT:
+                mainPlayer.setDirection(0);
+                break;
+            case D:
+            case RIGHT:
+                mainPlayer.setDirection(1);
+                break;
+            case S:
+            case DOWN:
+                mainPlayer.setPosY(5);
+                break;
+            case W:
+            case UP:
+                mainPlayer.setPosY(-20);
+                break;
+            case F1:
+                mainPlayer.setPosX(320 - mainPlayer.getPosX());
+                mainPlayer.setPosY(240 - mainPlayer.getPosY());
+                mainPlayer.setySpeed(0);
+                break;
+            case F2:
+                try {
+                    playerSave(mainPlayer);
+                    System.out.println(mainPlayer.toString());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+
+            case F3:
+                try {
+                    loadSave();
+                    mainPlayer.renderPlayer();
+                    System.out.println(mainPlayer.toString());
+                } catch (Exception e2) {
+                    System.out.println(e);
+                }
+                break;
+
+            case F5:
+                    Terminate();
+                break;
+
+            case ESCAPE:
+                running = false;
+                StateManager.changeScene(e, StateManager.GameState.PAUSE);
+                break;
+>>>>>>> Asim
+        }
+    }
+
+<<<<<<< HEAD
     }
 
     //må kalles hver gang vi endrer map, dersom map størrelsene skal være forskjellige.
@@ -256,3 +411,27 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         }
     }
 }
+=======
+    public void Terminate(){
+        if(gamePane != null && mainPlayer != null && timer != null){
+            gamePane.getChildren().clear();
+            gpWrap.getChildren().clear();
+            mc.getMap().clear();
+
+            timer.stop();
+
+            gamePane.removeEventHandler(KeyEvent.ANY,this);
+            gamePane.setOnKeyPressed(null);
+            gamePane.setOnKeyReleased(null);
+
+            gpWrap = null;
+            gamePane = null;
+            mc = null;
+            mainPlayer = null;
+            ec = null;
+
+        } else System.exit(2);
+    }
+
+}
+>>>>>>> Asim

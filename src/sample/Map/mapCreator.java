@@ -1,25 +1,24 @@
 package sample.Map;
 
-import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import sample.Entity.Enemy;
 import sample.Entity.EntityCreator;
 import sample.Entity.Player;
-
 import java.util.ArrayList;
+<<<<<<< HEAD
 import java.util.BitSet;
 
 import static javafx.scene.paint.Color.DARKGREEN;
 import static javafx.scene.paint.Color.GREEN;
+=======
+>>>>>>> Asim
 import static javafx.scene.paint.Color.color;
-
 
 public class mapCreator{
 
+<<<<<<< HEAD
     private static String[] LEVEL2MAP;
     private static String[] LEVEL3MAP;
     private static String[] LEVEL4MAP;
@@ -59,14 +58,31 @@ public class mapCreator{
 
         for (int i = 0; i < mapCreator.LEVEL1MAP.length; i++) {
             String line = mapCreator.LEVEL1MAP[i];
+=======
+    private int scalar = 35;
+    public  int levelWidth;
+    public ArrayList<Rectangle> map=new ArrayList<>();
+
+    private String[] LEVELARRAY = Map.getMapArray();
+
+    public void initMap(Pane pe){
+        levelWidth = LEVELARRAY[0].length() * scalar;
+        for (int i = 0; i < LEVELARRAY.length; i++) {
+            String line = LEVELARRAY[i];
+>>>>>>> Asim
             for (int j = 0; j < line.length(); j++) {
                 switch (line.charAt(j)) {
                     case '0':
                         break;
                     case '1':
+<<<<<<< HEAD
                         Rectangle mapPart1 = mapMaker1(j*widthscalar,i*scalar,widthscalar,scalar, pe);
                        // mapPart1.setFill(Color.DARKGREEN);
                          mapPart1.setFill(Grass);
+=======
+                        Rectangle mapPart1 = mapMaker1(j*scalar,i*scalar,scalar,scalar, pe);
+                        mapPart1.setFill(Color.rgb(randomColor(),randomColor(),randomColor()));
+>>>>>>> Asim
                         map.add(mapPart1);
                         break;
                     case '2':
@@ -80,6 +96,7 @@ public class mapCreator{
                         mapPart1.setFill(Dirt);
                         map.add(mapPart1);
                         break;
+<<<<<<< HEAD
                     case '4':
                         Enemy enemy1 = (Enemy) ec.getEntity("ENEMY1");
                         enemy1.setPosX(j*widthscalar);
@@ -101,6 +118,8 @@ public class mapCreator{
                         enemy3.initEnemy(pe);
                         Emap.add(enemy3);
                         break;
+=======
+>>>>>>> Asim
                 }
             }
         }
@@ -116,11 +135,25 @@ public class mapCreator{
     }
 
 
+<<<<<<< HEAD
+=======
+   public int randomColor(){
+       return (int) Math.floor(Math.random() * 256);
+   }
+
+    //tar inn parameter som svarer til map 1,2 3 etc.. og returnerer lengden til mappet i piksler
+    //tenkte å ha denne i en mer generel map klasse som inneholder string arrayene til de ulike levelene
+    // har for nå bare adda det her
+    public int getmapLength() {
+        return scalar*LEVELARRAY[0].length();
+    }
+>>>>>>> Asim
 
     public ArrayList<Rectangle> getMap() {
         return map;
     }
 
+<<<<<<< HEAD
   /* public void RemoveMap() {
         map.remove(Rectangle);
     }*/
@@ -145,5 +178,34 @@ public class mapCreator{
                 break;
         }
         return length;
+=======
+    public void setMap(ArrayList<Rectangle> map) {
+        this.map = map;
+>>>>>>> Asim
     }
 }
+
+
+
+        /*
+        switch (i){
+            case 1:
+                length= scalar*LEVEL1MAP[0].length();
+                break;
+            case 2:
+                length= scalar*LEVEL2MAP[0].length();
+                break;
+            case 3:
+                length= scalar*LEVEL3MAP[0].length();
+                break;
+            case 4:
+                length= scalar*LEVEL4MAP[0].length();
+                break;
+        }
+        return length;
+    }
+
+    private static String[] LEVEL2MAP;
+    private static String[] LEVEL3MAP;
+    private static String[] LEVEL4MAP;
+    */
