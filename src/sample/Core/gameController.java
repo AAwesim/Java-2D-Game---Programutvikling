@@ -261,7 +261,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         for (Enemy enemy : mc.getEMap()) {
         if (p.intersects(enemy.getBoundsInLocal())) {
             p.setPosX(110);
-            p.setPosY(390);
+            p.setPosY(300);
             }
         }
     }
