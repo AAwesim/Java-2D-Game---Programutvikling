@@ -33,7 +33,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
-    private Enemy enemy = (Enemy) ec.getEntity("ENEMY");
+   // private Enemy enemy = (Enemy) ec.getEntity("ENEMY");
     private AnimationTimer timer;
     private mapCreator mc = new mapCreator();
 
@@ -50,7 +50,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public void initialize(URL location, ResourceBundle resources) {
         keyHandlerInit(gamePane);
         mainPlayer.initPlayer(gamePane);
-        enemy.initEnemy(gamePane);
+        //mc.enemy1(gamePane);
+       // enemy.initEnemy(gamePane);
 
         mc.initMap(gamePane);
         setGamePaneWidth();
@@ -65,13 +66,24 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 if (left) {PlayerCollisionX(4, mainPlayer);}
                 if (right) {PlayerCollisionX(4, mainPlayer);}
 
+
+
                 PitCheck(mainPlayer,gamePane);
-                
+
+                PlayerEnemyColl(mainPlayer);
+
                 mainPlayer.updatePlayerState();
                 mainPlayer.renderPlayer();
                 view(mainPlayer,gamePane);
 
+<<<<<<< HEAD
+=======
+
+                view(mainPlayer, gamePane);
+>>>>>>> JakobMain
                 playerMapCollisionChecker2(mainPlayer);
+
+
 
             }
         };
@@ -79,7 +91,13 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         timer.start();
 
     }
+<<<<<<< HEAD
     
+=======
+
+    /*private int left = 0;
+    private int right = 1;*/
+>>>>>>> JakobMain
     public void keyHandlerInit(Pane p) {
         p.setFocusTraversable(true);
         p.requestFocus();
@@ -118,8 +136,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 mainPlayer.setySpeed(-7.5);
             }
         } else if (keyEvent.getCode() == KeyCode.F1) {
-            mainPlayer.setPosX(350);
-            mainPlayer.setPosY(350);
+            mainPlayer.setPosX(150);
+            mainPlayer.setPosY(300);
             mainPlayer.setySpeed(0);
         } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
             Stage stage = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();
@@ -226,6 +244,15 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         if (p.getPosY() > pa.getHeight() - 65) {
             p.setPosX(300);
             p.setPosY(300);
+        }
+    }
+
+    public void PlayerEnemyColl(Player p) {
+        for (Enemy enemy : mc.getEMap()) {
+        if (p.intersects(enemy.getBoundsInLocal())) {
+            p.setPosX(110);
+            p.setPosY(300);
+            }
         }
     }
 }
