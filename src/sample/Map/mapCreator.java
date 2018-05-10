@@ -47,7 +47,7 @@ public class mapCreator{
             "0000000000000000000000000000000004000000001111111001111",
             "0500000000400000000001111110001110000000003333333300003",
             "0000400001111101011113333333003333000000003333333003333",
-            "1111111003333300033333333333300000000044000040000033333",
+            "1111111003333300033333333333300000000044000000000033333",
             "3333333003333322233333333333222222100111113333233333333",
             //bredde: 69 høyde:15
             //Hvis dere lager maps sørg for at de er rektangel formet slik  0000  ikke 000
@@ -55,6 +55,7 @@ public class mapCreator{
     };
 
     public void initMap(Pane pe){
+
 
         for (int i = 0; i < mapCreator.LEVEL1MAP.length; i++) {
             String line = mapCreator.LEVEL1MAP[i];
