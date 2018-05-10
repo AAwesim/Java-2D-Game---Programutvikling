@@ -33,14 +33,7 @@ public class Player extends Rectangle implements Entity, Serializable {
     }
 
     public void updatePlayerState() {
-        //gravity();
         setPosY(getPosY()+ySpeed);
-      //  setPosX(getPosX()+xSpeed);
-
-      //  {System.out.println(ySpeed);}
-       // {System.out.println(xSpeed);}
-        // System.out.println(this.posX);
-        // System.out.println(this.posY);
     }
 
     public void gravity() {
