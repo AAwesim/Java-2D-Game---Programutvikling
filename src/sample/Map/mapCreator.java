@@ -24,7 +24,7 @@ public class mapCreator{
     private static String[] LEVEL3MAP;
     private static String[] LEVEL4MAP;
 
-    private int scalar = 35;
+    private int scalar = 75;
     private int widthscalar = 70;
 
     private EntityCreator ec = new EntityCreator();
@@ -42,21 +42,14 @@ public class mapCreator{
 
 
     public static final String[] LEVEL1MAP = new String[] {
-            "00000000000000000000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000000000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000000000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000000000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000000000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000000000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000003000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000003000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000003000000000000000000000333000000000000000000000000000000000000000000000000000000000000000",
-            "0000000000000000300000000000000040000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000000111110000400110001110000333000000000000000000000000000000000000000000000000000000000000000",
-            "00000000000400000000001111130003330000000000000000000000000000400000000000000000000000000000000000000000",
-            "000004000111000001111133330001130000000000000110000011110011111111001111111111111110111111111110000000",
-            "11111110011311000003333333330003330000040000111330333033300000000000033033300000000000003330000000000000",
-            "33333330033333222223333333332223331100111100003330333033311111111111133033311111111111103331111111111111"
+
+            "0000000000000000000000000000000000000033300000000000000",
+            "0000000000000000000000000000000004000033300000000000000",
+            "0000000000000000000000000000000000000000000000000000000",
+            "0500000000400001000000111111000111000000000000000000000",
+            "000040001111100011111333333300333000000000001100000000",
+            "1111111003333300033333333333330000000004000013311111111",
+            "3333333003333322233333333333222000110011110033333333333"
             //bredde: 69 høyde:15
             //Hvis dere lager maps sørg for at de er rektangel formet slik  0000  ikke 000
             //        
@@ -85,25 +78,41 @@ public class mapCreator{
                         mapPart1 = mapMaker1(j*widthscalar,i*scalar,widthscalar,scalar, pe);
                         //mapPart1.setFill(Color.rgb(97, 63, 16));
                         mapPart1.setFill(Dirt);
-                       // map.add(mapPart1);
+                        map.add(mapPart1);
                         break;
                     case '4':
-                        Enemy enemy = (Enemy) ec.getEntity("ENEMY");
-                        enemy.setPosX(j*widthscalar);
-                        enemy.setPosY(i*scalar);
-                        enemy.initEnemy(pe);
-                        Emap.add(enemy);
+                        Enemy enemy1 = (Enemy) ec.getEntity("ENEMY1");
+                        enemy1.setPosX(j*widthscalar);
+                        enemy1.setPosY(i*scalar);
+                        enemy1.initEnemy(pe);
+                        Emap.add(enemy1);
+                        break;
+                    case '5':
+                        Enemy enemy2 = (Enemy) ec.getEntity("ENEMY2");
+                        enemy2.setPosX(j*widthscalar);
+                        enemy2.setPosY(i*scalar);
+                        enemy2.initEnemy(pe);
+                        Emap.add(enemy2);
+                        break;
+                    case '6':
+                        Enemy enemy3 = (Enemy) ec.getEntity("ENEMY3");
+                        enemy3.setPosX(j*widthscalar);
+                        enemy3.setPosY(i*scalar);
+                        enemy3.initEnemy(pe);
+                        Emap.add(enemy3);
+                        break;
                 }
             }
         }
     }
 
-    public ArrayList<Enemy>  getEMap() {return Emap;}
-
-    public Rectangle mapMaker1(int x, int y, int w, int h, Pane pe) {
+    private Rectangle mapMaker1(int x, int y, int w, int h, Pane pe) {
         Rectangle rect = new Rectangle(x,y,w,h);
         pe.getChildren().add(rect);
         return rect;
+    }
+    public ArrayList<Enemy>  getEMap() {
+        return Emap;
     }
 
     public ArrayList<Rectangle> getMap() {

@@ -53,8 +53,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
         keyHandlerInit(gamePane);
         mainPlayer.initPlayer(gamePane);
-        //mc.enemy.(gamePane);
-        //enemy.initEnemy(gamePane);
+        //mc.enemy1(gamePane);
+       // enemy.initEnemy(gamePane);
 
         mc.initMap(gamePane);
         setGamePaneWidth();
@@ -75,6 +75,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 if (right) {PlayerCollisionX(4, mainPlayer);}
 
                 PitCheck(mainPlayer,gamePane);
+
+
 
                 PlayerEnemyColl(mainPlayer);
 
