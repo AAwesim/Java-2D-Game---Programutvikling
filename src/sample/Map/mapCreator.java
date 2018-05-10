@@ -40,16 +40,15 @@ public class mapCreator{
     public ArrayList<Rectangle> map=new ArrayList<>();
     public ArrayList<Enemy> Emap=new ArrayList<>();
 
-
     public static final String[] LEVEL1MAP = new String[] {
 
             "0000000000000000000000000000000000000033300000000000000",
-            "0000000000000000000000000000000004000033300000000000000",
-            "0000000000000000000000000000000000000000000000000000000",
-            "0500000000400001000000111111000111000000000000000000000",
-            "000040001111100011111333333300333000000000001100000000",
-            "1111111003333300033333333333330000000004000013311111111",
-            "3333333003333322233333333333222000110011110033333333333"
+            "0000000000000000000000000000000000000033300000000000000",
+            "0000000000000000000000000000000004000000001111111001111",
+            "0500000000400000000001111110001110000000003333333300003",
+            "0000400001111101011113333333003333000000003333333003333",
+            "1111111003333300033333333333300000000044000040000033333",
+            "3333333003333322233333333333222222100111113333233333333",
             //bredde: 69 høyde:15
             //Hvis dere lager maps sørg for at de er rektangel formet slik  0000  ikke 000
             //        
@@ -71,8 +70,8 @@ public class mapCreator{
                         break;
                     case '2':
                         mapPart1 = mapMaker1(j*widthscalar,i*scalar,widthscalar,scalar, pe);
-                        mapPart1.setFill(color(0.0,0.20,0.50));
-                        map.add(mapPart1);
+                        mapPart1.setFill(color(0.70,0.20,0.10));
+                        //p.add(mapPart1);
                         break;
                     case '3':
                         mapPart1 = mapMaker1(j*widthscalar,i*scalar,widthscalar,scalar, pe);
@@ -83,7 +82,7 @@ public class mapCreator{
                     case '4':
                         Enemy enemy1 = (Enemy) ec.getEntity("ENEMY1");
                         enemy1.setPosX(j*widthscalar);
-                        enemy1.setPosY(i*scalar);
+                        enemy1.setPosY(i*scalar+30);
                         enemy1.initEnemy(pe);
                         Emap.add(enemy1);
                         break;
@@ -115,9 +114,15 @@ public class mapCreator{
         return Emap;
     }
 
+
+
     public ArrayList<Rectangle> getMap() {
         return map;
     }
+
+  /* public void RemoveMap() {
+        map.remove(Rectangle);
+    }*/
 
     //tar inn parameter som svarer til map 1,2 3 etc.. og returnerer lengden til mappet i piksler
     //tenkte å ha denne i en mer generel map klasse som inneholder string arrayene til de ulike levelene

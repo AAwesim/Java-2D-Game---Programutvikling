@@ -74,9 +74,9 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 if (left) {PlayerCollisionX(4, mainPlayer);}
                 if (right) {PlayerCollisionX(4, mainPlayer);}
 
+
+
                 PitCheck(mainPlayer,gamePane);
-
-
 
                 PlayerEnemyColl(mainPlayer);
 
@@ -136,8 +136,8 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 mainPlayer.setySpeed(-7.5);
             }
         } else if (keyEvent.getCode() == KeyCode.F1) {
-            mainPlayer.setPosX(350);
-            mainPlayer.setPosY(350);
+            mainPlayer.setPosX(150);
+            mainPlayer.setPosY(300);
             mainPlayer.setySpeed(0);
         } else if (keyEvent.getCode() == KeyCode.ESCAPE) {
             Stage stage = (Stage) ((Node) keyEvent.getSource()).getScene().getWindow();

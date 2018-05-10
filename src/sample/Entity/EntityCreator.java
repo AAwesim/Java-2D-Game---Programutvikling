@@ -3,7 +3,7 @@ package sample.Entity;
 public class EntityCreator {
 
     public Entity getEntity(String type) {
-        switch (type) {
+        switch (type.toUpperCase()) {
             case "PLAYER":
                 return new Player();
             case "ENEMY1":
