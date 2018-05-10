@@ -13,7 +13,7 @@ public class mapCreator{
     public  int levelWidth;
     public ArrayList<Rectangle> map=new ArrayList<>();
 
-    public static final String[] LEVELARRAY = Map.getMapArray();
+    private String[] LEVELARRAY = Map.getMapArray();
 
     public void initMap(Pane pe){
         levelWidth = LEVELARRAY[0].length() * scalar;
@@ -66,7 +66,17 @@ public class mapCreator{
     public int getmapLength() {
         return scalar*LEVELARRAY[0].length();
     }
+
+    public ArrayList<Rectangle> getMap() {
+        return map;
+    }
+
+    public void setMap(ArrayList<Rectangle> map) {
+        this.map = map;
+    }
 }
+
+
 
         /*
         switch (i){

@@ -1,24 +1,18 @@
 package sample.Core;
 
 import javafx.animation.AnimationTimer;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.Map;
 import sample.Map.mapCreator;
 import sample.Tools.StateManager;
-
 import java.io.*;
 import java.net.URL;
-import java.security.Key;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -37,19 +31,21 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void initialize(URL location, ResourceBundle resources) {
         running = true;
         init(gamePane);
+        /*setGamePaneWidth();*/
         System.out.println(Arrays.toString(Map.getMapArray()));
-        setGamePaneWidth();
 
         timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
-                if(running) {
+
+                if (running) {
                     camera(mainPlayer, gamePane);
                     mainPlayer.updatePlayerState();
                     mainPlayer.renderPlayer();
                     mc.playerMapCollisionChecker(mainPlayer);
-                }else return;
+                } else return;
+
             }
         };
 
@@ -117,7 +113,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     //Setter gamePane witdh lik maplengden
     public void setGamePaneWidth() {
         gamePane.setPrefWidth(mc.getmapLength());
-        System.out.println(mc.getmapLength());
+        /*System.out.println(mc.getmapLength());*/
         System.out.println(gamePane.getWidth());
     }
 
@@ -176,8 +172,8 @@ public class gameController implements Initializable, Serializable, EventHandler
                 break;
 
             case ESCAPE:
-                StateManager.changeScene(e, StateManager.GameState.PAUSE);
                 running = false;
+                StateManager.changeScene(e, StateManager.GameState.PAUSE);
                 break;
         }
     }
@@ -185,11 +181,22 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void Terminate(){
         if(gamePane != null && mainPlayer != null && timer != null){
             gamePane.getChildren().clear();
+            gpWrap.getChildren().clear();
+            mc.getMap().clear();
+
             timer.stop();
-            mainPlayer = null;
+
             gamePane.removeEventHandler(KeyEvent.ANY,this);
             gamePane.setOnKeyPressed(null);
             gamePane.setOnKeyReleased(null);
+
+            gpWrap = null;
+            gamePane = null;
+            mc = null;
+            mainPlayer = null;
+            ec = null;
+
         } else System.exit(2);
     }
+
 }

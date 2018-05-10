@@ -80,13 +80,13 @@ public class StateManager {
     }
 
     public void initGame(){
-        try{
-            this.gameRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/gameScene.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-        State.put("GAME",new Scene(gameRoot));
+            try {
+                this.gameRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/gameScene.fxml"));
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(1);
+            }
+            State.put("GAME", new Scene(gameRoot));
     }
 
     public static void changeScene(Event e, GameState gameStateEnum){
@@ -99,4 +99,8 @@ public class StateManager {
         stage.show();
     }
 
+    public void setGameRoot(Parent gameRoot) {
+        State.remove("GAME");
+        this.gameRoot = gameRoot;
+    }
 }

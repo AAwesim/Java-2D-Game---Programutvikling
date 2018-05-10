@@ -9,7 +9,7 @@ public class Main extends Application {
     public final static  double SCREEN_WIDTH = 640.0;
     public final static  double SCREEN_HEIGHT = 480.0;
     public final static String GAME_NAME = "Tiyareed";
-    public static StateManager stateManager = new StateManager();
+    private static StateManager stateManager = new StateManager();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
