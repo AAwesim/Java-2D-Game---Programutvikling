@@ -12,7 +12,7 @@ import static javafx.scene.paint.Color.color;
 
 public class mapCreator {
 
-    private int scalar = 35;
+    private int scalar = 75;
     private int widthscalar = 70;
     private int levelWidth;
 

@@ -41,7 +41,7 @@ public class Player extends Rectangle implements Entity, Serializable {
 
     public void gravity() {
         if (ySpeed<7)
-        ySpeed = ySpeed+0.2;
+        ySpeed = ySpeed+0.3;
     }
 
     public void renderPlayer() {
