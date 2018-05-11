@@ -12,7 +12,7 @@ import static javafx.scene.paint.Color.color;
 
 public class mapCreator {
 
-    private int scalar = 75;
+    private int scalar = 35;
     private int widthscalar = 70;
     private int levelWidth;
 
@@ -43,7 +43,6 @@ public class mapCreator {
                         Rectangle mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
                         // mapPart1.setFill(Color.DARKGREEN);
                         mapPart1.setFill(Grass);
-                        mapPart1.setFill(Color.rgb(randomColor(), randomColor(), randomColor()));
                         map.add(mapPart1);
                         break;
                     case '2':
@@ -91,10 +90,6 @@ public class mapCreator {
 
     public ArrayList<Enemy> getEMap() {
         return Emap;
-    }
-
-    public int randomColor() {
-        return (int) Math.floor(Math.random() * 256);
     }
 
     //tar inn parameter som svarer til map 1,2 3 etc.. og returnerer lengden til mappet i piksler

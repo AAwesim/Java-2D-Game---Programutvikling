@@ -8,6 +8,8 @@ import javafx.scene.shape.Rectangle;
 
 import java.io.*;
 
+import static javafx.scene.paint.Color.BLUE;
+
 public class Player extends Rectangle implements Entity, Serializable {
 
     private double posX = 300;
@@ -25,10 +27,11 @@ public class Player extends Rectangle implements Entity, Serializable {
         this.setHeight(32);
         this.setWidth(32);
         //this.setFill(imgPattern);
-        //this.setFill();
+        this.setFill(BLUE);
         this.strokeProperty();
         this.setStroke(Color.ALICEBLUE);
         this.setX(posX);
+        p.getChildren().add(this);
         // System.out.println(posX);
     }
 
@@ -38,7 +41,7 @@ public class Player extends Rectangle implements Entity, Serializable {
 
     public void gravity() {
         if (ySpeed<7)
-        ySpeed = ySpeed+0.3;
+        ySpeed = ySpeed+0.2;
     }
 
     public void renderPlayer() {

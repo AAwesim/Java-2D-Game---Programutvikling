@@ -57,11 +57,11 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void initialize(URL location, ResourceBundle resources) {
         running = true;
         init(gamePane);
-        setGamePaneWidth();
+       // setGamePaneWidth();
         System.out.println(Arrays.toString(Map.getMapArray()));
-     //   keyHandlerInit(gamePane);
-      //  mainPlayer.initPlayer(gamePane);
-       // mc.initMap(gamePane);
+        keyHandlerInit(gamePane);
+        mainPlayer.initPlayer(gamePane);
+        mc.initMap(gamePane);
         //gamePane.setBackground(new Background(BI));
 
         timer = new AnimationTimer() {
@@ -95,11 +95,11 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     public void init(Pane p) {
         BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        keyHandlerInit(p);
-        mainPlayer.initPlayer(p);
-        mc.initMap(p);
-        p.setBackground(new Background(BI));
+     //   keyHandlerInit(p);
 
+        //mc.initMap(p);
+        p.setBackground(new Background(BI));
+       // mainPlayer.initPlayer(p);
       //  System.out.println("stage: " + gpWrap.getWidth());
         System.out.println("scene: " + p.getWidth());
     }
@@ -123,6 +123,73 @@ public class gameController implements Initializable, Serializable, EventHandler
                 System.out.println("BAAAAAAAAAAls");
             }
         });
+    }
+
+    @Override
+    public void handle(KeyEvent e) {
+        switch (e.getCode()) {
+            case SPACE:
+                System.out.println(e.toString());
+                break;
+            case A:
+                this.right = false ;
+                this.left = true;
+                break;
+            case LEFT:
+                this.right = false ;
+                this.left = true;
+                break;
+            case D:
+                this.left = false;
+                this.right = true;
+                break;
+            case RIGHT:
+                this.left = false;
+                this.right = true;
+                break;
+            case W:
+                if (gravitycheck(mainPlayer)) {
+                    mainPlayer.setySpeed(-7.5);
+                }
+                break;
+            case UP:
+                if (gravitycheck(mainPlayer)) {
+                    mainPlayer.setySpeed(-7.5);
+                }
+                break;
+            case F1:
+                mainPlayer.setPosX(150);
+                mainPlayer.setPosY(300);
+                mainPlayer.setySpeed(0);
+                break;
+            case F2:
+                try {
+                    playerSave(mainPlayer);
+                    System.out.println(mainPlayer.toString());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                break;
+
+            case F3:
+                try {
+                    loadSave();
+                    mainPlayer.renderPlayer();
+                    System.out.println(mainPlayer.toString());
+                } catch (Exception e2) {
+                    System.out.println(e);
+                }
+                break;
+
+            case F5:
+                Terminate();
+                break;
+
+            case ESCAPE:
+                running = false;
+                StateManager.changeScene(e, StateManager.GameState.PAUSE);
+                break;
+        }
     }
 
 
@@ -228,74 +295,14 @@ public class gameController implements Initializable, Serializable, EventHandler
         gameController.running = running;
     }
 
-    @Override
-    public void handle(KeyEvent e) {
-        switch (e.getCode()) {
-            case SPACE:
-                System.out.println(e.toString());
-                break;
-            case A:
-                this.right = false ;
-                this.left = true;
-                break;
-            case LEFT:
-                this.right = false ;
-                this.left = true;
-                break;
-            case D:
-                this.left = false;
-                this.right = true;
-                break;
-            case RIGHT:
-                this.left = false;
-                this.right = true;
-                break;
-            case W:
-                if (gravitycheck(mainPlayer)) {
-                    mainPlayer.setySpeed(-7.5);
-                }
-                break;
-            case UP:
-                if (gravitycheck(mainPlayer)) {
-                    mainPlayer.setySpeed(-7.5);
-                }
-                break;
-            case F1:
-                mainPlayer.setPosX(150);
-                mainPlayer.setPosY(300);
-                mainPlayer.setySpeed(0);
-                break;
-            case F2:
-                try {
-                    playerSave(mainPlayer);
-                    System.out.println(mainPlayer.toString());
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                break;
-
-            case F3:
-                try {
-                    loadSave();
-                    mainPlayer.renderPlayer();
-                    System.out.println(mainPlayer.toString());
-                } catch (Exception e2) {
-                    System.out.println(e);
-                }
-                break;
-
-            case F5:
-                    Terminate();
-                break;
-
-            case ESCAPE:
-                running = false;
-                StateManager.changeScene(e, StateManager.GameState.PAUSE);
-                break;
+    public void PlayerEnemyColl(Player p) {
+        for (Enemy enemy : mc.getEMap()) {
+            if (p.intersects(enemy.getBoundsInLocal())) {
+                p.setPosX(110);
+                p.setPosY(300);
+            }
         }
     }
-
-
     /*//må kalles hver gang vi endrer map, dersom map størrelsene skal være forskjellige.
     //Setter gamePane witdh lik maplengden
     public void setGamePaneWidth() {
@@ -321,14 +328,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         }
     }
 
-    public void PlayerEnemyColl(Player p) {
-        for (Enemy enemy : mc.getEMap()) {
-        if (p.intersects(enemy.getBoundsInLocal())) {
-            p.setPosX(110);
-            p.setPosY(300);
-            }
-        }
-    }
+
 
     public void Terminate(){
         if(gamePane != null && mainPlayer != null && timer != null){
