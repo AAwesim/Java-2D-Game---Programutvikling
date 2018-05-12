@@ -13,8 +13,6 @@ public final class Enemy1 {
 
     private int i;
 
-
-
         private int  a ;
 
         private static final Enemy1 e = new Enemy1();
@@ -22,7 +20,6 @@ public final class Enemy1 {
         public static Enemy1 getEnemy() {
             return e;
         }
-
 
     public void Enemy1Movement(Enemy e) {
             System.out.println(e.getEPosX()+" "+e.getX());
