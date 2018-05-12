@@ -78,9 +78,19 @@ public class gameController implements Initializable, Serializable, EventHandler
                         System.out.println("runtime: "+ i/60);
                     Enemyh.getEnemyh().renderEnemies();
 
-                    if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
-                    if (KeyA) {PlayerCollisionX(4, mainPlayer);}
-                    if (KeyD) {PlayerCollisionX(4, mainPlayer);}
+                    if (!gravitycheck(mainPlayer)) {
+                        mainPlayer.gravity();
+                    }
+
+                    if (KeyA) {
+                        PlayerCollisionX(4, mainPlayer);
+                       // mainPlayer.setFill(mainPlayer.getLeftGif());
+                    } else if (KeyD) {
+                        PlayerCollisionX(4, mainPlayer);
+                      //  mainPlayer.setFill(mainPlayer.getRightGif());
+                    } else if(!KeyA || !KeyD) {
+                  //      mainPlayer.setFill(mainPlayer.getCharGif());
+                    }
 
                     PitCheck(mainPlayer,gamePane);
 
@@ -238,17 +248,14 @@ public class gameController implements Initializable, Serializable, EventHandler
                     // Bevegelseretning høyre
                     if (KeyD) {
                         speed--;
-                        //p.setxSpeed(0);
-                        //this.KeyD = false;
                         p.setPosX(mapPart.getX() - p.getWidth() - 1);
                     }
                 }
+
                 if (mapPart.intersects(p.getPosX() - speed, p.getPosY(), p.getWidth(), p.getHeight())) {
                     // Bevegelseretning venstre
                     if (KeyA) {
                         speed--;
-                        //p.setxSpeed(0);
-                        //this.KeyA = false;
                         p.setPosX(mapPart.getX() + mapPart.getWidth() + 1);
                     }
                 }
@@ -325,7 +332,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     //checker om mainplayer har falt ned i høøøøl
     public void PitCheck(Player p, Pane pa) {
         if (p.getPosY() > pa.getHeight() - 65) {
-            p.setPosX(300);
+            p.setPosX(110);
             p.setPosY(300);
         }
     }

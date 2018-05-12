@@ -19,21 +19,16 @@ public class Player extends Rectangle implements Entity, Serializable {
     private double ySpeed = 4;
     private int MaxySpeed = 7;
 
-    private static transient final String testPic = "file:ressurser\\\\char.png";
-    transient Image img = new Image(testPic);
-    transient final private ImagePattern imgPattern = new ImagePattern(img);
-
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void initPlayer(Pane p) {
-        this.setHeight(53);
-        this.setWidth(53);
-        //this.setFill(imgPattern);
-        this.setFill(BLUE);
-        this.strokeProperty();
-        this.setStroke(Color.ALICEBLUE);
+        this.setHeight(45);
+        this.setWidth(36);
+       // this.setFill();
+        //this.setFill(BLUE);
+        //this.strokeProperty();
+       // this.setStroke(Color.ALICEBLUE);
         this.setX(posX);
         p.getChildren().add(this);
-        // System.out.println(posX);
     }
 
     public void updatePlayerState() {

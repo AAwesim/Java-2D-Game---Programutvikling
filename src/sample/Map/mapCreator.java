@@ -13,8 +13,8 @@ import static javafx.scene.paint.Color.color;
 
 public class mapCreator {
 
-    private int scalar = 35;
-    private int widthscalar = 35;
+    private int scalar = 50;
+    private int widthscalar = 50;
     private int levelWidth;
 
     private EntityCreator ec = new EntityCreator();
@@ -53,7 +53,7 @@ public class mapCreator {
                         break;
                     case '2':
                         mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
-                        mapPart1.setFill(color(0.70, 0.20, 0.10));
+                        mapPart1.setFill(color(0.90, 0.20, 0.10));
                         //p.add(mapPart1);
                         break;
                     case '3':
