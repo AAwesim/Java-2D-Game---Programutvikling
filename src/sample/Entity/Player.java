@@ -25,8 +25,8 @@ public class Player extends Rectangle implements Entity, Serializable {
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void initPlayer(Pane p) {
-        this.setHeight(32);
-        this.setWidth(15);
+        this.setHeight(53);
+        this.setWidth(53);
         //this.setFill(imgPattern);
         this.setFill(BLUE);
         this.strokeProperty();

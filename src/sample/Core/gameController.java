@@ -76,15 +76,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                     i++;
                     if (i%60==0)
                         System.out.println("runtime: "+ i/60);
-                  // System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosX());
-                   // System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosY());
-                    // System.out.println("mainplayer "+mainPlayer.getPosX());
-
-                   // mc.getEnemy1(1).renderEnemy();
-                   // mc.getEnemy1(2).renderEnemy();
                     Enemyh.getEnemyh().renderEnemies();
-                    //      mc.getEMap().listIterator(0).renderEnemy1();
-                //  System.out.println(mc.getEMap().listIterator().
 
                     if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
                     if (KeyA) {PlayerCollisionX(4, mainPlayer);}

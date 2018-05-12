@@ -3,9 +3,6 @@ package sample.Entity;
 public final class Enemy2 {
 
     private int i;
-    private int ce2;
-
-    private int a;
 
     private static final Enemy2 e2 = new Enemy2();
 
@@ -15,9 +12,6 @@ public final class Enemy2 {
 
 
     public void Enemy2Movement(Enemy e) {
-        ce2++;
-       // System.out.println(e);
-     //   System.out.println(e.getEPosY() + " " + e.getX());
         if (e.getY() > e.getEPosY() + 200) {
             i = -2;
         }
