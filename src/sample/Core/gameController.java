@@ -60,12 +60,8 @@ public class gameController implements Initializable, Serializable, EventHandler
    //     System.out.println("gamebefore remove "+Enemyh.getEnemyh().E1List);
       //  Enemyh.getEnemyh().E1List.remove(0);
     //    System.out.println("game remove"+Enemyh.getEnemyh().E1List);
-       // setGamePaneWidth();
        // System.out.println(Arrays.toString(Map.getMapArray()));
         //gamePane.setBackground(new Background(BI));
-        //mc.getEnemy1(1);
-       //mc.getEnemy1(2);
-      //   System.out.println("E1list "+Enemy1.getE1List().size());
         timer = new AnimationTimer() {
 
             @Override
@@ -77,18 +73,18 @@ public class gameController implements Initializable, Serializable, EventHandler
                 }
 
                 if (running) {
-                    System.out.println(mainPlayer.getPosX());
                     i++;
                     if (i%60==0)
                         System.out.println("runtime: "+ i/60);
-                  //  System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosX());
+                  // System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosX());
                    // System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosY());
+                    // System.out.println("mainplayer "+mainPlayer.getPosX());
 
                    // mc.getEnemy1(1).renderEnemy();
                    // mc.getEnemy1(2).renderEnemy();
                     Enemyh.getEnemyh().renderEnemies();
-              //      mc.getEMap().listIterator(0).renderEnemy1();
-                //    System.out.println(mc.getEMap().listIterator().
+                    //      mc.getEMap().listIterator(0).renderEnemy1();
+                //  System.out.println(mc.getEMap().listIterator().
 
                     if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
                     if (KeyA) {PlayerCollisionX(4, mainPlayer);}
@@ -132,13 +128,10 @@ public class gameController implements Initializable, Serializable, EventHandler
         p.setOnKeyPressed(this);
         p.setOnKeyReleased(e -> {
 
-            if (e.getCode() == KeyCode.A) {
-                //   mainPlayer.setDirection(5);
+            if (e.getCode() == KeyCode.A || e.getCode() == KeyCode.LEFT) {
                 this.KeyA = false;
-            } else if (e.getCode() == KeyCode.D) {
-                //  mainPlayer.setDirection(5);
+            } else if (e.getCode() == KeyCode.D || e.getCode() == KeyCode.RIGHT) {
                 this.KeyD = false;
-                System.out.println("BAAAAAAAAAAls");
             }
         });
     }
@@ -255,9 +248,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                         speed--;
                         //p.setxSpeed(0);
                         //this.KeyD = false;
-                        System.out.println("høyre movement løkke");
                         p.setPosX(mapPart.getX() - p.getWidth() - 1);
-                        System.out.println("sjekk");
                     }
                 }
                 if (mapPart.intersects(p.getPosX() - speed, p.getPosY(), p.getWidth(), p.getHeight())) {
@@ -353,10 +344,9 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.getChildren().clear();
         gpWrap.getChildren().clear();
         mc.getMap().clear();
-        mc.getEMap();
+        mc.getEMap().clear();
         Enemyh.getEnemyh().getE1List().clear();
         Enemyh.getEnemyh().getE2List().clear();
-
 
         timer.stop();
 
@@ -369,7 +359,6 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc = null;
         mainPlayer = null;
         ec = null;
-
     }
 
     public static void setSetNull(boolean setNull) {

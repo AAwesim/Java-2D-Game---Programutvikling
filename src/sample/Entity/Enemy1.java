@@ -24,8 +24,8 @@ public final class Enemy1 {
 
     public void Enemy1Movement(Enemy e) {
             ce1++;
-        System.out.println(ce1);
-            //     System.out.println(e.getEPosX()+" "+e.getX());
+        //System.out.println(ce1);
+        // System.out.println(e.getEPosX()+" "+e.getX());
         if (e.getX() > e.getEPosX() + 200) {
             i = -2;
         }

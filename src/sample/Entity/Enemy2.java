@@ -16,8 +16,7 @@ public final class Enemy2 {
 
     public void Enemy2Movement(Enemy e) {
         ce2++;
-        System.out.println(e);
-
+       // System.out.println(e);
      //   System.out.println(e.getEPosY() + " " + e.getX());
         if (e.getY() > e.getEPosY() + 200) {
             i = -2;
