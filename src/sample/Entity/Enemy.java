@@ -1,45 +1,54 @@
 package sample.Entity;
 
+import javafx.scene.control.Dialog;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import sample.Map.mapCreator;
 
-public abstract class Enemy extends Rectangle implements Entity {
+public  abstract class Enemy extends Rectangle implements Entity {
 
-    private double EposX;
-    private double EposY;
+    private double EPosX= 50;
+    private double EposY =50;
 
     //Setter opp entiteten Player sine vilkårlige verdier.
-    public void initEnemy(Pane p) {
-        this.setHeight(35);
-        this.setWidth(35);
-        setX(EposX);
+    /*public void initEnemy(Pane p) {
+        this.setHeight(30);
+        this.setWidth(30);
+        setX(EPosX);
         setY(EposY);
         this.setFill(Color.RED);
         p.getChildren().add(this);
     }
 
+    public void renderEnemy() {
+
+       /// for(int i = 0; i<mapCreator.getSizeEMap(); i++)
+            setX(EPosX);
+            setY(EposY);
+    }
+
     //Getters og setters
 
-    public void setPosX(double EposX) {
-        this.EposX = EposX;
+    public void setEPosX(double EPosX) {
+        this.EPosX = EPosX;
     }
 
-    public void setPosY(double EposY) {
-        this.EposY = EposY;
+    public void setEPosY(double EPosY) {
+        this.EposY = EPosY;
     }
 
-    public double getPosX() {
-        return EposX;
+    public double getEPosX() {
+        return EPosX;
     }
 
-    public double getPosY() {
+    public double getEPosY() {
         return EposY;
     }
 
-  /*public void setxSpeed(double xSpeed) {
+    public void setxSpeed(double xSpeed) {
         this.xSpeed = xSpeed;
 
     }public void setySpeed(double ySpeed) {

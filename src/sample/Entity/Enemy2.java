@@ -6,16 +6,16 @@ import javafx.scene.paint.Color;
 public class Enemy2 extends Enemy {
 
     private double ySpeed;
-    private int EposX;
-    private int EposY;
+    private double EPosX;
+    private double EPosY;
 
 
-    @Override
+    //@Override
     public void initEnemy(Pane p) {
-        this.setHeight(35);
-        this.setWidth(35);
-        setX(EposX);
-        setY(EposY);
+        this.setHeight(30);
+        this.setWidth(30);
+        setEPosX(getEPosX());
+        setEPosX(getEPosY());
         this.setFill(Color.YELLOW);
         p.getChildren().add(this);
     }
@@ -26,16 +26,24 @@ public class Enemy2 extends Enemy {
     }
 
     public void renderEnemy() {
-        setX(EposX);
-        setY(EposY);
+        setX(EPosX);
+        setY(EPosY);
     }
 
-    public void setySpeed(double ySpeed) {
-    this.ySpeed = ySpeed;
+    public void setEPosX(double EPosX) {
+        this.EPosX = EPosX;
     }
 
-    public double getySpeed() {
-        return ySpeed;
+    public void setEPosY(double EposY) {
+        this.EPosY = EPosY;
+    }
+
+    public double getEPosX() {
+        return EPosX;
+    }
+
+    public double getEPosY() {
+        return EPosY;
     }
 
 }

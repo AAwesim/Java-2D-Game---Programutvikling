@@ -16,7 +16,8 @@ public class Player extends Rectangle implements Entity, Serializable {
     private double posY = 300;
 
     private double xSpeed = 4;
-    public double ySpeed = 4;
+    private double ySpeed = 4;
+    private int MaxySpeed = 7;
 
     private static transient final String testPic = "file:ressurser\\\\char.png";
     transient Image img = new Image(testPic);
@@ -25,7 +26,7 @@ public class Player extends Rectangle implements Entity, Serializable {
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void initPlayer(Pane p) {
         this.setHeight(32);
-        this.setWidth(32);
+        this.setWidth(15);
         //this.setFill(imgPattern);
         this.setFill(BLUE);
         this.strokeProperty();
@@ -40,8 +41,9 @@ public class Player extends Rectangle implements Entity, Serializable {
     }
 
     public void gravity() {
-        if (ySpeed<7)
-        ySpeed = ySpeed+0.3;
+        if (ySpeed<MaxySpeed) {
+            ySpeed = ySpeed + 0.3;
+        } else {setySpeed(MaxySpeed);}
     }
 
     public void renderPlayer() {
@@ -92,5 +94,9 @@ public class Player extends Rectangle implements Entity, Serializable {
 
     public double getxSpeed() {
         return xSpeed;
+    }
+
+    public int getMaxySpeed() {
+        return MaxySpeed;
     }
 }

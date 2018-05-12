@@ -6,14 +6,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import sample.Entity.Enemy;
+import sample.Entity.Enemy1;
+import sample.Entity.Enemy2;
 import sample.Entity.EntityCreator;
 import java.util.ArrayList;
 import static javafx.scene.paint.Color.color;
 
 public class mapCreator {
 
-    private int scalar = 75;
-    private int widthscalar = 70;
+    private int scalar = 35;
+    private int widthscalar = 35;
     private int levelWidth;
 
     private EntityCreator ec = new EntityCreator();
@@ -26,8 +28,12 @@ public class mapCreator {
     Image img = new Image(testPic);
     final private ImagePattern Grass = new ImagePattern(img);
 
+    public Enemy1 e1;
+    public Enemy1 e2;
+    public int ecount = 0;
+
     public ArrayList<Rectangle> map = new ArrayList<>();
-    public ArrayList<Enemy> Emap = new ArrayList<>();
+    public ArrayList<Enemy1> Emap = new ArrayList<>();
 
     private String[] LEVELARRAY = Map.getMapArray();
 
@@ -57,28 +63,43 @@ public class mapCreator {
                         map.add(mapPart1);
                         break;
                     case '4':
-                        Enemy enemy1 = (Enemy) ec.getEntity("ENEMY1");
-                        enemy1.setPosX(j * widthscalar);
-                        enemy1.setPosY(i * scalar + 30);
+                        Enemy1 enemy1 = (Enemy1) ec.getEntity("ENEMY1");
+                        enemy1.setEPosX(j * widthscalar);
+                        enemy1.setEPosY(i * scalar);
                         enemy1.initEnemy(pe);
                         Emap.add(enemy1);
+
+                        if (ecount<1){e1 = enemy1;}
+                        else {e2 = enemy1;}
+                        ecount++;
                         break;
-                    case '5':
+                    /*case '5':
                         Enemy enemy2 = (Enemy) ec.getEntity("ENEMY2");
-                        enemy2.setPosX(j * widthscalar);
-                        enemy2.setPosY(i * scalar);
+                        enemy2.setEPosX(j * widthscalar);
+                        enemy2.setEPosY(i * scalar);
                         enemy2.initEnemy(pe);
                         Emap.add(enemy2);
                         break;
                     case '6':
                         Enemy enemy3 = (Enemy) ec.getEntity("ENEMY3");
-                        enemy3.setPosX(j * widthscalar);
-                        enemy3.setPosY(i * scalar);
+                        enemy3.setEPosX(j * widthscalar);
+                        enemy3.setEPosY(i * scalar);
                         enemy3.initEnemy(pe);
                         Emap.add(enemy3);
-                        break;
+                        break;*/
                 }
             }
+        }
+    }
+
+    public Enemy1 getEnemy1(int e) {
+        switch (e) {
+            case 1 :
+                return e1;
+            case 2 :
+                return e2;
+            default:
+                return null;
         }
     }
 
@@ -88,8 +109,12 @@ public class mapCreator {
         return rect;
     }
 
-    public ArrayList<Enemy> getEMap() {
+    public ArrayList<Enemy1> getEMap() {
         return Emap;
+    }
+
+    public int getSizeEMap() {
+        return Emap.size();
     }
 
     //tar inn parameter som svarer til map 1,2 3 etc.. og returnerer lengden til mappet i piksler

@@ -35,12 +35,13 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
+
    // private Enemy enemy = (Enemy) ec.getEntity("ENEMY");
     private AnimationTimer timer;
     private mapCreator mc = new mapCreator();
 
-    private boolean left = false;
-    private boolean right = false;
+    private boolean KeyA = false;
+    private boolean KeyD = false;
 
     public int i = 0;
     public int d = 0;
@@ -59,10 +60,9 @@ public class gameController implements Initializable, Serializable, EventHandler
         init(gamePane);
        // setGamePaneWidth();
         System.out.println(Arrays.toString(Map.getMapArray()));
-        keyHandlerInit(gamePane);
-        mainPlayer.initPlayer(gamePane);
-        mc.initMap(gamePane);
         //gamePane.setBackground(new Background(BI));
+        mc.getEnemy1(1);
+        mc.getEnemy1(2);
 
         timer = new AnimationTimer() {
 
@@ -70,9 +70,12 @@ public class gameController implements Initializable, Serializable, EventHandler
             public void handle(long now) {
                 if (running) {
 
+                    mc.getEnemy1(1).renderEnemy();
+                    mc.getEnemy1(2).renderEnemy();
+
                     if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
-                    if (left) {PlayerCollisionX(4, mainPlayer);}
-                    if (right) {PlayerCollisionX(4, mainPlayer);}
+                    if (KeyA) {PlayerCollisionX(4, mainPlayer);}
+                    if (KeyD) {PlayerCollisionX(4, mainPlayer);}
 
                     PitCheck(mainPlayer,gamePane);
 
@@ -95,18 +98,16 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     public void init(Pane p) {
         BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-     //   keyHandlerInit(p);
+        keyHandlerInit(p);
 
-        //mc.initMap(p);
+        mc.initMap(p);
         p.setBackground(new Background(BI));
-       // mainPlayer.initPlayer(p);
-      //  System.out.println("stage: " + gpWrap.getWidth());
-        System.out.println("scene: " + p.getWidth());
+        mainPlayer.initPlayer(p);
     }
 
 
-    /*private int left = 0;
-    private int right = 1;*/
+    /*private int KeyA = 0;
+    private int KeyD = 1;*/
 
     public void keyHandlerInit(Pane p) {
         p.setFocusTraversable(true);
@@ -116,10 +117,10 @@ public class gameController implements Initializable, Serializable, EventHandler
 
             if (e.getCode() == KeyCode.A) {
                 //   mainPlayer.setDirection(5);
-                this.left = false;
+                this.KeyA = false;
             } else if (e.getCode() == KeyCode.D) {
                 //  mainPlayer.setDirection(5);
-                this.right = false;
+                this.KeyD = false;
                 System.out.println("BAAAAAAAAAAls");
             }
         });
@@ -132,26 +133,25 @@ public class gameController implements Initializable, Serializable, EventHandler
                 System.out.println(e.toString());
                 break;
             case A:
-                this.right = false ;
-                this.left = true;
-                break;
+                this.KeyD = false ;
+                this.KeyA = true;
             case LEFT:
-                this.right = false ;
-                this.left = true;
+                this.KeyD = false ;
+                this.KeyA = true;
                 break;
             case D:
-                this.left = false;
-                this.right = true;
-                break;
+                this.KeyA = false;
+                this.KeyD = true;
+
             case RIGHT:
-                this.left = false;
-                this.right = true;
+                this.KeyA = false;
+                this.KeyD = true;
                 break;
             case W:
                 if (gravitycheck(mainPlayer)) {
                     mainPlayer.setySpeed(-7.5);
                 }
-                break;
+
             case UP:
                 if (gravitycheck(mainPlayer)) {
                     mainPlayer.setySpeed(-7.5);
@@ -212,7 +212,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         for (Rectangle mapPart : mc.getMap()) {
             if (mapPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {
                 // Collision Ovenifra
-                if ((p.getPosY() + p.getHeight()) < (mapPart.getY() + 7.1) && p.getySpeed() > 0) {
+                if ((p.getPosY() + p.getHeight()) < (mapPart.getY() + p.getMaxySpeed()) && p.getySpeed() > 0) {
                     p.setySpeed(0);
                     p.setPosY(mapPart.getY() - p.getHeight() - 1);
                     return;
@@ -233,10 +233,10 @@ public class gameController implements Initializable, Serializable, EventHandler
             for (Rectangle mapPart : mc.getMap()) {
                 if (mapPart.intersects(p.getPosX() + speed, p.getPosY(), p.getWidth(), p.getHeight())) {
                     // Bevegelseretning høyre
-                    if (right) {
+                    if (KeyD) {
                         speed--;
                         //p.setxSpeed(0);
-                        //this.right = false;
+                        //this.KeyD = false;
                         System.out.println("høyre movement løkke");
                         p.setPosX(mapPart.getX() - p.getWidth() - 1);
                         System.out.println("sjekk");
@@ -244,10 +244,10 @@ public class gameController implements Initializable, Serializable, EventHandler
                 }
                 if (mapPart.intersects(p.getPosX() - speed, p.getPosY(), p.getWidth(), p.getHeight())) {
                     // Bevegelseretning venstre
-                    if (left) {
+                    if (KeyA) {
                         speed--;
                         //p.setxSpeed(0);
-                        //this.left = false;
+                        //this.KeyA = false;
                         p.setPosX(mapPart.getX() + mapPart.getWidth() + 1);
                     }
                 }
@@ -255,9 +255,9 @@ public class gameController implements Initializable, Serializable, EventHandler
         }
         System.out.println(p.getPosX());
         System.out.println(speed);
-        if (right) {
+        if (KeyD) {
             p.MoveRight(speed);
-        } else if (left) {
+        } else if (KeyA) {
             p.MoveLeft(speed);
         }
     }
@@ -296,7 +296,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void PlayerEnemyColl(Player p) {
-        for (Enemy enemy : mc.getEMap()) {
+        for (Enemy1 enemy : mc.getEMap()) {
             if (p.intersects(enemy.getBoundsInLocal())) {
                 p.setPosX(110);
                 p.setPosY(300);
