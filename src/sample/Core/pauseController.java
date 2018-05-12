@@ -9,11 +9,13 @@ public class pauseController {
     public void changeScene(ActionEvent actionEvent) {
         switch (( (Button)actionEvent.getSource()).getText() ) {
             case "Resume":
-            StateManager.changeScene(actionEvent, StateManager.GameState.GAME);
-            gameController.setRunning(true);
+                StateManager.changeScene(actionEvent, StateManager.GameState.GAME);
+                gameController.setRunning(true);
             break;
             case "Meny":
-                Main.getStateManager().setGameRoot(null);
+                StateManager.setGameRoot();
+                gameController.setNull = true;
+                System.out.println(StateManager.State);
                 StateManager.changeScene(actionEvent, StateManager.GameState.MAINMENU);
         }
     }

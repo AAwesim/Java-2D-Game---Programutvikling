@@ -9,14 +9,14 @@ public class Main extends Application {
     public final static  double SCREEN_WIDTH = 640.0;
     public final static  double SCREEN_HEIGHT = 480.0;
     public final static String GAME_NAME = "Tiyareed";
-    private static StateManager stateManager = new StateManager();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        StateManager.initStates();
         primaryStage.setResizable(false);
         primaryStage.setTitle(GAME_NAME);
 
-        primaryStage.setScene(stateManager.update());
+        primaryStage.setScene(StateManager.update());
 
         primaryStage.show();
     }
@@ -25,8 +25,6 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static StateManager getStateManager(){
-        return stateManager;
-    }
+
 }
 

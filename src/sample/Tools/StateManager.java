@@ -23,27 +23,7 @@ public class StateManager {
     }
 
     private static GameState gameState = GameState.MAINMENU;
-    static Map<String, Scene> State = new HashMap<>();
-    private Parent menuRoot, gameRoot, levelRoot, helpRoot, pauseRoot;
-
-    public StateManager(){
-
-        try {
-            this.menuRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/meny.fxml"));
-            this.levelRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/levelScene.fxml"));
-            this.helpRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/hjelpScene.fxml"));
-            this.pauseRoot= FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/pauseScene.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-        State.put("MENU", new Scene(menuRoot));
-        State.put("LEVEL", new Scene(levelRoot));
-        State.put("HELP", new Scene(helpRoot));
-        State.put("PAUSE", new Scene(pauseRoot));
-
-    }
+    public static Map<String, Scene> State = new HashMap<>();
 
     public static Scene update(){
         switch(gameState){
@@ -53,9 +33,15 @@ public class StateManager {
                     return State.get("MENU");
 
             case GAME:
-                if(State.get("GAME") != null)
+                if(State.get("GAME") == null) {
+                    System.out.println("NO GAME");
+                    initGame();
+                    return State.get("GAME");
+                }
+                else if(State.get("GAME") != null)
                     System.out.println("GAME");
                     return State.get("GAME");
+
             case LEVEL:
                 if(State.get("LEVEL") != null){
                     System.out.println("LEVEL");
@@ -75,18 +61,30 @@ public class StateManager {
         return null;
     }
 
-    public static void setState(GameState newState){
-        gameState = newState;
+    public static void initStates(){
+        try {
+            State.put("MENU", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/meny.fxml"))));
+            State.put("LEVEL", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/levelScene.fxml"))));
+            State.put("HELP", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/hjelpScene.fxml"))));
+            State.put("PAUSE", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/pauseScene.fxml"))));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
-    public void initGame(){
+    public static void initGame(){
             try {
-                this.gameRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/gameScene.fxml"));
+                final Parent gameRoot = FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/gameScene.fxml"));
+                State.put("GAME", new Scene(gameRoot));
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
             }
-            State.put("GAME", new Scene(gameRoot));
+    }
+
+    public static void setState(GameState newState){
+        gameState = newState;
     }
 
     public static void changeScene(Event e, GameState gameStateEnum){
@@ -99,8 +97,7 @@ public class StateManager {
         stage.show();
     }
 
-    public void setGameRoot(Parent gameRoot) {
+    public static void setGameRoot() {
         State.remove("GAME");
-        this.gameRoot = gameRoot;
     }
 }

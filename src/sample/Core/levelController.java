@@ -51,7 +51,6 @@ public class levelController implements Initializable{
                 if(new File("1.map").exists()) {
                     loadMap("1");
 
-                    Main.getStateManager().initGame();
                     StateManager.changeScene(event, StateManager.GameState.GAME);
                 } else generateMap();
                 break;
@@ -59,7 +58,6 @@ public class levelController implements Initializable{
             case "2":
                 loadMap("2");
 
-                Main.getStateManager().initGame();
                 StateManager.changeScene(event, StateManager.GameState.GAME);
             break;
 

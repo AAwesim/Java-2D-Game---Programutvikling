@@ -33,6 +33,8 @@ public class gameController implements Initializable, Serializable, EventHandler
     @FXML
     Pane gpWrap;
 
+    public static boolean setNull = false;
+
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
 
@@ -49,8 +51,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
         //mc.enemy1(gamePane);
        // enemy.initEnemy(gamePane);
-
-
 
 
     @Override
@@ -70,8 +70,14 @@ public class gameController implements Initializable, Serializable, EventHandler
 
             @Override
             public void handle(long now) {
-                if (running) {
+                if(!running){
+                    if(setNull){
+                        Terminate();
+                    }
+                }
 
+                if (running) {
+                    System.out.println(mainPlayer.getPosX());
                   //  System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosX());
                    // System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosY());
 
@@ -194,6 +200,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                 break;
 
             case ESCAPE:
+                System.out.println(StateManager.State);
                 running = false;
                 StateManager.changeScene(e, StateManager.GameState.PAUSE);
                 break;
@@ -339,24 +346,22 @@ public class gameController implements Initializable, Serializable, EventHandler
 
 
 
-    public void Terminate(){
-        if(gamePane != null && mainPlayer != null && timer != null){
-            gamePane.getChildren().clear();
-            gpWrap.getChildren().clear();
-            mc.getMap().clear();
+    public void Terminate() {
+        gamePane.getChildren().clear();
+        gpWrap.getChildren().clear();
+        mc.getMap().clear();
 
-            timer.stop();
 
-            gamePane.removeEventHandler(KeyEvent.ANY,this);
-            gamePane.setOnKeyPressed(null);
-            gamePane.setOnKeyReleased(null);
+        timer.stop();
 
-            gpWrap = null;
-            gamePane = null;
-            mc = null;
-            mainPlayer = null;
-            ec = null;
+        gamePane.removeEventHandler(KeyEvent.ANY, this);
+        gamePane.setOnKeyPressed(null);
+        gamePane.setOnKeyReleased(null);
 
-        } else System.exit(2);
+        gpWrap = null;
+        gamePane = null;
+        mc = null;
+        mainPlayer = null;
+        ec = null;
     }
 }
