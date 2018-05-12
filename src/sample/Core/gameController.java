@@ -33,7 +33,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     @FXML
     Pane gpWrap;
 
-    public static boolean setNull = false;
+    private static boolean setNull = false;
 
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
@@ -353,7 +353,9 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.getChildren().clear();
         gpWrap.getChildren().clear();
         mc.getMap().clear();
-
+        mc.getEMap();
+        Enemyh.getEnemyh().getE1List().clear();
+        Enemyh.getEnemyh().getE2List().clear();
 
         timer.stop();
 
@@ -366,5 +368,9 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc = null;
         mainPlayer = null;
         ec = null;
+    }
+
+    public static void setSetNull(boolean setNull) {
+        gameController.setNull = setNull;
     }
 }
