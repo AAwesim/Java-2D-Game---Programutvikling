@@ -57,9 +57,9 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void initialize(URL location, ResourceBundle resources) {
         running = true;
         init(gamePane);
-        System.out.println("gamebefore remove "+Enemyh.getEnemyh().E1List);
+   //     System.out.println("gamebefore remove "+Enemyh.getEnemyh().E1List);
       //  Enemyh.getEnemyh().E1List.remove(0);
-        System.out.println("game remove"+Enemyh.getEnemyh().E1List);
+    //    System.out.println("game remove"+Enemyh.getEnemyh().E1List);
        // setGamePaneWidth();
        // System.out.println(Arrays.toString(Map.getMapArray()));
         //gamePane.setBackground(new Background(BI));
@@ -72,12 +72,15 @@ public class gameController implements Initializable, Serializable, EventHandler
             public void handle(long now) {
                 if (running) {
 
+                    i++;
+                    if (i%60==0)
+                        System.out.println("runtime: "+ i/60);
                   //  System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosX());
                    // System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosY());
 
                    // mc.getEnemy1(1).renderEnemy();
                    // mc.getEnemy1(2).renderEnemy();
-                    Enemyh.getEnemyh().renderEnemy1();
+                    Enemyh.getEnemyh().renderEnemies();
               //      mc.getEMap().listIterator(0).renderEnemy1();
                 //    System.out.println(mc.getEMap().listIterator().
 

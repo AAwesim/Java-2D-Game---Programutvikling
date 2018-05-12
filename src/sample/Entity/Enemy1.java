@@ -12,17 +12,20 @@ import java.util.ArrayList;
 public final class Enemy1 {
 
     private int i;
+    private int ce1;
 
         private int  a ;
 
-        private static final Enemy1 e = new Enemy1();
+        private static final Enemy1 e1 = new Enemy1();
 
         public static Enemy1 getEnemy() {
-            return e;
+            return e1;
         }
 
     public void Enemy1Movement(Enemy e) {
-            System.out.println(e.getEPosX()+" "+e.getX());
+            ce1++;
+        System.out.println(ce1);
+            //     System.out.println(e.getEPosX()+" "+e.getX());
         if (e.getX() > e.getEPosX() + 200) {
             i = -2;
         }

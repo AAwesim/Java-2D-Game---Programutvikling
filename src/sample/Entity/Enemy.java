@@ -20,34 +20,23 @@ public class Enemy extends Rectangle {
     private double EPosY;
     private int a ;
 
-
+    //konstruerer Enemy
     public Enemy(int type, double EPosX, double EPosY, Pane p) {
-        setEPosX(EPosX);
-        setX(EPosX);
-        setEPosY(EPosY);
-        setY(EPosY);
-        System.out.println("Enemy");
+        this.setEPosX(EPosX);
+        this.setX(EPosX);
+        this.setEPosY(EPosY);
+        this.setY(EPosY);
+       // System.out.println("Enemy");
         this.setFill(Color.RED);
         this.setWidth(width);
         this.setHeight(height);
-        if(type==1){Enemyh.getEnemyh().addE1List(this);}
-        if(type==2){Enemyh.getEnemyh().addE2List(this);}
+        if(type==1){this.setFill(Color.RED);Enemyh.getEnemyh().addE1List(this);}
+        if(type==2){this.setFill(Color.DARKBLUE);Enemyh.getEnemyh().addE2List(this);}
         p.getChildren().add(this);
     }
 
-    public void EnemyMove(int i) {
-        switch (i) {
-            case 1:
-                for (int j = 0; j < Enemyh.getEnemyh().getE1List().size(); j++) {
-                    Enemy1.getEnemy().Enemy1Movement(Enemyh.getEnemyh().getE1List().get(j));
-                }
-            case 2:
-                for (int j = 0; j < Enemyh.getEnemyh().getE2List().size(); j++) {
-                    Enemy2.getEnemy().Enemy2Movement(Enemyh.getEnemyh().getE2List().get(j));
-                }
-        }
-    }
-
+    //Kaller på Enemyene sin Movement metode for hver Enemy avhengig om det er enemy 1 eller 2
+    //
 
 
     //renderEnemy ved å bruke setX/Y metoden i Rectangle som tar inn EPosX/Y til Hvert Enemy1 object
