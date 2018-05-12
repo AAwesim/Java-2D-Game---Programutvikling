@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import sample.Tools.ResourceManager;
 import sample.Tools.StateManager;
 
 import javax.swing.plaf.nimbus.State;
@@ -17,7 +18,7 @@ public class menyController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        ResourceManager.loadResources();
     }
 
     @FXML
