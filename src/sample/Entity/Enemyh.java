@@ -12,15 +12,31 @@ public final class Enemyh {
         return eh;
     }
 
-    public void renderEnemy1() {
-        for(int i = 0; i<getE1List().size(); i++) {
-            E1List.get(i).EnemyMove(1);
+    public void renderEnemies() {
+
+            EnemyMove(1);
 
            // E1List.get(i).setX(E1List.get(i).getEPosX());
           //  getE1List().get(i).setY(getE1List().get(i).getEPosY());
-        }
-        for (int i = 0; i<getE2List().size(); i++){
-            E2List.get(i).EnemyMove(2);
+
+
+            EnemyMove(2);
+
+    }
+
+    public void EnemyMove(int i) {
+        switch (i) {
+            case 1:
+                for (int j = 0; j < getE1List().size(); j++) {
+                    Enemy1.getEnemy().Enemy1Movement(Enemyh.getEnemyh().getE1List().get(j));
+
+                }
+                break;
+            case 2:
+                for (int jj = 0; jj < getsizeE2List(); jj++) {
+                    Enemy2.getEnemy().Enemy2Movement(Enemyh.getEnemyh().getE2List().get(jj));
+                }
+                break;
         }
     }
 
@@ -38,6 +54,10 @@ public final class Enemyh {
 
     public ArrayList<Enemy> getE2List() {
         return E2List;
+    }
+
+    public int getsizeE2List() {
+        return E2List.size();
     }
 
     public void addE2List(Enemy e) {

@@ -65,22 +65,20 @@ public class mapCreator {
                     case '4':
                         ecount++;
                         Enemy enemy1 = ec.getEnemy(1,j * widthscalar,i * scalar, pe);
-                       // enemy1.initEnemy(pe);
-                        System.out.println("MapCReator");
-                        Emap.add(enemy1);
-                        System.out.println("mapCreator Emap: "+Emap);
+                        if(enemy1!=null)
+                            Emap.add(enemy1);
+                        //System.out.println("mapCreator Emap: "+Emap);
                         break;
                      case '5':
                         Enemy enemy2 = ec.getEnemy(2,j * widthscalar,i * scalar, pe);
-                        Emap.add(enemy2);
+                        if(enemy2!=null)
+                            Emap.add(enemy2);
                         break;
-                   /* case '6':
-                        Enemy enemy3 = (Enemy) ec.getEntity("ENEMY3");
-                        enemy3.setEPosX(j * widthscalar);
-                        enemy3.setEPosY(i * scalar);
-                        enemy3.initEnemy(pe);
-                        Emap.add(enemy3);
-                        break;*/
+                    case '6':
+                        Enemy enemy3 = ec.getEnemy(3,j * widthscalar,i * scalar, pe);
+                        if(enemy3!=null)
+                            Emap.add(enemy3);
+                        break;
                 }
             }
         }

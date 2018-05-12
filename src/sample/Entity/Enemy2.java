@@ -3,26 +3,29 @@ package sample.Entity;
 public final class Enemy2 {
 
     private int i;
-
+    private int ce2;
 
     private int a;
 
-    private static final Enemy2 e = new Enemy2();
+    private static final Enemy2 e2 = new Enemy2();
 
     public static Enemy2 getEnemy() {
-        return e;
+        return e2;
     }
 
 
     public void Enemy2Movement(Enemy e) {
-        System.out.println(e.getEPosX() + " " + e.getX());
-        if (e.getX() > e.getEPosX() + 200) {
+        ce2++;
+        System.out.println(e);
+
+     //   System.out.println(e.getEPosY() + " " + e.getX());
+        if (e.getY() > e.getEPosY() + 200) {
             i = -2;
         }
-        if (e.getX() <= e.getEPosX()) {
+        if (e.getY() <= e.getEPosY()) {
             i = 2;
         }
-        e.setX(e.getX() + i);
+        e.setY(e.getY() + i);
     }
 }
 
