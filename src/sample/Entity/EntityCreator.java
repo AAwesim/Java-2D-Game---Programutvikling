@@ -18,9 +18,9 @@ public class EntityCreator {
     public Enemy getEnemy(int type, double EPosX, double EPosY, Pane pe) {
         switch (type) {
             case 1:
-                return new Enemy(EPosX, EPosY, pe);
-           // case 2:
-           //     return new Enemy2(EPosX, EPosY, pe);
+                return new Enemy(type,EPosX, EPosY, pe );
+            case 2:
+                return new Enemy(type,EPosX, EPosY, pe);
             default :
                 return null;
         }

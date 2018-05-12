@@ -1,13 +1,30 @@
 package sample.Entity;
 
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import sample.Map.mapCreator;
+public final class Enemy2 {
 
-import java.awt.image.AreaAveragingScaleFilter;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+    private int i;
+
+
+    private int a;
+
+    private static final Enemy2 e = new Enemy2();
+
+    public static Enemy2 getEnemy() {
+        return e;
+    }
+
+
+    public void Enemy2Movement(Enemy e) {
+        System.out.println(e.getEPosX() + " " + e.getX());
+        if (e.getX() > e.getEPosX() + 200) {
+            i = -2;
+        }
+        if (e.getX() <= e.getEPosX()) {
+            i = 2;
+        }
+        e.setX(e.getX() + i);
+    }
+}
 
 /*public class Enemy2 extends Enemy {
 

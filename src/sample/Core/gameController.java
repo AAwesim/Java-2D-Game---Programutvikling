@@ -58,7 +58,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         running = true;
         init(gamePane);
         System.out.println("gamebefore remove "+Enemyh.getEnemyh().E1List);
-        Enemyh.getEnemyh().E1List.remove(0);
+      //  Enemyh.getEnemyh().E1List.remove(0);
         System.out.println("game remove"+Enemyh.getEnemyh().E1List);
        // setGamePaneWidth();
        // System.out.println(Arrays.toString(Map.getMapArray()));

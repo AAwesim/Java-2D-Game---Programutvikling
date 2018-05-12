@@ -64,14 +64,14 @@ public class mapCreator {
                         break;
                     case '4':
                         ecount++;
-                        Enemy enemy = ec.getEnemy(1,j * widthscalar,i * scalar, pe);
+                        Enemy enemy1 = ec.getEnemy(1,j * widthscalar,i * scalar, pe);
                        // enemy1.initEnemy(pe);
                         System.out.println("MapCReator");
-                        Emap.add(enemy);
+                        Emap.add(enemy1);
                         System.out.println("mapCreator Emap: "+Emap);
                         break;
-                 /*   case '5':
-                        Enemy2 enemy2 = (Enemy2) ec.getEntity(2,j * widthscalar,i * scalar, pe);
+                     case '5':
+                        Enemy enemy2 = ec.getEnemy(2,j * widthscalar,i * scalar, pe);
                         Emap.add(enemy2);
                         break;
                    /* case '6':
