@@ -21,6 +21,8 @@ public class EntityCreator {
                 return new Enemy(type,EPosX, EPosY, pe );
             case 2:
                 return new Enemy(type,EPosX, EPosY, pe);
+            case 3:
+                return new Enemy(type, EPosX,EPosY,pe);
             default :
                 return null;
         }

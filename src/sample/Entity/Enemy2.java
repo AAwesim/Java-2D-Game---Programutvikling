@@ -40,9 +40,6 @@ public final class Enemy2 {
     private boolean a = true;
 
     public static ArrayList<Enemy> E1List = new ArrayList<>();
-
-
-
    /* public Enemy2(double EPosX, double EPosY, Pane p) {
         System.out.println("ENEMY1 EPosX "+EPosX);
         System.out.println("ENEMY1 EPosY "+EPosY);
@@ -70,31 +67,4 @@ public final class Enemy2 {
         setY(EposY);
         p.getChildren().add(this);
     }
-
-   /* public void renderEnemy() {
-        setX(EPosX);
-        setY(EposY);
-        enemymovement();
-    }
-
-
-
-    //Getters og setters
-
-    public void setEPosX(double EPosX) {
-        this.EPosX = EPosX;
-    }
-
-    public void setEPosY(double EPosY) {
-        this.EPosY = EPosY;
-    }
-
-    public double getEPosX() {
-        return EPosX;
-    }
-
-    public double getEPosY() {
-        return EPosY;
-    }
-
 }*/

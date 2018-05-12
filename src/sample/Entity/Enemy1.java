@@ -34,19 +34,4 @@ public final class Enemy1 {
         }
         e.setX(e.getX()+i);
     }
-    //Setter opp entiteten Player sine vilkårlige verdier.
-
-  /*  public void initEnemy(Pane p) {
-        this.setHeight(30);
-        this.setWidth(30);
-        setX(EPosX);
-        setY(EposY);
-        p.getChildren().add(this);
-    }*/
-
-   /* public void renderEnemy() {
-        setX(EPosX);
-        setY(EposY);
-        enemymovement();
-    }*/
 }

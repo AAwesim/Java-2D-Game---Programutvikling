@@ -357,6 +357,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         Enemyh.getEnemyh().getE1List().clear();
         Enemyh.getEnemyh().getE2List().clear();
 
+
         timer.stop();
 
         gamePane.removeEventHandler(KeyEvent.ANY, this);
@@ -368,6 +369,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc = null;
         mainPlayer = null;
         ec = null;
+
     }
 
     public static void setSetNull(boolean setNull) {
