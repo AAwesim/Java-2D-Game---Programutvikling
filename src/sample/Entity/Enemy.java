@@ -8,36 +8,64 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import sample.Map.mapCreator;
 
-public  abstract class Enemy extends Rectangle implements Entity {
+import java.util.ArrayList;
 
-    private double EPosX= 50;
-    private double EposY =50;
+public class Enemy extends Rectangle {
 
-    //Setter opp entiteten Player sine vilkårlige verdier.
-    /*public void initEnemy(Pane p) {
-        this.setHeight(30);
-        this.setWidth(30);
+
+
+    private static int width = 35;
+    private static int height = 35;
+    private double EPosX;
+    private double EPosY;
+    private int a ;
+
+
+    public Enemy(double EPosX, double EPosY, Pane p) {
+        setEPosX(EPosX);
         setX(EPosX);
-        setY(EposY);
+        setEPosY(EPosY);
+        setY(EPosY);
+        System.out.println("Enemy");
         this.setFill(Color.RED);
+        this.setWidth(width);
+        this.setHeight(height);
+        Enemyh.getEnemyh().addE1List(this);
         p.getChildren().add(this);
     }
 
-    public void renderEnemy() {
-
-       /// for(int i = 0; i<mapCreator.getSizeEMap(); i++)
-            setX(EPosX);
-            setY(EposY);
+    public void EnemyMove(int i){
+        switch (i) {
+            case 1:
+                for(int j=0;j<Enemyh.getEnemyh().getE1List().size();j++){
+                    Enemy1.getEnemy().Enemy1Movement(Enemyh.getEnemyh().getE1List().get(j));
+                }
+        }
     }
+
+
+    //renderEnemy ved å bruke setX/Y metoden i Rectangle som tar inn EPosX/Y til Hvert Enemy1 object
+    // for loopen kjøres en gang for hvert element i E1Listen som inneholder alle Enemy Objektene.
+
+    /*public void e1() {
+        for(int i = 0; i<getE1List().size(); i++) {
+
+
+            getE1List().get(i).setX(getE1List().get(i).getEPosX());
+            getE1List().get(i).setY(getE1List().get(i).getEPosY());
+        }
+    }*/
+    //public void renderEnemy2() {
+
 
     //Getters og setters
 
-    public void setEPosX(double EPosX) {
+    /*public void setEPosX(double EPosX) {
         this.EPosX = EPosX;
     }
 
     public void setEPosY(double EPosY) {
-        this.EposY = EPosY;
+        this.EPosY = EPosY;
     }
 
     public double getEPosX() {
@@ -45,9 +73,9 @@ public  abstract class Enemy extends Rectangle implements Entity {
     }
 
     public double getEPosY() {
-        return EposY;
-    }
-
+        return EPosY;
+    }*/
+/*
     public void setxSpeed(double xSpeed) {
         this.xSpeed = xSpeed;
 
@@ -87,4 +115,24 @@ public  abstract class Enemy extends Rectangle implements Entity {
         setxSpeed(x);
         setPosX(getPosX()+xSpeed);
     }*/
+
+    //Getters og setters
+
+    public void setEPosX(double EPosX) {
+        this.EPosX = EPosX;
+    }
+
+    public void setEPosY(double EPosY) {
+        this.EPosY = EPosY;
+    }
+
+    public double getEPosX() {
+        return EPosX;
+    }
+
+    public double getEPosY() {
+        return EPosY;
+    }
+
+
 }

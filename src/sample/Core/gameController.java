@@ -36,7 +36,6 @@ public class gameController implements Initializable, Serializable, EventHandler
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
 
-   // private Enemy enemy = (Enemy) ec.getEntity("ENEMY");
     private AnimationTimer timer;
     private mapCreator mc = new mapCreator();
 
@@ -58,20 +57,29 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void initialize(URL location, ResourceBundle resources) {
         running = true;
         init(gamePane);
+        System.out.println("gamebefore remove "+Enemyh.getEnemyh().E1List);
+        Enemyh.getEnemyh().E1List.remove(0);
+        System.out.println("game remove"+Enemyh.getEnemyh().E1List);
        // setGamePaneWidth();
-        System.out.println(Arrays.toString(Map.getMapArray()));
+       // System.out.println(Arrays.toString(Map.getMapArray()));
         //gamePane.setBackground(new Background(BI));
-        mc.getEnemy1(1);
-        mc.getEnemy1(2);
-
+        //mc.getEnemy1(1);
+       //mc.getEnemy1(2);
+      //   System.out.println("E1list "+Enemy1.getE1List().size());
         timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
                 if (running) {
 
-                    mc.getEnemy1(1).renderEnemy();
-                    mc.getEnemy1(2).renderEnemy();
+                  //  System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosX());
+                   // System.out.println("Enemy 2 eposx "+Enemy1.getE1List().get(1).getEPosY());
+
+                   // mc.getEnemy1(1).renderEnemy();
+                   // mc.getEnemy1(2).renderEnemy();
+                    Enemyh.getEnemyh().renderEnemy1();
+              //      mc.getEMap().listIterator(0).renderEnemy1();
+                //    System.out.println(mc.getEMap().listIterator().
 
                     if (!gravitycheck(mainPlayer)) {mainPlayer.gravity();}
                     if (KeyA) {PlayerCollisionX(4, mainPlayer);}
@@ -296,7 +304,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void PlayerEnemyColl(Player p) {
-        for (Enemy1 enemy : mc.getEMap()) {
+        for (Enemy enemy : mc.getEMap()) {
             if (p.intersects(enemy.getBoundsInLocal())) {
                 p.setPosX(110);
                 p.setPosY(300);
