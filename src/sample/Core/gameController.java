@@ -353,6 +353,10 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.getChildren().clear();
         gpWrap.getChildren().clear();
         mc.getMap().clear();
+        mc.getEMap();
+        Enemyh.getEnemyh().getE1List().clear();
+        Enemyh.getEnemyh().getE2List().clear();
+
 
 
         timer.stop();
@@ -366,5 +370,6 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc = null;
         mainPlayer = null;
         ec = null;
+
     }
 }
