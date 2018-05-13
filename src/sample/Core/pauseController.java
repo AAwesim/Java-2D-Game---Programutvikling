@@ -13,7 +13,9 @@ public class pauseController {
                 gameController.setRunning(true);
             break;
             case "Meny":
+                System.out.println(StateManager.State.size());
                 StateManager.setGameRoot();
+                System.out.println(StateManager.State.size());
                 gameController.setSetNull(true);
                 System.out.println(StateManager.State);
                 StateManager.changeScene(actionEvent, StateManager.GameState.MAINMENU);

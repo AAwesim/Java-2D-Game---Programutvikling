@@ -3,10 +3,8 @@ package sample.Tools;
 import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -75,9 +73,7 @@ public class StateManager {
 
     private static void initGame(){
             try {
-                final Parent gameRoot = FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/gameScene.fxml"));
-
-                State.put("GAME", new Scene(gameRoot));
+                State.put("GAME", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/gameScene.fxml"))));
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
