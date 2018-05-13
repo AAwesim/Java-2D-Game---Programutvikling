@@ -70,7 +70,7 @@ public class levelController implements Initializable{
     }
 
     public void loadMap(String s) throws IOException, ClassNotFoundException {
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream((s+".map")));
+        ObjectInputStream in = new ObjectInputStream(new FileInputStream(("ressurser//maps//"+s+".map")));
         Map.setMapArray((String[]) in.readObject());
         in.close();
     }
