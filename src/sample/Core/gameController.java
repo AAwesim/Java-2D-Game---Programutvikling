@@ -26,6 +26,12 @@ public class gameController implements Initializable, Serializable, EventHandler
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
 
+    public EnemyHandler getEH() {
+        return this.EH;
+    }
+
+    public EnemyHandler EH = new EnemyHandler();
+
     private AnimationTimer timer;
     private mapCreator mc;
 
@@ -58,7 +64,7 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                 if (running) {
                     runtime();
-                    Enemyh.getEnemyh().renderEnemies();
+                    EH.renderEnemies();
 
                     if (!gravitycheck(mainPlayer)) {
                         mainPlayer.gravity();
@@ -330,8 +336,8 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc.getMap().clear();
         mc.getEMap().clear();
 
-        Enemyh.getEnemyh().getE1List().clear();
-        Enemyh.getEnemyh().getE2List().clear();
+        EH.getE1List().clear();
+        EH.getE2List().clear();
 
         mc.setEmap(null);
         mc.setMap(null);
@@ -341,6 +347,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.setOnKeyPressed(null);
         gamePane.setOnKeyReleased(null);
 
+        EH = null;
         timer = null;
         gpWrap = null;
         gamePane = null;

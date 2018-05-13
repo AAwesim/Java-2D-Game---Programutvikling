@@ -22,9 +22,10 @@ public class EntityCreator {
             case 2:
                 return new Enemy(type,EPosX, EPosY, pe);
             case 3:
-                return new Enemy(type, EPosX,EPosY,pe);
+                return new Enemy(type,EPosX, EPosY, pe);
             default :
                 return null;
         }
     }
+
 }

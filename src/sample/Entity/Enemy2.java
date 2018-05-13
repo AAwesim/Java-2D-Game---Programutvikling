@@ -1,15 +1,14 @@
 package sample.Entity;
 
-public final class Enemy2 {
+import javafx.scene.layout.Pane;
+
+public class Enemy2 extends Enemy{
 
     private int i;
 
-    private static final Enemy2 e2 = new Enemy2();
-
-    public static Enemy2 getEnemy() {
-        return e2;
+    public Enemy2(int type, double EPosX, double EPosY, Pane p) {
+        super(type, EPosX, EPosY, p);
     }
-
 
     public void Enemy2Movement(Enemy e) {
         if (e.getY() > e.getEPosY() + 200) {

@@ -2,13 +2,11 @@ package sample.Entity;
 
 import java.util.ArrayList;
 
-public final class Enemyh {
+public class EnemyHandler extends Enemy {
 
     //oppretter 2 arraylister av typen enemy
     public ArrayList<Enemy> E1List = new ArrayList<>();
     public ArrayList<Enemy> E2List = new ArrayList<>();
-
-    private static final Enemyh eh = new Enemyh();
 
     public void renderEnemies() {
             EnemyMove(1);
@@ -22,19 +20,15 @@ public final class Enemyh {
         switch (i) {
             case 1:
                 for (int j = 0; j < getE1List().size(); j++) {
-                    Enemy1.getEnemy().Enemy1Movement(Enemyh.getEnemyh().getE1List().get(j));
+                    Enemy1Movement(getE1List().get(j));
                 }
                 break;
             case 2:
                 for (int jj = 0; jj < getsizeE2List(); jj++) {
-                    Enemy2.getEnemy().Enemy2Movement(Enemyh.getEnemyh().getE2List().get(jj));
+                    Enemy2.getEnemy2().Enemy2Movement(EnemyHandler.getEnemyh().getE2List().get(jj));
                 }
                 break;
         }
-    }
-
-    public static Enemyh getEnemyh() {
-        return eh;
     }
 
     public ArrayList<Enemy> getE1List() {
