@@ -40,7 +40,7 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
 
     public int i = 0;
     public int d = 0;
-
+    public Bullet bully;
 
     BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT,
             BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
@@ -51,14 +51,16 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
         mc.shop(gamePane);
         mainPlayer.init(gamePane);
         mc.initMap(gamePane);
+        bully = new Bullet(gamePane);
+
 
         gamePane.setBackground(new Background(BI));
 
         timer = new AnimationTimer() {
 
             @Override
-            public void handle(long now) {
 
+            public void handle(long now) {
                 i++;
                 if (i%60==0){
                 System.out.println("runtime: "+ i/60);}
@@ -78,12 +80,16 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
                 }
                 //mainPlayer.gravity();
                 // System.out.println(playerMapCollisionChecker(mainPlayer));
-                mainPlayer.updatePlayerState();
-                mainPlayer.renderPlayer();
-                //  playerMapCollisionChecker(mainPlayer);
-                view(mainPlayer, gamePane);
-                playerMapCollisionChecker2(mainPlayer);
 
+                    mainPlayer.updatePlayerState();
+                    mainPlayer.renderPlayer();
+
+                    updateBullet();
+
+
+                    //  playerMapCollisionChecker(mainPlayer);
+                    view(mainPlayer, gamePane);
+                    playerMapCollisionChecker2(mainPlayer);
 
                 //  System.out.println(mainPlayer.getySpeed());
                 // System.out.println(mainPlayer.getPosY());
@@ -117,7 +123,12 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.SPACE) {
             System.out.println(keyEvent.toString());
-        } else if (keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT) {
+        }
+        else if(keyEvent.getCode()==KeyCode.C){
+                bully.initBullet(mainPlayer.getPosX(), mainPlayer.getPosY());
+            }
+
+        else if (keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT) {
              this.left = true;
 
         } else if (keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT) {
@@ -211,6 +222,19 @@ public class gameController implements Initializable, EventHandler<KeyEvent> {
             pa.setLayoutX(-p.getPosX() + 300);
         } else if (p.getPosX() < 300) {
             pa.setLayoutX(0);
+        }
+    }
+
+    public void updateBullet() {
+        for (Rectangle bulsy : bully.bullets) {
+            double rectX = bulsy.getX();
+            bulsy.setX(rectX + bully.getBulletSpeed());
+            for(Rectangle mapsy:mc.getMap()) {
+                if (bulsy.getBoundsInParent().intersects(mapsy.getBoundsInParent())){
+                    bully.collisionRemoveFirst(bulsy, mapsy);
+                }
+
+            }
         }
     }
 }

@@ -1,6 +1,8 @@
 package sample.Map;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -16,9 +18,11 @@ import static javafx.scene.paint.Color.color;
 
 public class mapCreator{
     Image img=new Image("file:ressurser\\\\\\\\shop.png");
+    public boolean running=true;
+    public boolean option=false;
     private int scalar = 35;
     public ArrayList<Rectangle> map=new ArrayList<>();
-
+    public ArrayList<Rectangle> shops=new ArrayList<>();
     public static final String[] LEVEL1MAP = new String[] {
             "000000000000000000000000000000000000001110000000000000000000000000000",
             "000000000000000000000000000000000000001110000000000000000000000000000",
@@ -77,8 +81,10 @@ public class mapCreator{
      Rectangle shop=new Rectangle(0, 355,150, 100);
      shop.setFill(new ImagePattern(img, 0, 0, 1, 1, true));
      pe.getChildren().add(shop);
+     shops.add(shop);
      return shop;
     }
+
 
     public ArrayList<Rectangle> getMap() {
         return map;

@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ArrayList;
+
 
 public class Player extends Rectangle implements Entity {
     private double posX = 300;
@@ -17,6 +19,7 @@ public class Player extends Rectangle implements Entity {
 
     protected int left = 0;
     protected int right = 1;
+
 
 
     private static final String testPic = "file:ressurser\\\\char.png";

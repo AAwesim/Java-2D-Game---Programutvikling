@@ -12,12 +12,13 @@ public class StateManager {
     public enum GameState {
         MAINMENU,
         GAME,
-        HELP
+        HELP,
+        BUTIKK
     }
 
     public static GameState gameState = GameState.MAINMENU;
     static List<Scene> State = new ArrayList<>();
-    public Parent menuRoot, gameRoot, helpRoot;
+    public Parent menuRoot, gameRoot, helpRoot, butikkRoot;
 
     public StateManager(){
 
@@ -25,6 +26,7 @@ public class StateManager {
             this.menuRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/meny.fxml"));
             this.gameRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/gameScene.fxml"));
             this.helpRoot = FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/hjelpScene.fxml"));
+            this.butikkRoot=FXMLLoader.load(getClass().getClassLoader().getResource("sample/FXML/butikkScene.fxml"));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
@@ -33,9 +35,11 @@ public class StateManager {
         Scene menuScene = new Scene(menuRoot);
         Scene gameScene = new Scene(gameRoot);
         Scene helpScene = new Scene(helpRoot);
+        Scene butikkScene= new Scene(butikkRoot);
         State.add(menuScene);
         State.add(gameScene);
         State.add(helpScene);
+        State.add(butikkScene);
     }
 
     public static Scene update(){
@@ -51,6 +55,10 @@ public class StateManager {
             case HELP:
                 if(State.get(2) != null)
                     return State.get(2);
+
+            case BUTIKK:
+                if(State.get(3) !=null)
+                    return State.get(3);
         }
         return null;
     }

@@ -54,4 +54,12 @@ public class menyController implements Initializable{
     public void exit(ActionEvent e) {
         System.exit(0);
     }
+
+    public void setButikkScene(ActionEvent e){
+        Stage stage=(Stage) ((Node)e.getSource()).getScene().getWindow();
+        StateManager.setState(StateManager.gameState.BUTIKK);
+        stage.setScene(StateManager.update());
+        stage.setResizable(false);
+        stage.show();
+    }
 }

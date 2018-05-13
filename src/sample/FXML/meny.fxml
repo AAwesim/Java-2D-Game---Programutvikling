@@ -7,6 +7,8 @@
    <children>
       <Button fx:id="startButton" layoutX="270.0" layoutY="110.0" onAction="#setGameScene" prefWidth="100" text="Start" />
       <Button fx:id="hjelpButton" layoutX="270.0" layoutY="150.0" onAction="#setHjelpScene"  prefWidth="100" text="Hjelp" />
-      <Button fx:id="exitButton" layoutX="270.0" layoutY="190.0" onAction="#exit" prefWidth="100" text="Avslutt" />
+      <Button fx:id="butikkButton" layoutX="270" layoutY="190.0" onAction="#setButikkScene" prefWidth="100" text="Butikk"/>
+      <Button fx:id="exitButton" layoutX="270.0" layoutY="230.0" onAction="#exit" prefWidth="100" text="Avslutt" />
+
    </children>
 </AnchorPane>
