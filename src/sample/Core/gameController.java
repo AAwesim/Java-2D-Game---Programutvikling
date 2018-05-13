@@ -42,12 +42,14 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void initialize(URL location, ResourceBundle resources) {
         mc = new mapCreator();
         running = true;
+        setNull = false;
         init(gamePane);
 
         timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
+
                 if(!running){
                     if(setNull){
                         Terminate();
@@ -56,7 +58,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                 if (running) {
                     runtime();
-
                     Enemyh.getEnemyh().renderEnemies();
 
                     if (!gravitycheck(mainPlayer)) {
@@ -336,11 +337,11 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc.setMap(null);
         mc.setTextures(null);
 
-
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);
         gamePane.setOnKeyReleased(null);
 
+        timer = null;
         gpWrap = null;
         gamePane = null;
         mc = null;

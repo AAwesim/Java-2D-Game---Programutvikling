@@ -17,9 +17,6 @@ public class levelController implements Initializable{
 
     /*MIDDLERTIDIG: Hvis dere vil endre på mappet må dere endre her også trykke på generate map.*/
     public final static String[] tempMap = new String[] {
-
-
-
             "000000000000333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
             "000000000000333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
             "0000000000003333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
@@ -60,14 +57,16 @@ public class levelController implements Initializable{
     public void generateMap(ActionEvent actionEvent) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("maps/1.map"));
         out.writeObject(tempMap);
+        out.close();
     }
 
     public void generateMap() throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("maps/1.map"));
         out.writeObject(tempMap);
+        out.close();
     }
 
-    public static void loadMap(String s) throws IOException, ClassNotFoundException {
+    public void loadMap(String s) throws IOException, ClassNotFoundException {
         InputStream is = levelController.class.getClassLoader().getResourceAsStream("maps/"+s+".map");
         System.out.println(is.toString());
         ObjectInputStream in = new ObjectInputStream(is);
