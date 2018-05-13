@@ -10,6 +10,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
@@ -19,7 +20,6 @@ import sample.Map.mapCreator;
 import sample.Tools.StateManager;
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
@@ -37,6 +37,8 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
+
+
 
     private AnimationTimer timer;
     private mapCreator mc = new mapCreator();
@@ -84,12 +86,12 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                     if (KeyA) {
                         PlayerCollisionX(4, mainPlayer);
-                       // mainPlayer.setFill(mainPlayer.getLeftGif());
+                        mainPlayer.setFill(mainPlayer.getSprites().get(5));
                     } else if (KeyD) {
                         PlayerCollisionX(4, mainPlayer);
-                      //  mainPlayer.setFill(mainPlayer.getRightGif());
-                    } else if(!KeyA || !KeyD) {
-                  //      mainPlayer.setFill(mainPlayer.getCharGif());
+                        mainPlayer.setFill(mainPlayer.getSprites().get(4));
+                    } else if(!KeyA && !KeyD) {
+                        mainPlayer.setFill(mainPlayer.getSprites().get(0));
                     }
 
                     PitCheck(mainPlayer,gamePane);
@@ -346,6 +348,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc.getEMap().clear();
         Enemyh.getEnemyh().getE1List().clear();
         Enemyh.getEnemyh().getE2List().clear();
+        mainPlayer.getSprites().clear();
 
         timer.stop();
 

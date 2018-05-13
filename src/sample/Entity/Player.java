@@ -5,8 +5,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import sample.Tools.ResourceManager;
 
 import java.io.*;
+import java.util.ArrayList;
 
 import static javafx.scene.paint.Color.BLUE;
 
@@ -18,6 +20,12 @@ public class Player extends Rectangle implements Entity, Serializable {
     private double xSpeed = 4;
     private double ySpeed = 4;
     private int MaxySpeed = 7;
+
+    public ArrayList<ImagePattern> getSprites() {
+        return sprites;
+    }
+
+    private ArrayList<ImagePattern> sprites = ResourceManager.playerSprites;
 
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void initPlayer(Pane p) {
