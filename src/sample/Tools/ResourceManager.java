@@ -2,7 +2,6 @@ package sample.Tools;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
-import sample.Core.Main;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,12 +18,14 @@ public class ResourceManager {
 
         while (i <= 3) {
             URL url = cldr.getResource("character/" + i + ".png");
+            System.out.println(url.toString());
             playerSprites.add(new ImagePattern(new Image(url.toString())));
             i++;
         }
 
         while (i <= 5) {
             URL url = cldr.getResource("character/" + i + ".gif");
+            System.out.println(url.toString());
             playerSprites.add(new ImagePattern(new Image(url.toString())));
             i++;
         }

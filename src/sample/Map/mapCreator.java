@@ -1,19 +1,13 @@
 package sample.Map;
 
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import sample.Entity.Enemy;
 import sample.Entity.Enemy1;
-//import sample.Entity.Enemy2;
 import sample.Entity.EntityCreator;
 import sample.Tools.ResourceManager;
-
 import java.util.ArrayList;
-
-import static javafx.scene.paint.Color.BROWN;
-import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.color;
 
 public class mapCreator {
@@ -24,21 +18,17 @@ public class mapCreator {
 
     private EntityCreator ec = new EntityCreator();
 
-/*    private static final String Dit = "file:ressurser\\\\Dirt.png";
-    Image D = new Image(Dit);
-    final private ImagePattern Dirt = new ImagePattern(D);
-
-    private static final String testPic = "file:ressurser\\\\Grass.png";
-    Image img = new Image(testPic);
-    final private ImagePattern Grass = new ImagePattern(img);*/
-
     public Enemy1 e1;
     public Enemy1 e2;
     public int ecount = 0;
 
-    private ArrayList<ImagePattern> textures = ResourceManager.mapTextures;
-    public  ArrayList<Rectangle> map = new ArrayList<>();
+    private  ArrayList<ImagePattern> textures;
+    private  ArrayList<Rectangle> map = new ArrayList<>();
     private  ArrayList<Enemy> Emap = new ArrayList<>();
+
+    public mapCreator(){
+        textures = ResourceManager.mapTextures;
+    }
 
 
     private String[] LEVELARRAY = Map.getMapArray();
@@ -123,4 +113,23 @@ public class mapCreator {
         return map;
     }
 
+    public ArrayList<ImagePattern> getTextures() {
+        return textures;
+    }
+
+    public void setTextures(ArrayList<ImagePattern> textures) {
+        this.textures = textures;
+    }
+
+    public void setMap(ArrayList<Rectangle> map) {
+        this.map = map;
+    }
+
+    public ArrayList<Enemy> getEmap() {
+        return Emap;
+    }
+
+    public void setEmap(ArrayList<Enemy> emap) {
+        Emap = emap;
+    }
 }

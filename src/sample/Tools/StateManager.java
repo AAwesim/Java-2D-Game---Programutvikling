@@ -72,9 +72,10 @@ public class StateManager {
         }
     }
 
-    public static void initGame(){
+    private static void initGame(){
             try {
                 final Parent gameRoot = FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/gameScene.fxml"));
+
                 State.put("GAME", new Scene(gameRoot));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -82,7 +83,7 @@ public class StateManager {
             }
     }
 
-    public static void setState(GameState newState){
+    private static void setState(GameState newState){
         gameState = newState;
     }
 

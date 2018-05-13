@@ -34,37 +34,27 @@ public class gameController implements Initializable, Serializable, EventHandler
     @FXML
     Pane gpWrap;
 
-    private static boolean setNull = false;
-
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
 
-
-
     private AnimationTimer timer;
-    private mapCreator mc = new mapCreator();
+    private mapCreator mc;
 
     private boolean KeyA = false;
     private boolean KeyD = false;
+    private static boolean setNull = false;
 
     public int i = 0;
     public int d = 0;
 
     private static boolean running = true;
 
-        //mc.enemy1(gamePane);
-       // enemy.initEnemy(gamePane);
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        mc = new mapCreator();
         running = true;
         init(gamePane);
-   //     System.out.println("gamebefore remove "+Enemyh.getEnemyh().E1List);
-      //  Enemyh.getEnemyh().E1List.remove(0);
-    //    System.out.println("game remove"+Enemyh.getEnemyh().E1List);
-       // System.out.println(Arrays.toString(Map.getMapArray()));
-        //gamePane.setBackground(new Background(BI));
+
         timer = new AnimationTimer() {
 
             @Override
@@ -76,9 +66,8 @@ public class gameController implements Initializable, Serializable, EventHandler
                 }
 
                 if (running) {
-                    i++;
-                    if (i%60==0)
-                        System.out.println("runtime: "+ i/60);
+                    runtime();
+
                     Enemyh.getEnemyh().renderEnemies();
 
                     if (!gravitycheck(mainPlayer)) {
@@ -117,7 +106,6 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void init(Pane p) {
         BackgroundImage BI = new BackgroundImage((ResourceManager.background), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         keyHandlerInit(p);
-
         mc.initMap(p);
         p.setBackground(new Background(BI));
         mainPlayer.initPlayer(p);
@@ -351,8 +339,14 @@ public class gameController implements Initializable, Serializable, EventHandler
         gpWrap.getChildren().clear();
         mc.getMap().clear();
         mc.getEMap().clear();
+        /*mc.getTextures().clear();*/
         Enemyh.getEnemyh().getE1List().clear();
         Enemyh.getEnemyh().getE2List().clear();
+
+        mc.setEmap(null);
+        mc.setMap(null);
+        mc.setTextures(null);
+
 
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);
@@ -367,5 +361,11 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     public static void setSetNull(boolean setNull) {
         gameController.setNull = setNull;
+    }
+
+    public void runtime(){
+        i++;
+        if (i%60==0)
+            System.out.println("runtime: "+ i/60);
     }
 }
