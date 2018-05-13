@@ -24,7 +24,7 @@ public class levelController implements Initializable{
             "000000000000333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
             "0000000000003333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
             "0000000000000055005500000000000050000000000000000000000000000055005000000000000000000000000000",
-            "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "0000000000000007777700000000000000000000000000000000000000000000000000000000000000000000000000000",
             "0000000000000000000000000000000000000040000000000004000000000000400000000000040000000000004000000",
             "000000000000000000000000000000000000111111111111111111111111111111111111111111111111111111111111",
             "00000000000011111111111001100111111133333333333333333333333333333333333333333333333333333333333",
@@ -41,13 +41,11 @@ public class levelController implements Initializable{
 
     public void getMap(ActionEvent event) throws IOException, ClassNotFoundException {
         switch(((Button) event.getSource()).getText()){
+            
             case "1":
-
-                if(new File("1.map").exists()) {
                     loadMap("1");
 
                     StateManager.changeScene(event, StateManager.GameState.GAME);
-                } else generateMap();
                 break;
 
             case "2":
@@ -60,12 +58,12 @@ public class levelController implements Initializable{
     }
 
     public void generateMap(ActionEvent actionEvent) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("2.map"));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("maps/1.map"));
         out.writeObject(tempMap);
     }
 
     public void generateMap() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("2.map"));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("maps/1.map"));
         out.writeObject(tempMap);
     }
 

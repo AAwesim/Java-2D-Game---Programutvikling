@@ -75,6 +75,9 @@ public class mapCreator {
                         if(enemy3!=null)
                             Emap.add(enemy3);
                         break;
+                    default:
+                        break;
+
                 }
             }
         }

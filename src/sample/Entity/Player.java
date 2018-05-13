@@ -16,7 +16,6 @@ public class Player extends Rectangle implements Entity, Serializable {
 
     private double posX = 300;
     private double posY = 300;
-
     private double xSpeed = 4;
     private double ySpeed = 4;
     private int MaxySpeed = 7;

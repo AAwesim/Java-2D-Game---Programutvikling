@@ -4,28 +4,17 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
-import javafx.stage.Stage;
 import sample.Entity.*;
-import sample.Map.Map;
 import sample.Map.mapCreator;
 import sample.Tools.ResourceManager;
 import sample.Tools.StateManager;
 import java.io.*;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.ResourceBundle;
-import static javafx.scene.paint.Color.MAGENTA;
-import static javafx.scene.paint.Color.color;
 
 public class gameController implements Initializable, Serializable, EventHandler<KeyEvent> {
 

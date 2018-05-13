@@ -22,6 +22,7 @@ public class StateManager {
     }
 
     private static GameState gameState = GameState.MAINMENU;
+
     public static Map<String, Scene> State = new HashMap<>();
 
     public static Scene update(){
