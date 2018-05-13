@@ -14,13 +14,8 @@ public class mapCreator {
 
     private int scalar = 50;
     private int widthscalar = 50;
-    private int levelWidth;
 
     private EntityCreator ec = new EntityCreator();
-
-    public Enemy1 e1;
-    public Enemy1 e2;
-    public int ecount = 0;
 
     private  ArrayList<ImagePattern> textures;
     private  ArrayList<Rectangle> map = new ArrayList<>();
@@ -30,11 +25,9 @@ public class mapCreator {
         textures = ResourceManager.mapTextures;
     }
 
-
     private String[] LEVELARRAY = Map.getMapArray();
 
     public void initMap(Pane pe) {
-        levelWidth = LEVELARRAY[0].length() * scalar;
         for (int i = 0; i < LEVELARRAY.length; i++) {
             String line = LEVELARRAY[i];
             for (int j = 0; j < line.length(); j++) {
@@ -59,7 +52,6 @@ public class mapCreator {
                         map.add(mapPart1);
                         break;
                     case '4':
-                        ecount++;
                         Enemy enemy1 = ec.getEnemy(1,j * widthscalar,i * scalar, pe);
                         if(enemy1!=null)
                             Emap.add(enemy1);
@@ -80,17 +72,6 @@ public class mapCreator {
 
                 }
             }
-        }
-    }
-
-    public Enemy1 getEnemy1(int e) {
-        switch (e) {
-            case 1 :
-                return e1;
-            case 2 :
-                return e2;
-            default:
-                return null;
         }
     }
 
