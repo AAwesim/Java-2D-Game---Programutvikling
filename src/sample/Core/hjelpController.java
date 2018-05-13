@@ -17,7 +17,7 @@ public class hjelpController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
 
         Rectangle rect = new Rectangle(50,50);
-        System.out.println(ResourceManager.playerSprites.size());
+        rect.setFill(ResourceManager.playerSprites.get(1));
         pane.getChildren().add(rect);
 
     }

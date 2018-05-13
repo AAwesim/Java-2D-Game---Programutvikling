@@ -13,22 +13,18 @@ public class ResourceManager {
 
     public static void loadResources() {
         int i = 0;
-        int j = 4;
-
-        URL url = ResourceManager.class.getClassLoader().getResource("character//" + i + ".png");
-        URL url2 = ResourceManager.class.getClassLoader().getResource("character//" + j + ".gif");
 
         while (i <= 3) {
+            URL url = ResourceManager.class.getClassLoader().getResource("character//" + i + ".png");
             playerSprites.add(new ImagePattern(new Image(url.toString())));
             i++;
         }
 
-        while (j <= 5) {
+        while (i <= 5) {
+            URL url2 = ResourceManager.class.getClassLoader().getResource("character//" + i + ".gif");
             playerSprites.add(new ImagePattern(new Image(url2.toString())));
-            j++;
-
+            i++;
         }
-
     }
 }
 
