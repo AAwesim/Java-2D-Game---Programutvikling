@@ -8,7 +8,12 @@ import sample.Entity.Enemy;
 import sample.Entity.Enemy1;
 //import sample.Entity.Enemy2;
 import sample.Entity.EntityCreator;
+import sample.Tools.ResourceManager;
+
 import java.util.ArrayList;
+
+import static javafx.scene.paint.Color.BROWN;
+import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.color;
 
 public class mapCreator {
@@ -19,20 +24,21 @@ public class mapCreator {
 
     private EntityCreator ec = new EntityCreator();
 
-    private static final String Dit = "file:ressurser\\\\Dirt.png";
+/*    private static final String Dit = "file:ressurser\\\\Dirt.png";
     Image D = new Image(Dit);
     final private ImagePattern Dirt = new ImagePattern(D);
 
     private static final String testPic = "file:ressurser\\\\Grass.png";
     Image img = new Image(testPic);
-    final private ImagePattern Grass = new ImagePattern(img);
+    final private ImagePattern Grass = new ImagePattern(img);*/
 
     public Enemy1 e1;
     public Enemy1 e2;
     public int ecount = 0;
 
+    private ArrayList<ImagePattern> textures = ResourceManager.mapTextures;
     public  ArrayList<Rectangle> map = new ArrayList<>();
-    public static final ArrayList<Enemy> Emap = new ArrayList<>();
+    private  ArrayList<Enemy> Emap = new ArrayList<>();
 
 
     private String[] LEVELARRAY = Map.getMapArray();
@@ -48,7 +54,7 @@ public class mapCreator {
                     case '1':
                         Rectangle mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
                         // mapPart1.setFill(Color.DARKGREEN);
-                        mapPart1.setFill(Grass);
+                        mapPart1.setFill(textures.get(0));
                         map.add(mapPart1);
                         break;
                     case '2':
@@ -59,7 +65,7 @@ public class mapCreator {
                     case '3':
                         mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
                         //mapPart1.setFill(Color.rgb(97, 63, 16));
-                        mapPart1.setFill(Dirt);
+                        mapPart1.setFill(textures.get(1));
                         map.add(mapPart1);
                         break;
                     case '4':

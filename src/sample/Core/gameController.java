@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.Map;
 import sample.Map.mapCreator;
+import sample.Tools.ResourceManager;
 import sample.Tools.StateManager;
 import java.io.*;
 import java.net.URL;
@@ -86,12 +87,12 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                     if (KeyA) {
                         PlayerCollisionX(4, mainPlayer);
-                        mainPlayer.setFill(mainPlayer.getSprites().get(5));
+                        mainPlayer.setFill(ResourceManager.playerSprites.get(5));
                     } else if (KeyD) {
                         PlayerCollisionX(4, mainPlayer);
-                        mainPlayer.setFill(mainPlayer.getSprites().get(4));
+                        mainPlayer.setFill(ResourceManager.playerSprites.get(4));
                     } else if(!KeyA && !KeyD) {
-                        mainPlayer.setFill(mainPlayer.getSprites().get(0));
+                        mainPlayer.setFill(ResourceManager.playerSprites.get(0));
                     }
 
                     PitCheck(mainPlayer,gamePane);
@@ -114,7 +115,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void init(Pane p) {
-        BackgroundImage BI = new BackgroundImage(new Image("file:ressurser\\\\Hills.png", 805, 525, false, true), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        BackgroundImage BI = new BackgroundImage((ResourceManager.background), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
         keyHandlerInit(p);
 
         mc.initMap(p);
@@ -342,15 +343,16 @@ public class gameController implements Initializable, Serializable, EventHandler
 
 
     public void Terminate() {
+        System.out.println("TERMINATED");
+        timer.stop();
+        running = false;
+
         gamePane.getChildren().clear();
         gpWrap.getChildren().clear();
         mc.getMap().clear();
         mc.getEMap().clear();
         Enemyh.getEnemyh().getE1List().clear();
         Enemyh.getEnemyh().getE2List().clear();
-        mainPlayer.getSprites().clear();
-
-        timer.stop();
 
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);

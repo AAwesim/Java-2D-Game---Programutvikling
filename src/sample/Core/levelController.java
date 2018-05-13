@@ -69,9 +69,12 @@ public class levelController implements Initializable{
         out.writeObject(tempMap);
     }
 
-    public void loadMap(String s) throws IOException, ClassNotFoundException {
-        ObjectInputStream in = new ObjectInputStream(new FileInputStream(("ressurser//maps//"+s+".map")));
+    public static void loadMap(String s) throws IOException, ClassNotFoundException {
+        InputStream is = levelController.class.getClassLoader().getResourceAsStream("maps/"+s+".map");
+        System.out.println(is.toString());
+        ObjectInputStream in = new ObjectInputStream(is);
         Map.setMapArray((String[]) in.readObject());
+        is.close();
         in.close();
     }
 }

@@ -21,20 +21,10 @@ public class Player extends Rectangle implements Entity, Serializable {
     private double ySpeed = 4;
     private int MaxySpeed = 7;
 
-    public ArrayList<ImagePattern> getSprites() {
-        return sprites;
-    }
-
-    private ArrayList<ImagePattern> sprites = ResourceManager.playerSprites;
-
     //Setter opp entiteten Player sine vilkårlige verdier.
     public void initPlayer(Pane p) {
         this.setHeight(45);
         this.setWidth(36);
-       // this.setFill();
-        //this.setFill(BLUE);
-        //this.strokeProperty();
-       // this.setStroke(Color.ALICEBLUE);
         this.setX(posX);
         p.getChildren().add(this);
     }
@@ -102,4 +92,5 @@ public class Player extends Rectangle implements Entity, Serializable {
     public int getMaxySpeed() {
         return MaxySpeed;
     }
+
 }
