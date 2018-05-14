@@ -22,12 +22,12 @@ public final class Enemyh {
         switch (i) {
             case 1:
                 for (int j = 0; j < getE1List().size(); j++) {
-                    Enemy1.getEnemy().Enemy1Movement(Enemyh.getEnemyh().getE1List().get(j));
+                    Enemy1.getEnemy().Enemy1Movement(E1List.get(j));
                 }
                 break;
             case 2:
                 for (int jj = 0; jj < getsizeE2List(); jj++) {
-                    Enemy2.getEnemy().Enemy2Movement(Enemyh.getEnemyh().getE2List().get(jj));
+                    Enemy2.getEnemy().Enemy2Movement(E2List.get(jj));
                 }
                 break;
         }
