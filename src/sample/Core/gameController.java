@@ -37,7 +37,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     public int i = 0;
 
     private static boolean running = true;
-    public boolean boo=true;
+    public boolean intervalShooting=true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -122,7 +122,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                 this.KeyD = false;
             }
             if (e.getCode()==KeyCode.C){
-                boo=true;
+                intervalShooting=true;
             }
         });
     }
@@ -155,8 +155,8 @@ public class gameController implements Initializable, Serializable, EventHandler
                 break;
             case C:
 
-                if(boo) {
-                    boo=false;
+                if(intervalShooting) {
+                    intervalShooting=false;
                     bully.initBullet(mainPlayer.getPosX() + 10, mainPlayer.getPosY());
                 }
                 break;
