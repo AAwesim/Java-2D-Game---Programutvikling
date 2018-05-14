@@ -325,8 +325,8 @@ public class gameController implements Initializable, Serializable, EventHandler
         mapCreator.getERMap().clear();
         mapCreator.getECMap().clear();
 
-      //System.out.println("EMAP a"+mc.getEMap().size());
-      //System.out.println("EMAP b"+mapCreator.getEMap().size());
+        System.out.println("EMAP a"+mc.getEntityMap());
+        System.out.println("EMAP b"+mapCreator.getERMap());
 
         mc.setEntityMap(null);
         mc.setMap(null);

@@ -43,12 +43,24 @@ public class Player extends Rectangle implements Serializable {
         setY(posY);
     }
 
+    /**
+     * Beveger en instanse av player til venstre:
+     * setter player sin xSpeed lik -x og
+     * setter player sin posX lik posX+xspeed     *
+     * @param x
+     */
     public void MoveLeft(int x) {
         //System.out.println("MLeft");
         setxSpeed(-x);
         setPosX(getPosX()+xSpeed);
     }
 
+    /**
+     * Beveger en instanse av player til høyre:
+     * setter player sin xSpeed lik x og
+     * setter player sin posX lik posX+xSpeed
+     * @param x
+     */
     public void MoveRight(int x) {
       //  System.out.println("MRight");
         setxSpeed(x);
