@@ -16,8 +16,8 @@ public final class EnemyHandler {
     }
 
     //Kaller på Enemyene sin Movement metode for hver Enemy avhengig om det er enemy 1 eller 2
-    public void EnemyMove(char i) {
-        switch (i) {
+    public void EnemyMove(char Dir) {
+        switch (Dir) {
             case 'X':
                 for (int j = 0; j < getsizeEnemyXList(); j++) {
                     EnemyDecoration.getEnemy().EnemyXMovement(EnemyXList.get(j));
