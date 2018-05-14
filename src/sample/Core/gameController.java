@@ -25,12 +25,8 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     private EntityCreator ec = new EntityCreator();
     private Player mainPlayer = (Player) ec.getEntity("PLAYER");
+    private Enemy enemy = new Enemy();
 
-    public EnemyHandler getEH() {
-        return this.EH;
-    }
-
-    public EnemyHandler EH = new EnemyHandler();
 
     private AnimationTimer timer;
     private mapCreator mc;
@@ -64,7 +60,7 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                 if (running) {
                     runtime();
-                    EH.renderEnemies();
+                    enemy.renderEntity();
 
                     if (!gravitycheck(mainPlayer)) {
                         mainPlayer.gravity();
@@ -82,10 +78,10 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                     PitCheck(mainPlayer,gamePane);
 
-                    PlayerEnemyColl(mainPlayer);
+                   // PlayerEnemyColl(mainPlayer);
 
                     mainPlayer.updatePlayerState();
-                    mainPlayer.renderPlayer();
+                    mainPlayer.renderEntity();
 
                     view(mainPlayer,gamePane);
                     playerMapCollisionChecker2(mainPlayer);
@@ -173,7 +169,7 @@ public class gameController implements Initializable, Serializable, EventHandler
             case F3:
                 try {
                     loadSave();
-                    mainPlayer.renderPlayer();
+                    mainPlayer.renderEntity();
                     System.out.println(mainPlayer.toString());
                 } catch (Exception e2) {
                     System.out.println(e);
@@ -290,14 +286,15 @@ public class gameController implements Initializable, Serializable, EventHandler
         gameController.running = running;
     }
 
-    public void PlayerEnemyColl(Player p) {
+  /*  public void PlayerEnemyColl(Player p) {
+        System.out.println(st);
         for (Enemy enemy : mc.getEMap()) {
-            if (p.intersects(enemy.getBoundsInLocal())) {
+            if (p.intersects(enemy.getBoundsInParent())) {
                 p.setPosX(110);
                 p.setPosY(300);
             }
         }
-    }
+    }*/
 
     /*//må kalles hver gang vi endrer map, dersom map størrelsene skal være forskjellige.
     //Setter gamePane witdh lik maplengden
@@ -336,8 +333,8 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc.getMap().clear();
         mc.getEMap().clear();
 
-        EH.getE1List().clear();
-        EH.getE2List().clear();
+     //   EH.getE1List().clear();
+      //  EH.getE2List().clear();
 
         mc.setEmap(null);
         mc.setMap(null);
@@ -347,7 +344,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.setOnKeyPressed(null);
         gamePane.setOnKeyReleased(null);
 
-        EH = null;
+       // EH = null;
         timer = null;
         gpWrap = null;
         gamePane = null;

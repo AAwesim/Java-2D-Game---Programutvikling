@@ -1,10 +1,13 @@
 package sample.Entity;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 
 public class EntityCreator {
+
+    public EnemyHandler EH = new EnemyHandler();
 
     public Entity getEntity(String type) {
         switch (type.toUpperCase()) {
@@ -15,14 +18,14 @@ public class EntityCreator {
         }
     }
 
-    public Enemy getEnemy(int type, double EPosX, double EPosY, Pane pe) {
+    public Entity getEnemy(int type, double EPosX, double EPosY, Pane pe) {
         switch (type) {
             case 1:
-                return new Enemy(type,EPosX, EPosY, pe );
+                new Enemy1(EPosX, EPosY, pe );
             case 2:
-                return new Enemy(type,EPosX, EPosY, pe);
+                new Enemy2(EPosX, EPosY, pe);
             case 3:
-                return new Enemy(type,EPosX, EPosY, pe);
+                new Enemy3(EPosX, EPosY, pe);
             default :
                 return null;
         }

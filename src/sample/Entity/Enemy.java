@@ -4,29 +4,28 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class Enemy extends Rectangle {
+public class Enemy extends rectangle {
 
-    private static int width = 35;
-    private static int height = 35;
-    private double EPosX;
-    private double EPosY;
-    private int a ;
+    protected static int width = 35;
+    protected static int height = 35;
+    protected double EPosX;
+    protected double EPosY;
+
 
     //konstruerer Enemy
-    public Enemy(int type, double EPosX, double EPosY, Pane p) {
+    public Enemy() {
         this.setEPosX(EPosX);
         this.setX(EPosX);
         this.setEPosY(EPosY);
         this.setY(EPosY);
-       // System.out.println("Enemy");
         this.setFill(Color.RED);
         this.setWidth(width);
         this.setHeight(height);
-        if(type==1){this.setFill(Color.RED); EH().addE1List(this);}
-        if(type==2){this.setFill(Color.DARKBLUE); EH().addE2List(this);}
-        if(type==3){this.setFill(Color.BLACK);}
-        p.getChildren().add(this);
+       // if(type==1){this.setFill(Color.RED); }//EH().addE1List(this);}
+       // if(type==2){this.setFill(Color.DARKBLUE); }//EH().addE2List(this);}
+      //  if(type==3){this.setFill(Color.BLACK);}
     }
+
 
     //Getters og setters
 
@@ -45,6 +44,8 @@ public class Enemy extends Rectangle {
     public double getEPosY() {
         return EPosY;
     }
+
+
 }
 
     /*public void e1() {
@@ -54,8 +55,8 @@ public class Enemy extends Rectangle {
         }
     }
  /*
-        public void Enemygravity() {
-        if (ySpeed<7)
+     public void Enemygravity() {
+       if (ySpeed<7)
             ySpeed = ySpeed+0.3;
     }
 

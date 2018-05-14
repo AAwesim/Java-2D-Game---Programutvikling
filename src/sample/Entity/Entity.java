@@ -1,9 +1,11 @@
 package sample.Entity;
 
+import javafx.scene.shape.Rectangle;
 
-public interface Entity {
+
+public interface  Entity {
 
 
-    //Gjør at alle entiteter må opprette en avatar
-   /*void createAvatar();*/
+    void renderEntity();
+
 }

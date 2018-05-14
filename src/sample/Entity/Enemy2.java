@@ -1,13 +1,28 @@
 package sample.Entity;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class Enemy2 extends Enemy{
 
     private int i;
 
-    public Enemy2(int type, double EPosX, double EPosY, Pane p) {
-        super(type, EPosX, EPosY, p);
+    private static int width = 35;
+    private static int height = 35;
+    protected double EPosX;
+    protected double EPosY;
+
+    public Enemy2(double EPosX, double EPosY, Pane p) {
+
+        this.setEPosX(EPosX);
+        this.setX(EPosX);
+        this.setEPosY(EPosY);
+        this.setY(EPosY);
+        this.setFill(Color.BLUE);
+        this.setWidth(width);
+        this.setHeight(height);
+//        p.getChildren().add(this);
+    //    EH.E2List.add(this);
     }
 
     public void Enemy2Movement(Enemy e) {

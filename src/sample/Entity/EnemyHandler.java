@@ -2,13 +2,13 @@ package sample.Entity;
 
 import java.util.ArrayList;
 
-public class EnemyHandler extends Enemy {
+public class EnemyHandler extends Enemy{
 
     //oppretter 2 arraylister av typen enemy
-    public ArrayList<Enemy> E1List = new ArrayList<>();
-    public ArrayList<Enemy> E2List = new ArrayList<>();
+    public ArrayList<Enemy1> E1List = new ArrayList<>();
+    public ArrayList<Enemy2> E2List = new ArrayList<>();
 
-    public void renderEnemies() {
+    public void renderEntity() {
             EnemyMove(1);
            // E1List.get(i).setX(E1List.get(i).getEPosX());
           //  getE1List().get(i).setY(getE1List().get(i).getEPosY());
@@ -19,33 +19,34 @@ public class EnemyHandler extends Enemy {
     public void EnemyMove(int i) {
         switch (i) {
             case 1:
-                for (int j = 0; j < getE1List().size(); j++) {
-                    Enemy1Movement(getE1List().get(j));
+                for (int j= 0; j < getE1List().size(); j++) {
+                    E1List.get(j).Enemy1Movement(E1List.get(j));
                 }
                 break;
             case 2:
-                for (int jj = 0; jj < getsizeE2List(); jj++) {
-                    Enemy2.getEnemy2().Enemy2Movement(EnemyHandler.getEnemyh().getE2List().get(jj));
+                for (int j = 0; j < getsizeE2List(); j++) {
+                    E2List.get(j).Enemy2Movement(E2List.get(j));
                 }
                 break;
         }
     }
 
-    public ArrayList<Enemy> getE1List() {
+    public ArrayList<Enemy1> getE1List() {
         return E1List;
     }
 
-    public ArrayList<Enemy> getE2List() {
+    public ArrayList<Enemy2> getE2List() {
         return E2List;
     }
 
-    public void addE1List(Enemy e) {
+    public void addE1List(Enemy1 e) {
         E1List.add(e);
     }
 
-    public void addE2List(Enemy e) {
+    public void addE2List(Enemy2 e) {
         E2List.add(e);
     }
+
     public int getsizeE2List() {
         return E2List.size();
     }

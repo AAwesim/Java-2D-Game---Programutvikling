@@ -1,6 +1,8 @@
 package sample.Core;
 
-public class Collision {
+public class Collision extends gameController {
+
+
 
 
 }

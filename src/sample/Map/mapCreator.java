@@ -3,9 +3,7 @@ package sample.Map;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import sample.Entity.Enemy;
-import sample.Entity.Enemy1;
-import sample.Entity.EntityCreator;
+import sample.Entity.*;
 import sample.Tools.ResourceManager;
 import java.util.ArrayList;
 import static javafx.scene.paint.Color.color;
@@ -59,38 +57,27 @@ public class mapCreator {
                         map.add(mapPart1);
                         break;
                     case '4':
-                        ecount++;
-                        Enemy enemy1 = ec.getEnemy(1,j * widthscalar,i * scalar, pe);
+
+                        Entity enemy1 = ec.getEnemy(1,j * widthscalar,i * scalar, pe);
                         if(enemy1!=null)
-                            Emap.add(enemy1);
+                         //   Emap.add(enemy1);
                         //System.out.println("mapCreator Emap: "+Emap);
                         break;
                      case '5':
-                        Enemy enemy2 = ec.getEnemy(2,j * widthscalar,i * scalar, pe);
+                         Entity enemy2 = ec.getEnemy(2,j * widthscalar,i * scalar, pe);
                         if(enemy2!=null)
-                            Emap.add(enemy2);
+                          //  Emap.add(enemy2);
                         break;
                     case '6':
-                        Enemy enemy3 = ec.getEnemy(3,j * widthscalar,i * scalar, pe);
+                        Entity enemy3 = ec.getEnemy(3,j * widthscalar,i * scalar, pe);
                         if(enemy3!=null)
-                            Emap.add(enemy3);
+                           // Emap.add(enemy3);
                         break;
                     default:
                         break;
 
                 }
             }
-        }
-    }
-
-    public Enemy1 getEnemy1(int e) {
-        switch (e) {
-            case 1 :
-                return e1;
-            case 2 :
-                return e2;
-            default:
-                return null;
         }
     }
 
