@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import static javafx.scene.paint.Color.BLUE;
 
-public class Player extends Rectangle implements Entity, Serializable {
+public class Player extends Rectangle implements Serializable {
 
     private double posX = 300;
     private double posY = 300;
@@ -44,13 +44,13 @@ public class Player extends Rectangle implements Entity, Serializable {
     }
 
     public void MoveLeft(int x) {
-        System.out.println("MLeft");
+        //System.out.println("MLeft");
         setxSpeed(-x);
         setPosX(getPosX()+xSpeed);
     }
 
     public void MoveRight(int x) {
-        System.out.println("MRight");
+      //  System.out.println("MRight");
         setxSpeed(x);
         setPosX(getPosX()+xSpeed);
     }

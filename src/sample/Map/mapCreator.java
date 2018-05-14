@@ -3,9 +3,7 @@ package sample.Map;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import sample.Entity.Enemy;
-import sample.Entity.Enemy1;
-import sample.Entity.EntityCreator;
+import sample.Entity.*;
 import sample.Tools.ResourceManager;
 import java.util.ArrayList;
 import static javafx.scene.paint.Color.color;
@@ -15,11 +13,11 @@ public class mapCreator {
     private int scalar = 50;
     private int widthscalar = 50;
 
-    private EntityCreator ec = new EntityCreator();
-
     private  ArrayList<ImagePattern> textures;
     private  ArrayList<Rectangle> map = new ArrayList<>();
-    private  ArrayList<Enemy> Emap = new ArrayList<>();
+    private static ArrayList<EnemyRect> ERMap = new ArrayList<>();
+    private static ArrayList<EnemyCircle> ECMap = new ArrayList<>();
+    private ArrayList<Entity> EntityMap = new ArrayList<>();
 
     public mapCreator(){
         textures = ResourceManager.mapTextures;
@@ -37,7 +35,7 @@ public class mapCreator {
                     case '1':
                         Rectangle mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
                         // mapPart1.setFill(Color.DARKGREEN);
-                        mapPart1.setFill(textures.get(0));
+                        mapPart1.setFill(textures.get(1));
                         map.add(mapPart1);
                         break;
                     case '2':
@@ -48,28 +46,23 @@ public class mapCreator {
                     case '3':
                         mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
                         //mapPart1.setFill(Color.rgb(97, 63, 16));
-                        mapPart1.setFill(textures.get(1));
+                        mapPart1.setFill(textures.get(0));
                         map.add(mapPart1);
                         break;
                     case '4':
-                        Enemy enemy1 = ec.getEnemy(1,j * widthscalar,i * scalar, pe);
-                        if(enemy1!=null)
-                            Emap.add(enemy1);
-                        //System.out.println("mapCreator Emap: "+Emap);
+                        Entity enemy1 = new EntityMovingYDecorator(new EnemyRect(j * widthscalar, i * scalar, pe));
+                        EntityMap.add(enemy1);
                         break;
-                     case '5':
-                        Enemy enemy2 = ec.getEnemy(2,j * widthscalar,i * scalar, pe);
-                        if(enemy2!=null)
-                            Emap.add(enemy2);
+                    case '5':
+                        Entity enemy2 = new EntityMovingXDecorator(new EnemyRect( j * widthscalar, i * scalar, pe));
+                        EntityMap.add(enemy2);
                         break;
                     case '6':
-                        Enemy enemy3 = ec.getEnemy(3,j * widthscalar,i * scalar, pe);
-                        if(enemy3!=null)
-                            Emap.add(enemy3);
+                        Entity enemy3 = new EntityMovingYDecorator(new EnemyCircle( j * widthscalar, i * scalar,30, pe));
+                        EntityMap.add(enemy3);
                         break;
                     default:
                         break;
-
                 }
             }
         }
@@ -81,12 +74,23 @@ public class mapCreator {
         return rect;
     }
 
-    public ArrayList<Enemy> getEMap() {
-        return Emap;
+    public static ArrayList<EnemyCircle> getECMap() {
+        return ECMap;
     }
 
-    public int getSizeEMap() {
-        return Emap.size();
+    public static void setECMap(ArrayList<EnemyCircle> ECMap) {
+        mapCreator.ECMap = ECMap;
+    }
+    public static ArrayList<EnemyRect> getERMap() {
+        return ERMap;
+    }
+
+    public ArrayList<Entity> getEntityMap() {
+        return EntityMap;
+    }
+
+    public void setEntityMap(ArrayList<Entity> entityMap) {
+        EntityMap = entityMap;
     }
 
     public int getmapLength() {
@@ -109,11 +113,7 @@ public class mapCreator {
         this.map = map;
     }
 
-    public ArrayList<Enemy> getEmap() {
-        return Emap;
-    }
-
-    public void setEmap(ArrayList<Enemy> emap) {
-        Emap = emap;
+    public void setERMap(ArrayList<EnemyRect> ERMap) {
+        mapCreator.ERMap = ERMap;
     }
 }
