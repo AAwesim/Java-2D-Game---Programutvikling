@@ -22,8 +22,8 @@ public class Enemy extends Rectangle {
         this.setFill(Color.RED);
         this.setWidth(width);
         this.setHeight(height);
-        if(type==1){this.setFill(Color.RED);EnemyHandler.getEnemyh().addE1List(this);}
-        if(type==2){this.setFill(Color.DARKBLUE);EnemyHandler.getEnemyh().addE2List(this);}
+        if(type==1){this.setFill(Color.RED);EnemyHandler.getEnemyHandler().addEnemyXList(this);}
+        if(type==2){this.setFill(Color.DARKBLUE);EnemyHandler.getEnemyHandler().addEnemyYList(this);}
         if(type==3){this.setFill(Color.BLACK);}
         p.getChildren().add(this);
     }
@@ -48,9 +48,9 @@ public class Enemy extends Rectangle {
 }
 
     /*public void e1() {
-        for(int i = 0; i<getE1List().size(); i++) {
-            getE1List().get(i).setX(getE1List().get(i).getEPosX());
-            getE1List().get(i).setY(getE1List().get(i).getEPosY());
+        for(int i = 0; i<getEnemyXList().size(); i++) {
+            getEnemyXList().get(i).setX(getEnemyXList().get(i).getEPosX());
+            getEnemyXList().get(i).setY(getEnemyXList().get(i).getEPosY());
         }
     }
  /*
