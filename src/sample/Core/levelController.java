@@ -17,10 +17,10 @@ public class levelController implements Initializable{
 
     /*MIDDLERTIDIG: Hvis dere vil endre på mappet må dere endre her også trykke på generate map.*/
     public final static String[] tempMap = new String[] {
-            "000000000000333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
-            "000000000000333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
-            "0600000000003333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
-            "00000000000000000000000000000000000000000000000000000005000000000000000000000000000000000000000000",
+            "000011111100333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+            "000011111100333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+            "0600111111003333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+            "00001111110000000000000000000000000000000000000000000005000000000000000000000000000000000000000000",
             "00405040500000050000500000000000000000000000000000000000000000000000000000000000000000000000000000",
             "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
             "0040504050000000000000000000000000000111111111111111111111111111111111111111111111111111111111111",
@@ -51,17 +51,23 @@ public class levelController implements Initializable{
                 StateManager.changeScene(event, StateManager.GameState.GAME);
             break;
 
+            case "3":
+                loadMap("3");
+
+                StateManager.changeScene(event, StateManager.GameState.GAME);
+                break;
+
         }
     }
 
     public void generateMap(ActionEvent actionEvent) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ressurser/maps/2.map"));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ressurser/maps/3.map"));
         out.writeObject(tempMap);
         out.close();
     }
 
     public void generateMap() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ressurser/maps/2.map"));
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ressurser/maps/3.map"));
         out.writeObject(tempMap);
         out.close();
     }
