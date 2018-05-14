@@ -5,7 +5,7 @@ import javafx.scene.layout.Pane;
 
 public interface Entity {
 
-    default void RenderEntity() {
+    default void RenderEntity(){
 
     }
 }

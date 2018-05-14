@@ -12,7 +12,7 @@ public class PlayerCreator {
                 return null;
         }
     }
-    }
+}
 /*
     public Entity getEnemy(int type, double CPosX, double CPosY, Pane pe) {
         switch (type) {

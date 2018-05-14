@@ -18,7 +18,8 @@ public class mapCreator {
 
     private  ArrayList<ImagePattern> textures;
     private  ArrayList<Rectangle> map = new ArrayList<>();
-    private static ArrayList<EnemyRect> EMap = new ArrayList<>();
+    private static ArrayList<EnemyRect> ERMap = new ArrayList<>();
+    private static ArrayList<EnemyCircle> ECMap = new ArrayList<>();
     private ArrayList<Entity> EntityMap = new ArrayList<>();
 
     public mapCreator(){
@@ -60,7 +61,7 @@ public class mapCreator {
                         EntityMap.add(enemy1);
                         break;
                     case '5':
-                        Entity enemy2 = new EntityMovingYDecorator(new EnemyRect(j * widthscalar, i * scalar, pe));
+                        Entity enemy2 = new EnemyRect(j * widthscalar, i * scalar, pe);
                         //Entity enemy2 = new EntityMovingYDecorator(new EnemyRect( j * widthscalar, i * scalar, pe));
                         EntityMap.add(enemy2);
                         break;
@@ -84,12 +85,15 @@ public class mapCreator {
         return rect;
     }
 
-    public static ArrayList<EnemyRect> getEMap() {
-        return EMap;
+    public static ArrayList<EnemyCircle> getECMap() {
+        return ECMap;
     }
 
-    public int getSizeEMap() {
-        return EMap.size();
+    public static void setECMap(ArrayList<EnemyCircle> ECMap) {
+        mapCreator.ECMap = ECMap;
+    }
+    public static ArrayList<EnemyRect> getERMap() {
+        return ERMap;
     }
 
     public ArrayList<Entity> getEntityMap() {
@@ -120,11 +124,7 @@ public class mapCreator {
         this.map = map;
     }
 
-    public ArrayList<EnemyRect> getEmap() {
-        return EMap;
-    }
-
-    public void setEmap(ArrayList<EnemyRect> EMap) {
-        EMap = EMap;
+    public void setERMap(ArrayList<EnemyRect> ERMap) {
+        mapCreator.ERMap = ERMap;
     }
 }

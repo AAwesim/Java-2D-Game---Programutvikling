@@ -26,7 +26,6 @@ public class gameController implements Initializable, Serializable, EventHandler
     private PlayerCreator pc = new PlayerCreator();
     private Player mainPlayer = (Player) pc.getEntity("PLAYER");
 
-
     private AnimationTimer timer;
     private mapCreator mc;
 
@@ -42,7 +41,6 @@ public class gameController implements Initializable, Serializable, EventHandler
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         mc = new mapCreator();
-
         running = true;
         setNull = false;
         init(gamePane);
@@ -71,7 +69,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                     } else if (KeyD) {
                         PlayerCollisionX(4, mainPlayer);
                         mainPlayer.setFill(ResourceManager.playerSprites.get(4));
-                    } else if(!KeyA && !KeyD) {
+                    } else {
                         mainPlayer.setFill(ResourceManager.playerSprites.get(0));
                     }
 
@@ -290,8 +288,14 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void PlayerEnemyColl(Player p) {
-        for (EnemyRect enemyRect : mapCreator.getEMap()) {
+        for (EnemyRect enemyRect : mapCreator.getERMap()) {
             if (p.intersects(enemyRect.getBoundsInParent())) {
+                p.setPosX(110);
+                p.setPosY(300);
+            }
+        }
+        for (EnemyCircle enemyCircle : mapCreator.getECMap()) {
+            if (p.intersects(enemyCircle.getBoundsInParent())) {
                 p.setPosX(110);
                 p.setPosY(300);
             }
@@ -324,14 +328,16 @@ public class gameController implements Initializable, Serializable, EventHandler
         gpWrap.getChildren().clear();
         mc.getMap().clear();
         mc.getEntityMap().clear();
-        mapCreator.getEMap().clear();
+        mapCreator.getERMap().clear();
+        mapCreator.getECMap().clear();
+
       //System.out.println("EMAP a"+mc.getEMap().size());
       //System.out.println("EMAP b"+mapCreator.getEMap().size());
 
      // EH.getE1List().clear();
       //EH.getE2List().clear();
 
-        mc.setEmap(null);
+        mc.setEntityMap(null);
         mc.setMap(null);
         mc.setTextures(null);
 
@@ -357,6 +363,8 @@ public class gameController implements Initializable, Serializable, EventHandler
         if (i%60==0){
             System.out.println("runtime:"+ i/60);
         System.out.println("Entities: "+mc.getEntityMap().size());
-        System.out.println("Enemies: "+mc.getEmap().size());}
+        System.out.println("Enemies: "+mc.getERMap().size());
+        System.out.println("Enemies: "+mc.getECMap().size());
+        }
     }
 }

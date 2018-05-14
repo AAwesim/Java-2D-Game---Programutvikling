@@ -1,7 +1,5 @@
 package sample.Entity;
 
-import javafx.scene.shape.Shape;
-
 public class EntityMovingXDecorator extends EntityDecorator {
 
 private int a;
@@ -28,10 +26,10 @@ private int a;
         if (a%60==0)
         System.out.println("MoveXEnemyRect/2: "+ a/60);
 
-        if (e.getX() > e.getEPosX() + 200) {
+        if (e.getX() > e.getRPosX() + 200) {
             i = -2;
         }
-        if (e.getX() <= e.getEPosX()) {
+        if (e.getX() <= e.getRPosX()) {
             i = 2;
         }
         e.setX(e.getX()+i);

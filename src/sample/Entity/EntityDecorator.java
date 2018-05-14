@@ -3,7 +3,6 @@ package sample.Entity;
 * Decorates Entities
 */
 
-
 public abstract class EntityDecorator implements Entity {
 
     protected Entity decoratedEntity;

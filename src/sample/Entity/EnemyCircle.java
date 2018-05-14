@@ -2,6 +2,7 @@ package sample.Entity;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
+import sample.Map.mapCreator;
 
 import static javafx.scene.paint.Color.BLUE;
 
@@ -19,6 +20,7 @@ public class EnemyCircle extends Circle implements Entity {
         setCPosY(centerY);
         setFill(BLUE);
         p.getChildren().add(this);
+        mapCreator.getECMap().add(this);
     }
 
     public void setCPosX(double CPosX) {
@@ -36,6 +38,4 @@ public class EnemyCircle extends Circle implements Entity {
     public double getCPosY() {
         return CPosY;
     }
-
-
 }

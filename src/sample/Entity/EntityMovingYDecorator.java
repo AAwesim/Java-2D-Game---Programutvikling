@@ -1,14 +1,9 @@
 package sample.Entity;
 
-import javafx.scene.shape.Shape;
-
 public class EntityMovingYDecorator extends EntityDecorator {
 
     private int a;
-
     private int i;
-
-
 
     public EntityMovingYDecorator(Entity decoratedEntity) {
         super(decoratedEntity);
@@ -28,10 +23,10 @@ public class EntityMovingYDecorator extends EntityDecorator {
         if (a%60==0)
             System.out.println("MoveYEnemyRect/2: "+ a/60);
 
-        if (e.getY() > e.getEPosY() + 200) {
+        if (e.getY() > e.getRPosY() + 200) {
             i = -2;
         }
-        if (e.getY() <= e.getEPosY()) {
+        if (e.getY() <= e.getRPosY()) {
             i = 2;
         }
         e.setY(e.getY()+i);
