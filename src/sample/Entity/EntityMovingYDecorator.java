@@ -9,7 +9,7 @@ public class EntityMovingYDecorator extends EntityDecorator {
         super(decoratedEntity);
     }
 
-    @Override
+
     public void RenderEntity() {
         if (decoratedEntity instanceof EnemyRect){
             MoveYEnemyRect((EnemyRect)decoratedEntity);
@@ -19,10 +19,6 @@ public class EntityMovingYDecorator extends EntityDecorator {
     }
 
     private void MoveYEnemyRect(EnemyRect e) {
-        a++;
-        if (a%60==0)
-            System.out.println("MoveYEnemyRect/2: "+ a/60);
-
         if (e.getY() > e.getRPosY() + 200) {
             i = -2;
         }

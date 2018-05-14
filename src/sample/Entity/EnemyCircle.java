@@ -13,12 +13,12 @@ public class EnemyCircle extends Circle implements Entity {
     protected double CPosY;
 
     public EnemyCircle(double centerX, double centerY, double radius, Pane p){
-        setCenterX(centerX);
-        setCenterY(centerY);
-        setRadius(radius);
-        setCPosX(centerX);
-        setCPosY(centerY);
-        setFill(BLUE);
+        this.setCenterX(centerX);
+        this.setCenterY(centerY);
+        this.setRadius(radius);
+        this.setCPosX(centerX);
+        this.setCPosY(centerY);
+        this.setFill(BLUE);
         p.getChildren().add(this);
         mapCreator.getECMap().add(this);
     }
@@ -37,5 +37,11 @@ public class EnemyCircle extends Circle implements Entity {
 
     public double getCPosY() {
         return CPosY;
+    }
+
+    @Override
+    public void RenderEntity() {
+        System.out.println("EnemyRect: "+ 60);
+
     }
 }

@@ -34,7 +34,6 @@ public class gameController implements Initializable, Serializable, EventHandler
     private static boolean setNull = false;
 
     public int i = 0;
-    public int d = 0;
 
     private static boolean running = true;
 
@@ -78,18 +77,16 @@ public class gameController implements Initializable, Serializable, EventHandler
                     for (int i=0; i<mc.getEntityMap().size();i++) {
                         mc.getEntityMap().get(i).RenderEntity();
                     }
+
                     mainPlayer.renderPlayer();
                     PlayerEnemyColl(mainPlayer);
 
                     mainPlayer.updatePlayerState();
 
-
                     view(mainPlayer,gamePane);
                     playerMapCollisionChecker2(mainPlayer);
 
                 } else return;
-
-
             }
         };
 
@@ -245,15 +242,12 @@ public class gameController implements Initializable, Serializable, EventHandler
                 }
             }
         }
-       // System.out.println(p.getPosX());
-       // System.out.println(speed);
         if (KeyD) {
             p.MoveRight(speed);
         } else if (KeyA) {
             p.MoveLeft(speed);
         }
     }
-
 
     public void playerSave(Player p) throws IOException {
         FileOutputStream fo = new FileOutputStream("playersave.ser");
@@ -334,9 +328,6 @@ public class gameController implements Initializable, Serializable, EventHandler
       //System.out.println("EMAP a"+mc.getEMap().size());
       //System.out.println("EMAP b"+mapCreator.getEMap().size());
 
-     // EH.getE1List().clear();
-      //EH.getE2List().clear();
-
         mc.setEntityMap(null);
         mc.setMap(null);
         mc.setTextures(null);
@@ -344,7 +335,6 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);
         gamePane.setOnKeyReleased(null);
-
        // EH = null;
         timer = null;
         gpWrap = null;
@@ -362,9 +352,9 @@ public class gameController implements Initializable, Serializable, EventHandler
         i++;
         if (i%60==0){
             System.out.println("runtime:"+ i/60);
-        System.out.println("Entities: "+mc.getEntityMap().size());
-        System.out.println("Enemies: "+mc.getERMap().size());
-        System.out.println("Enemies: "+mc.getECMap().size());
+      /*  System.out.println("Entities: "+mc.getEntityMap().size());
+        System.out.println("EnemiesR: "+mapCreator.getERMap().size());
+        System.out.println("EnemiesC: "+mapCreator.getECMap().size());*/
         }
     }
 }

@@ -44,13 +44,13 @@ public class Player extends Rectangle implements Serializable {
     }
 
     public void MoveLeft(int x) {
-        System.out.println("MLeft");
+        //System.out.println("MLeft");
         setxSpeed(-x);
         setPosX(getPosX()+xSpeed);
     }
 
     public void MoveRight(int x) {
-        System.out.println("MRight");
+      //  System.out.println("MRight");
         setxSpeed(x);
         setPosX(getPosX()+xSpeed);
     }

@@ -56,19 +56,16 @@ public class mapCreator {
                     case '4':
 
                        // Entity enemy1 = ec.getEnemy(1,j * widthscalar,i * scalar, pe);
-                        Entity enemy1 = new EntityMovingXDecorator(new EnemyRect(j * widthscalar, i * scalar, pe));
+                        Entity enemy1 = new EntityMovingYDecorator(new EnemyRect(j * widthscalar, i * scalar, pe));
                         //if(enemy1!=null)
                         EntityMap.add(enemy1);
                         break;
                     case '5':
-                        Entity enemy2 = new EnemyRect(j * widthscalar, i * scalar, pe);
-                        //Entity enemy2 = new EntityMovingYDecorator(new EnemyRect( j * widthscalar, i * scalar, pe));
+                        Entity enemy2 = new EntityMovingXDecorator(new EnemyRect( j * widthscalar, i * scalar, pe));
                         EntityMap.add(enemy2);
                         break;
                     case '6':
-                    //    Entity enemy3 = ec.getEnemy(3,j * widthscalar,i * scalar, pe);
-                         Entity enemy3 = new EntityMovingYDecorator(new EnemyCircle( j * widthscalar, i * scalar,30, pe));
-                       // if(enemy3!=null)
+                        Entity enemy3 = new EntityMovingYDecorator(new EnemyCircle( j * widthscalar, i * scalar,30, pe));
                         EntityMap.add(enemy3);
                         break;
                     default:
