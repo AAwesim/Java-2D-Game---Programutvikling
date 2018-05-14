@@ -2,7 +2,7 @@ package sample.Map;
 
 import java.io.Serializable;
 
-public class Map implements Serializable{
+public final class Map implements Serializable{
 
     private static String[] mapArray;
 
