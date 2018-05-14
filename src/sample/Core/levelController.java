@@ -51,6 +51,12 @@ public class levelController implements Initializable{
                 StateManager.changeScene(event, StateManager.GameState.GAME);
             break;
 
+            case "3":
+                loadMap("3");
+
+                StateManager.changeScene(event, StateManager.GameState.GAME);
+                break;
+
         }
     }
 
