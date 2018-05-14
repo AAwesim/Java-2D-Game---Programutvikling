@@ -28,6 +28,7 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     private AnimationTimer timer;
     private mapCreator mc;
+    public Bullet bully;
 
     private boolean KeyA = false;
     private boolean KeyD = false;
@@ -36,6 +37,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     public int i = 0;
 
     private static boolean running = true;
+    public boolean boo=true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +45,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         running = true;
         setNull = false;
         init(gamePane);
+        bully=new Bullet(gamePane);
 
         timer = new AnimationTimer() {
 
@@ -57,6 +60,7 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                 if (running) {
                     runtime();
+                    System.out.println(bully.bullets.size());
 
                     if (!gravitycheck(mainPlayer)) {
                         mainPlayer.gravity();
@@ -73,6 +77,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                     }
 
                     PitCheck(mainPlayer,gamePane);
+                    updateBullet();
 
                     for (int i=0; i<mc.getEntityMap().size();i++) {
                         mc.getEntityMap().get(i).RenderEntity();
@@ -116,6 +121,9 @@ public class gameController implements Initializable, Serializable, EventHandler
             } else if (e.getCode() == KeyCode.D || e.getCode() == KeyCode.RIGHT) {
                 this.KeyD = false;
             }
+            if (e.getCode()==KeyCode.C){
+                boo=true;
+            }
         });
     }
 
@@ -144,6 +152,14 @@ public class gameController implements Initializable, Serializable, EventHandler
                 if (gravitycheck(mainPlayer)) {
                     mainPlayer.setySpeed(-7.5);
                 }
+                break;
+            case C:
+
+                if(boo) {
+                    boo=false;
+                    bully.initBullet(mainPlayer.getPosX() + 10, mainPlayer.getPosY());
+                }
+                break;
 
             case UP:
                 if (gravitycheck(mainPlayer)) {
@@ -357,4 +373,18 @@ public class gameController implements Initializable, Serializable, EventHandler
         System.out.println("EnemiesC: "+mapCreator.getECMap().size());*/
         }
     }
+    public void updateBullet() {
+        for (Rectangle bulsy : bully.bullets) {
+            double rectX = bulsy.getX();
+            bulsy.setX(rectX + bully.getBulletSpeed());
+            for(Rectangle mapsy:mc.getMap()) {
+                if (bulsy.getBoundsInParent().intersects(mapsy.getBoundsInParent())){
+                    bully.collisionRemoveFirst(bulsy, mapsy);
+                }
+
+            }
+        }
+    }
+
+
 }
