@@ -4,7 +4,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import sample.Entity.Enemy;
-import sample.Entity.Enemy1;
 import sample.Entity.EntityCreator;
 import sample.Tools.ResourceManager;
 import java.util.ArrayList;

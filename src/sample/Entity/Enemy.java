@@ -1,14 +1,8 @@
 package sample.Entity;
 
-import javafx.scene.control.Dialog;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import sample.Map.mapCreator;
-
-import java.util.ArrayList;
 
 public class Enemy extends Rectangle {
 
@@ -28,8 +22,8 @@ public class Enemy extends Rectangle {
         this.setFill(Color.RED);
         this.setWidth(width);
         this.setHeight(height);
-        if(type==1){this.setFill(Color.RED);Enemyh.getEnemyh().addE1List(this);}
-        if(type==2){this.setFill(Color.DARKBLUE);Enemyh.getEnemyh().addE2List(this);}
+        if(type==1){this.setFill(Color.RED);EnemyHandler.getEnemyh().addE1List(this);}
+        if(type==2){this.setFill(Color.DARKBLUE);EnemyHandler.getEnemyh().addE2List(this);}
         if(type==3){this.setFill(Color.BLACK);}
         p.getChildren().add(this);
     }

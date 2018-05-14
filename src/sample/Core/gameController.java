@@ -58,7 +58,7 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                 if (running) {
                     runtime();
-                    Enemyh.getEnemyh().renderEnemies();
+                    EnemyHandler.getEnemyh().renderEnemies();
 
                     if (!gravitycheck(mainPlayer)) {
                         mainPlayer.gravity();
@@ -330,8 +330,8 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc.getMap().clear();
         mc.getEMap().clear();
 
-        Enemyh.getEnemyh().getE1List().clear();
-        Enemyh.getEnemyh().getE2List().clear();
+        EnemyHandler.getEnemyh().getE1List().clear();
+        EnemyHandler.getEnemyh().getE2List().clear();
 
         mc.setEmap(null);
         mc.setMap(null);
