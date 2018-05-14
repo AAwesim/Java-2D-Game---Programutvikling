@@ -1,11 +1,11 @@
 package sample.Entity;
 
-import javafx.scene.shape.Rectangle;
 
+import javafx.scene.layout.Pane;
 
-public interface  Entity {
+public interface Entity {
 
+    default void RenderEntity() {
 
-    void renderEntity();
-
+    }
 }

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 import static javafx.scene.paint.Color.BLUE;
 
-public class Player extends rectangle implements Serializable {
+public class Player extends Rectangle implements Serializable {
 
     private double posX = 300;
     private double posY = 300;
@@ -38,8 +38,7 @@ public class Player extends rectangle implements Serializable {
         } else {setySpeed(MaxySpeed);}
     }
 
-    @Override
-    public void renderEntity() {
+    public void renderPlayer() {
         setX(posX);
         setY(posY);
     }

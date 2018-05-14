@@ -23,9 +23,8 @@ public class gameController implements Initializable, Serializable, EventHandler
     @FXML
     Pane gpWrap;
 
-    private EntityCreator ec = new EntityCreator();
-    private Player mainPlayer = (Player) ec.getEntity("PLAYER");
-    private Enemy enemy = new Enemy();
+    private PlayerCreator pc = new PlayerCreator();
+    private Player mainPlayer = (Player) pc.getEntity("PLAYER");
 
 
     private AnimationTimer timer;
@@ -43,6 +42,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         mc = new mapCreator();
+
         running = true;
         setNull = false;
         init(gamePane);
@@ -60,7 +60,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                 if (running) {
                     runtime();
-                    enemy.renderEntity();
 
                     if (!gravitycheck(mainPlayer)) {
                         mainPlayer.gravity();
@@ -78,10 +77,14 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                     PitCheck(mainPlayer,gamePane);
 
-                   // PlayerEnemyColl(mainPlayer);
+                    for (int i=0; i<mc.getEntityMap().size();i++) {
+                        mc.getEntityMap().get(i).RenderEntity();
+                    }
+                    mainPlayer.renderPlayer();
+                    PlayerEnemyColl(mainPlayer);
 
                     mainPlayer.updatePlayerState();
-                    mainPlayer.renderEntity();
+
 
                     view(mainPlayer,gamePane);
                     playerMapCollisionChecker2(mainPlayer);
@@ -169,7 +172,7 @@ public class gameController implements Initializable, Serializable, EventHandler
             case F3:
                 try {
                     loadSave();
-                    mainPlayer.renderEntity();
+                    mainPlayer.renderPlayer();
                     System.out.println(mainPlayer.toString());
                 } catch (Exception e2) {
                     System.out.println(e);
@@ -244,8 +247,8 @@ public class gameController implements Initializable, Serializable, EventHandler
                 }
             }
         }
-        System.out.println(p.getPosX());
-        System.out.println(speed);
+       // System.out.println(p.getPosX());
+       // System.out.println(speed);
         if (KeyD) {
             p.MoveRight(speed);
         } else if (KeyA) {
@@ -286,23 +289,14 @@ public class gameController implements Initializable, Serializable, EventHandler
         gameController.running = running;
     }
 
-  /*  public void PlayerEnemyColl(Player p) {
-        System.out.println(st);
-        for (Enemy enemy : mc.getEMap()) {
-            if (p.intersects(enemy.getBoundsInParent())) {
+    public void PlayerEnemyColl(Player p) {
+        for (EnemyRect enemyRect : mapCreator.getEMap()) {
+            if (p.intersects(enemyRect.getBoundsInParent())) {
                 p.setPosX(110);
                 p.setPosY(300);
             }
         }
-    }*/
-
-    /*//må kalles hver gang vi endrer map, dersom map størrelsene skal være forskjellige.
-    //Setter gamePane witdh lik maplengden
-    public void setGamePaneWidth() {
-           gamePane.setPrefWidth(mc.getmapLength(1));
-           System.out.println(mc.getmapLength(1));
-           System.out.println(gamePane.getWidth());
-    }*/
+    }
 
     //endrer visningfeltet
     public void view(Player p, Pane pa) {
@@ -321,8 +315,6 @@ public class gameController implements Initializable, Serializable, EventHandler
         }
     }
 
-
-
     public void Terminate() {
         System.out.println("TERMINATED");
         timer.stop();
@@ -331,10 +323,13 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.getChildren().clear();
         gpWrap.getChildren().clear();
         mc.getMap().clear();
-        mc.getEMap().clear();
+        mc.getEntityMap().clear();
+        mapCreator.getEMap().clear();
+      //System.out.println("EMAP a"+mc.getEMap().size());
+      //System.out.println("EMAP b"+mapCreator.getEMap().size());
 
-     //   EH.getE1List().clear();
-      //  EH.getE2List().clear();
+     // EH.getE1List().clear();
+      //EH.getE2List().clear();
 
         mc.setEmap(null);
         mc.setMap(null);
@@ -350,7 +345,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane = null;
         mc = null;
         mainPlayer = null;
-        ec = null;
+        pc = null;
     }
 
     public static void setSetNull(boolean setNull) {
@@ -359,7 +354,9 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     public void runtime(){
         i++;
-        if (i%60==0)
-            System.out.println("runtime: "+ i/60);
+        if (i%60==0){
+            System.out.println("runtime:"+ i/60);
+        System.out.println("Entities: "+mc.getEntityMap().size());
+        System.out.println("Enemies: "+mc.getEmap().size());}
     }
 }

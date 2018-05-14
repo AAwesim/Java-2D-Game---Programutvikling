@@ -1,21 +1,21 @@
-package sample.Entity;
+/*package sample.Entity;
 
 import java.util.ArrayList;
 
-public class EnemyHandler extends Enemy{
+public class EnemyHandler{
 
     //oppretter 2 arraylister av typen enemy
-    public ArrayList<Enemy1> E1List = new ArrayList<>();
+    public ArrayList<EnemyRect> E1List = new ArrayList<>();
     public ArrayList<Enemy2> E2List = new ArrayList<>();
 
     public void renderEntity() {
             EnemyMove(1);
-           // E1List.get(i).setX(E1List.get(i).getEPosX());
-          //  getE1List().get(i).setY(getE1List().get(i).getEPosY());
+           // E1List.get(i).setX(E1List.get(i).getCPosX());
+          //  getE1List().get(i).setY(getE1List().get(i).getCPosY());
             EnemyMove(2);
     }
 
-    //Kaller på Enemyene sin Movement metode for hver Enemy avhengig om det er enemy 1 eller 2
+    //Kaller på Enemyene sin Movement metode for hver EnemyRect avhengig om det er enemy 1 eller 2
     public void EnemyMove(int i) {
         switch (i) {
             case 1:
@@ -31,7 +31,7 @@ public class EnemyHandler extends Enemy{
         }
     }
 
-    public ArrayList<Enemy1> getE1List() {
+    public ArrayList<EnemyRect> getE1List() {
         return E1List;
     }
 
@@ -39,7 +39,7 @@ public class EnemyHandler extends Enemy{
         return E2List;
     }
 
-    public void addE1List(Enemy1 e) {
+    public void addE1List(EnemyRect e) {
         E1List.add(e);
     }
 
@@ -54,4 +54,4 @@ public class EnemyHandler extends Enemy{
     public int getsizeE1List() {
         return E1List.size();
     }
-}
+}*/
