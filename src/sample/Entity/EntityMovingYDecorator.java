@@ -29,10 +29,6 @@ public class EntityMovingYDecorator extends EntityDecorator {
     }
 
     private void MoveYEnemyCircle(EnemyCircle e) {
-        a++;
-        if (a%60==0)
-            System.out.println("EntityMovingYDecorator MoveYEnemyCircle/2: "+ a/60);
-
         if (e.getCenterY() > e.getCPosY() + 200) {
             i = -2;
         }

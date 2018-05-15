@@ -65,7 +65,7 @@ public class mapCreator {
                         EntityMap.add(enemy3);
                         break;
                     case '7':
-                        Entity enemy4 = new EntityMovingXDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
+                        Entity enemy4 = new EntityMovingYDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
                         EntityMap.add(enemy4);
                     default:
                         break;

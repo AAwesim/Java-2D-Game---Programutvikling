@@ -18,12 +18,6 @@ public class EnemyRectsmall extends EnemyRect {
         this.setHeight(height);
     }
 
-    @Override
-    public void RenderEntity(){
-        setX(getX());
-        setY(getY());
-    }
-
     //Getters og setters
 
     public void setRPosX(double RPosX) {
