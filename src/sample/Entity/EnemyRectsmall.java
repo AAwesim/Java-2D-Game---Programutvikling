@@ -16,7 +16,6 @@ public class EnemyRectsmall extends EnemyRect {
         this.setFill(Color.YELLOW);
         this.setWidth(width);
         this.setHeight(height);
-
     }
 
     @Override
