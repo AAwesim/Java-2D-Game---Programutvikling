@@ -9,8 +9,7 @@
      <URL value="@menyStyleSheet.css" />
   </stylesheets>
    <children>
-      <Button fx:id="startButton" id="knapp" layoutX="196.0" layoutY="104.0" onAction="#changeScene" prefHeight="105.0" prefWidth="248.0" text="Start" />
-      <Button fx:id="hjelpButton" id= "knapp" layoutX="198.0" layoutY="217.0" onAction="#changeScene" prefHeight="105.0" prefWidth="248.0" text="Hjelp" />
-      <Button fx:id="exitButton"  id="knapp" layoutX="198.0" layoutY="330.0" onAction="#exit" prefHeight="105.0" prefWidth="248.0" text="Avslutt" />
+      <Button id= "knapp" layoutX="198.0" layoutY="217.0" onAction="#changeScene" prefHeight="105.0" prefWidth="248.0" text="Hjelp" />
+      <Button id="knapp" layoutX="198.0" layoutY="330.0" onAction="#exit" prefHeight="105.0" prefWidth="248.0" text="Avslutt" />
    </children>
 </AnchorPane>
