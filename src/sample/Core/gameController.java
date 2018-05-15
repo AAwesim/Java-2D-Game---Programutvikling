@@ -46,7 +46,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         running = true;
         setNull = false;
         init(gamePane);
-        bully=new Bullet(gamePane);
+        bully = new Bullet(gamePane);
         timer = new AnimationTimer() {
 
             @Override
@@ -60,33 +60,24 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                 if (running) {
                     runtime();
+
                     if (!collision.gravityCheck(mainPlayer, mc)) {
                         mainPlayer.gravity();
                     }
 
                     //collision()
-                    if (mainPlayer.KeyA) {
-                        collision.PlayerCollisionX(4, mainPlayer, mc);
-                        mainPlayer.setFill(ResourceManager.playerSprites.get(5));
-                    } else if (mainPlayer.KeyD) {
-                        collision.PlayerCollisionX(4, mainPlayer, mc);
-                        mainPlayer.setFill(ResourceManager.playerSprites.get(4));
-                    } else {
-                        mainPlayer.setFill(ResourceManager.playerSprites.get(0));
-                    }
+
+                    PlayerMoveXColl();
 
                     PitCheck(mainPlayer, gamePane);
+
                     updateBullet();
 
-                    for (int i = 0; i < mc.getEntityMap().size(); i++) {
-                        mc.getEntityMap().get(i).RenderEntity();
-                    }
-
-                    mainPlayer.renderPlayer();
+                    Render();
                     collision.PlayerEnemyColl(mainPlayer);
 
                     mainPlayer.updatePlayerState();
-                    
+
                     view(mainPlayer, gamePane);
                     collision.playerCollisionY(mainPlayer, mc);
 
@@ -103,13 +94,13 @@ public class gameController implements Initializable, Serializable, EventHandler
         p.setBackground(new Background(new BackgroundImage((ResourceManager.background), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         keyHandlerInit(p);
 
-        if(mc == null)
+        if (mc == null)
             System.out.println("MC NULL");
 
-        if(mc.getLEVELARRAY() == null){
+        if (mc.getLEVELARRAY() == null) {
             System.out.println("LEVELARRAY NULL");
         } else System.out.println("not null");
-               mc.initMap(p);
+        mc.initMap(p);
 
         mainPlayer.initPlayer(p);
     }
@@ -125,8 +116,8 @@ public class gameController implements Initializable, Serializable, EventHandler
             } else if (e.getCode() == KeyCode.D || e.getCode() == KeyCode.RIGHT) {
                 mainPlayer.KeyD = false;
             }
-            if (e.getCode()==KeyCode.C){
-                intervalShooting=true;
+            if (e.getCode() == KeyCode.C) {
+                intervalShooting = true;
             }
         });
     }
@@ -139,7 +130,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                 break;
             case A:
             case LEFT:
-                mainPlayer.KeyD = false ;
+                mainPlayer.KeyD = false;
                 mainPlayer.KeyA = true;
                 break;
             case D:
@@ -153,8 +144,8 @@ public class gameController implements Initializable, Serializable, EventHandler
                 }
                 break;
             case C:
-                if(intervalShooting) {
-                    intervalShooting=false;
+                if (intervalShooting) {
+                    intervalShooting = false;
                     bully.initBullet(mainPlayer.getPosX() + 10, mainPlayer.getPosY());
                 }
                 break;
@@ -261,8 +252,8 @@ public class gameController implements Initializable, Serializable, EventHandler
         mapCreator.getECMap().clear();
         bully.bullets.clear();
 
-        System.out.println("EMAP a"+mc.getEntityMap());
-        System.out.println("EMAP b"+mapCreator.getERMap());
+        System.out.println("EMAP a" + mc.getEntityMap());
+        System.out.println("EMAP b" + mapCreator.getERMap());
 
         mc.setEntityMap(null);
         mc.setMap(null);
@@ -270,7 +261,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);
         gamePane.setOnKeyReleased(null);
-       // EH = null;
+        // EH = null;
         timer = null;
         gpWrap = null;
         gamePane = null;
@@ -284,11 +275,11 @@ public class gameController implements Initializable, Serializable, EventHandler
         gameController.setNull = setNull;
     }
 
-    public void runtime(){
+    public void runtime() {
         i++;
-        if (i%60==0){
-            System.out.println("runtime:"+ i/60);
-            System.out.println("ERMAP"+mapCreator.getERMap().size());
+        if (i % 60 == 0) {
+            System.out.println("runtime:" + i / 60);
+            System.out.println("ERMAP" + mapCreator.getERMap().size());
 
       /* System.out.println("ArraybulletsSize: "bully.bullets.size());
       System.out.println("Entities: "+mc.getEntityMap().size());
@@ -296,16 +287,40 @@ public class gameController implements Initializable, Serializable, EventHandler
         System.out.println("EnemiesC: "+mapCreator.getECMap().size());*/
         }
     }
+
     public void updateBullet() {
         for (Rectangle bulsy : bully.bullets) {
             double rectX = bulsy.getX();
             bulsy.setX(rectX + bully.getBulletSpeed());
-            for(Rectangle mapsy:mc.getMap()) {
-                if (bulsy.getBoundsInParent().intersects(mapsy.getBoundsInParent())){
+            for (Rectangle mapsy : mc.getMap()) {
+                if (bulsy.getBoundsInParent().intersects(mapsy.getBoundsInParent())) {
                     bully.collisionRemoveFirst(bulsy, mapsy);
                 }
-
             }
         }
+    }
+
+    /**
+     * Kaller på RenderEntity metoden for hver entitet
+     * Kaller på Player sin renderPlayer metode
+     */
+    private void Render() {
+        for (int i = 0; i < mc.getEntityMap().size(); i++) {
+            mc.getEntityMap().get(i).RenderEntity();
+        }
+        mainPlayer.renderPlayer();
+    }
+
+    /**
+     * Kaller på metoden PlayerCollisionX dersom av mainPlayer sin instanse variabeler
+     * KeyA eller KeyD er sann
+     */
+    private void PlayerMoveXColl() {
+        if (mainPlayer.KeyA) {
+            collision.PlayerCollisionX(4, mainPlayer, mc);
+        } else if (mainPlayer.KeyD) {
+            collision.PlayerCollisionX(4, mainPlayer, mc);
+        }
+
     }
 }

@@ -27,6 +27,7 @@ public class Player extends Rectangle implements Serializable {
         this.setHeight(45);
         this.setWidth(36);
         this.setX(posX);
+        setFill(ResourceManager.playerSprites.get(0));
         p.getChildren().add(this);
     }
 
@@ -41,6 +42,17 @@ public class Player extends Rectangle implements Serializable {
     }
 
     public void renderPlayer() {
+        if (KeyA && ySpeed==0) {
+            setFill(ResourceManager.playerSprites.get(5));
+        } else if (KeyD && ySpeed==0) {
+            setFill(ResourceManager.playerSprites.get(4));
+        } else if (KeyA && ySpeed!=0) {
+            setFill(ResourceManager.playerSprites.get(3));
+        } else if (KeyD && ySpeed!=0){
+            setFill(ResourceManager.playerSprites.get(2));
+        } else if (!KeyA && ySpeed==0){
+            setFill(ResourceManager.playerSprites.get(0));
+        }
         setX(posX);
         setY(posY);
     }
