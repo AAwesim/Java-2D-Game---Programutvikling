@@ -12,10 +12,17 @@ public class pauseController {
                 StateManager.changeScene(actionEvent, StateManager.GameState.GAME);
                 gameController.setRunning(true);
             break;
-            case "Meny":
-                StateManager.setGameRoot();
+            case "Restart":
                 gameController.setSetNull(true);
+                StateManager.removeGameRoot();
+                StateManager.changeScene(actionEvent, StateManager.GameState.BUFFER);
+                StateManager.changeScene(actionEvent, StateManager.GameState.GAME);
+            break;
+            case "Meny":
+                gameController.setSetNull(true);
+                StateManager.removeGameRoot();
                 StateManager.changeScene(actionEvent, StateManager.GameState.MAINMENU);
+            break;
         }
     }
 }

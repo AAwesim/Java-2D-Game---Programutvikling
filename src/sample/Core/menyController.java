@@ -32,7 +32,7 @@ public class menyController implements Initializable{
         }
     }
 
-    public void exit(ActionEvent e) {
+    public void exit() {
         System.exit(0);
     }
 }
