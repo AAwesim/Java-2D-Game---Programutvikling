@@ -20,9 +20,9 @@ public class levelController implements Initializable{
             "000000000000333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
             "000000000000333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
             "0000000000003333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
-            "00000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000",
-            "060044400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-            "0600000000000000000000000000000000000050000000000005000000000000500000000000050000000000005000000",
+            "00004440000004000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "000044400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "060000000000000000000000000000000000050000000000005000000000000500000000000050000000000005000000",
             "060000000000000050000000000000000000111111111111111111111111111111111111111111111111111111111111",
             "00000000000011111111111001100111111133333333333333333333333333333333333333333333333333333333333",
             "111111111000333333333330000003333333333333333333333333333333333333333333333333333333333333333333",
@@ -36,48 +36,40 @@ public class levelController implements Initializable{
 
     }
 
-    public void getMap(ActionEvent event) throws IOException, ClassNotFoundException {
-        switch(((Button) event.getSource()).getText()){
-            
-            case "1":
-                    loadMap("1");
-
-                    StateManager.changeScene(event, StateManager.GameState.GAME);
-                break;
-
-            case "2":
-                loadMap("2");
-
-                StateManager.changeScene(event, StateManager.GameState.GAME);
-            break;
-
-            case "3":
-                loadMap("3");
-
-                StateManager.changeScene(event, StateManager.GameState.GAME);
-                break;
-
-        }
+    public void getMap(ActionEvent event) {
+        String s = ((Button) event.getSource()).getText();
+        StateManager.LEVEL = s;
+        System.out.println(StateManager.LEVEL);
+        StateManager.changeScene(event, StateManager.GameState.GAME);
     }
 
     public void generateMap(ActionEvent actionEvent) throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ressurser/maps/1.map"));
-        out.writeObject(tempMap);
-        out.close();
+        actionEvent.toString();
+        try (FileOutputStream fos = new FileOutputStream("ressurser/maps/2.map")) {
+            ObjectOutputStream out = new ObjectOutputStream(fos);
+            Map m = new Map(tempMap);
+            out.writeObject(m);
+            out.flush();
+        }
     }
 
-    public void generateMap() throws IOException {
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ressurser/maps/1.map"));
-        out.writeObject(tempMap);
-        out.close();
+    public void generateMap() {
+        try (FileOutputStream fos = new FileOutputStream("ressurser/maps/2.map")) {
+            ObjectOutputStream out = new ObjectOutputStream(fos);
+            Map m = new Map(tempMap);
+            out.writeObject(m);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void loadMap(String s) throws IOException, ClassNotFoundException {
+/*    public void loadMap(String s) {
         InputStream is = levelController.class.getClassLoader().getResourceAsStream("maps/"+s+".map");
         System.out.println(is.toString());
         ObjectInputStream in = new ObjectInputStream(is);
         Map.setMapArray((String[]) in.readObject());
         is.close();
         in.close();
-    }
+    }*/
 }

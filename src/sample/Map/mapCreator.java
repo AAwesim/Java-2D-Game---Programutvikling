@@ -1,7 +1,6 @@
 package sample.Map;
 
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import sample.Entity.*;
 import sample.Tools.ResourceManager;
@@ -9,6 +8,7 @@ import java.util.ArrayList;
 import static javafx.scene.paint.Color.color;
 
 public class mapCreator {
+    private String levelID;
 
     private int scalar = 50;
     private int widthscalar = 50;
@@ -18,7 +18,15 @@ public class mapCreator {
     private static ArrayList<EnemyCircle> ECMap = new ArrayList<>();
     private ArrayList<Entity> EntityMap = new ArrayList<>();
 
-    private String[] LEVELARRAY = Map.getMapArray();
+    private String[] LEVELARRAY;
+
+    public mapCreator(String levelID){
+
+        this.levelID = levelID;
+        MapIO mapIO = new MapIO(this.levelID);
+        this.LEVELARRAY = mapIO.getMapArray();
+
+    }
 
     public void initMap(Pane pe) {
         for (int i = 0; i < LEVELARRAY.length; i++) {
@@ -102,5 +110,9 @@ public class mapCreator {
 
     public void setERMap(ArrayList<EnemyRect> ERMap) {
         mapCreator.ERMap = ERMap;
+    }
+
+    public String[] getLEVELARRAY() {
+        return LEVELARRAY;
     }
 }

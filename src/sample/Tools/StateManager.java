@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class StateManager {
+    public static String LEVEL;
 
     private static Stage stage;
 

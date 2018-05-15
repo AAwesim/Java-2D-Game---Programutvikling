@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
 import sample.Tools.ResourceManager;
@@ -25,9 +26,9 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     private PlayerCreator pc = new PlayerCreator();
     private Player mainPlayer = (Player) pc.getEntity("PLAYER");
+    private mapCreator mc;
 
     private AnimationTimer timer;
-    private mapCreator mc;
     public Bullet bully;
 
     private boolean KeyA = false;
@@ -41,12 +42,11 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mc = new mapCreator();
+        mc = new mapCreator(StateManager.LEVEL);
         running = true;
         setNull = false;
         init(gamePane);
         bully=new Bullet(gamePane);
-
         timer = new AnimationTimer() {
 
             @Override
@@ -98,10 +98,17 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void init(Pane p) {
-        BackgroundImage BI = new BackgroundImage((ResourceManager.background), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        p.setBackground(new Background(new BackgroundImage((ResourceManager.background), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         keyHandlerInit(p);
-        mc.initMap(p);
-        p.setBackground(new Background(BI));
+
+        if(mc == null)
+            System.out.println("MC NULL");
+
+        if(mc.getLEVELARRAY() == null){
+            System.out.println("LEVELARRAY NULL");
+        } else System.out.println("not null");
+               mc.initMap(p);
+
         mainPlayer.initPlayer(p);
     }
 
