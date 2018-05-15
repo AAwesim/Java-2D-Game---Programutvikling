@@ -2,15 +2,20 @@ package sample.Map;
 
 import java.io.Serializable;
 
-public final class Map implements Serializable{
+public class Map implements Serializable{
 
-    private static String[] mapArray;
+    private final int check = 5555;
+    private String[] mapArray;
 
-    public static String[] getMapArray() {
+    public Map(String [] mapArray){
+        this.mapArray = mapArray;
+    }
+
+    public String[] getMapArray() {
         return mapArray;
     }
 
-    public static void setMapArray(String[] mapArray) {
-        Map.mapArray = mapArray;
+    public int getCheck() {
+        return check;
     }
 }

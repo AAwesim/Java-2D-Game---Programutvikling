@@ -9,7 +9,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StateManager {
+public final class StateManager {
+    public static String LEVEL;
+
+    private static Stage stage;
 
     public enum GameState {
         MAINMENU,
@@ -21,7 +24,7 @@ public class StateManager {
 
     private static GameState gameState = GameState.MAINMENU;
 
-    public static Map<String, Scene> State = new HashMap<>();
+    private static Map<String, Scene> State = new HashMap<>();
 
     public static Scene update(){
         switch(gameState){
@@ -85,11 +88,11 @@ public class StateManager {
     }
 
     public static void changeScene(Event e, GameState gameStateEnum){
-        Stage stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
-
+        if(stage == null){
+            stage = (Stage) ((Node)e.getSource()).getScene().getWindow();
+        }
         StateManager.setState(gameStateEnum);
         stage.setScene(StateManager.update());
-
         stage.setResizable(false);
         stage.show();
     }

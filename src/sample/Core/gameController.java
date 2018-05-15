@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
 import sample.Tools.ResourceManager;
@@ -36,24 +37,23 @@ public class gameController implements Initializable, Serializable, EventHandler
     public int i = 0;
 
     private static boolean running = true;
-    public boolean intervalShooting=true;
+    private boolean intervalShooting = true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        mc = new mapCreator();
         collision = new Collision();
+        mc = new mapCreator(StateManager.LEVEL);
         running = true;
         setNull = false;
         init(gamePane);
         bully=new Bullet(gamePane);
-
         timer = new AnimationTimer() {
 
             @Override
             public void handle(long now) {
 
-                if(!running){
-                    if(setNull){
+                if (!running) {
+                    if (setNull) {
                         Terminate();
                     }
                 }
@@ -74,10 +74,10 @@ public class gameController implements Initializable, Serializable, EventHandler
                         mainPlayer.setFill(ResourceManager.playerSprites.get(0));
                     }
 
-                    PitCheck(mainPlayer,gamePane);
+                    PitCheck(mainPlayer, gamePane);
                     updateBullet();
 
-                    for (int i=0; i<mc.getEntityMap().size();i++) {
+                    for (int i = 0; i < mc.getEntityMap().size(); i++) {
                         mc.getEntityMap().get(i).RenderEntity();
                     }
 
@@ -86,7 +86,7 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                     mainPlayer.updatePlayerState();
 
-                    view(mainPlayer,gamePane);
+                    view(mainPlayer, gamePane);
                     collision.playerCollisionY(mainPlayer, mc);
 
                 } else return;
@@ -94,13 +94,22 @@ public class gameController implements Initializable, Serializable, EventHandler
         };
 
         timer.start();
+
     }
 
+
     public void init(Pane p) {
-        BackgroundImage BI = new BackgroundImage((ResourceManager.background), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        p.setBackground(new Background(new BackgroundImage((ResourceManager.background), BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
         keyHandlerInit(p);
-        mc.initMap(p);
-        p.setBackground(new Background(BI));
+
+        if(mc == null)
+            System.out.println("MC NULL");
+
+        if(mc.getLEVELARRAY() == null){
+            System.out.println("LEVELARRAY NULL");
+        } else System.out.println("not null");
+               mc.initMap(p);
+
         mainPlayer.initPlayer(p);
     }
 
@@ -128,16 +137,11 @@ public class gameController implements Initializable, Serializable, EventHandler
                 System.out.println(e.toString());
                 break;
             case A:
-                mainPlayer.KeyD = false ;
-                mainPlayer.KeyA = true;
             case LEFT:
                 mainPlayer.KeyD = false ;
                 mainPlayer.KeyA = true;
                 break;
             case D:
-                mainPlayer.KeyA = false;
-                mainPlayer.KeyD = true;
-
             case RIGHT:
                 mainPlayer.KeyA = false;
                 mainPlayer.KeyD = true;
@@ -148,7 +152,6 @@ public class gameController implements Initializable, Serializable, EventHandler
                 }
                 break;
             case C:
-
                 if(intervalShooting) {
                     intervalShooting=false;
                     bully.initBullet(mainPlayer.getPosX() + 10, mainPlayer.getPosY());
@@ -189,7 +192,6 @@ public class gameController implements Initializable, Serializable, EventHandler
                 break;
 
             case ESCAPE:
-                System.out.println(StateManager.State);
                 running = false;
                 StateManager.changeScene(e, StateManager.GameState.PAUSE);
                 break;
@@ -278,7 +280,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
         mc.setEntityMap(null);
         mc.setMap(null);
-        mc.setTextures(null);
 
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);
