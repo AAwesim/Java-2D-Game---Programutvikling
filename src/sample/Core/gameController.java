@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -18,10 +19,9 @@ import java.util.ResourceBundle;
 
 public class gameController implements Initializable, Serializable, EventHandler<KeyEvent> {
 
-    @FXML
-    Pane gamePane;
-    @FXML
-    Pane gpWrap;
+    @FXML Pane gamePane;
+    @FXML Pane gpWrap;
+    @FXML Label healthLabel;
 
     private PlayerCreator pc = new PlayerCreator();
     private Player mainPlayer = (Player) pc.getEntity("PLAYER");
@@ -321,6 +321,10 @@ public class gameController implements Initializable, Serializable, EventHandler
     //checker om mainplayer har falt ned i høøøøl
     public void PitCheck(Player p, Pane pa) {
         if (p.getPosY() > pa.getHeight() - 65) {
+            p.setPosX(110);
+            p.setPosY(300);
+            /*p.setHealthAmount(p.getHealthAmount() - 1);
+            healthLabel.setText(Integer.toString(p.getHealthAmount()));*/
             changeScene(StateManager.GameState.MAINMENU);
         }
     }

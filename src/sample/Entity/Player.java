@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import static javafx.scene.paint.Color.BLUE;
 
 public class Player extends Rectangle implements Serializable {
+    private int healthAmount = 3;
 
     private double posX = 300;
     private double posY = 300;
@@ -104,4 +105,11 @@ public class Player extends Rectangle implements Serializable {
         return MaxySpeed;
     }
 
+    public int getHealthAmount() {
+        return healthAmount;
+    }
+
+    public void setHealthAmount(int healthAmount) {
+        this.healthAmount = healthAmount;
+    }
 }
