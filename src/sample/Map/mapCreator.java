@@ -14,7 +14,7 @@ public class mapCreator {
     private int widthscalar = 50;
 
     private  ArrayList<ImagePattern> textures;
-    private  ArrayList<Rectangle> map = new ArrayList<>();
+    public  ArrayList<Rectangle> map = new ArrayList<>();
     private static ArrayList<EnemyRect> ERMap = new ArrayList<>();
     private static ArrayList<EnemyCircle> ECMap = new ArrayList<>();
     private ArrayList<Entity> EntityMap = new ArrayList<>();
@@ -61,6 +61,9 @@ public class mapCreator {
                         Entity enemy3 = new EntityMovingYDecorator(new EnemyCircle( j * widthscalar, i * scalar,30, pe));
                         EntityMap.add(enemy3);
                         break;
+                    case '7':
+                        Entity enemy4 = new EntityMovingXDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
+                        EntityMap.add(enemy4);
                     default:
                         break;
                 }

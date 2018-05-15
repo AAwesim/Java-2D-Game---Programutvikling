@@ -41,7 +41,7 @@ public class EnemyCircle extends Circle implements Entity {
 
     @Override
     public void RenderEntity() {
-        System.out.println("EnemyRect: "+ 60);
+        System.out.println("renderfromEnemyCircle: "+ 60);
 
     }
 }

@@ -31,8 +31,6 @@ public class gameController implements Initializable, Serializable, EventHandler
     protected mapCreator mc;
     protected Bullet bully;
 
-    protected boolean KeyA = false;
-    protected boolean KeyD = false;
     private static boolean setNull = false;
 
     public int i = 0;
@@ -42,9 +40,8 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        collision = new Collision();
         mc = new mapCreator();
-
+        collision = new Collision();
         running = true;
         setNull = false;
         init(gamePane);
@@ -63,17 +60,15 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                 if (running) {
                     runtime();
-                    System.out.println(bully.bullets.size());
-
-                    if (!collision.gravitycheck(mainPlayer)) {
+                    if (!collision.gravityCheck(mainPlayer, mc)) {
                         mainPlayer.gravity();
                     }
 
-                    if (KeyA) {
-                        collision.PlayerCollisionX(4, mainPlayer);
+                    if (mainPlayer.KeyA) {
+                        collision.PlayerCollisionX(4, mainPlayer, mc);
                         mainPlayer.setFill(ResourceManager.playerSprites.get(5));
-                    } else if (KeyD) {
-                        collision.PlayerCollisionX(4, mainPlayer);
+                    } else if (mainPlayer.KeyD) {
+                        collision.PlayerCollisionX(4, mainPlayer, mc);
                         mainPlayer.setFill(ResourceManager.playerSprites.get(4));
                     } else {
                         mainPlayer.setFill(ResourceManager.playerSprites.get(0));
@@ -92,7 +87,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                     mainPlayer.updatePlayerState();
 
                     view(mainPlayer,gamePane);
-                    collision.playerMapCollisionChecker2(mainPlayer);
+                    collision.playerCollisionY(mainPlayer, mc);
 
                 } else return;
             }
@@ -109,10 +104,6 @@ public class gameController implements Initializable, Serializable, EventHandler
         mainPlayer.initPlayer(p);
     }
 
-
-    /*private int KeyA = 0;
-    private int KeyD = 1;*/
-
     public void keyHandlerInit(Pane p) {
         p.setFocusTraversable(true);
         p.requestFocus();
@@ -120,9 +111,9 @@ public class gameController implements Initializable, Serializable, EventHandler
         p.setOnKeyReleased(e -> {
 
             if (e.getCode() == KeyCode.A || e.getCode() == KeyCode.LEFT) {
-                this.KeyA = false;
+                mainPlayer.KeyA = false;
             } else if (e.getCode() == KeyCode.D || e.getCode() == KeyCode.RIGHT) {
-                this.KeyD = false;
+                mainPlayer.KeyD = false;
             }
             if (e.getCode()==KeyCode.C){
                 intervalShooting=true;
@@ -137,22 +128,22 @@ public class gameController implements Initializable, Serializable, EventHandler
                 System.out.println(e.toString());
                 break;
             case A:
-                this.KeyD = false ;
-                this.KeyA = true;
+                mainPlayer.KeyD = false ;
+                mainPlayer.KeyA = true;
             case LEFT:
-                this.KeyD = false ;
-                this.KeyA = true;
+                mainPlayer.KeyD = false ;
+                mainPlayer.KeyA = true;
                 break;
             case D:
-                this.KeyA = false;
-                this.KeyD = true;
+                mainPlayer.KeyA = false;
+                mainPlayer.KeyD = true;
 
             case RIGHT:
-                this.KeyA = false;
-                this.KeyD = true;
+                mainPlayer.KeyA = false;
+                mainPlayer.KeyD = true;
                 break;
             case W:
-                if (collision.gravitycheck(mainPlayer)) {
+                if (collision.gravityCheck(mainPlayer, mc)) {
                     mainPlayer.setySpeed(-7.5);
                 }
                 break;
@@ -165,7 +156,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                 break;
 
             case UP:
-                if (collision.gravitycheck(mainPlayer)) {
+                if (collision.gravityCheck(mainPlayer, mc)) {
                     mainPlayer.setySpeed(-7.5);
                 }
                 break;
@@ -280,6 +271,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc.getEntityMap().clear();
         mapCreator.getERMap().clear();
         mapCreator.getECMap().clear();
+        bully.bullets.clear();
 
         System.out.println("EMAP a"+mc.getEntityMap());
         System.out.println("EMAP b"+mapCreator.getERMap());
@@ -308,7 +300,10 @@ public class gameController implements Initializable, Serializable, EventHandler
         i++;
         if (i%60==0){
             System.out.println("runtime:"+ i/60);
-      /*  System.out.println("Entities: "+mc.getEntityMap().size());
+            System.out.println("ERMRMAP"+mapCreator.getERMap().size());
+
+      /* System.out.println("ArraybulletsSize: "bully.bullets.size());
+      System.out.println("Entities: "+mc.getEntityMap().size());
         System.out.println("EnemiesR: "+mapCreator.getERMap().size());
         System.out.println("EnemiesC: "+mapCreator.getECMap().size());*/
         }
@@ -325,6 +320,4 @@ public class gameController implements Initializable, Serializable, EventHandler
             }
         }
     }
-
-
 }

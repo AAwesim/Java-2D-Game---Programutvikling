@@ -24,7 +24,7 @@ public class hjelpController implements Initializable{
         pane.requestFocus();
 
         pane.setOnKeyPressed(e -> {
-            System.out.println("HHHHHHH");
+            System.out.println("Hjelp initializze");
         });
 
     }

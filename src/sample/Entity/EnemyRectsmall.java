@@ -2,32 +2,27 @@ package sample.Entity;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import sample.Map.mapCreator;
 
-public class EnemyRect extends Rectangle implements Entity {
-
-    protected static int width = 35;
-    protected static int height = 35;
+public class EnemyRectsmall extends EnemyRect {
+    protected static int width = 10;
+    protected static int height = 10;
     protected double RPosX;
     protected double RPosY;
-    private int i;
 
     //konstruerer EnemyRect
-    public EnemyRect(double RPosX, double RPosY, Pane p) {
-        this.setRPosX(RPosX);
-        this.setX(RPosX);
-        this.setRPosY(RPosY);
-        this.setY(RPosY);
-        this.setFill(Color.RED);
+    public EnemyRectsmall(double RPosX, double RPosY, Pane p) {
+        super(RPosX, RPosY, p);
+        this.setFill(Color.YELLOW);
         this.setWidth(width);
         this.setHeight(height);
-        p.getChildren().add(this);
-        mapCreator.getERMap().add(this);
+
     }
 
     @Override
     public void RenderEntity(){
+        setX(getX());
+        setY(getY());
     }
 
     //Getters og setters
@@ -49,4 +44,3 @@ public class EnemyRect extends Rectangle implements Entity {
     }
 
 }
-

@@ -14,6 +14,8 @@ import static javafx.scene.paint.Color.BLUE;
 
 public class Player extends Rectangle implements Serializable {
 
+    public boolean KeyA = false;
+    public boolean KeyD = false;
     private double posX = 300;
     private double posY = 300;
     private double xSpeed = 4;
