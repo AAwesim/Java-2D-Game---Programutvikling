@@ -64,6 +64,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                         mainPlayer.gravity();
                     }
 
+                    //collision()
                     if (mainPlayer.KeyA) {
                         collision.PlayerCollisionX(4, mainPlayer, mc);
                         mainPlayer.setFill(ResourceManager.playerSprites.get(5));
@@ -82,10 +83,10 @@ public class gameController implements Initializable, Serializable, EventHandler
                     }
 
                     mainPlayer.renderPlayer();
-                    PlayerEnemyColl(mainPlayer);
+                    collision.PlayerEnemyColl(mainPlayer);
 
                     mainPlayer.updatePlayerState();
-
+                    
                     view(mainPlayer, gamePane);
                     collision.playerCollisionY(mainPlayer, mc);
 
@@ -228,21 +229,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     public static void setRunning(boolean running) {
         gameController.running = running;
-    }
-
-    public void PlayerEnemyColl(Player p) {
-        for (EnemyRect enemyRect : mapCreator.getERMap()) {
-            if (p.intersects(enemyRect.getBoundsInParent())) {
-                p.setPosX(110);
-                p.setPosY(300);
-            }
-        }
-        for (EnemyCircle enemyCircle : mapCreator.getECMap()) {
-            if (p.intersects(enemyCircle.getBoundsInParent())) {
-                p.setPosX(110);
-                p.setPosY(300);
-            }
-        }
     }
 
     //endrer visningfeltet

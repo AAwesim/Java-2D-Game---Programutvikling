@@ -1,6 +1,8 @@
 package sample.Core;
 
 import javafx.scene.shape.Rectangle;
+import sample.Entity.EnemyCircle;
+import sample.Entity.EnemyRect;
 import sample.Entity.Player;
 import sample.Map.mapCreator;
 
@@ -17,6 +19,21 @@ public class Collision {
             }
         }
         return false;
+    }
+
+    public void PlayerEnemyColl(Player p) {
+        for (EnemyRect enemyRect : mapCreator.getERMap()) {
+            if (p.intersects(enemyRect.getBoundsInParent())) {
+                p.setPosX(110);
+                p.setPosY(300);
+            }
+        }
+        for (EnemyCircle enemyCircle : mapCreator.getECMap()) {
+            if (p.intersects(enemyCircle.getBoundsInParent())) {
+                p.setPosX(110);
+                p.setPosY(300);
+            }
+        }
     }
 
     public void playerCollisionY(Player p, mapCreator mc) {
