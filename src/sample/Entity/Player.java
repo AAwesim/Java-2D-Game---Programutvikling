@@ -68,6 +68,7 @@ public class Player extends Rectangle implements Serializable {
         setxSpeed(speed);
         setPosX(getPosX()+xSpeed);
     }
+
     //Getters og setters
 
     public void setPosX(double posX) {

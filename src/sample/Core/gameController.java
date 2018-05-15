@@ -291,6 +291,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc = null;
         mainPlayer = null;
         pc = null;
+        collision = null;
     }
 
     public static void setSetNull(boolean setNull) {
@@ -301,7 +302,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         i++;
         if (i%60==0){
             System.out.println("runtime:"+ i/60);
-            System.out.println("ERMRMAP"+mapCreator.getERMap().size());
+            System.out.println("ERMAP"+mapCreator.getERMap().size());
 
       /* System.out.println("ArraybulletsSize: "bully.bullets.size());
       System.out.println("Entities: "+mc.getEntityMap().size());

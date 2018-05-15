@@ -11,7 +11,6 @@ public class Collision {
     //Vet ikke lenger, men tror det eneste formålet til metoden er for å sjekke om gravity()
     //skal kjøres, derfor er Width og Height en pixel større enn metoden under.
     public boolean gravityCheck(Player p, mapCreator mc) {
-      //  System.out.println("Map "+mc.getMap());
         for (Rectangle mapPart : mc.getMap()) {
             if (mapPart.intersects(p.getX(), p.getY(), p.getWidth() + 0.5, p.getHeight() + 0.5)) {
                 return true;
@@ -20,10 +19,6 @@ public class Collision {
         return false;
     }
 
-    //kan forbedres ved å adde en for loop her, metoden må da ta inn en parameter som tilsvarer
-    //xspeed. Antall iterasjoner i for løkken avhenger av denne parameteren med mer
-    //dette kan gjøre at vi kan skjekke collision for hver piksel
-    //TODO
     public void playerCollisionY(Player p, mapCreator mc) {
         for (Rectangle mapPart : mc.getMap()) {
             if (mapPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {
