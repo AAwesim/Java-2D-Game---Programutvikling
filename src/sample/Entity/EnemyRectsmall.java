@@ -3,17 +3,18 @@ package sample.Entity;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import sample.Map.mapCreator;
+import sample.Tools.ResourceManager;
 
 public class EnemyRectsmall extends EnemyRect {
-    protected static int width = 10;
-    protected static int height = 10;
+    protected static int width = 20;
+    protected static int height = 20;
     protected double RPosX;
     protected double RPosY;
 
     //konstruerer EnemyRect
     public EnemyRectsmall(double RPosX, double RPosY, Pane p) {
         super(RPosX, RPosY, p);
-        this.setFill(Color.YELLOW);
+        this.setFill(ResourceManager.mapTextures.get(4));
         this.setWidth(width);
         this.setHeight(height);
     }

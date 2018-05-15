@@ -35,7 +35,7 @@ public final class ResourceManager {
         int i = 0;
         ClassLoader cldr = ResourceManager.class.getClassLoader();
 
-        while (i <= 1) {
+        while (i <= 5) {
             URL url = cldr.getResource("textures/"+ i +".png");
             mapTextures.add(new ImagePattern(new Image(url.toString())));
             i++;

@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import sample.Entity.*;
@@ -15,6 +16,7 @@ import sample.Tools.ResourceManager;
 import sample.Tools.StateManager;
 import java.io.*;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ResourceBundle;
 
 public class gameController implements Initializable, Serializable, EventHandler<KeyEvent> {
@@ -116,7 +118,7 @@ public class gameController implements Initializable, Serializable, EventHandler
             } else if (e.getCode() == KeyCode.D || e.getCode() == KeyCode.RIGHT) {
                 mainPlayer.KeyD = false;
             }
-            if (e.getCode() == KeyCode.C) {
+            if (e.getCode() == KeyCode.F) {
                 intervalShooting = true;
             }
         });
@@ -143,10 +145,10 @@ public class gameController implements Initializable, Serializable, EventHandler
                     mainPlayer.setySpeed(-7.5);
                 }
                 break;
-            case C:
+            case F:
                 if (intervalShooting) {
                     intervalShooting = false;
-                    bully.initBullet(mainPlayer.getPosX() + 10, mainPlayer.getPosY());
+                    bully.initBullet(mainPlayer.getPosX() + mainPlayer.getWidth(), mainPlayer.getPosY() + mainPlayer.getHeight()/2);
                 }
                 break;
 
@@ -289,9 +291,9 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void updateBullet() {
-        for (Rectangle bulsy : bully.bullets) {
-            double rectX = bulsy.getX();
-            bulsy.setX(rectX + bully.getBulletSpeed());
+        for (Circle bulsy : bully.bullets) {
+            double rectX = bulsy.getCenterX();
+            bulsy.setCenterX(rectX + bully.getBulletSpeed());
             for (Rectangle mapsy : mc.getMap()) {
                 if (bulsy.getBoundsInParent().intersects(mapsy.getBoundsInParent())) {
                     bully.collisionRemoveFirst(bulsy, mapsy);

@@ -57,15 +57,15 @@ public class mapCreator {
                         EntityMap.add(enemy1);
                         break;
                     case '5':
-                        Entity enemy2 = new EntityMovingXDecorator(new EnemyRect( j * widthscalar, i * scalar, pe));
+                        Entity enemy2 = new EnemyRect( j * widthscalar, i * scalar, pe);
                         EntityMap.add(enemy2);
                         break;
                     case '6':
-                        Entity enemy3 = new EntityMovingYDecorator(new EnemyCircle( j * widthscalar, i * scalar,30, pe));
+                        Entity enemy3 = new EntityMovingYDecorator(new EnemyCircle( j * widthscalar, i * scalar,20, pe));
                         EntityMap.add(enemy3);
                         break;
                     case '7':
-                        Entity enemy4 = new EntityMovingYDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
+                        Entity enemy4 = new EntityMovingXDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
                         EntityMap.add(enemy4);
                     default:
                         break;

@@ -4,14 +4,14 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import sample.Map.mapCreator;
+import sample.Tools.ResourceManager;
 
 public class EnemyRect extends Rectangle implements Entity {
 
-    protected static int width = 35;
-    protected static int height = 35;
+    protected static int width = 50;
+    protected static int height = 50;
     protected double RPosX;
     protected double RPosY;
-    private int i;
 
     //konstruerer EnemyRect
     public EnemyRect(double RPosX, double RPosY, Pane p) {
@@ -19,7 +19,8 @@ public class EnemyRect extends Rectangle implements Entity {
         this.setX(RPosX);
         this.setRPosY(RPosY);
         this.setY(RPosY);
-        this.setFill(Color.RED);
+        this.setFill(ResourceManager.mapTextures.get(3));
+      //  this.setFill(Color.BLUE);
         this.setWidth(width);
         this.setHeight(height);
         p.getChildren().add(this);

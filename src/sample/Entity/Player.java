@@ -26,7 +26,6 @@ public class Player extends Rectangle implements Serializable {
     public void initPlayer(Pane p) {
         this.setHeight(45);
         this.setWidth(36);
-        this.setX(posX);
         setFill(ResourceManager.playerSprites.get(0));
         p.getChildren().add(this);
     }

@@ -2,7 +2,9 @@ package sample.Entity;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import sample.Tools.ResourceManager;
 
 import java.util.ArrayList;
 
@@ -14,32 +16,31 @@ public class Bullet {
     private double posy;
     private double w=10;
     private double h=10;
-    public ArrayList<Rectangle> bullets=new ArrayList<>();
+    public ArrayList<Circle> bullets=new ArrayList<>();
 
     public Bullet(Pane gamePane) {
         this.gamePane = gamePane;
     }
 
     public void initBullet(double posx, double posy){
-        Rectangle rectangle=new Rectangle();
-        rectangle.setHeight(w);
-        rectangle.setWidth(h);
-        rectangle.setX(posx);
-        rectangle.setY(posy);
-        rectangle.setFill(Color.RED);
-        gamePane.getChildren().add(rectangle);
-        bullets.add(rectangle);
+        Circle circle= new Circle();
+        circle.setRadius(w);
+        circle.setCenterX(posx);
+        circle.setCenterY(posy);
+        circle.setFill(ResourceManager.mapTextures.get(4));
+        gamePane.getChildren().add(circle);
+        bullets.add(circle);
     }
 
 
-    public void removeBullet(Rectangle other) {
+    public void removeBullet(Circle other) {
 
         gamePane.getChildren().remove(other);
         bullets.remove(bullets);
         }
-    public void collisionRemoveFirst(Rectangle rectangle1, Rectangle rectangle2 ){
-        if(rectangle1.getBoundsInParent().intersects(rectangle2.getBoundsInParent())){
-            removeBullet(rectangle1);
+    public void collisionRemoveFirst(Circle circleB, Rectangle rectangle2 ){
+        if(circleB.getBoundsInParent().intersects(rectangle2.getBoundsInParent())){
+            removeBullet(circleB);
         }
     }
 

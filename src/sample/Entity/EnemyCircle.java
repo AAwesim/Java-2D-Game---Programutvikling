@@ -3,14 +3,15 @@ package sample.Entity;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import sample.Map.mapCreator;
+import sample.Tools.ResourceManager;
 
 import static javafx.scene.paint.Color.BLUE;
 
 public class EnemyCircle extends Circle implements Entity {
 
 
-    protected double CPosX;
-    protected double CPosY;
+    private double CPosX;
+    private double CPosY;
 
     public EnemyCircle(double centerX, double centerY, double radius, Pane p){
         this.setCenterX(centerX);
@@ -18,7 +19,7 @@ public class EnemyCircle extends Circle implements Entity {
         this.setRadius(radius);
         this.setCPosX(centerX);
         this.setCPosY(centerY);
-        this.setFill(BLUE);
+        this.setFill(ResourceManager.mapTextures.get(5));
         p.getChildren().add(this);
         mapCreator.getECMap().add(this);
     }
@@ -41,7 +42,5 @@ public class EnemyCircle extends Circle implements Entity {
 
     @Override
     public void RenderEntity() {
-        System.out.println("renderfromEnemyCircle: "+ 60);
-
     }
 }
