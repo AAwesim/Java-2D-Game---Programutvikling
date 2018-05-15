@@ -13,15 +13,10 @@ public class mapCreator {
     private int scalar = 50;
     private int widthscalar = 50;
 
-    private  ArrayList<ImagePattern> textures;
     private  ArrayList<Rectangle> map = new ArrayList<>();
     private static ArrayList<EnemyRect> ERMap = new ArrayList<>();
     private static ArrayList<EnemyCircle> ECMap = new ArrayList<>();
     private ArrayList<Entity> EntityMap = new ArrayList<>();
-
-    public mapCreator(){
-        textures = ResourceManager.mapTextures;
-    }
 
     private String[] LEVELARRAY = Map.getMapArray();
 
@@ -35,7 +30,7 @@ public class mapCreator {
                     case '1':
                         Rectangle mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
                         // mapPart1.setFill(Color.DARKGREEN);
-                        mapPart1.setFill(textures.get(1));
+                        mapPart1.setFill(ResourceManager.mapTextures.get(1));
                         map.add(mapPart1);
                         break;
                     case '2':
@@ -46,7 +41,7 @@ public class mapCreator {
                     case '3':
                         mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
                         //mapPart1.setFill(Color.rgb(97, 63, 16));
-                        mapPart1.setFill(textures.get(0));
+                        mapPart1.setFill(ResourceManager.mapTextures.get(0));
                         map.add(mapPart1);
                         break;
                     case '4':
@@ -99,14 +94,6 @@ public class mapCreator {
 
     public ArrayList<Rectangle> getMap() {
         return map;
-    }
-
-    public ArrayList<ImagePattern> getTextures() {
-        return textures;
-    }
-
-    public void setTextures(ArrayList<ImagePattern> textures) {
-        this.textures = textures;
     }
 
     public void setMap(ArrayList<Rectangle> map) {

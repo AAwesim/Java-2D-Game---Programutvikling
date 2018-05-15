@@ -37,7 +37,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     public int i = 0;
 
     private static boolean running = true;
-    public boolean intervalShooting=true;
+    private boolean intervalShooting = true;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,7 +60,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                 if (running) {
                     runtime();
-                    System.out.println(bully.bullets.size());
 
                     if (!gravitycheck(mainPlayer)) {
                         mainPlayer.gravity();
@@ -134,16 +133,11 @@ public class gameController implements Initializable, Serializable, EventHandler
                 System.out.println(e.toString());
                 break;
             case A:
-                this.KeyD = false ;
-                this.KeyA = true;
             case LEFT:
                 this.KeyD = false ;
                 this.KeyA = true;
                 break;
             case D:
-                this.KeyA = false;
-                this.KeyD = true;
-
             case RIGHT:
                 this.KeyA = false;
                 this.KeyD = true;
@@ -195,7 +189,6 @@ public class gameController implements Initializable, Serializable, EventHandler
                 break;
 
             case ESCAPE:
-                System.out.println(StateManager.State);
                 running = false;
                 StateManager.changeScene(e, StateManager.GameState.PAUSE);
                 break;
@@ -346,7 +339,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
         mc.setEntityMap(null);
         mc.setMap(null);
-        mc.setTextures(null);
 
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);

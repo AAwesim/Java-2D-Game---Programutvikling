@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public final class Map implements Serializable{
 
-    private static String[] mapArray;
+    private  static String[] mapArray;
 
     public static String[] getMapArray() {
         return mapArray;
