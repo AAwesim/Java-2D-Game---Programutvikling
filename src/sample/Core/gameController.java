@@ -8,7 +8,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 import sample.Entity.*;
 import sample.Map.mapCreator;
 import sample.Tools.ResourceManager;
@@ -33,10 +32,10 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     private boolean KeyA = false;
     private boolean KeyD = false;
-    private static boolean setNull = false;
 
     public int i = 0;
 
+    private static boolean setNull = false;
     private static boolean running = true;
     private boolean intervalShooting = true;
 
@@ -46,7 +45,9 @@ public class gameController implements Initializable, Serializable, EventHandler
         running = true;
         setNull = false;
         init(gamePane);
-        bully=new Bullet(gamePane);
+
+        bully = new Bullet(gamePane);
+
         timer = new AnimationTimer() {
 
             @Override
@@ -191,12 +192,8 @@ public class gameController implements Initializable, Serializable, EventHandler
                 }
                 break;
 
-            case F5:
-                Terminate();
-                break;
-
             case ESCAPE:
-                running = false;
+                gameController.running = false;
                 StateManager.changeScene(e, StateManager.GameState.PAUSE);
                 break;
         }
@@ -361,7 +358,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         mainPlayer = null;
         pc = null;
 
-        StateManager.setGameRoot();
+        StateManager.removeGameRoot();
     }
 
     public void changeScene(StateManager.GameState gameState){

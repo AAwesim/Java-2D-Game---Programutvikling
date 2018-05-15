@@ -12,26 +12,48 @@ import java.util.Map;
 public final class StateManager {
     public static String LEVEL;
 
-    private static Stage stage;
+    static Stage stage;
 
     public enum GameState {
+        BUFFER,
         MAINMENU,
-        GAME,
         LEVEL,
         HELP,
-        PAUSE
+        PAUSE,
+        GAME
     }
 
     private static GameState gameState = GameState.MAINMENU;
 
-    private static Map<String, Scene> State = new HashMap<>();
+    public static Map<String, Scene> State = new HashMap<>();
 
     public static Scene update(){
         switch(gameState){
+            case BUFFER:
+                if(State.get("HELP") != null)
+                    return State.get("BUFFER");
+
+                    case HELP:
+                if(State.get("HELP") != null)
+                    System.out.println("HELP");
+                return State.get("HELP");
+
             case MAINMENU:
                 if(State.get("MENU") != null)
                     System.out.println("MAINMENU");
                     return State.get("MENU");
+
+            case LEVEL:
+                if(State.get("LEVEL") != null){
+                    System.out.println("LEVEL");
+                    return State.get("LEVEL");
+                }
+
+            case PAUSE:
+                if(State.get("PAUSE") != null){
+                    System.out.println("PAUSE");
+                    return State.get("PAUSE");
+                }
 
             case GAME:
                 if(State.get("GAME") == null) {
@@ -42,28 +64,13 @@ public final class StateManager {
                 else if(State.get("GAME") != null)
                     System.out.println("GAME");
                     return State.get("GAME");
-
-            case LEVEL:
-                if(State.get("LEVEL") != null){
-                    System.out.println("LEVEL");
-                    return State.get("LEVEL");
-                }
-
-            case HELP:
-                if(State.get("HELP") != null)
-                    System.out.println("HELP");
-                    return State.get("HELP");
-            case PAUSE:
-                if(State.get("PAUSE") != null){
-                    System.out.println("PAUSE");
-                    return State.get("PAUSE");
-                }
         }
         return null;
     }
 
     public static void initStates(){
         try {
+            State.put("BUFFER", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/buffer.fxml"))));
             State.put("MENU", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/meny.fxml"))));
             State.put("LEVEL", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/levelScene.fxml"))));
             State.put("HELP", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/hjelpScene.fxml"))));
@@ -104,7 +111,7 @@ public final class StateManager {
         stage.show();
     }
 
-    public static void setGameRoot() {
+    public static void removeGameRoot() {
         State.remove("GAME");
     }
 }
