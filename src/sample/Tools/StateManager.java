@@ -97,6 +97,13 @@ public final class StateManager {
         stage.show();
     }
 
+    public static void changeScene(GameState gameStateEnum){
+        StateManager.setState(gameStateEnum);
+        stage.setScene(StateManager.update());
+        stage.setResizable(false);
+        stage.show();
+    }
+
     public static void setGameRoot() {
         State.remove("GAME");
     }

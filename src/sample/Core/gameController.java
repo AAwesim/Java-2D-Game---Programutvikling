@@ -324,8 +324,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     //checker om mainplayer har falt ned i høøøøl
     public void PitCheck(Player p, Pane pa) {
         if (p.getPosY() > pa.getHeight() - 65) {
-            p.setPosX(110);
-            p.setPosY(300);
+            changeScene(StateManager.GameState.MAINMENU);
         }
     }
 
@@ -341,8 +340,12 @@ public class gameController implements Initializable, Serializable, EventHandler
         mapCreator.getERMap().clear();
         mapCreator.getECMap().clear();
 
-        System.out.println("EMAP a"+mc.getEntityMap());
-        System.out.println("EMAP b"+mapCreator.getERMap());
+        /*System.out.println("EMAP a "+mc.getEntityMap());
+        System.out.println("EMAP b "+mapCreator.getERMap());
+        System.out.println("gamePane children " + gamePane.getChildren());
+        System.out.println("gpWrap children " + gpWrap.getChildren());
+        System.out.println("gamepane "+gamePane);
+        System.out.println("gpWrap" + gpWrap);*/
 
         mc.setEntityMap(null);
         mc.setMap(null);
@@ -350,13 +353,21 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);
         gamePane.setOnKeyReleased(null);
-       // EH = null;
+
         timer = null;
         gpWrap = null;
         gamePane = null;
         mc = null;
         mainPlayer = null;
         pc = null;
+
+        StateManager.setGameRoot();
+    }
+
+    public void changeScene(StateManager.GameState gameState){
+        StateManager.changeScene(gameState);
+        gameController.setSetNull(true);
+        running = false;
     }
 
     public static void setSetNull(boolean setNull) {
