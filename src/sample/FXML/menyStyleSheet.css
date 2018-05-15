@@ -1,0 +1,17 @@
+/*menyStyleSheet.css*/
+#knapp{
+    -fx-background-color: black;
+    -fx-text-fill:white;
+    -fx-font-size: 20;
+    -fx-font-family: monospace;
+    -fx-border-width:3,3,3,3;
+    -fx-border-color: gray;
+}
+#knapp:hover{
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-size: 20;
+}
+#anchorpane{
+-fx-background-image:url("gifback.gif");
+}
