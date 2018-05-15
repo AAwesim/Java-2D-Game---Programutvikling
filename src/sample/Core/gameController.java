@@ -24,14 +24,15 @@ public class gameController implements Initializable, Serializable, EventHandler
     Pane gpWrap;
 
     private PlayerCreator pc = new PlayerCreator();
-    private Player mainPlayer = (Player) pc.getEntity("PLAYER");
+    protected Player mainPlayer = (Player) pc.getEntity("PLAYER");
 
     private AnimationTimer timer;
-    private mapCreator mc;
-    public Bullet bully;
+    private Collision collision;
+    protected mapCreator mc;
+    protected Bullet bully;
 
-    private boolean KeyA = false;
-    private boolean KeyD = false;
+    protected boolean KeyA = false;
+    protected boolean KeyD = false;
     private static boolean setNull = false;
 
     public int i = 0;
@@ -41,7 +42,9 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        collision = new Collision();
         mc = new mapCreator();
+
         running = true;
         setNull = false;
         init(gamePane);
@@ -62,15 +65,15 @@ public class gameController implements Initializable, Serializable, EventHandler
                     runtime();
                     System.out.println(bully.bullets.size());
 
-                    if (!gravitycheck(mainPlayer)) {
+                    if (!collision.gravitycheck(mainPlayer)) {
                         mainPlayer.gravity();
                     }
 
                     if (KeyA) {
-                        PlayerCollisionX(4, mainPlayer);
+                        collision.PlayerCollisionX(4, mainPlayer);
                         mainPlayer.setFill(ResourceManager.playerSprites.get(5));
                     } else if (KeyD) {
-                        PlayerCollisionX(4, mainPlayer);
+                        collision.PlayerCollisionX(4, mainPlayer);
                         mainPlayer.setFill(ResourceManager.playerSprites.get(4));
                     } else {
                         mainPlayer.setFill(ResourceManager.playerSprites.get(0));
@@ -89,7 +92,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                     mainPlayer.updatePlayerState();
 
                     view(mainPlayer,gamePane);
-                    playerMapCollisionChecker2(mainPlayer);
+                    collision.playerMapCollisionChecker2(mainPlayer);
 
                 } else return;
             }
@@ -149,7 +152,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                 this.KeyD = true;
                 break;
             case W:
-                if (gravitycheck(mainPlayer)) {
+                if (collision.gravitycheck(mainPlayer)) {
                     mainPlayer.setySpeed(-7.5);
                 }
                 break;
@@ -162,7 +165,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                 break;
 
             case UP:
-                if (gravitycheck(mainPlayer)) {
+                if (collision.gravitycheck(mainPlayer)) {
                     mainPlayer.setySpeed(-7.5);
                 }
                 break;
@@ -199,69 +202,6 @@ public class gameController implements Initializable, Serializable, EventHandler
                 running = false;
                 StateManager.changeScene(e, StateManager.GameState.PAUSE);
                 break;
-        }
-    }
-
-
-    //Vet ikke lenger, men tror det eneste formålet til metoden er for å sjekke om gravity()
-    //skal kjøres, derfor er Width og Height en pixel større enn metoden under.
-    public boolean gravitycheck(Player p) {
-        for (Rectangle mapPart : mc.getMap()) {
-            if (mapPart.intersects(p.getX(), p.getY(), p.getWidth() + 0.5, p.getHeight() + 1)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //kan forbedres ved å adde en for loop her, metoden må da ta inn en parameter som tilsvarer
-    //xspeed. Antall iterasjoner i for løkken avhenger av denne parameteren med mer
-    //dette kan gjøre at vi kan skjekke collision for hver piksel
-    //TODO
-    public void playerMapCollisionChecker2(Player p) {
-        for (Rectangle mapPart : mc.getMap()) {
-            if (mapPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {
-                // Collision Ovenifra
-                if ((p.getPosY() + p.getHeight()) < (mapPart.getY() + p.getMaxySpeed()) && p.getySpeed() > 0) {
-                    p.setySpeed(0);
-                    p.setPosY(mapPart.getY() - p.getHeight() - 1);
-                    return;
-                }
-                // Collision Nedenifra
-                if ((p.getPosY()) > (mapPart.getY() + mapPart.getHeight() / 2) && p.getySpeed() < 0) {
-                    p.setySpeed(0);
-                    p.setPosY(mapPart.getY() + mapPart.getHeight() + 1);
-                    return;
-                }
-            }
-        }
-    }
-
-    public void PlayerCollisionX(int x, Player p) {
-        int speed = 4;
-        for (int i = 1; i <= x; i++) {
-            for (Rectangle mapPart : mc.getMap()) {
-                if (mapPart.intersects(p.getPosX() + speed, p.getPosY(), p.getWidth(), p.getHeight())) {
-                    // Bevegelseretning høyre
-                    if (KeyD) {
-                        speed--;
-                        p.setPosX(mapPart.getX() - p.getWidth() - 1);
-                    }
-                }
-
-                if (mapPart.intersects(p.getPosX() - speed, p.getPosY(), p.getWidth(), p.getHeight())) {
-                    // Bevegelseretning venstre
-                    if (KeyA) {
-                        speed--;
-                        p.setPosX(mapPart.getX() + mapPart.getWidth() + 1);
-                    }
-                }
-            }
-        }
-        if (KeyD) {
-            p.MoveRight(speed);
-        } else if (KeyA) {
-            p.MoveLeft(speed);
         }
     }
 

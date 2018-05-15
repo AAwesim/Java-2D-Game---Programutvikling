@@ -44,14 +44,14 @@ public class Player extends Rectangle implements Serializable {
     }
 
     /**
-     * Beveger en instanse av player til venstre:
+     * Beveger et player object til venstre
      * setter player sin xSpeed lik -x og
      * setter player sin posX lik posX+xspeed     *
-     * @param x
+     * @param speed
      */
-    public void MoveLeft(int x) {
+    public void MoveLeft(int speed) {
         //System.out.println("MLeft");
-        setxSpeed(-x);
+        setxSpeed(-speed);
         setPosX(getPosX()+xSpeed);
     }
 
@@ -59,11 +59,11 @@ public class Player extends Rectangle implements Serializable {
      * Beveger en instanse av player til høyre:
      * setter player sin xSpeed lik x og
      * setter player sin posX lik posX+xSpeed
-     * @param x
+     * @param speed
      */
-    public void MoveRight(int x) {
+    public void MoveRight(int speed) {
       //  System.out.println("MRight");
-        setxSpeed(x);
+        setxSpeed(speed);
         setPosX(getPosX()+xSpeed);
     }
     //Getters og setters
