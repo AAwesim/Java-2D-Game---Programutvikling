@@ -3,6 +3,7 @@ package sample.Core;
 import javafx.application.Application;
 import javafx.stage.Stage;
 /*import sample.Tools.ResourceManager;*/
+import javafx.stage.StageStyle;
 import sample.Tools.StateManager;
 
 public class Main extends Application {
