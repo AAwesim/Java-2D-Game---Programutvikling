@@ -12,9 +12,9 @@
       <URL value="@menyStyleSheet.css" />
    </stylesheets>
    <children>
-      <Button id="knapp" fx:id="startButton" layoutX="198.0" layoutY="135.0" onAction="#changeScene" prefHeight="73.0" prefWidth="248.0" text="START" />
-      <Button id="knapp" fx:id="hjelpButton" layoutX="198.0" layoutY="248.0" onAction="#changeScene" prefHeight="73.0" prefWidth="248.0" text="HJELP" />
-      <Button id="knapp" fx:id="exitButton" layoutX="198.0" layoutY="361.0" onAction="#exit" prefHeight="73.0" prefWidth="248.0" text="AVSLUTT" />
+      <Button id="knapp" fx:id="startButton" layoutX="198.0" layoutY="135.0" onAction="#changeScene" prefHeight="73.0" prefWidth="248.0" text="Start" />
+      <Button id="knapp" fx:id="hjelpButton" layoutX="198.0" layoutY="248.0" onAction="#changeScene" prefHeight="73.0" prefWidth="248.0" text="Hjelp" />
+      <Button id="knapp" fx:id="exitButton" layoutX="198.0" layoutY="361.0" onAction="#exit" prefHeight="73.0" prefWidth="248.0" text="Avslutt" />
       <Label layoutX="102.0" layoutY="41.0" prefHeight="73.0" prefWidth="441.0" text="WELCOME TO TIYAREED">
          <font>
             <Font name="Rockwell Extra Bold" size="30.0" />
