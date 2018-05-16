@@ -115,3 +115,4 @@ pom.xml.tag
 *.xml
 *.MF
 .idea/misc.xml
+*.db

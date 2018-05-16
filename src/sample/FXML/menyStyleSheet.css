@@ -1,19 +1,72 @@
 /*menyStyleSheet.css*/
 #knapp{
-    -fx-background-color: black;
-    -fx-text-fill:white;
-    -fx-font-size: 20;
-    -fx-font-family: monospace;
+    -fx-background-color: #1C00ff00;
+    -fx-text-fill:black;
+    -fx-font-size: 25;
+    -fx-font-family:Rockwell Extra Bold;
+    -fx-font-weight:bold;
     -fx-border-width:3,3,3,3;
-    -fx-border-color: gray;
+    -fx-border-radius:20,20,20,20;
+    -fx-border-color: white;
+
+
 }
 #knapp:hover{
-    -fx-background-color: white;
-    -fx-text-fill: black;
-    -fx-font-size: 20;
+    -fx-background-color: #1C00ff00;
+    -fx-text-fill: yellow;
+    -fx-font-size: 30;
+
+
 }
 #anchorpane{
 /*
 -fx-background-image:url("gifback.gif");
 */
+
+
+-fx-background-image:url("marioclouds.gif");
+-fx-background-size:cover;
+}
+#pane{
+-fx-background-color:black;
+}
+#knappmap{
+  -fx-background-color:#71EEB8;
+  -fx-font-size:23;
+  -fx-font-family:Rockwell Extra Bold;
+  -fx-border-width:1,1,1,1;
+  -fx-border-color: white;
+}
+#knappmap:hover{
+  -fx-background-color:#00ff0080;;
+  -fx-font-family:Rockwell Extra Bold;
+  -fx-font-size:23;
+  -fx-text-fill:yellow;
+}
+#map{
+-fx-background-color:#71EEB8;
+-fx-text-fill:black;
+-fx-font-family:Rockwell Extra bold;
+}
+
+#map:hover{
+-fx-background-color:#71EEB8;
+-fx-text-fill:yellow;
+-fx-font-size:20;
+}
+
+#knappause{
+-fx-background-color: #1C00ff00;
+    -fx-text-fill:white;
+    -fx-font-size: 25;
+    -fx-font-family:Rockwell Extra Bold;
+    -fx-font-weight:bold;
+    -fx-border-width:3,3,3,3;
+    -fx-border-radius:20,20,20,20;
+    -fx-border-color: white;
+}
+#knappause:hover{
+-fx-font-size: 27;
+-fx-font-family:Rockwell Extra Bold;
+-fx-font-fill:white;
 }
