@@ -36,6 +36,10 @@ public class Player extends Rectangle implements Serializable {
         setPosY(getPosY()+ySpeed);
     }
 
+
+    /**
+     * øker yspeed til player dersom den er mindre enn maxyspeed
+     */
     public void gravity() {
         if (ySpeed<MaxySpeed) {
             ySpeed = ySpeed + 0.3;
