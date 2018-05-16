@@ -6,6 +6,11 @@ import javafx.scene.paint.ImagePattern;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * Denne klassen tar seg hånd om å laste inn ressurser ved programstart. Alle filene blir lest og lagret ved
+ * programstart.
+ */
+
 public final class ResourceManager {
 
     public static ArrayList<ImagePattern> playerSprites = new ArrayList<>();
@@ -40,6 +45,11 @@ public final class ResourceManager {
             mapTextures.add(new ImagePattern(new Image(url.toString())));
             i++;
         }
+    }
+
+    public static void loadResources(){
+        loadCharacterResources();
+        loadTextureResources();
     }
 }
 

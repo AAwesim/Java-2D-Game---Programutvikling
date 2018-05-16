@@ -14,12 +14,18 @@ import sample.Tools.StateManager;
 
 public class menyController implements Initializable {
 
+    /**
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if (ResourceManager.playerSprites.size() == 0) {
+        if (ResourceManager.playerSprites.size() == 0 ||
+            ResourceManager.mapTextures.size() == 0 ||
+            ResourceManager.background == null) {
             System.out.println("SPRITES");
-            ResourceManager.loadCharacterResources();
-            ResourceManager.loadTextureResources();
+            ResourceManager.loadResources();
         } else return;
     }
 

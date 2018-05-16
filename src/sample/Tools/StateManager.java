@@ -12,9 +12,15 @@ import java.util.Map;
 /**
  * Denne klassen eksisterer for å endre scenegrafen til applikasjonen. Den behandler .fxml filene og laster dem inn i en
  * hashmap som Scene objekt. Formålet med dette er å lagre scenes i minne og ganske enkelt bytte til en vilkårlig scene.
+ * Det er veldig enkelt å legge til flere scenes, man legger til en enum, legger til .fxml til State hashmappet, legger
+ * til en case i update og vipps så har man enda en scene.
  *
  * Begrunnelse: Det ga god mening å holde styr på alle scenes som blir tatt bruk av i javafx-applikasjonen. Fordi man
- * kan
+ * kan raskt og enkelt navigere til andre scenes uten å måtte hele tiden lese .fxml og lage nye Scene objekter.
+ *
+ * Ulemper: Dette er ikke en skalerbar metode fordi alle scenes blir lagret til minnet.
+ *
+ * @author Asim (s325912)
  */
 public final class StateManager {
 
@@ -31,7 +37,9 @@ public final class StateManager {
      */
     private static Stage stage;
 
-
+    /**
+     * Forhåndssatte faste variabler som blir brukt for å holde styr på hvilken state programmet er i.
+     */
     public enum GameState {
         BUFFER,
         MENU,
@@ -42,6 +50,11 @@ public final class StateManager {
         GAME
     }
 
+    /**
+     * gameState er en GameState variabel den kan bli mutert av setState og den kan være bare en av enum variablene.
+     * Formålet med variabelen er å holde styr på hvilken state du ønsker. Som default er den satt til GameState.MENU
+     * så når programmet starter vil første scene være menu.fxml
+     */
     private static GameState gameState = GameState.MENU;
 
     /**
@@ -53,7 +66,9 @@ public final class StateManager {
     private static Map<String, Scene> State = new HashMap<>();
 
     /**
-     * 
+     * Prosedyre som kjøres hvis gameState blir mutert, altså at setState() blir brukt.
+     * Formålet med prosedyren er å returnere riktig Scene objekt basert på hva gameState er.
+     *
      * @return
      */
     public static Scene update(){
@@ -123,7 +138,7 @@ public final class StateManager {
 
             State.put("MENU", new Scene(
                     FXMLLoader.load(
-                            StateManager.class.getClassLoader().getResource("sample/FXML/meny.fxml"))));
+                            StateManager.class.getClassLoader().getResource("sample/FXML/menu.fxml"))));
 
             State.put("LEVEL", new Scene(
                     FXMLLoader.load(
@@ -139,7 +154,7 @@ public final class StateManager {
 
             State.put("GAMEOVER", new Scene(
                     FXMLLoader.load(
-                            StateManager.class.getClassLoader().getResource("sample/FXML/gameOVer.fxml"))));
+                            StateManager.class.getClassLoader().getResource("sample/FXML/gameOver.fxml"))));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
