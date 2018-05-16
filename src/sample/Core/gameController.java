@@ -34,7 +34,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     protected mapCreator mc;
     protected Bullet bullet;
 
-    public int i = 0;
+    private int Runtime = 0;
 
     private static boolean setNull = false;
     private static boolean running = true;
@@ -238,7 +238,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         }
     }
 
-    //checker om mainplayer har falt ned i høøøøl
+    //checker om mainplayer har falt ned Runtime høøøøl
     public void PitCheck(Player p, Pane pa) {
         if (p.getPosY() > pa.getHeight() - 65) {
             p.setPosX(110);
@@ -299,9 +299,9 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void runtime() {
-        i++;
-        if (i % 60 == 0) {
-            System.out.println("runtime:" + i / 60);
+        Runtime++;
+        if (Runtime % 60 == 0) {
+            System.out.println("runtime:" + Runtime / 60);
             System.out.println("ERMAP" + mapCreator.getERMap().size());
 
       /* System.out.println("ArraybulletsSize: "bully.bullets.size());
