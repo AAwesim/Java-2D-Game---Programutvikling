@@ -24,6 +24,7 @@ public class menyController implements Initializable {
      * @param location
      * @param resources
      */
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (ResourceManager.playerSprites.size() == 0 ||
@@ -38,6 +39,7 @@ public class menyController implements Initializable {
      * Bytter scene basert på teksten til Button objektet som blir trykket på. Kaller på StateManager.changeScene.
      * @param e
      */
+
     @FXML
     private void changeScene(ActionEvent e) {
         switch (((Button) e.getSource()).getText()) {
