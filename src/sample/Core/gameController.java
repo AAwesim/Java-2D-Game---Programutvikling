@@ -17,6 +17,7 @@ import sample.Tools.ResourceManager;
 import sample.Tools.StateManager;
 import java.io.*;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class gameController implements Initializable, Serializable, EventHandler<KeyEvent> {
@@ -31,9 +32,9 @@ public class gameController implements Initializable, Serializable, EventHandler
     private AnimationTimer timer;
     private Collision collision;
     protected mapCreator mc;
-    protected Bullet bully;
+    protected Bullet bullet;
 
-    public int i = 0;
+    private int Runtime = 0;
 
     private static boolean setNull = false;
     private static boolean running = true;
@@ -46,7 +47,8 @@ public class gameController implements Initializable, Serializable, EventHandler
         running = true;
         setNull = false;
         init(gamePane);
-        bully = new Bullet(gamePane);
+        setGamePaneWidth();
+        bullet = new Bullet(gamePane);
         timer = new AnimationTimer() {
 
             @Override
@@ -148,7 +150,7 @@ public class gameController implements Initializable, Serializable, EventHandler
             case F:
                 if (intervalShooting) {
                     intervalShooting = false;
-                    bully.initBullet(mainPlayer.getPosX() + mainPlayer.getWidth(), mainPlayer.getPosY() + mainPlayer.getHeight()/2);
+                    bullet.initBullet(mainPlayer.getPosX() + mainPlayer.getWidth(), mainPlayer.getPosY() + mainPlayer.getHeight()/2);
                 }
                 break;
 
@@ -214,7 +216,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     //må kalles hver gang vi endrer map, dersom map størrelsene skal være forskjellige.
     //Setter gamePane witdh lik maplengden
     public void setGamePaneWidth() {
-        gamePane.setPrefWidth(mc.getmapLength());
+        gamePane.setMaxWidth((mc.getmapLength()));
         /*System.out.println(mc.getmapLength());*/
         System.out.println(gamePane.getWidth());
     }
@@ -225,18 +227,22 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     //endrer visningfeltet
     public void view(Player p, Pane pa) {
-        if (p.getPosX() > 300 && p.getPosX() < pa.getWidth() - 505) {
-            pa.setLayoutX(-p.getPosX() + 300);
-        } else if (p.getPosX() < 300) {
+        int OffSetLeft=300;
+        int OffSetRight=505;
+        System.out.println(gamePane.getWidth());
+        System.out.println(pa.getWidth()-gpWrap.getWidth());
+        if (p.getPosX() > OffSetLeft && p.getPosX() < pa.getWidth() - OffSetRight) {
+            pa.setLayoutX(-p.getPosX() + OffSetLeft);
+        } else if (p.getPosX() < OffSetLeft) {
             pa.setLayoutX(0);
         }
     }
 
-    //checker om mainplayer har falt ned i høøøøl
+    //checker om mainplayer har falt ned Runtime høøøøl
     public void PitCheck(Player p, Pane pa) {
         if (p.getPosY() > pa.getHeight() - 65) {
             p.setPosX(110);
-            p.setPosY(300);
+            p.setPosY(200);
             /*p.setHealthAmount(p.getHealthAmount() - 1);
             healthLabel.setText(Integer.toString(p.getHealthAmount()));*/
             changeScene(StateManager.GameState.GAMEOVER);
@@ -254,7 +260,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         mc.getEnemyMap().clear();
         mapCreator.getERMap().clear();
         mapCreator.getECMap().clear();
-        bully.bullets.clear();
+        bullet.bullets.clear();
 
         System.out.println("EMAP a" + mc.getEnemyMap());
         System.out.println("EMAP b" + mapCreator.getERMap());
@@ -293,9 +299,9 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void runtime() {
-        i++;
-        if (i % 60 == 0) {
-            System.out.println("runtime:" + i / 60);
+        Runtime++;
+        if (Runtime % 60 == 0) {
+            System.out.println("runtime:" + Runtime / 60);
             System.out.println("ERMAP" + mapCreator.getERMap().size());
 
       /* System.out.println("ArraybulletsSize: "bully.bullets.size());
@@ -306,12 +312,20 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void updateBullet() {
-        for (Circle bulsy : bully.bullets) {
-            double rectX = bulsy.getCenterX();
-            bulsy.setCenterX(rectX + bully.getBulletSpeed());
+        for (Circle bulsy : bullet.bullets) {
+            double CircleX = bulsy.getCenterX();
+            bulsy.setCenterX(CircleX + bullet.getBulletSpeed());
             for (Rectangle mapsy : mc.getMap()) {
                 if (bulsy.getBoundsInParent().intersects(mapsy.getBoundsInParent())) {
-                    bully.collisionRemoveFirst(bulsy, mapsy);
+                    bullet.collisionRemoveFirst(bulsy, mapsy);
+                }
+            }
+            for (Iterator<EnemyRect> itER = mapCreator.getERMap().iterator(); itER.hasNext();){
+                EnemyRect ER = itER.next();
+                if (bulsy.getBoundsInParent().intersects(ER.getBoundsInParent())){
+                    itER.remove();
+                    mc.getEnemyMap().remove(ER);
+                    gamePane.getChildren().remove(ER);
                 }
             }
         }

@@ -1,6 +1,8 @@
 package sample.Core;
 
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import sample.Entity.Bullet;
 import sample.Entity.EnemyCircle;
 import sample.Entity.EnemyRect;
 import sample.Entity.Player;
@@ -13,8 +15,8 @@ public class Collision {
     //Vet ikke lenger, men tror det eneste formålet til metoden er for å sjekke om gravity()
     //skal kjøres, derfor er Width og Height en pixel større enn metoden under.
     public boolean gravityCheck(Player p, mapCreator mc) {
-        for (Rectangle mapPart : mc.getMap()) {
-            if (mapPart.intersects(p.getX(), p.getY(), p.getWidth() + 0.5, p.getHeight() + 0.5)) {
+        for (Rectangle mPart : mc.getMap()) {
+            if (mPart.intersects(p.getX(), p.getY(), p.getWidth() + 0.5, p.getHeight() + 0.5)) {
                 return true;
             }
         }
@@ -37,18 +39,18 @@ public class Collision {
     }
 
     public void playerCollisionY(Player p, mapCreator mc) {
-        for (Rectangle mapPart : mc.getMap()) {
-            if (mapPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {
+        for (Rectangle mPart : mc.getMap()) {
+            if (mPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {
                 // Collision Ovenifra
-                if ((p.getPosY() + p.getHeight()) < (mapPart.getY() + p.getMaxySpeed()) && p.getySpeed() > 0) {
+                if ((p.getPosY() + p.getHeight()) < (mPart.getY() + p.getMaxySpeed()) && p.getySpeed() > 0) {
                     p.setySpeed(0);
-                    p.setPosY(mapPart.getY() - p.getHeight() - 0.5);
+                    p.setPosY(mPart.getY() - p.getHeight() - 0.5);
                     return;
                 }
                 // Collision Nedenifra
-                if ((p.getPosY()) > (mapPart.getY() + mapPart.getHeight() / 2) && p.getySpeed() < 0) {
+                if ((p.getPosY()) > (mPart.getY() + mPart.getHeight() / 2) && p.getySpeed() < 0) {
                     p.setySpeed(0);
-                    p.setPosY(mapPart.getY() + mapPart.getHeight() + 0.5);
+                    p.setPosY(mPart.getY() + mPart.getHeight() + 0.5);
                     return;
                 }
             }
@@ -58,20 +60,20 @@ public class Collision {
     public void PlayerCollisionX(int x, Player p, mapCreator mc) {
         int speed = 4;
         for (int i = 1; i <= x; i++) {
-            for (Rectangle mapPart : mc.getMap()) {
-                if (mapPart.intersects(p.getPosX() + speed, p.getPosY(), p.getWidth(), p.getHeight())) {
+            for (Rectangle mPart : mc.getMap()) {
+                if (mPart.intersects(p.getPosX() + speed, p.getPosY(), p.getWidth(), p.getHeight())) {
                     // Bevegelseretning høyre
                     if (p.KeyD) {
                         speed--;
-                        p.setPosX(mapPart.getX() - p.getWidth() - 1);
+                        p.setPosX(mPart.getX() - p.getWidth() - 1);
                     }
                 }
 
-                if (mapPart.intersects(p.getPosX() - speed, p.getPosY(), p.getWidth(), p.getHeight())) {
+                if (mPart.intersects(p.getPosX() - speed, p.getPosY(), p.getWidth(), p.getHeight())) {
                     // Bevegelseretning venstre
                     if (p.KeyA) {
                         speed--;
-                        p.setPosX(mapPart.getX() + mapPart.getWidth() + 1);
+                        p.setPosX(mPart.getX() + mPart.getWidth() + 1);
                     }
                 }
             }

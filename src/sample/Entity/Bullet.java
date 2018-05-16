@@ -8,7 +8,6 @@ import sample.Tools.ResourceManager;
 
 import java.util.ArrayList;
 
-
 public class Bullet {
     private Pane gamePane;
     private double bulletSpeed=5;
@@ -31,7 +30,6 @@ public class Bullet {
         gamePane.getChildren().add(circle);
         bullets.add(circle);
     }
-
 
     public void removeBullet(Circle other) {
 
