@@ -9,7 +9,19 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Denne klassen eksisterer for å endre scenegrafen til applikasjonen. Den behandler .fxml filene og laster dem inn i en
+ * hashmap som Scene objekt. Formålet med dette er å lagre scenes i minne og ganske enkelt bytte til en vilkårlig scene.
+ *
+ * Begrunnelse: Det ga god mening å holde styr på alle scenes som blir tatt bruk av i javafx-applikasjonen. Fordi man
+ * kan
+ */
 public final class StateManager {
+
+    /**
+     * Den statiske variablen blir brukt for å holde styr på hvilket level brukeren vil spille. Det gir mening å ha noe
+     * som holder
+     */
     public static String LEVEL;
 
     static Stage stage;
@@ -20,6 +32,7 @@ public final class StateManager {
         LEVEL,
         HELP,
         PAUSE,
+        GAMEOVER,
         GAME
     }
 
@@ -55,6 +68,12 @@ public final class StateManager {
                     return State.get("PAUSE");
                 }
 
+            case GAMEOVER:
+                if(State.get("GAMEOVER") != null){
+                    System.out.println("GAMEOVER");
+                    return State.get("GAMEOVER");
+                }
+
             case GAME:
                 if(State.get("GAME") == null) {
                     System.out.println("NO GAME");
@@ -68,6 +87,11 @@ public final class StateManager {
         return null;
     }
 
+    /**
+     * Denne prosedyren er en av kjernedelene til denne klassen.
+     * Formålet med prosedyren er å hente lagre Scenes inn i
+     * Den blir kalt en gang i Main.main().
+     */
     public static void initStates(){
         try {
             State.put("BUFFER", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/buffer.fxml"))));
@@ -75,6 +99,7 @@ public final class StateManager {
             State.put("LEVEL", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/levelScene.fxml"))));
             State.put("HELP", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/hjelpScene.fxml"))));
             State.put("PAUSE", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/pauseScene.fxml"))));
+            State.put("GAMEOVER", new Scene(FXMLLoader.load(StateManager.class.getClassLoader().getResource("sample/FXML/gameOVer.fxml"))));
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);

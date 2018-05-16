@@ -245,7 +245,7 @@ public class gameController implements Initializable, Serializable, EventHandler
             p.setPosY(200);
             /*p.setHealthAmount(p.getHealthAmount() - 1);
             healthLabel.setText(Integer.toString(p.getHealthAmount()));*/
-            changeScene(StateManager.GameState.MAINMENU);
+            changeScene(StateManager.GameState.GAMEOVER);
         }
     }
 
