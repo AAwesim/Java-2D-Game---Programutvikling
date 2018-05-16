@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -162,22 +163,11 @@ public class gameController implements Initializable, Serializable, EventHandler
                 mainPlayer.setySpeed(0);
                 break;
             case F2:
-                try {
-                    playerSave(mainPlayer);
-                    System.out.println(mainPlayer.toString());
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                playerSave();
                 break;
 
             case F3:
-                try {
-                    loadSave();
-                    mainPlayer.renderPlayer();
-                    System.out.println(mainPlayer.toString());
-                } catch (Exception e2) {
-                    System.out.println(e);
-                }
+                loadSave();
                 break;
 
             case ESCAPE:
@@ -187,22 +177,36 @@ public class gameController implements Initializable, Serializable, EventHandler
         }
     }
 
-    public void playerSave(Player p) throws IOException {
-        FileOutputStream fo = new FileOutputStream("playersave.ser");
-        ObjectOutputStream out = new ObjectOutputStream(fo);
-        out.writeObject(p);
-        out.close();
-        fo.close();
+    public void playerSave() {
+        try(ObjectOutputStream out = new ObjectOutputStream (new FileOutputStream("player.sav"))) {
+            out.writeObject(mainPlayer);
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("Save Complete");
     }
 
-    public void loadSave() throws Exception {
+    public void loadSave(){
+        Player backupPlayer = mainPlayer;
         gamePane.getChildren().remove(mainPlayer);
-        FileInputStream fi = new FileInputStream("playersave.ser");
-        ObjectInputStream in = new ObjectInputStream(fi);
-        mainPlayer = (Player) in.readObject();
-        in.close();
-        fi.close();
+        try(FileInputStream fi = new FileInputStream("player.sav")){
+            ObjectInputStream in = new ObjectInputStream(fi);
+            mainPlayer = (Player) in.readObject();
+        }   catch (IOException ioe){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("LOAD SAVE ERROR");
+            alert.setHeaderText("FINNER IKKE PLAYER SAVE.");
+            alert.setContentText("Filen for player sine tilstander finnes ikke eller eksisterer ikke. Det kan hende " +
+                    "at filen er slettet.");
+            backupPlayer.initPlayer(gamePane);
+            alert.showAndWait();
+            ioe.printStackTrace();
+            return;
+
+        }   catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         mainPlayer.initPlayer(gamePane);
         System.out.println("Load Complete");
     }

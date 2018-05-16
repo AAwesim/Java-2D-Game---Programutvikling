@@ -15,8 +15,8 @@ import static javafx.scene.paint.Color.BLUE;
 public class Player extends Rectangle implements Serializable {
     private int healthAmount = 3;
 
-    public boolean KeyA = false;
-    public boolean KeyD = false;
+    public transient boolean KeyA = false;
+    public transient boolean KeyD = false;
     private double posX = 300;
     private double posY = 300;
     private double xSpeed = 4;
