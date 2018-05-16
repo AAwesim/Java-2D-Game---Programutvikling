@@ -20,12 +20,14 @@ public class mapCreator {
 
     private String[] LEVELARRAY;
 
+    /**
+     * Konstruktøren til mapCreator tar inn
+     * @param levelID
+     */
     public mapCreator(String levelID){
-
         this.levelID = levelID;
         MapIO mapIO = new MapIO(this.levelID);
         this.LEVELARRAY = mapIO.getMapArray();
-
     }
 
     public void initMap(Pane pe) {
