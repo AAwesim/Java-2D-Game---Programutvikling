@@ -21,7 +21,7 @@ public class EnemyMovingXDecorator extends EnemyDecorator {
         super(decoratedEnemy);
     }
 
-
+    @Override
     public void RenderEntity() {
         if (decoratedEnemy instanceof EnemyRect){
             MoveXEnemyRect((EnemyRect) decoratedEnemy);
