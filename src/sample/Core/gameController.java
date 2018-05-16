@@ -76,12 +76,13 @@ public class gameController implements Initializable, Serializable, EventHandler
                     updateBullet();
 
                     Render();
-                    collision.PlayerEnemyColl(mainPlayer);
+
 
                     mainPlayer.updatePlayerState();
 
                     view(mainPlayer, gamePane);
                     collision.playerCollisionY(mainPlayer, mc);
+                    collision.PlayerEnemyColl(mainPlayer);
 
                 } else return;
             }
@@ -229,8 +230,6 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void view(Player p, Pane pa) {
         int OffSetLeft=300;
         int OffSetRight=505;
-        System.out.println(gamePane.getWidth());
-        System.out.println(pa.getWidth()-gpWrap.getWidth());
         if (p.getPosX() > OffSetLeft && p.getPosX() < pa.getWidth() - OffSetRight) {
             pa.setLayoutX(-p.getPosX() + OffSetLeft);
         } else if (p.getPosX() < OffSetLeft) {
@@ -241,11 +240,10 @@ public class gameController implements Initializable, Serializable, EventHandler
     //checker om mainplayer har falt ned Runtime høøøøl
     public void PitCheck(Player p, Pane pa) {
         if (p.getPosY() > pa.getHeight() - 65) {
-            p.setPosX(110);
-            p.setPosY(200);
-            /*p.setHealthAmount(p.getHealthAmount() - 1);
-            healthLabel.setText(Integer.toString(p.getHealthAmount()));*/
-            changeScene(StateManager.GameState.GAMEOVER);
+            p.setHealthAmount(p.getHealthAmount() - 1);
+            healthLabel.setText(Integer.toString(p.getHealthAmount()));
+            if (p.getHealthAmount()==0 )
+                changeScene(StateManager.GameState.GAMEOVER);
         }
     }
 
@@ -354,4 +352,6 @@ public class gameController implements Initializable, Serializable, EventHandler
         }
 
     }
+
+
 }
