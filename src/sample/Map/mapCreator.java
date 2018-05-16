@@ -16,7 +16,7 @@ public class mapCreator {
     public  ArrayList<Rectangle> map = new ArrayList<>();
     private static ArrayList<EnemyRect> ERMap = new ArrayList<>();
     private static ArrayList<EnemyCircle> ECMap = new ArrayList<>();
-    private ArrayList<Entity> EntityMap = new ArrayList<>();
+    private ArrayList<Enemy> enemyMap = new ArrayList<>();
 
     private String[] LEVELARRAY;
 
@@ -53,20 +53,20 @@ public class mapCreator {
                         map.add(mapPart1);
                         break;
                     case '4':
-                        Entity enemy1 = new EntityMovingYDecorator(new EnemyRect(j * widthscalar, i * scalar, pe));
-                        EntityMap.add(enemy1);
+                        Enemy enemy1 = new EnemyMovingYDecorator(new EnemyRect(j * widthscalar, i * scalar, pe));
+                        enemyMap.add(enemy1);
                         break;
                     case '5':
-                        Entity enemy2 = new EnemyRect( j * widthscalar, i * scalar, pe);
-                        EntityMap.add(enemy2);
+                        Enemy enemy2 = new EnemyRect( j * widthscalar, i * scalar, pe);
+                        enemyMap.add(enemy2);
                         break;
                     case '6':
-                        Entity enemy3 = new EntityMovingYDecorator(new EnemyCircle( j * widthscalar, i * scalar,20, pe));
-                        EntityMap.add(enemy3);
+                        Enemy enemy3 = new EnemyMovingYDecorator(new EnemyCircle( j * widthscalar, i * scalar,20, pe));
+                        enemyMap.add(enemy3);
                         break;
                     case '7':
-                        Entity enemy4 = new EntityMovingXDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
-                        EntityMap.add(enemy4);
+                        Enemy enemy4 = new EnemyMovingXDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
+                        enemyMap.add(enemy4);
                     default:
                         break;
                 }
@@ -91,12 +91,12 @@ public class mapCreator {
         return ERMap;
     }
 
-    public ArrayList<Entity> getEntityMap() {
-        return EntityMap;
+    public ArrayList<Enemy> getEnemyMap() {
+        return enemyMap;
     }
 
-    public void setEntityMap(ArrayList<Entity> entityMap) {
-        EntityMap = entityMap;
+    public void setEnemyMap(ArrayList<Enemy> enemyMap) {
+        this.enemyMap = enemyMap;
     }
 
     public int getmapLength() {

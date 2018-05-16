@@ -14,7 +14,7 @@ public class PlayerCreator {
     }
 }
 /*
-    public Entity getEnemy(int type, double CPosX, double CPosY, Pane pe) {
+    public Enemy getEnemy(int type, double CPosX, double CPosY, Pane pe) {
         switch (type) {
             case 1:
                 new EnemyRect(CPosX, CPosY, pe );

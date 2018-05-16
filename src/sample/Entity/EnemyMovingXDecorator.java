@@ -1,6 +1,6 @@
 package sample.Entity;
 
-public class EntityMovingXDecorator extends EntityDecorator {
+public class EnemyMovingXDecorator extends EnemyDecorator {
 
 private int a;
     private int ba;
@@ -8,16 +8,16 @@ private int a;
 
 
 
-    public EntityMovingXDecorator(Entity decoratedEntity) {
-        super(decoratedEntity);
+    public EnemyMovingXDecorator(Enemy decoratedEnemy) {
+        super(decoratedEnemy);
     }
 
 
     public void RenderEntity() {
-        if (decoratedEntity instanceof EnemyRect){
-            MoveXEnemyRect((EnemyRect)decoratedEntity);
-        } else if (decoratedEntity instanceof EnemyCircle){
-            MoveXEnemyCircle((EnemyCircle)decoratedEntity);
+        if (decoratedEnemy instanceof EnemyRect){
+            MoveXEnemyRect((EnemyRect) decoratedEnemy);
+        } else if (decoratedEnemy instanceof EnemyCircle){
+            MoveXEnemyCircle((EnemyCircle) decoratedEnemy);
         }
     }
 

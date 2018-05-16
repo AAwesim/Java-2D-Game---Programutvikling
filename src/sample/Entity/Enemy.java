@@ -3,7 +3,7 @@ package sample.Entity;
 
 import javafx.scene.layout.Pane;
 
-public interface Entity {
+public interface Enemy {
 
     void RenderEntity();
 

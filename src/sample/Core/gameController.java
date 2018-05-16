@@ -16,7 +16,6 @@ import sample.Tools.ResourceManager;
 import sample.Tools.StateManager;
 import java.io.*;
 import java.net.URL;
-import java.time.Duration;
 import java.util.ResourceBundle;
 
 public class gameController implements Initializable, Serializable, EventHandler<KeyEvent> {
@@ -246,21 +245,21 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.getChildren().clear();
         gpWrap.getChildren().clear();
         mc.getMap().clear();
-        mc.getEntityMap().clear();
+        mc.getEnemyMap().clear();
         mapCreator.getERMap().clear();
         mapCreator.getECMap().clear();
         bully.bullets.clear();
 
-        System.out.println("EMAP a" + mc.getEntityMap());
+        System.out.println("EMAP a" + mc.getEnemyMap());
         System.out.println("EMAP b" + mapCreator.getERMap());
-        /*System.out.println("EMAP a "+mc.getEntityMap());
+        /*System.out.println("EMAP a "+mc.getEnemyMap());
         System.out.println("EMAP b "+mapCreator.getERMap());
         System.out.println("gamePane children " + gamePane.getChildren());
         System.out.println("gpWrap children " + gpWrap.getChildren());
         System.out.println("gamepane "+gamePane);
         System.out.println("gpWrap" + gpWrap);*/
 
-        mc.setEntityMap(null);
+        mc.setEnemyMap(null);
         mc.setMap(null);
 
         gamePane.removeEventHandler(KeyEvent.ANY, this);
@@ -294,7 +293,7 @@ public class gameController implements Initializable, Serializable, EventHandler
             System.out.println("ERMAP" + mapCreator.getERMap().size());
 
       /* System.out.println("ArraybulletsSize: "bully.bullets.size());
-      System.out.println("Entities: "+mc.getEntityMap().size());
+      System.out.println("Entities: "+mc.getEnemyMap().size());
         System.out.println("EnemiesR: "+mapCreator.getERMap().size());
         System.out.println("EnemiesC: "+mapCreator.getECMap().size());*/
         }
@@ -317,8 +316,8 @@ public class gameController implements Initializable, Serializable, EventHandler
      * Kaller på Player sin renderPlayer metode
      */
     private void Render() {
-        for (int i = 0; i < mc.getEntityMap().size(); i++) {
-            mc.getEntityMap().get(i).RenderEntity();
+        for (int i = 0; i < mc.getEnemyMap().size(); i++) {
+            mc.getEnemyMap().get(i).RenderEntity();
         }
         mainPlayer.renderPlayer();
     }

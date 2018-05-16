@@ -5,9 +5,7 @@ import javafx.scene.shape.Circle;
 import sample.Map.mapCreator;
 import sample.Tools.ResourceManager;
 
-import static javafx.scene.paint.Color.BLUE;
-
-public class EnemyCircle extends Circle implements Entity {
+public class EnemyCircle extends Circle implements Enemy {
 
 
     private double CPosX;

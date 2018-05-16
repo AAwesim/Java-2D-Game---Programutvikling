@@ -1,12 +1,11 @@
 package sample.Entity;
 
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import sample.Map.mapCreator;
 import sample.Tools.ResourceManager;
 
-public class EnemyRect extends Rectangle implements Entity {
+public class EnemyRect extends Rectangle implements Enemy {
 
     protected static int width = 50;
     protected static int height = 50;

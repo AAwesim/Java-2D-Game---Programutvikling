@@ -1,20 +1,20 @@
 package sample.Entity;
 
-public class EntityMovingYDecorator extends EntityDecorator {
+public class EnemyMovingYDecorator extends EnemyDecorator {
 
     private int a;
     private int i;
 
-    public EntityMovingYDecorator(Entity decoratedEntity) {
-        super(decoratedEntity);
+    public EnemyMovingYDecorator(Enemy decoratedEnemy) {
+        super(decoratedEnemy);
     }
 
 
     public void RenderEntity() {
-        if (decoratedEntity instanceof EnemyRect){
-            MoveYEnemyRect((EnemyRect)decoratedEntity);
-        } else if (decoratedEntity instanceof EnemyCircle){
-            MoveYEnemyCircle((EnemyCircle)decoratedEntity);
+        if (decoratedEnemy instanceof EnemyRect){
+            MoveYEnemyRect((EnemyRect) decoratedEnemy);
+        } else if (decoratedEnemy instanceof EnemyCircle){
+            MoveYEnemyCircle((EnemyCircle) decoratedEnemy);
         }
     }
 

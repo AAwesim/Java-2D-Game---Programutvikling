@@ -47,9 +47,9 @@ public class Player extends Rectangle implements Serializable {
         } else if (KeyD && ySpeed==0) {
             setFill(ResourceManager.playerSprites.get(4));
         } else if (KeyA && ySpeed!=0) {
-            setFill(ResourceManager.playerSprites.get(3));
-        } else if (KeyD && ySpeed!=0){
             setFill(ResourceManager.playerSprites.get(2));
+        } else if (KeyD && ySpeed!=0){
+            setFill(ResourceManager.playerSprites.get(3));
         } else if (!KeyA && ySpeed==0){
             setFill(ResourceManager.playerSprites.get(0));
         }
