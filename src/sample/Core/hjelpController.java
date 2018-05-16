@@ -1,7 +1,6 @@
 package sample.Core;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
@@ -31,6 +30,6 @@ public class hjelpController implements Initializable{
 
 
     public void changeScene(ActionEvent e) {
-        StateManager.changeScene(e, StateManager.GameState.MAINMENU);
+        StateManager.changeScene(e, StateManager.GameState.MENU);
     }
 }
