@@ -2,8 +2,8 @@ package sample.Entity;
 
 /**
  * Ved opprettelse
- *
- *
+ * tilbyr funksjonalitet
+ * for
  */
 
 import javafx.scene.layout.Pane;
@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 public interface Enemy {
 
     /**
-     * kjører metodene for render Entity
+     * Render Entity metode som blir override i decorators og EnemyCircle og EnemyRect
      */
     void RenderEntity();
 

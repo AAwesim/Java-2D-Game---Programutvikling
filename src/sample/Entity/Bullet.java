@@ -10,17 +10,29 @@ import java.util.ArrayList;
 
 public class Bullet {
     private Pane gamePane;
-    private double bulletSpeed=5;
+    private final double bulletSpeed=5;
     private double posx;
     private double posy;
     private double w=10;
     private double h=10;
     public ArrayList<Circle> bullets=new ArrayList<>();
 
+    /**
+     * tar inn en Pane som parameter og gir en referanse til den slik at den kan bli brukt senere
+     * som refereanse i andre metoder.
+     * @param gamePane
+     */
     public Bullet(Pane gamePane) {
         this.gamePane = gamePane;
     }
 
+    /**
+     * denne metoden skaper en sirkel med posisjon posx, og posy som parametere, i tillegg tar
+     * den inn textures som blir hentet fra klassen resoursemanager.
+     * denne sirkelen blir lagt inn i Panen vår og sirkelene blir lagret i en Arraylist.
+     * @param posx angitt posisjon x
+     * @param posy angitt posisjon y
+     */
     public void initBullet(double posx, double posy){
         Circle circle= new Circle();
         circle.setRadius(w);
@@ -31,28 +43,11 @@ public class Bullet {
         bullets.add(circle);
     }
 
-    public void removeBullet(Circle other) {
-
-        gamePane.getChildren().remove(other);
-        bullets.remove(other);
-        }
-    public void collisionRemoveFirst(Circle circleB, Rectangle rectangle2 ){
-        if(circleB.getBoundsInParent().intersects(rectangle2.getBoundsInParent())){
-            removeBullet(circleB);
-        }
-    }
-
-
-    public void setposx(double posx){ this.posx=posx;}
-    public double getPosx(){ return posx;}
-
-    public void setBulletSpeed(double bulletSpeed){this.bulletSpeed=bulletSpeed; }
-
+    /**
+     * gir bulletspeeden til bulleten
+     * @return bullet sin fart
+     */
     public double getBulletSpeed(){return bulletSpeed; }
-
-    public void setPosy(double posy){this.posy=posy;}
-    public double getPosy(){return posy;}
-
 
 }
 
