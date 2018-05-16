@@ -18,8 +18,8 @@ public class Player extends Rectangle implements Serializable {
     private int checksum = 123456789;
     public transient boolean KeyA = false;
     public transient boolean KeyD = false;
-    private double posX = 300;
-    private double posY = 300;
+    private double posX = 90;
+    private double posY = 260;
     private double xSpeed = 4;
     private double ySpeed = 4;
     private int MaxySpeed = 7;

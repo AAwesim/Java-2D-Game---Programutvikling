@@ -76,12 +76,13 @@ public class gameController implements Initializable, Serializable, EventHandler
                     updateBullet();
 
                     Render();
-                    collision.PlayerEnemyColl(mainPlayer);
+
 
                     mainPlayer.updatePlayerState();
 
                     view(mainPlayer, gamePane);
                     collision.playerCollisionY(mainPlayer, mc);
+                    collision.PlayerEnemyColl(mainPlayer);
 
                 } else return;
             }
@@ -207,6 +208,12 @@ public class gameController implements Initializable, Serializable, EventHandler
             return;
 
         }   catch (ClassNotFoundException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("JARFILE CORRUPT ERROR");
+            alert.setHeaderText("KAN IKKE DESERIALIZE SAVE FIL.");
+            alert.setContentText("LAST NED .JAR FILEN PÅ NYTT");
+            alert.showAndWait();
+            System.exit(5);
             e.printStackTrace();
         }
         mainPlayer.initPlayer(gamePane);
@@ -239,11 +246,10 @@ public class gameController implements Initializable, Serializable, EventHandler
     //checker om mainplayer har falt ned Runtime høøøøl
     public void PitCheck(Player p, Pane pa) {
         if (p.getPosY() > pa.getHeight() - 65) {
-            p.setPosX(110);
-            p.setPosY(200);
-            /*p.setHealthAmount(p.getHealthAmount() - 1);
-            healthLabel.setText(Integer.toString(p.getHealthAmount()));*/
-            changeScene(StateManager.GameState.GAMEOVER);
+            p.setHealthAmount(p.getHealthAmount() - 1);
+            healthLabel.setText(Integer.toString(p.getHealthAmount()));
+            if (p.getHealthAmount()==0 )
+                changeScene(StateManager.GameState.GAMEOVER);
         }
     }
 
@@ -260,21 +266,14 @@ public class gameController implements Initializable, Serializable, EventHandler
         mapCreator.getECMap().clear();
         bullet.bullets.clear();
 
-        System.out.println("EMAP a" + mc.getEnemyMap());
-        System.out.println("EMAP b" + mapCreator.getERMap());
-        /*System.out.println("EMAP a "+mc.getEnemyMap());
-        System.out.println("EMAP b "+mapCreator.getERMap());
-        System.out.println("gamePane children " + gamePane.getChildren());
-        System.out.println("gpWrap children " + gpWrap.getChildren());
-        System.out.println("gamepane "+gamePane);
-        System.out.println("gpWrap" + gpWrap);*/
-
         mc.setEnemyMap(null);
         mc.setMap(null);
 
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);
         gamePane.setOnKeyReleased(null);
+
+        bullet = null;
         timer = null;
         gpWrap = null;
         gamePane = null;
@@ -362,4 +361,6 @@ public class gameController implements Initializable, Serializable, EventHandler
         }
 
     }
+
+
 }

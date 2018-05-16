@@ -22,11 +22,9 @@ public class mapCreator {
 
 
     public mapCreator(String levelID){
-
         this.levelID = levelID;
         MapIO mapIO = new MapIO(this.levelID);
         this.LEVELARRAY = mapIO.getMapArray();
-
     }
 
     /**
