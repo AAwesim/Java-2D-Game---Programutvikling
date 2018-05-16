@@ -1,14 +1,15 @@
 package sample.Core;
 
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-import sample.Entity.Bullet;
 import sample.Entity.EnemyCircle;
 import sample.Entity.EnemyRect;
 import sample.Entity.Player;
 import sample.Map.mapCreator;
+import sample.Tools.StateManager;
 
-import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+
 
 public class Collision {
 
@@ -24,20 +25,51 @@ public class Collision {
     }
 
     public void PlayerEnemyColl(Player p) {
-        for (EnemyRect enemyRect : mapCreator.getERMap()) {
-            if (p.intersects(enemyRect.getBoundsInParent())) {
-                p.setPosX(110);
-                p.setPosY(300);
+        for(Iterator<EnemyRect> itER = mapCreator.getERMap().iterator(); itER.hasNext();) {
+            try {
+                EnemyRect ER = itER.next();
+                if (p.intersects(ER.getBoundsInParent())) {
+                    p.setPosX(90);
+                    p.setPosY(260);
+                    gameController.setRunning(false);
+                    gameController.setSetNull(true);
+                    StateManager.removeGameRoot();
+                    StateManager.changeScene(StateManager.GameState.BUFFER);
+                    StateManager.changeScene(StateManager.GameState.GAMEOVER);
+                }
+            } catch (ConcurrentModificationException e) {
+                System.out.println("ConcurrentModificationException e at Collision PlayerEnemyColl");
+                return;
             }
         }
-        for (EnemyCircle enemyCircle : mapCreator.getECMap()) {
-            if (p.intersects(enemyCircle.getBoundsInParent())) {
-                p.setPosX(110);
-                p.setPosY(300);
+
+        for (Iterator<EnemyCircle> itEC = mapCreator.getECMap().iterator(); itEC.hasNext();) {
+            try {
+                EnemyCircle EC = itEC.next();
+                if (p.intersects(EC.getBoundsInParent())) {
+                    gameController.setRunning(false);
+                    gameController.setSetNull(true);
+                    StateManager.removeGameRoot();
+                    StateManager.changeScene(StateManager.GameState.BUFFER);
+                    StateManager.changeScene(StateManager.GameState.GAMEOVER);
+                }
+            } catch (ConcurrentModificationException e) {
+                System.out.println("ConcurrentModificationException e at Collision PlayerEnemyColl");
+                return;
             }
+              /* p.setHealthAmount(p.getHealthAmount() - 1);
+                ().setText(Integer.toString(p.getHealthAmount()));*/
         }
     }
 
+    /**
+     * Behandler kollision mellom parameterne p og mc som er instanser av player og mapCreator
+     * sjekker om instansen av player intersecter noen av rectanglene i arraylisten Map i instansen av mapcreator
+     * dersom p instersecter rectanglene/mPart ovenifra settes p sin posisjon 0,5 piksler over mParten
+     * dersom p intersecter rectanglene/mPart neden ifra settes p sin posisjon 0,5 piksler under mParten
+     * @param p
+     * @param mc
+     */
     public void playerCollisionY(Player p, mapCreator mc) {
         for (Rectangle mPart : mc.getMap()) {
             if (mPart.intersects(p.getPosX(), p.getPosY(), p.getWidth(), p.getHeight())) {

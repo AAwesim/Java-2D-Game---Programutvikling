@@ -76,12 +76,13 @@ public class gameController implements Initializable, Serializable, EventHandler
                     updateBullet();
 
                     Render();
-                    collision.PlayerEnemyColl(mainPlayer);
+
 
                     mainPlayer.updatePlayerState();
 
                     view(mainPlayer, gamePane);
                     collision.playerCollisionY(mainPlayer, mc);
+                    collision.PlayerEnemyColl(mainPlayer);
 
                 } else return;
             }
@@ -229,8 +230,6 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void view(Player p, Pane pa) {
         int OffSetLeft=300;
         int OffSetRight=505;
-        System.out.println(gamePane.getWidth());
-        System.out.println(pa.getWidth()-gpWrap.getWidth());
         if (p.getPosX() > OffSetLeft && p.getPosX() < pa.getWidth() - OffSetRight) {
             pa.setLayoutX(-p.getPosX() + OffSetLeft);
         } else if (p.getPosX() < OffSetLeft) {
@@ -241,11 +240,10 @@ public class gameController implements Initializable, Serializable, EventHandler
     //checker om mainplayer har falt ned Runtime høøøøl
     public void PitCheck(Player p, Pane pa) {
         if (p.getPosY() > pa.getHeight() - 65) {
-            p.setPosX(110);
-            p.setPosY(200);
-            /*p.setHealthAmount(p.getHealthAmount() - 1);
-            healthLabel.setText(Integer.toString(p.getHealthAmount()));*/
-            changeScene(StateManager.GameState.GAMEOVER);
+            p.setHealthAmount(p.getHealthAmount() - 1);
+            healthLabel.setText(Integer.toString(p.getHealthAmount()));
+            if (p.getHealthAmount()==0 )
+                changeScene(StateManager.GameState.GAMEOVER);
         }
     }
 
@@ -312,24 +310,34 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void updateBullet() {
-        for (Circle bulsy : bullet.bullets) {
-            double CircleX = bulsy.getCenterX();
-            bulsy.setCenterX(CircleX + bullet.getBulletSpeed());
-            for (Rectangle mapsy : mc.getMap()) {
-                if (bulsy.getBoundsInParent().intersects(mapsy.getBoundsInParent())) {
-                    bullet.collisionRemoveFirst(bulsy, mapsy);
+        for (Iterator<Circle>itBT = bullet.bullets.iterator(); itBT.hasNext();) {
+            Circle BT= itBT.next();
+            double CircleX = BT.getCenterX();
+            if(BT.getCenterX()-mainPlayer.getPosX()>200){
+                itBT.remove();
+                gamePane.getChildren().remove(BT);
+            }
+            BT.setCenterX(CircleX + bullet.getBulletSpeed());
+            for (Iterator<Rectangle> itMP=mc.getMap().iterator(); itMP.hasNext();) {
+                Rectangle MP=itMP.next();
+                if (BT.getBoundsInParent().intersects(MP.getBoundsInParent())) {
+                    itBT.remove();
+                    gamePane.getChildren().remove(BT);
                 }
             }
             for (Iterator<EnemyRect> itER = mapCreator.getERMap().iterator(); itER.hasNext();){
                 EnemyRect ER = itER.next();
-                if (bulsy.getBoundsInParent().intersects(ER.getBoundsInParent())){
+                if (BT.getBoundsInParent().intersects(ER.getBoundsInParent())){
                     itER.remove();
+                    itBT.remove();
                     mc.getEnemyMap().remove(ER);
                     gamePane.getChildren().remove(ER);
+                    gamePane.getChildren().remove(BT);
                 }
             }
         }
     }
+
 
     /**
      * Kaller på RenderEntity metoden for hver entitet
@@ -354,4 +362,6 @@ public class gameController implements Initializable, Serializable, EventHandler
         }
 
     }
+
+
 }
