@@ -22,6 +22,7 @@ public abstract class EnemyDecorator implements Enemy {
     /**
      *
      */
+    @Override
     public void RenderEntity(){
         decoratedEnemy.RenderEntity();
     }
