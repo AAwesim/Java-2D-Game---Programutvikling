@@ -23,6 +23,7 @@
             <Font name="Rockwell Nova Extra Bold" size="25.0" />
          </font>
       </Label>
+      <Label layoutX="154.0" layoutY="84.0" text="BARE EEVEL TO FUNKER FORDI VI IKKE LAGDE MAP TIL DE ANDRE" />
    </children>
     <stylesheets>
         <URL value="@menyStyleSheet.css" />
