@@ -112,8 +112,10 @@ public class gameController implements Initializable, Serializable, EventHandler
 
             if (e.getCode() == KeyCode.A || e.getCode() == KeyCode.LEFT) {
                 mainPlayer.KeyA = false;
+                mainPlayer.setFill(ResourceManager.playerSprites.get(1));
             } else if (e.getCode() == KeyCode.D || e.getCode() == KeyCode.RIGHT) {
                 mainPlayer.KeyD = false;
+                mainPlayer.setFill(ResourceManager.playerSprites.get(0));
             }
             if (e.getCode() == KeyCode.F) {
                 intervalShooting = true;
