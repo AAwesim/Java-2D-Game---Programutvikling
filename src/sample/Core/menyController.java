@@ -12,10 +12,15 @@ import sample.Tools.ResourceManager;
 import sample.Tools.StateManager;
 
 
+/**
+ * Controller for meny.fxml
+ * @author Asim
+ */
 public class menyController implements Initializable {
 
     /**
-     *
+     * Metoden kjører når menyController kjører. (På en måte som main()).
+     * Den laster inn ressurser hvis arraylistene i ResourceManager er tomme.
      * @param location
      * @param resources
      */
@@ -29,6 +34,10 @@ public class menyController implements Initializable {
         } else return;
     }
 
+    /**
+     * Bytter scene basert på teksten til Button objektet som blir trykket på. Kaller på StateManager.changeScene.
+     * @param e
+     */
     @FXML
     private void changeScene(ActionEvent e) {
         switch (((Button) e.getSource()).getText()) {
