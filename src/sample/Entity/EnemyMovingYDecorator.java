@@ -1,5 +1,11 @@
 package sample.Entity;
 
+/**
+ * EnemyMovingYDecorator
+ * extender EnemyDecorator og tilbyr funksjonalitet for å automatisk animere Enemies Som beveger seg
+ * langs Y-aksen
+ */
+
 public class EnemyMovingYDecorator extends EnemyDecorator {
 
     private int a;

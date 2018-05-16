@@ -5,6 +5,12 @@ import javafx.scene.shape.Rectangle;
 import sample.Map.mapCreator;
 import sample.Tools.ResourceManager;
 
+/**
+ * Denne klassen extender Rectangle og implementerer Enemy interface
+ * Klassen gjør at man kan opprette rectangelformede enemies i mapcreator
+ */
+
+
 public class EnemyRect extends Rectangle implements Enemy {
 
     protected static int width = 50;

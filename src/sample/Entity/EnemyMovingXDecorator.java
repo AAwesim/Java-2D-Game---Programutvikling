@@ -1,13 +1,22 @@
 package sample.Entity;
 
+/**
+ * EnemyMovingXDecorator
+ * extender EnemyDecorator og tilbyr funksjonalitet for å automatisk animere Enemies Som beveger seg
+ * langs X-aksen
+ */
+
 public class EnemyMovingXDecorator extends EnemyDecorator {
 
-private int a;
-    private int ba;
+    /**
+     * datafeltet i klassen består av int i som brukes i MoveXEnemyRect/Circle metodene
+     */
     private int i;
 
-
-
+    /**
+     *
+     * @param decoratedEnemy
+     */
     public EnemyMovingXDecorator(Enemy decoratedEnemy) {
         super(decoratedEnemy);
     }
