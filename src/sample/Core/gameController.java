@@ -310,24 +310,34 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void updateBullet() {
-        for (Circle bulsy : bullet.bullets) {
-            double CircleX = bulsy.getCenterX();
-            bulsy.setCenterX(CircleX + bullet.getBulletSpeed());
-            for (Rectangle mapsy : mc.getMap()) {
-                if (bulsy.getBoundsInParent().intersects(mapsy.getBoundsInParent())) {
-                    bullet.collisionRemoveFirst(bulsy, mapsy);
+        for (Iterator<Circle>itBT = bullet.bullets.iterator(); itBT.hasNext();) {
+            Circle BT= itBT.next();
+            double CircleX = BT.getCenterX();
+            if(BT.getCenterX()-mainPlayer.getPosX()>200){
+                itBT.remove();
+                gamePane.getChildren().remove(BT);
+            }
+            BT.setCenterX(CircleX + bullet.getBulletSpeed());
+            for (Iterator<Rectangle> itMP=mc.getMap().iterator(); itMP.hasNext();) {
+                Rectangle MP=itMP.next();
+                if (BT.getBoundsInParent().intersects(MP.getBoundsInParent())) {
+                    itBT.remove();
+                    gamePane.getChildren().remove(BT);
                 }
             }
             for (Iterator<EnemyRect> itER = mapCreator.getERMap().iterator(); itER.hasNext();){
                 EnemyRect ER = itER.next();
-                if (bulsy.getBoundsInParent().intersects(ER.getBoundsInParent())){
+                if (BT.getBoundsInParent().intersects(ER.getBoundsInParent())){
                     itER.remove();
+                    itBT.remove();
                     mc.getEnemyMap().remove(ER);
                     gamePane.getChildren().remove(ER);
+                    gamePane.getChildren().remove(BT);
                 }
             }
         }
     }
+
 
     /**
      * Kaller på RenderEntity metoden for hver entitet

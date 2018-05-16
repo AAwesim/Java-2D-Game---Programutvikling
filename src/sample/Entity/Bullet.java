@@ -34,7 +34,7 @@ public class Bullet {
     public void removeBullet(Circle other) {
 
         gamePane.getChildren().remove(other);
-        bullets.remove(bullets);
+        bullets.remove(other);
         }
     public void collisionRemoveFirst(Circle circleB, Rectangle rectangle2 ){
         if(circleB.getBoundsInParent().intersects(rectangle2.getBoundsInParent())){
