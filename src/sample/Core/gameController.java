@@ -195,19 +195,41 @@ public class gameController implements Initializable, Serializable, EventHandler
         gamePane.getChildren().remove(mainPlayer);
         try(FileInputStream fi = new FileInputStream("player.sav")){
             ObjectInputStream in = new ObjectInputStream(fi);
-            mainPlayer = (Player) in.readObject();
-        }   catch (IOException ioe){
+            Player tempPlayer = (Player) in.readObject();
+            if(tempPlayer.getChecksum() % 9 == 0){mainPlayer = tempPlayer;}
+                else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("KORRUPT");
+                alert.setHeaderText("FILEN ER KORRUPT OG DERMED ER DET IKKE MULIG Å LOADE SAVEN.");
+                alert.setContentText("PLAYERDATA ER KORRUPT OG UMULIG Å HENTE");
+                backupPlayer.initPlayer(gamePane);
+                alert.showAndWait();
+            }
+        } catch(FileNotFoundException fnfe){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("LOAD SAVE ERROR");
             alert.setHeaderText("FINNER IKKE PLAYER SAVE.");
             alert.setContentText("Filen for player sine tilstander finnes ikke eller eksisterer ikke. Det kan hende " +
                     "at filen er slettet.");
             backupPlayer.initPlayer(gamePane);
+            backupPlayer.KeyA = false;
+            backupPlayer.KeyD = false;
+            alert.showAndWait();
+            fnfe.printStackTrace();
+        } catch (IOException ioe){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("IO Funker ikke");
+            alert.setHeaderText("FINNER IKKE PLAYER SAVE.");
+            alert.setContentText("Filen for player sine tilstander finnes ikke eller eksisterer ikke. Det kan hende " +
+                    "at filen er slettet.");
+            backupPlayer.initPlayer(gamePane);
+            backupPlayer.KeyA = false;
+            backupPlayer.KeyD = false;
             alert.showAndWait();
             ioe.printStackTrace();
             return;
 
-        }   catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("JARFILE CORRUPT ERROR");
             alert.setHeaderText("KAN IKKE DESERIALIZE SAVE FIL.");

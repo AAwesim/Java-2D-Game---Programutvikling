@@ -15,7 +15,7 @@ import static javafx.scene.paint.Color.BLUE;
 public class Player extends Rectangle implements Serializable {
     private int healthAmount = 3;
 
-    private int checksum = 123456789;
+    private final int checksum = 123456789;
     public transient boolean KeyA = false;
     public transient boolean KeyD = false;
     private double posX = 90;
@@ -128,5 +128,9 @@ public class Player extends Rectangle implements Serializable {
 
     public void setHealthAmount(int healthAmount) {
         this.healthAmount = healthAmount;
+    }
+
+    public int getChecksum() {
+        return checksum;
     }
 }
