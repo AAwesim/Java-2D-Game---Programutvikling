@@ -42,6 +42,10 @@ public class Player extends Rectangle implements Serializable {
         } else {setySpeed(MaxySpeed);}
     }
 
+    /**
+     *setterFill til player avhengig av verdiene til keyA, KeyD og ySpeed
+     *kaller på setX og SetY metodene i Rectangle med posX og posY som parameter.
+     */
     public void renderPlayer() {
         if (KeyA && ySpeed==0) {
             setFill(ResourceManager.playerSprites.get(5));
