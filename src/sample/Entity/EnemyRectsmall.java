@@ -16,8 +16,8 @@ public class EnemyRectsmall extends EnemyRect {
      * datafeltet til klassen EnemyRectSmall. int variablene Width og height definerer høyden og widten til
      * enemyrectsmall.
      */
-    protected int width = 20;
-    protected int height = 20;
+    private int width = 20;
+    private int height = 20;
 
     /**
      * Konstruktøren til klassen EnemyRectSmall. Ved kall på konstruktøren opprettes et object av typen EnemyRect

@@ -8,11 +8,11 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: red;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.gameOverController">
    <children>
-      <Button id="knappover" layoutX="248.0" layoutY="128.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #71EEB8;" text="TRY AGAIN" textFill="WHITE">
+      <Button id="knappover" layoutX="248.0" layoutY="128.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #71EEB8;" text="Restart" textFill="WHITE">
          <font>
             <Font name="Rockwell Extra Bold" size="18.0" />
          </font></Button>
-      <Button id="knappover" layoutX="248.0" layoutY="200.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #71EEB8;" text="MENY" textFill="#fffbfb">
+      <Button id="knappover" layoutX="248.0" layoutY="200.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #71EEB8;" text="Meny" textFill="#fffbfb">
          <font>
             <Font name="Rockwell Nova Extra Bold" size="18.0" />
          </font></Button>

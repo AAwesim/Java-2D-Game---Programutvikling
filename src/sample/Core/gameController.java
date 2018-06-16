@@ -348,9 +348,9 @@ public class gameController implements Initializable, Serializable, EventHandler
             }
             for (Iterator<EnemyRect> itER = mapCreator.getERMap().iterator(); itER.hasNext();){
                 EnemyRect ER = itER.next();
-                if (BT.getBoundsInParent().intersects(ER.getBoundsInParent())){
-                    itER.remove();
+                if (BT.intersects(ER.getBoundsInParent())){
                     itBT.remove();
+                    itER.remove();
                     mc.getEnemyMap().remove(ER);
                     gamePane.getChildren().remove(ER);
                     gamePane.getChildren().remove(BT);
