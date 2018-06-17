@@ -11,9 +11,14 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 
-public class Collision {
+public class Collision extends gameController {
 
-    //Vet ikke lenger, men tror det eneste formålet til metoden er for å sjekke om gravity()
+    /**
+        Endres til true hvis instansen av player objektet har 0 liv
+     */
+    private boolean PlayerDead;
+
+    //Formålet til metoden er for å sjekke om gravity()
     //skal kjøres, derfor er Width og Height en pixel større enn metoden under.
     public boolean gravityCheck(Player p, mapCreator mc) {
         for (Rectangle mPart : mc.getMap()) {
@@ -24,42 +29,37 @@ public class Collision {
         return false;
     }
 
-    public void PlayerEnemyColl(Player p) {
-        for(Iterator<EnemyRect> itER = mapCreator.getERMap().iterator(); itER.hasNext();) {
-            try {
-                EnemyRect ER = itER.next();
-                if (p.intersects(ER.getBoundsInParent())) {
-                    p.setPosX(90);
-                    p.setPosY(260);
-                    gameController.setRunning(false);
-                    gameController.setSetNull(true);
-                    StateManager.removeGameRoot();
-                    StateManager.changeScene(StateManager.GameState.BUFFER);
-                    StateManager.changeScene(StateManager.GameState.GAMEOVER);
-                }
-            } catch (ConcurrentModificationException e) {
-                System.out.println("ConcurrentModificationException e at Collision PlayerEnemyColl");
-                return;
+    protected void PlayerEnemyColl(Player p) {
+        for (EnemyRect ERnext : mapCreator.getERMap()) {
+            if (p.intersects(ERnext.getBoundsInParent())) {
+                p.setHealthAmount(p.getHealthAmount() - 1);
+                p.setPlayerPositionStart();
+                if (p.getHealthAmount() == 0)
+                    PlayerDead = true;
             }
         }
+        if(PlayerDead) { sceneGameover(); }
+        for (EnemyCircle ECnext : mapCreator.getECMap()) {
+            if (p.intersects(ECnext.getBoundsInParent())) {
+                p.setHealthAmount(p.getHealthAmount() - 1);
+                p.setPlayerPositionStart();
+                if (p.getHealthAmount() == 0)
+                    PlayerDead = true;
+            }
+        }
+        if(PlayerDead) { sceneGameover(); }
+    }
 
-        for (Iterator<EnemyCircle> itEC = mapCreator.getECMap().iterator(); itEC.hasNext();) {
-            try {
-                EnemyCircle EC = itEC.next();
-                if (p.intersects(EC.getBoundsInParent())) {
-                    gameController.setRunning(false);
-                    gameController.setSetNull(true);
-                    StateManager.removeGameRoot();
-                    StateManager.changeScene(StateManager.GameState.BUFFER);
-                    StateManager.changeScene(StateManager.GameState.GAMEOVER);
-                }
-            } catch (ConcurrentModificationException e) {
-                System.out.println("ConcurrentModificationException e at Collision PlayerEnemyColl");
-                return;
-            }
-              /* p.setHealthAmount(p.getHealthAmount() - 1);
-                ().setText(Integer.toString(p.getHealthAmount()));*/
-        }
+    /**
+     * Setter setNull true og running false
+     * Bytter til gameoverscenen
+     */
+    private void sceneGameover() {
+        gameController.setRunning(false);
+        gameController.setSetNull(true);
+        StateManager.removeGameRoot();
+        StateManager.changeScene(StateManager.GameState.BUFFER);
+        StateManager.changeScene(StateManager.GameState.GAMEOVER);
     }
 
     /**

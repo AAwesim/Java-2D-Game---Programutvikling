@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import static javafx.scene.paint.Color.BLUE;
 
 public class Player extends Rectangle implements Serializable {
-    private int healthAmount = 3;
 
+    private int healthAmount = 3;
     private final int checksum = 123456789;
     public transient boolean KeyA = false;
     public transient boolean KeyD = false;
@@ -29,7 +29,6 @@ public class Player extends Rectangle implements Serializable {
         this.setHeight(45);
         this.setWidth(36);
         setFill(ResourceManager.playerSprites.get(0));
-
         p.getChildren().add(this);
     }
 
@@ -87,6 +86,13 @@ public class Player extends Rectangle implements Serializable {
       //  System.out.println("MRight");
         setxSpeed(speed);
         setPosX(getPosX()+xSpeed);
+    }
+
+    public void setPlayerPositionStart() {
+        setySpeed(0);
+        setxSpeed(0);
+        setPosX(90);
+        setPosY(260);
     }
 
     //Getters og setters
