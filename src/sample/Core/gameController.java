@@ -17,14 +17,19 @@ import sample.Tools.ResourceManager;
 import sample.Tools.StateManager;
 import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 
 public class gameController implements Initializable, Serializable, EventHandler<KeyEvent> {
 
-    @FXML Pane gamePane;
-    @FXML Pane gpWrap;
-    @FXML Label healthLabel;
+    @FXML
+    Pane gamePane;
+    @FXML
+    Pane gpWrap;
+    @FXML
+    Label LivesCounter;
 
     private PlayerCreator pc = new PlayerCreator();
     protected Player mainPlayer = (Player) pc.getEntity("PLAYER");
@@ -66,7 +71,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                     if (!collision.gravityCheck(mainPlayer, mc)) {
                         mainPlayer.gravity();
                     }
-
+                    updateHealth(mainPlayer);
                     //collision()
 
                     PlayerMoveXColl();
@@ -83,6 +88,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                     view(mainPlayer, gamePane);
                     collision.playerCollisionY(mainPlayer, mc);
                     collision.PlayerEnemyColl(mainPlayer);
+
 
                 } else return;
             }
@@ -151,7 +157,7 @@ public class gameController implements Initializable, Serializable, EventHandler
             case F:
                 if (intervalShooting) {
                     intervalShooting = false;
-                    bullet.initBullet(mainPlayer.getPosX() + mainPlayer.getWidth(), mainPlayer.getPosY() + mainPlayer.getHeight()/2);
+                    bullet.initBullet(mainPlayer.getPosX() + mainPlayer.getWidth(), mainPlayer.getPosY() + mainPlayer.getHeight() / 2);
                 }
                 break;
 
@@ -181,7 +187,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void playerSave() {
-        try(ObjectOutputStream out = new ObjectOutputStream (new FileOutputStream("player.sav"))) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("player.sav"))) {
             out.writeObject(mainPlayer);
             out.flush();
         } catch (IOException e) {
@@ -190,14 +196,15 @@ public class gameController implements Initializable, Serializable, EventHandler
         System.out.println("Save Complete");
     }
 
-    public void loadSave(){
+    public void loadSave() {
         Player backupPlayer = mainPlayer;
         gamePane.getChildren().remove(mainPlayer);
-        try(FileInputStream fi = new FileInputStream("player.sav")){
+        try (FileInputStream fi = new FileInputStream("player.sav")) {
             ObjectInputStream in = new ObjectInputStream(fi);
             Player tempPlayer = (Player) in.readObject();
-            if(tempPlayer.getChecksum() % 9 == 0){mainPlayer = tempPlayer;}
-                else {
+            if (tempPlayer.getChecksum() % 9 == 0) {
+                mainPlayer = tempPlayer;
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("KORRUPT");
                 alert.setHeaderText("FILEN ER KORRUPT OG DERMED ER DET IKKE MULIG Å LOADE SAVEN.");
@@ -205,7 +212,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                 backupPlayer.initPlayer(gamePane);
                 alert.showAndWait();
             }
-        } catch(FileNotFoundException fnfe){
+        } catch (FileNotFoundException fnfe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("LOAD SAVE ERROR");
             alert.setHeaderText("FINNER IKKE PLAYER SAVE.");
@@ -216,7 +223,7 @@ public class gameController implements Initializable, Serializable, EventHandler
             backupPlayer.KeyD = false;
             alert.showAndWait();
             fnfe.printStackTrace();
-        } catch (IOException ioe){
+        } catch (IOException ioe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("IO Funker ikke");
             alert.setHeaderText("FINNER IKKE PLAYER SAVE.");
@@ -256,8 +263,8 @@ public class gameController implements Initializable, Serializable, EventHandler
 
     //endrer visningfeltet
     public void view(Player p, Pane pa) {
-        int OffSetLeft=300;
-        int OffSetRight=505;
+        int OffSetLeft = 300;
+        int OffSetRight = 505;
         if (p.getPosX() > OffSetLeft && p.getPosX() < pa.getWidth() - OffSetRight) {
             pa.setLayoutX(-p.getPosX() + OffSetLeft);
         } else if (p.getPosX() < OffSetLeft) {
@@ -266,13 +273,18 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     //checker om mainplayer har falt ned Runtime høøøøl
-    public void PitCheck(Player p, Pane pa) {
-        if (p.getPosY() > pa.getHeight() - 65) {
+    private void PitCheck(Player p, Pane pa) {
+        if (p.getPosY() > pa.getHeight()) {
             p.setHealthAmount(p.getHealthAmount() - 1);
-            healthLabel.setText(Integer.toString(p.getHealthAmount()));
-            if (p.getHealthAmount()==0 )
+            updateHealth(p);
+            p.setPlayerPositionStart();
+            if (p.getHealthAmount() == 0)
                 changeScene(StateManager.GameState.GAMEOVER);
         }
+    }
+
+    void updateHealth(Player p) {
+        LivesCounter.setText(Integer.toString(p.getHealthAmount()));
     }
 
     public void Terminate() {
@@ -290,7 +302,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
         mc.setEnemyMap(null);
         mc.setMap(null);
-
         gamePane.removeEventHandler(KeyEvent.ANY, this);
         gamePane.setOnKeyPressed(null);
         gamePane.setOnKeyReleased(null);
@@ -307,7 +318,7 @@ public class gameController implements Initializable, Serializable, EventHandler
         StateManager.removeGameRoot();
     }
 
-    public void changeScene(StateManager.GameState gameState){
+    public void changeScene(StateManager.GameState gameState) {
         StateManager.changeScene(gameState);
         gameController.setSetNull(true);
         running = false;
@@ -322,6 +333,8 @@ public class gameController implements Initializable, Serializable, EventHandler
         if (Runtime % 60 == 0) {
             System.out.println("runtime:" + Runtime / 60);
             System.out.println("ERMAP" + mapCreator.getERMap().size());
+            System.out.println("EnemyMAP" + mc.getEnemyMap().size());
+
 
       /* System.out.println("ArraybulletsSize: "bully.bullets.size());
       System.out.println("Entities: "+mc.getEnemyMap().size());
@@ -331,32 +344,35 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     public void updateBullet() {
-        for (Iterator<Circle>itBT = bullet.bullets.iterator(); itBT.hasNext();) {
-            Circle BT= itBT.next();
+        ArrayList<Circle> bulletsToRemove = new ArrayList<>();
+        for (ListIterator<Circle> itBT = bullet.bullets.listIterator(); itBT.hasNext(); ) {
+            Circle BT = itBT.next();
             double CircleX = BT.getCenterX();
-            if(BT.getCenterX()-mainPlayer.getPosX()>200){
+            //Removes bullet if distance to player is greater than 200
+            if((CircleX-mainPlayer.getPosX())>200){
                 itBT.remove();
                 gamePane.getChildren().remove(BT);
             }
             BT.setCenterX(CircleX + bullet.getBulletSpeed());
-            for (Iterator<Rectangle> itMP=mc.getMap().iterator(); itMP.hasNext();) {
-                Rectangle MP=itMP.next();
+            for (ListIterator<Rectangle> itMP = mc.getMap().listIterator(); itMP.hasNext(); ) {
+                Rectangle MP = itMP.next();
                 if (BT.getBoundsInParent().intersects(MP.getBoundsInParent())) {
-                    itBT.remove();
+                    bulletsToRemove.add(BT);
                     gamePane.getChildren().remove(BT);
                 }
             }
-            for (Iterator<EnemyRect> itER = mapCreator.getERMap().iterator(); itER.hasNext();){
+            for (ListIterator<EnemyRect> itER = mapCreator.getERMap().listIterator(); itER.hasNext(); ) {
                 EnemyRect ER = itER.next();
-                if (BT.getBoundsInParent().intersects(ER.getBoundsInParent())){
+                if (BT.intersects(ER.getBoundsInParent())) {
+                    bulletsToRemove.add(BT);
                     itER.remove();
-                    itBT.remove();
                     mc.getEnemyMap().remove(ER);
                     gamePane.getChildren().remove(ER);
                     gamePane.getChildren().remove(BT);
                 }
             }
         }
+        bullet.bullets.removeAll(bulletsToRemove);
     }
 
 
@@ -372,7 +388,7 @@ public class gameController implements Initializable, Serializable, EventHandler
     }
 
     /**
-     * Kaller på metoden PlayerCollisionX dersom av mainPlayer sin instanse variabeler
+     * Kaller på metoden PlayerCollisionX dersom en av mainPlayer sin instanse variabeler
      * KeyA eller KeyD er sann
      */
     private void PlayerMoveXColl() {
@@ -381,8 +397,5 @@ public class gameController implements Initializable, Serializable, EventHandler
         } else if (mainPlayer.KeyD) {
             collision.PlayerCollisionX(4, mainPlayer, mc);
         }
-
     }
-
-
 }

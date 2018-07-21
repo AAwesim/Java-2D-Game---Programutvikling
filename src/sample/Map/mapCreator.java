@@ -35,6 +35,13 @@ public class mapCreator {
      * case 2 instansierer et rektangel med oransje farge
      * case 3 instansierer et rektangel med bare jord og den blir også lagt til i arraylisten map.
      * case 4,5,6,7 instansierer objekter av ulike instanser av enemy og legger dem i en arraylist enemy
+     * case 4 = vertically moving rectangle shaped enemy
+     * case 5 = horizontally moving rectangle shaped enemy
+     * case 6 = vertically moving Circle shaped enemy
+     * case 7 = horizontally moving Circle shaped enemy
+     * case 8 = horizontally moving small rectanle shaped enemy
+     *
+     *
      * @param pe blir brukt for å sette inn i konstruktøren av de forskjellige objektene.
      */
     public void initMap(Pane pe) {
@@ -52,7 +59,7 @@ public class mapCreator {
                         break;
                     case '2':
                         mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
-                        mapPart1.setFill(color(0.90, 0.20, 0.10));
+                        mapPart1.setFill(color(1, 0.10, 0.10));
                         //p.add(mapPart1);
                         break;
                     case '3':
@@ -66,16 +73,21 @@ public class mapCreator {
                         enemyMap.add(enemy1);
                         break;
                     case '5':
-                        Enemy enemy2 = new EnemyRect( j * widthscalar, i * scalar, pe);
+                        Enemy enemy2 = new EnemyMovingXDecorator(new EnemyRect( j * widthscalar, i * scalar, pe));
                         enemyMap.add(enemy2);
                         break;
                     case '6':
-                        Enemy enemy3 = new EnemyMovingYDecorator(new EnemyCircle( j * widthscalar, i * scalar,20, pe));
+                        Enemy enemy3 = new EnemyMovingYDecorator(new EnemyCircle( j * widthscalar+widthscalar/2, i * scalar+scalar/2,20, pe));
                         enemyMap.add(enemy3);
                         break;
                     case '7':
-                        Enemy enemy4 = new EnemyMovingXDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
+                        Enemy enemy4 = new EnemyMovingXDecorator(new EnemyCircle(  j * widthscalar+widthscalar/2, i * scalar+scalar/2,20, pe));
                         enemyMap.add(enemy4);
+                        break;
+                    case '8':
+                        Enemy enemy5 = new EnemyMovingXDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
+                        enemyMap.add(enemy5);
+                        break;
                     default:
                         break;
                 }
@@ -90,7 +102,7 @@ public class mapCreator {
      * @param w bredden av rektangel
      * @param h høyden av rektangel
      * @param pe Pane
-     * @return
+     * @return returns rect
      */
     private Rectangle mapMaker1(int x, int y, int w, int h, Pane pe) {
         Rectangle rect = new Rectangle(x, y, w, h);

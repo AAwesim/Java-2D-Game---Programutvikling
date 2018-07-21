@@ -6,10 +6,16 @@
 
 <Pane fx:id="gpWrap" prefHeight="525.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.gameController">
    <Pane fx:id="gamePane" prefHeight="525.0" />
-   <Label fx:id="healthLabel" layoutX="29.0" layoutY="22.0" prefHeight="57.0" prefWidth="25.0" text="3" textAlignment="CENTER">
+   <Label fx:id="LivesText" layoutX="10" layoutY="22.0" maxHeight="30" maxWidth="79" text="Lives:" textAlignment="CENTER">
       <font>
-         <Font size="50.0" />
+      <Font size="30.0" />
       </font>
    </Label>
+   <Label fx:id="LivesCounter" layoutX="90.0" layoutY="22.0" prefHeight="25.0" prefWidth="25.0" text="3" textAlignment="CENTER">
+      <font>
+         <Font size="30.0" />
+      </font>
+   </Label>
+
 
 </Pane>

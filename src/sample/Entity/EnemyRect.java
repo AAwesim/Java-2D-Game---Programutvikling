@@ -35,9 +35,9 @@ public class EnemyRect extends Rectangle implements Enemy {
         this.setX(RPosX);
         this.setRPosY(RPosY);
         this.setY(RPosY);
-        this.setFill(ResourceManager.mapTextures.get(3));
         this.setWidth(width);
         this.setHeight(height);
+        this.setFill(ResourceManager.mapTextures.get(3));
         p.getChildren().add(this);
         mapCreator.getERMap().add(this);
     }
