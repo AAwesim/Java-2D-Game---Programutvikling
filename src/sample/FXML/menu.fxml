@@ -6,18 +6,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorpane" prefHeight="525.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.menyController">
+<AnchorPane id="anchorpane" prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.menyController">
 
    <stylesheets>
       <URL value="@menyStyleSheet.css" />
    </stylesheets>
    <children>
-      <Button id="knapp" fx:id="startButton" layoutX="278.0" layoutY="135.0" onAction="#changeScene" prefHeight="73.0" prefWidth="248.0" text="Start" />
-      <Button id="knapp" fx:id="hjelpButton" layoutX="278.0" layoutY="248.0" onAction="#changeScene" prefHeight="73.0" prefWidth="248.0" text="Hjelp" />
-      <Button id="knapp" fx:id="exitButton" layoutX="278.0" layoutY="361.0" onAction="#exit" prefHeight="73.0" prefWidth="248.0" text="Avslutt" />
-      <Label layoutX="187.0" layoutY="41.0" prefHeight="93.0" prefWidth="435.0" text="WELCOME TO TIYAREED">
+      <Button id="knapp" fx:id="startButton" layoutX="198.0" layoutY="135.0" onAction="#changeScene" prefHeight="73.0" prefWidth="248.0" text="Start" />
+      <Button id="knapp" fx:id="hjelpButton" layoutX="198.0" layoutY="248.0" onAction="#changeScene" prefHeight="73.0" prefWidth="248.0" text="Hjelp" />
+      <Button id="knapp" fx:id="exitButton" layoutX="198.0" layoutY="361.0" onAction="#exit" prefHeight="73.0" prefWidth="248.0" text="Avslutt" />
+      <Label layoutX="102.0" layoutY="41.0" prefHeight="73.0" prefWidth="441.0" text="WELCOME TO TIYAREED">
          <font>
-            <Font name="Rockwell Extra Bold" size="40.0" />
+            <Font name="Rockwell Extra Bold" size="30.0" />
          </font>
       </Label>
    </children>

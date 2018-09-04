@@ -62,22 +62,17 @@ public class MapIO {
      * blir mapArray til satt til en default array. (En slags failsafe).
      */
     public void mapLoader() {
-        try {
-            InputStream is = MapIO.class.getClassLoader().getResourceAsStream("maps/" + this.levelID + ".map");
+        try (InputStream is = MapIO.class.getClassLoader().getResourceAsStream("maps/" + this.levelID + ".map")) {
             ObjectInputStream in = new ObjectInputStream(is);
             if (in != null) {
                 Map m = (Map) in.readObject();
-                if (m.getCheck() % 5 == 0) this.mapArray = m.getMapArray();
-                else this.mapArray = defaultMapArray;
+                if(m.getCheck()%5 == 0) this.mapArray = m.getMapArray();
+                    else this.mapArray = defaultMapArray;
             } else {
                 System.out.println("WRONG MAP, THIS IS DEFAULT");
                 this.mapArray = defaultMapArray;
             }
 
-        } catch (NullPointerException npe) {
-            npe.printStackTrace();
-            System.out.println("");
-            // TODO: 8/17/2018*/
         } catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
             this.mapArray = defaultMapArray;

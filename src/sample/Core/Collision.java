@@ -90,7 +90,7 @@ public class Collision extends gameController {
     }
 
     public void PlayerCollisionX(int x, Player p, mapCreator mc) {
-        int speed = x;
+        int speed = 4;
         for (int i = 1; i <= x; i++) {
             for (Rectangle mPart : mc.getMap()) {
                 if (mPart.intersects(p.getPosX() + speed, p.getPosY(), p.getWidth(), p.getHeight())) {

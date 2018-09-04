@@ -82,8 +82,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                     Render();
 
-                    System.out.println(mainPlayer.getxSpeed());
-
 
                     mainPlayer.updatePlayerState();
 
@@ -143,13 +141,11 @@ public class gameController implements Initializable, Serializable, EventHandler
                 break;
             case A:
             case LEFT:
-                if(mainPlayer.getxSpeed()==0){mainPlayer.setxSpeed(4);}
                 mainPlayer.KeyD = false;
                 mainPlayer.KeyA = true;
                 break;
             case D:
             case RIGHT:
-                if(mainPlayer.getxSpeed()==0){mainPlayer.setxSpeed(4);}
                 mainPlayer.KeyA = false;
                 mainPlayer.KeyD = true;
                 break;
@@ -157,15 +153,6 @@ public class gameController implements Initializable, Serializable, EventHandler
                 if (collision.gravityCheck(mainPlayer, mc)) {
                     mainPlayer.setySpeed(-7.5);
                 }
-                break;
-            case I:
-                mainPlayer.setxSpeed(16);
-                break;
-            case U:
-                mainPlayer.setxSpeed(8);
-                break;
-            case Y:
-                mainPlayer.setxSpeed(4);
                 break;
             case F:
                 if (intervalShooting) {
@@ -406,9 +393,9 @@ public class gameController implements Initializable, Serializable, EventHandler
      */
     private void PlayerMoveXColl() {
         if (mainPlayer.KeyA) {
-            collision.PlayerCollisionX(mainPlayer.getxSpeed(), mainPlayer, mc);
+            collision.PlayerCollisionX(4, mainPlayer, mc);
         } else if (mainPlayer.KeyD) {
-            collision.PlayerCollisionX(mainPlayer.getxSpeed(), mainPlayer, mc);
+            collision.PlayerCollisionX(4, mainPlayer, mc);
         }
     }
 }

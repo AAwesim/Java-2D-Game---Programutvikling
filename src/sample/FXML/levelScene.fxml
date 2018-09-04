@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorpane" prefHeight="525.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.levelController">
+<AnchorPane id="anchorpane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.levelController">
    <children>
        <Button id="knappmap" layoutX="176.0" layoutY="69.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="1" />
        <Button id="knappmap" layoutX="176.0" layoutY="123.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="2" />

@@ -1,10 +1,16 @@
 package sample.Entity;
 
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import sample.Tools.ResourceManager;
 
 import java.io.*;
+import java.util.ArrayList;
+
+import static javafx.scene.paint.Color.BLUE;
 
 public class Player extends Rectangle implements Serializable {
 
@@ -14,7 +20,7 @@ public class Player extends Rectangle implements Serializable {
     public transient boolean KeyD = false;
     private double posX = 90;
     private double posY = 260;
-    private int xSpeed = 4;
+    private double xSpeed = 4;
     private double ySpeed = 4;
     private int MaxySpeed = 7;
 
@@ -66,8 +72,8 @@ public class Player extends Rectangle implements Serializable {
      */
     public void MoveLeft(int speed) {
         //System.out.println("MLeft");
-        //setxSpeed(-speed);
-        setPosX(getPosX()-speed);
+        setxSpeed(-speed);
+        setPosX(getPosX()+xSpeed);
     }
 
     /**
@@ -78,8 +84,8 @@ public class Player extends Rectangle implements Serializable {
      */
     public void MoveRight(int speed) {
       //  System.out.println("MRight");
-        //setxSpeed(speed);
-        setPosX(getPosX()+speed);
+        setxSpeed(speed);
+        setPosX(getPosX()+xSpeed);
     }
 
     public void setPlayerPositionStart() {
@@ -115,11 +121,11 @@ public class Player extends Rectangle implements Serializable {
         return ySpeed;
     }
 
-    public void setxSpeed(int xSpeed) {
+    public void setxSpeed(double xSpeed) {
         this.xSpeed = xSpeed;
     }
 
-    public int getxSpeed() {
+    public double getxSpeed() {
         return xSpeed;
     }
 
