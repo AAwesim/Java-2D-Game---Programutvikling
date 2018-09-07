@@ -7,23 +7,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="anchorpane" prefHeight="525.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.levelController">
+<AnchorPane id="anchorpane" maxHeight="525" maxWidth="805" prefHeight="525.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.levelController">
    <children>
-       <Button id="knappmap" layoutX="176.0" layoutY="69.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="1" />
-       <Button id="knappmap" layoutX="176.0" layoutY="123.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="2" />
-       <Button id="knappmap" layoutX="176.0" layoutY="177.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="3" />
-       <Button id="knappmap" layoutX="176.0" layoutY="231.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="4" />
-       <Button id="knappmap" layoutX="176.0" layoutY="284.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="5">
+       <Button id="knappmap" layoutX="283.0" layoutY="101.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="1" />
+       <Button id="knappmap" layoutX="283.0" layoutY="153.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="2" />
+       <Button id="knappmap" layoutX="283.0" layoutY="205.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="3" />
+       <Button id="knappmap" layoutX="283.0" layoutY="257.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="4" />
+       <Button id="knappmap" layoutX="283.0" layoutY="309.0" onAction="#getMap" prefHeight="39.0" prefWidth="239.0" text="5">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></Button>
-      <Button id="map" layoutX="206.0" layoutY="347.0" mnemonicParsing="false" onAction="#generateMap" prefHeight="39.0" prefWidth="189.0" text="GENERATE MAP" />
-      <Label layoutX="154.0" layoutY="10.0" prefHeight="59.0" prefWidth="303.0" text="CHOOSE A LEVEL">
+      <Button id="map" layoutX="308.0" layoutY="397.0" mnemonicParsing="false" onAction="#generateMap" prefHeight="39.0" prefWidth="189.0" text="GENERATE MAP" />
+      <Label layoutX="302.0" layoutY="42.0" prefHeight="59.0" prefWidth="197.0" text="CHOOSE A LEVEL">
          <font>
             <Font name="Rockwell Nova Extra Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="154.0" layoutY="84.0" text="BARE EEVEL TO FUNKER FORDI VI IKKE LAGDE MAP TIL DE ANDRE" />
    </children>
     <stylesheets>
         <URL value="@menyStyleSheet.css" />

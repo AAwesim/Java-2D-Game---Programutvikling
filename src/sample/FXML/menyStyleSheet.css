@@ -24,7 +24,7 @@
 */
 
 
--fx-background-image:url("marioclouds.gif");
+-fx-background-image:url("bg.gif");
 -fx-background-size:cover;
 }
 #pane{

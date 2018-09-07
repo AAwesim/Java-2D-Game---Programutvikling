@@ -20,7 +20,8 @@ public class Main extends Application {
         primaryStage.setTitle(GAME_NAME);
 
         primaryStage.setScene(StateManager.update());
-
+        primaryStage.setMaxWidth(805);
+        primaryStage.setMaxHeight(525);
         primaryStage.show();
     }
 

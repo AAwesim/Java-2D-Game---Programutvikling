@@ -72,6 +72,8 @@ public class MapIO {
             }
 
         } catch (EOFException eof) {
+            eof.printStackTrace();
+            System.out.println("End Of File Exeption");
 
         } catch (NullPointerException npe) {
             npe.printStackTrace();

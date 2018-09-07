@@ -7,26 +7,26 @@
 
 <Pane fx:id="pane" prefHeight="525.0" prefWidth="805.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Core.hjelpController">
    <children>
-      <Button layoutX="207.0" layoutY="300.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="39.0" prefWidth="192.0" style="-fx-background-color: #71EEB8;" text="MENY" textFill="WHITE">
+      <Button layoutX="25.0" layoutY="332.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="39.0" prefWidth="192.0" style="-fx-background-color: #71EEB8;" text="MENY" textFill="WHITE">
          <font>
             <Font name="Rockwell Extra Bold" size="18.0" />
          </font></Button>
-      <Label layoutX="25.0" layoutY="19.0" prefHeight="82.0" prefWidth="562.0" text="Spillet går ut på å overleve hindringer, så ikke kollider med fiender">
+      <Label layoutX="25.0" layoutY="36.0" prefHeight="82.0" prefWidth="562.0" text="Spillet går ut på å overleve hindringer, så ikke kollider med fiender">
          <font>
             <Font name="Arial Narrow" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="20.0" layoutY="119.0" prefHeight="27.0" prefWidth="537.0" text="bevegelse er med piltastene til høyre og venstre eller A og D">
+      <Label layoutX="25.0" layoutY="101.0" prefHeight="27.0" prefWidth="537.0" text="bevegelse er med piltastene til høyre og venstre eller A og D">
          <font>
             <Font name="Arial Narrow" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="24.0" layoutY="173.0" prefHeight="27.0" prefWidth="506.0" text="hopper med W eller piltast opp, skyter med F">
+      <Label layoutX="25.0" layoutY="147.0" prefHeight="27.0" prefWidth="506.0" text="hopper med W eller piltast opp, skyter med F">
          <font>
             <Font name="Arial Narrow" size="23.0" />
          </font>
       </Label>
-      <Label layoutX="15.0" layoutY="234.0" prefHeight="27.0" prefWidth="400.0" text="esc for pause, F2 for lagring og F3 loader">
+      <Label layoutX="25.0" layoutY="181.0" prefHeight="27.0" prefWidth="400.0" text="esc for pause, F2 for lagring og F3 loader">
          <font>
             <Font name="Arial Narrow" size="23.0" />
          </font>
