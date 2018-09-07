@@ -1,9 +1,6 @@
 package sample.Map;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
+import java.io.*;
 
 /**
  * Denne klassen leser en .map fil fra det persistente minnet og lager et objekt av typen Map ut ifra bytedata-en som er
@@ -74,9 +71,11 @@ public class MapIO {
                 this.mapArray = defaultMapArray;
             }
 
+        } catch (EOFException eof) {
+
         } catch (NullPointerException npe) {
             npe.printStackTrace();
-            System.out.println("");
+            System.out.println("NullPointer Exeption");
             // TODO: 8/17/2018*/
         } catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
