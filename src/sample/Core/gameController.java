@@ -82,7 +82,7 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                     Render();
 
-                    System.out.println(mainPlayer.getxSpeed());
+                    //System.out.println(mainPlayer.getxSpeed());
 
 
                     mainPlayer.updatePlayerState();
