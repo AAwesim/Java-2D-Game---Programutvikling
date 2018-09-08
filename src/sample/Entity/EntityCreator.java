@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class EntityCreator {
 
-    public Entity getEntity(String type) {
+    public Player getEntity(String type) {
         switch (type.toUpperCase()) {
             case "PLAYER":
                 return new Player();
