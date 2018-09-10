@@ -12,6 +12,11 @@ public class Player extends Rectangle implements Serializable {
     private final int checksum = 123456789;
     public transient boolean KeyA = false;
     public transient boolean KeyD = false;
+
+
+
+    //true == left
+    public boolean direction ;
     private double posX = 90;
     private double posY = 260;
     private int xSpeed = 4;
@@ -47,12 +52,16 @@ public class Player extends Rectangle implements Serializable {
     public void renderPlayer() {
         if (KeyA && ySpeed==0) {
             setFill(ResourceManager.playerSprites.get(5));
+            direction=true;
         } else if (KeyD && ySpeed==0) {
             setFill(ResourceManager.playerSprites.get(4));
+            direction=false;
         } else if (KeyA){
             setFill(ResourceManager.playerSprites.get(2));
+            direction=true;
         } else if (KeyD){
             setFill(ResourceManager.playerSprites.get(3));
+            direction=false;
         }
         setX(posX);
         setY(posY);
@@ -91,6 +100,7 @@ public class Player extends Rectangle implements Serializable {
 
     //Getters og setters
 
+    //Position
     public void setPosX(double posX) {
         this.posX = posX;
     }
@@ -106,6 +116,8 @@ public class Player extends Rectangle implements Serializable {
     public void setPosY(double posY) {
         this.posY = posY;
     }
+
+    //Speed
 
     public void setySpeed(double ySpeed) {
         this.ySpeed = ySpeed;
@@ -127,6 +139,8 @@ public class Player extends Rectangle implements Serializable {
         return MaxySpeed;
     }
 
+    //Health
+
     public int getHealthAmount() {
         return healthAmount;
     }
@@ -137,5 +151,9 @@ public class Player extends Rectangle implements Serializable {
 
     public int getChecksum() {
         return checksum;
+    }
+
+    public boolean getDirection() {
+        return direction;
     }
 }

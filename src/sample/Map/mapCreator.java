@@ -59,7 +59,7 @@ public class mapCreator {
                         break;
                     case '2':
                         mapPart1 = mapMaker1(j * widthscalar, i * scalar, widthscalar, scalar, pe);
-                        mapPart1.setFill(color(1, 0.10, 0.10));
+                        mapPart1.setFill(color(1, 0.10, 0.00));
                         //p.add(mapPart1);
                         break;
                     case '3':
@@ -69,15 +69,15 @@ public class mapCreator {
                         map.add(mapPart1);
                         break;
                     case '4':
-                        Enemy enemy1 = new EnemyMovingYDecorator(new EnemyRect(j * widthscalar, i * scalar, pe));
+                        Enemy enemy1 =  new EnemyRect(j * widthscalar, i * scalar, pe,'y');
                         enemyMap.add(enemy1);
                         break;
                     case '5':
-                        Enemy enemy2 = new EnemyMovingXDecorator(new EnemyRect( j * widthscalar, i * scalar, pe));
+                        Enemy enemy2 = new EnemyRectY(new EnemyMovingXDecorator(new EnemyRect( j * widthscalar, i * scalar, pe,'y')));
                         enemyMap.add(enemy2);
                         break;
                     case '6':
-                        Enemy enemy3 = new EnemyMovingYDecorator(new EnemyCircle( j * widthscalar+widthscalar/2, i * scalar+scalar/2,20, pe));
+                        Enemy enemy3 = new EnemyYMovementDecorator(new EnemyCircle( j * widthscalar+widthscalar/2, i * scalar+scalar/2,20, pe));
                         enemyMap.add(enemy3);
                         break;
                     case '7':
@@ -85,7 +85,7 @@ public class mapCreator {
                         enemyMap.add(enemy4);
                         break;
                     case '8':
-                        Enemy enemy5 = new EnemyMovingXDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe));
+                        Enemy enemy5 = new EnemyMovingXDecorator(new EnemyRectsmall( j * widthscalar, i * scalar, pe, 'a'));
                         enemyMap.add(enemy5);
                         break;
                     default:
@@ -157,6 +157,7 @@ public class mapCreator {
     public int getmapLength() {
         return scalar * LEVELARRAY[0].length();
     }
+
 
     /**
      * gir arraylisten av map som er platformen

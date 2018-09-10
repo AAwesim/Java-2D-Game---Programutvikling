@@ -30,13 +30,16 @@ public class EnemyRect extends Rectangle implements Enemy {
      * @param RPosY
      * @param p
      */
-    public EnemyRect(double RPosX, double RPosY, Pane p) {
+    public EnemyRect(double RPosX, double RPosY, Pane p, char d) {
         this.setRPosX(RPosX);
         this.setX(RPosX);
         this.setRPosY(RPosY);
         this.setY(RPosY);
         this.setWidth(width);
         this.setHeight(height);
+        if (d == 'y') {
+            this.setId("EnemyRectY");
+        } else {this.setId("lol");}
         this.setFill(ResourceManager.mapTextures.get(3));
         p.getChildren().add(this);
         mapCreator.getERMap().add(this);

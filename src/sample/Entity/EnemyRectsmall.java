@@ -26,8 +26,8 @@ public class EnemyRectsmall extends EnemyRect {
      * @param RPosY
      * @param p
      */
-    public EnemyRectsmall(double RPosX, double RPosY, Pane p) {
-        super(RPosX, RPosY, p);
+    public EnemyRectsmall(double RPosX, double RPosY, Pane p, char d) {
+        super(RPosX, RPosY, p, d);
         this.setFill(ResourceManager.mapTextures.get(4));
         this.setWidth(width);
         this.setHeight(height);

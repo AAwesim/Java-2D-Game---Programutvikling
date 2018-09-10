@@ -4,6 +4,7 @@ package sample.Entity;
  * EnemyMovingXDecorator
  * extender EnemyDecorator og tilbyr funksjonalitet for å automatisk animere Enemies Som beveger seg
  * langs X-aksen
+ * NB! Kan IKKE brukes i kombinasjon med alle andre decorators feks EnemyYMovementDecorator
  */
 
 public class EnemyMovingXDecorator extends EnemyDecorator {
@@ -41,10 +42,10 @@ public class EnemyMovingXDecorator extends EnemyDecorator {
      * @param e
      */
     private void MoveXEnemyRect(EnemyRect e) {
-        if (e.getX() > e.getRPosX() + 200) {
-            i = -2;
+        if (e.getX() > e.getRPosX() + 500) {
+            i = -5;
         } else if (e.getX() <= e.getRPosX()) {
-            i = 2;
+            i = 5;
         }
         e.setX(e.getX()+i);
     }

@@ -18,9 +18,9 @@
             <Insets />
          </opaqueInsets></Button>
       <Button id="map" layoutX="308.0" layoutY="397.0" mnemonicParsing="false" onAction="#generateMap" prefHeight="39.0" prefWidth="189.0" text="GENERATE MAP" />
-      <Label layoutX="302.0" layoutY="42.0" prefHeight="59.0" prefWidth="197.0" text="CHOOSE A LEVEL">
+      <Label alignment="CENTER" layoutX="266.0" layoutY="33.0" prefHeight="59.0" prefWidth="274.0" text="CHOOSE A LEVEL" textAlignment="CENTER">
          <font>
-            <Font name="Rockwell Nova Extra Bold" size="25.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
       </Label>
    </children>

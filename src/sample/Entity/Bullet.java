@@ -16,7 +16,8 @@ public class Bullet {
     private double w=10;
     private double h=10;
     public ArrayList<Circle> bullets=new ArrayList<>();
-
+    public ArrayList<Circle> bulletsleft=new ArrayList<>();
+    public ArrayList<Circle> bulletsright=new ArrayList<>();
     /**
      * tar inn en Pane som parameter og gir en referanse til den slik at den kan bli brukt senere
      * som refereanse i andre metoder.
@@ -32,13 +33,22 @@ public class Bullet {
      * denne sirkelen blir lagt inn i Panen vår og sirkelene blir lagret i en Arraylist.
      * @param posx angitt posisjon x
      * @param posy angitt posisjon y
+     * @param dir Avhenger av hvilken vei mainplayer peker ved metode kall.
+     *            Er true dersom Player ser mot venstre når initBullet blir kalt, og brukes for å konstruere
+     *            circle objektene deretter.
      */
-    public void initBullet(double posx, double posy){
+    public void initBullet(double posx, double posy, boolean dir){
         Circle circle= new Circle();
         circle.setRadius(w);
-        circle.setCenterX(posx);
+        if (!dir) {
+            circle.setCenterX(posx + 36);
+        } else {
+            circle.setCenterX(posx);
+        }
         circle.setCenterY(posy);
         circle.setFill(ResourceManager.mapTextures.get(4));
+        if (dir)
+            circle.setRotate(180);
         gamePane.getChildren().add(circle);
         bullets.add(circle);
     }

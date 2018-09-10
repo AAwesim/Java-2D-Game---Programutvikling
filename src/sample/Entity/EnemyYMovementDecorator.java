@@ -1,22 +1,24 @@
 package sample.Entity;
 
 /**
- * EnemyMovingYDecorator
- * extender EnemyDecorator og tilbyr funksjonalitet for å automatisk animere Enemies Som beveger seg
+ * EnemyYMovementDecorator
+ * extender EnemyDecorator og tilbyr funksjonalitet for å automatisk animere Enemies Som beveger seg *
  * langs Y-aksen
+ * Kan brukes som decorator på alle typer enemies hittil sirkler og rektangler
+ * NB! Kan IKKE brukes i kombinasjon med alle andre decorators feks EnemyMovingXDecorator
  */
 
-public class EnemyMovingYDecorator extends EnemyDecorator {
+public class EnemyYMovementDecorator extends EnemyDecorator {
 
     private int a;
     private int i;
 
-    public EnemyMovingYDecorator(Enemy decoratedEnemy) {
+    public EnemyYMovementDecorator(Enemy decoratedEnemy) {
         super(decoratedEnemy);
     }
 
     /**
-     * ovverrides metod renderentity i enemydecorator
+     * overrider metoden renderentity i enemydecorator
      * sjekker om decoratedEnemy er en instanse av enemyRect eller EnemyCircle ved kjøretid
      * og avhengig av dette castes decoratedEnemy til EnemyRect eller EnemyCircle og en av metodene MoveYEnemyRect og MoveYnememyCircle
      * kjøres

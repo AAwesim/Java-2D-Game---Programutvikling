@@ -1,15 +1,19 @@
 package sample.Entity;
+
+import javafx.scene.shape.Rectangle;
+
 /**
-* Abstact Klassse EnemyDecorator implementerer interfacet Enemy
+* Abstact Decorator Klassse som implementerer Enemy
  *
 */
 
 public abstract class EnemyDecorator implements Enemy {
 
     /**
+     *  Datafeltet består av decoratedEnemy som er av typen Enemy
      *
      */
-    protected Enemy decoratedEnemy;
+    Enemy decoratedEnemy;
 
     /**
      *
@@ -20,10 +24,11 @@ public abstract class EnemyDecorator implements Enemy {
     }
 
     /**
-     *
+     * kaller render en
      */
     @Override
     public void RenderEntity(){
         decoratedEnemy.RenderEntity();
     }
+
 }

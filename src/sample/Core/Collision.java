@@ -56,7 +56,6 @@ public class Collision extends gameController {
      */
     private void sceneGameover() {
         gameController.setRunning(false);
-        gameController.setSetNull(true);
         StateManager.removeGameRoot();
         StateManager.changeScene(StateManager.GameState.BUFFER);
         StateManager.changeScene(StateManager.GameState.GAMEOVER);

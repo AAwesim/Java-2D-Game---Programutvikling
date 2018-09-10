@@ -82,9 +82,6 @@ public class gameController implements Initializable, Serializable, EventHandler
 
                     Render();
 
-                    //System.out.println(mainPlayer.getxSpeed());
-
-
                     mainPlayer.updatePlayerState();
 
                     view(mainPlayer, gamePane);
@@ -129,7 +126,7 @@ public class gameController implements Initializable, Serializable, EventHandler
                 mainPlayer.KeyD = false;
                 mainPlayer.setFill(ResourceManager.playerSprites.get(0));
             }
-            if (e.getCode() == KeyCode.F) {
+            if (e.getCode() == KeyCode.SPACE) {
                 intervalShooting = true;
             }
         });
@@ -138,9 +135,6 @@ public class gameController implements Initializable, Serializable, EventHandler
     @Override
     public void handle(KeyEvent e) {
         switch (e.getCode()) {
-            case SPACE:
-                System.out.println(e.toString());
-                break;
             case A:
             case LEFT:
                 if(mainPlayer.getxSpeed()==0){mainPlayer.setxSpeed(4);}
@@ -167,10 +161,12 @@ public class gameController implements Initializable, Serializable, EventHandler
             case Y:
                 mainPlayer.setxSpeed(4);
                 break;
-            case F:
+            case SPACE:
                 if (intervalShooting) {
                     intervalShooting = false;
-                    bullet.initBullet(mainPlayer.getPosX() + mainPlayer.getWidth(), mainPlayer.getPosY() + mainPlayer.getHeight() / 2);
+                    bullet.initBullet( mainPlayer.getPosX(),
+                            mainPlayer.getPosY() + mainPlayer.getHeight() / 2,
+                            mainPlayer.getDirection());
                 }
                 break;
 
@@ -344,14 +340,12 @@ public class gameController implements Initializable, Serializable, EventHandler
     public void runtime() {
         Runtime++;
         if (Runtime % 60 == 0) {
+
             System.out.println("runtime:" + Runtime / 60);
             System.out.println("ERMAP" + mapCreator.getERMap().size());
             System.out.println("EnemyMAP" + mc.getEnemyMap().size());
 
-
-      /* System.out.println("ArraybulletsSize: "bully.bullets.size());
-      System.out.println("Entities: "+mc.getEnemyMap().size());
-        System.out.println("EnemiesR: "+mapCreator.getERMap().size());
+      /* System.out.println("ArraybulletsSize: "bully.bullets.size());;
         System.out.println("EnemiesC: "+mapCreator.getECMap().size());*/
         }
     }
@@ -366,7 +360,11 @@ public class gameController implements Initializable, Serializable, EventHandler
                 itBT.remove();
                 gamePane.getChildren().remove(BT);
             }
-            BT.setCenterX(CircleX + bullet.getBulletSpeed());
+            if (BT.getRotate()==180) {
+                BT.setCenterX(CircleX - bullet.getBulletSpeed());
+            } else {
+                BT.setCenterX(CircleX + bullet.getBulletSpeed());
+            }
             for (ListIterator<Rectangle> itMP = mc.getMap().listIterator(); itMP.hasNext(); ) {
                 Rectangle MP = itMP.next();
                 if (BT.getBoundsInParent().intersects(MP.getBoundsInParent())) {
@@ -397,12 +395,15 @@ public class gameController implements Initializable, Serializable, EventHandler
         for (int i = 0; i < mc.getEnemyMap().size(); i++) {
             mc.getEnemyMap().get(i).RenderEntity();
         }
+        for (int i = 0; i <mapCreator.getERMap().size();i++)
+            if (mapCreator.getERMap().get(i).getId().equalsIgnoreCase("EnemyRectY"))
+                EnemyRectY.MoveYEnemyRect(mapCreator.getERMap().get(i));
         mainPlayer.renderPlayer();
     }
 
     /**
-     * Kaller på metoden PlayerCollisionX dersom en av mainPlayer sin instanse variabeler
-     * KeyA eller KeyD er sann
+     * Kaller på metoden PlayerCollisionX dersom en av mainPlayer sine instanse variabeler
+     * KeyA eller KeyD er true.
      */
     private void PlayerMoveXColl() {
         if (mainPlayer.KeyA) {
