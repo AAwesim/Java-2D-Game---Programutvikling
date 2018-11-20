@@ -55,10 +55,9 @@ public class Collision extends gameController {
      * Bytter til gameoverscenen
      */
     private void sceneGameover() {
-        gameController.setRunning(false);
-        StateManager.removeGameRoot();
-        StateManager.changeScene(StateManager.GameState.BUFFER);
         StateManager.changeScene(StateManager.GameState.GAMEOVER);
+        gameController.setSetNull(true);
+        gameController.setRunning(false);
     }
 
     /**
